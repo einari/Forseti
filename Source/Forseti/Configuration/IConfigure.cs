@@ -13,5 +13,7 @@ namespace Forseti.Configuration
         PathConfiguration CasePaths { get; }
 
         IConfigure Initialize();
+
+        T GetInstanceOf<T>();
     }
 }

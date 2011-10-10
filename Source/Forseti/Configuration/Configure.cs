@@ -54,5 +54,11 @@ namespace Forseti.Configuration
 
             return this;
         }
+
+
+        public T GetInstanceOf<T>()
+        {
+            return Kernel.Get<T>();
+        }
     }
 }

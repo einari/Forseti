@@ -60,8 +60,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\ConfigurationFileReader.cs" />
     <Compile Include="Configuration\Configure.cs" />
     <Compile Include="Configuration\ConfigureExtensions.cs" />
+    <Compile Include="Configuration\IConfigurationFileReader.cs" />
     <Compile Include="Configuration\IConfigure.cs" />
     <Compile Include="Configuration\PathConfiguration.cs" />
     <Compile Include="Harnesses\Harness.cs" />
