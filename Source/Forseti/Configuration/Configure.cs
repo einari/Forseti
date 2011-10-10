@@ -1,4 +1,5 @@
 ﻿using Ninject;
+using Ninject.Extensions.Conventions;
 
 namespace Forseti.Configuration
 {
@@ -6,31 +7,59 @@ namespace Forseti.Configuration
     {
         static readonly object InstanceLock = new object();
         public static Configure Instance { get; private set; }
-        public IRunner Runner { get; private set; }
+        public IExecutor Executor { get; private set; }
         public IFramework Framework { get; private set; }
         public IKernel Kernel { get; private set; }
+        public PathConfiguration SourcePaths { get; private set; }
+        public PathConfiguration SpecificationPaths { get; private set; }
 
 
-        Configure(IKernel kernel, IFramework framework)
+        Configure(IKernel kernel)
         {
             Kernel = kernel;
-            Framework = framework;
+            SourcePaths = new PathConfiguration();
+            SpecificationPaths = new PathConfiguration();
         }
 
-        public static IConfigure With<T>(IKernel kernel) where T : IFramework
+        public static IConfigure WithStandardKernel()
+        {
+            var kernel = GetKernel();
+            return With(kernel);
+        }
+
+        public static IConfigure With(IKernel kernel)
         {
             if (Instance == null)
             {
                 lock (InstanceLock)
                 {
-                    var framework = kernel.Get<T>();
-                    Instance = new Configure(kernel, framework);
+                    Instance = new Configure(kernel);
                 }
             }
 
 
             return Instance;
         }
+
+
+        static IKernel GetKernel()
+        {
+            var kernel = new StandardKernel();
+
+            var scanner = new AssemblyScanner();
+            scanner.FromCallingAssembly();
+            scanner.BindWithDefaultConventions();
+            kernel.Scan(scanner);
+
+            return kernel;
+        }
+
+        public void Initialize()
+        {
+            Executor = Kernel.Get<IExecutor>();
+            Framework = Kernel.Get<IFramework>();
+        }
+
 
         /// <summary>
         /// Reset configuration

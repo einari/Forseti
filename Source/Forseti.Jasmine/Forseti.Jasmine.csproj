@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject, Version=2.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\Solutions\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,21 +43,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigureExtensions.cs" />
     <Compile Include="Framework.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\Libraries\Jasmine\jasmine.js">
+    <EmbeddedResource Include="..\..\Libraries\Jasmine\jasmine.js">
       <Link>JS\jasmine.js</Link>
-    </Content>
-    <Content Include="JS\jasmine-runner.js" />
-    <Content Include="JS\reporter.js" />
+    </EmbeddedResource>
+    <EmbeddedResource Include="JS\jasmine-executor.js" />
+    <EmbeddedResource Include="JS\reporter.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forseti\Forseti.csproj">
       <Project>{F4DC4B9D-BE5F-4DA6-9E18-CA1A242739A5}</Project>
       <Name>Forseti</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

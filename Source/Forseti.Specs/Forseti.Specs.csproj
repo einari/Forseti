@@ -49,14 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\for_Configure\FakeFramework.cs" />
-    <Compile Include="Configuration\for_Configure\when_configuring_with_a_framework.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Configuration\for_Configure\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forseti\Forseti.csproj">
       <Project>{F4DC4B9D-BE5F-4DA6-9E18-CA1A242739A5}</Project>

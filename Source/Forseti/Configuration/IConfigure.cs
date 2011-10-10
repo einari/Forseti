@@ -1,8 +1,15 @@
-﻿namespace Forseti.Configuration
+﻿using Ninject;
+
+namespace Forseti.Configuration
 {
     public interface IConfigure
     {
-        IRunner Runner { get; }
+        IKernel Kernel { get; }
+        IExecutor Executor { get; }
         IFramework Framework { get; }
+        PathConfiguration SourcePaths { get; }
+        PathConfiguration SpecificationPaths { get; }
+
+        void Initialize();
     }
 }
