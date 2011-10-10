@@ -1,18 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Ninject;
 
 namespace Forseti.Configuration
 {
     public class Configure : IConfigure
     {
+        static readonly object InstanceLock = new object();
+        public static Configure Instance { get; private set; }
         public IRunner Runner { get; private set; }
+        public IFramework Framework { get; private set; }
+        public IKernel Kernel { get; private set; }
 
 
-        public IConfigure With<T>() where T : IFramework
+        Configure(IKernel kernel, IFramework framework)
         {
-            return this;
+            Kernel = kernel;
+            Framework = framework;
         }
+
+        public static IConfigure With<T>(IKernel kernel) where T : IFramework
+        {
+            if (Instance == null)
+            {
+                lock (InstanceLock)
+                {
+                    var framework = kernel.Get<T>();
+                    Instance = new Configure(kernel, framework);
+                }
+            }
+
+
+            return Instance;
+        }
+
+        /// <summary>
+        /// Reset configuration
+        /// </summary>
+        public static void Reset()
+        {
+            lock (InstanceLock)
+            {
+                Instance = null;
+            }
+        }
+
     }
 }
