@@ -2,6 +2,6 @@
 {
     public interface IScriptEngine
     {
-        void Execute(IFramework framework, Execution execution);
+        void Execute(Harness execution);
     }
 }

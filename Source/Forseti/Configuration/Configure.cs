@@ -1,15 +1,15 @@
-﻿using Ninject;
+﻿using Forseti.Harnesses;
+using Ninject;
 using Ninject.Extensions.Conventions;
 
 namespace Forseti.Configuration
 {
     public class Configure : IConfigure
     {
-        static readonly object InstanceLock = new object();
-        public static Configure Instance { get; private set; }
-        public IExecutor Executor { get; private set; }
+        public IHarnessManager HarnessManager { get; private set; }
         public IFramework Framework { get; private set; }
         public IKernel Kernel { get; private set; }
+        public IScriptEngine ScriptEngine { get; private set; }
         public PathConfiguration SourcePaths { get; private set; }
         public PathConfiguration SpecificationPaths { get; private set; }
 
@@ -29,16 +29,8 @@ namespace Forseti.Configuration
 
         public static IConfigure With(IKernel kernel)
         {
-            if (Instance == null)
-            {
-                lock (InstanceLock)
-                {
-                    Instance = new Configure(kernel);
-                }
-            }
-
-
-            return Instance;
+            var instance = new Configure(kernel);
+            return instance;
         }
 
 
@@ -54,23 +46,13 @@ namespace Forseti.Configuration
             return kernel;
         }
 
-        public void Initialize()
+        public IConfigure Initialize()
         {
-            Executor = Kernel.Get<IExecutor>();
+            HarnessManager = Kernel.Get<IHarnessManager>();
             Framework = Kernel.Get<IFramework>();
+            ScriptEngine = Kernel.Get<IScriptEngine>();
+
+            return this;
         }
-
-
-        /// <summary>
-        /// Reset configuration
-        /// </summary>
-        public static void Reset()
-        {
-            lock (InstanceLock)
-            {
-                Instance = null;
-            }
-        }
-
     }
 }

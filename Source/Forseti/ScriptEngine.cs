@@ -1,7 +1,7 @@
-﻿using org.mozilla.javascript;
-using Forseti.Resources;
-using java.lang.reflect;
+﻿using Forseti.Resources;
 using java.lang;
+using java.lang.reflect;
+using org.mozilla.javascript;
 
 namespace Forseti
 {
@@ -33,7 +33,7 @@ namespace Forseti
         }
 
 
-        public void Execute(IFramework framework, Execution execution)
+        public void Execute(Harness execution)
         {
             var context = GetContext();
             
