@@ -4,15 +4,15 @@ namespace Forseti.Configuration
 {
     public static class ConfigureExtensions
     {
-        public static IConfigure Sources(this IConfigure configure, Action<PathConfiguration> pathConfiguration)
+        public static IConfigure Systems(this IConfigure configure, Action<PathConfiguration> pathConfiguration)
         {
-            pathConfiguration(configure.SourcePaths);
+            pathConfiguration(configure.SystemPaths);
             return configure;
         }
 
-        public static IConfigure Specifications(this IConfigure configure, Action<PathConfiguration> pathConfiguration)
+        public static IConfigure Cases(this IConfigure configure, Action<PathConfiguration> pathConfiguration)
         {
-            pathConfiguration(configure.SpecificationPaths);
+            pathConfiguration(configure.CasePaths);
             return configure;
         }
     }
