@@ -1,0 +1,13 @@
+source/**/bin
+source/**/obj
+*.suo
+*.ldf
+*.LDF
+*.user
+
+# OS generated files #
+######################
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db
