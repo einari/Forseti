@@ -20,10 +20,5 @@ namespace Forseti.Harnesses
             };
             return execution;
         }
-
-        public Harness Execute(string system, string @case)
-        {
-            return null;
-        }
     }
 }

@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\for_ConfigurationExtensions\when_applying_from_configuration_file.cs" />
+    <Compile Include="for_Suite\when_adding_suite_description.cs" />
     <Compile Include="Harnesses\for_HarnessManager\given\a_executor.cs" />
     <Compile Include="Harnesses\for_HarnessManager\when_executing_multiple_suites.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
