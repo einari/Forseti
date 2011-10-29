@@ -19,5 +19,6 @@ namespace Forseti.Specs.for_Suite
 
         It should_have_one_description = () => suite.Descriptions.Count().ShouldEqual(1);
         It should_have_the_added_description = () => suite.Descriptions.ShouldContain(description);
+        It should_set_suite_on_description_to_the_suite_its_added_to = () => description.Suite.ShouldEqual(suite);
     }
 }

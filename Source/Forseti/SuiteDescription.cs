@@ -6,6 +6,7 @@ namespace Forseti
     {
         List<Case> _cases = new List<Case>();
 
+        public Suite Suite { get; set; }
         public string File { get; set; }
         public IEnumerable<Case> Cases { get { return _cases; } }
 

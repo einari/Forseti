@@ -13,6 +13,7 @@ namespace Forseti
         public void AddDescription(SuiteDescription description)
         {
             _descriptions.Add(description);
+            description.Suite = this;
         }
     }
 }
