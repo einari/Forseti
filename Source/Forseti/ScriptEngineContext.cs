@@ -26,6 +26,11 @@ namespace Forseti
             _context.evaluateString(_scope, envJs, "env.js", 1, null);
         }
 
+        public void EvaluateString(string script, string source)
+        {
+            _context.evaluateString(_scope, script, source, 1, null);
+        }
+
         public void EvaluateFile(string file)
         {
             var script = File.ReadAllText(file);
