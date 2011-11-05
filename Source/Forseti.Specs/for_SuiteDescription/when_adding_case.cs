@@ -18,5 +18,6 @@ namespace Forseti.Specs.for_SuiteDescription
 
         It should_have_one_case = () => description.Cases.Count().ShouldEqual(1);
         It should_contain_the_added_case = () => description.Cases.ShouldContain(@case);
+        It should_set_the_description_to_the_description_it_is_added_to = () => @case.Description.ShouldEqual(description);
     }
 }

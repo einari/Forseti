@@ -61,6 +61,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Case.cs" />
+    <Compile Include="IScriptEngineContext.cs" />
+    <Compile Include="IScriptEngineContextManager.cs" />
+    <Compile Include="ScriptEngineContext.cs" />
+    <Compile Include="ScriptEngineContextManager.cs" />
     <Compile Include="SuiteDescription.cs" />
     <Compile Include="Configuration\ConfigurationFileReader.cs" />
     <Compile Include="Configuration\Configure.cs" />

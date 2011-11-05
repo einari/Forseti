@@ -14,11 +14,18 @@ namespace Forseti.Harnesses
 
         public Harness Execute(IEnumerable<Suite> suites)
         {
-            var execution = new Harness
-            {
-                Suites = suites
-            };
-            return execution;
+            var harness = new Harness();
+            var cases = new List<Case>();
+
+            foreach (var suite in suites)
+                foreach (var description in suite.Descriptions)
+                    cases.AddRange(description.Cases);
+
+            harness.Cases = cases;
+
+            _scriptEngine.Execute(harness);
+
+            return harness;
         }
     }
 }

@@ -13,7 +13,19 @@ namespace Forseti.Console
                 UsingJasmin().
                 Initialize();
 
-            configuration.ScriptEngine.Execute(null);
+            var suite = new Suite();
+            suite.System = "systemUnderTest";
+            suite.SystemFile = "systemUnderTest.js";
+
+            var description = new SuiteDescription();
+            description.File = "systemUnderTest.Specs.js";
+
+            var @case = new Case();
+            description.AddCase(@case);
+
+            suite.AddDescription(description);
+
+            var harness = configuration.HarnessManager.Execute(new[] {suite});
 
             return 0;
         }

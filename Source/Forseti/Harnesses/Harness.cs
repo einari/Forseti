@@ -4,6 +4,6 @@ namespace Forseti
 {
     public class Harness
     {
-        public IEnumerable<Suite> Suites { get; set; }
+        public IEnumerable<Case> Cases { get; set; }
     }
 }

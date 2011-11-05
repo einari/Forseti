@@ -12,6 +12,7 @@ namespace Forseti
 
         public void AddCase(Case @case)
         {
+            @case.Description = this;
             _cases.Add(@case);
         }
     }
