@@ -3,6 +3,7 @@ using Machine.Specifications;
 
 namespace Forseti.Specs.for_Case
 {
+    [Subject(typeof(Case))]
     public class when_adding_child_case
     {
         static Case parent;
