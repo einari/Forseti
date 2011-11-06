@@ -52,6 +52,9 @@
     <Reference Include="Ninject.Extensions.Conventions">
       <HintPath>..\Solutions\packages\Ninject.Extensions.Conventions.2.2.0.5\lib\net40-Full\Ninject.Extensions.Conventions.dll</HintPath>
     </Reference>
+    <Reference Include="Spark">
+      <HintPath>..\..\Libraries\Spark\Spark.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -61,10 +64,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Case.cs" />
+    <Compile Include="IPageGenerator.cs" />
     <Compile Include="IScriptEngineContext.cs" />
     <Compile Include="IScriptEngineContextManager.cs" />
+    <Compile Include="Modules\SparkModule.cs" />
+    <Compile Include="Page.cs" />
+    <Compile Include="Spark\PageGenerator.cs" />
     <Compile Include="ScriptEngineContext.cs" />
     <Compile Include="ScriptEngineContextManager.cs" />
+    <Compile Include="Spark\HarnessView.cs" />
     <Compile Include="SuiteDescription.cs" />
     <Compile Include="Configuration\ConfigurationFileReader.cs" />
     <Compile Include="Configuration\Configure.cs" />
@@ -91,6 +99,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\env.bootstrapper.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Spark\Harness.spark" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

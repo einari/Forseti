@@ -53,7 +53,7 @@
     <Compile Include="for_Case\when_adding_child_case.cs" />
     <Compile Include="for_SuiteDescription\when_adding_case.cs" />
     <Compile Include="for_Suite\when_adding_suite_description.cs" />
-    <Compile Include="Harnesses\for_HarnessManager\given\a_executor.cs" />
+    <Compile Include="Harnesses\for_HarnessManager\given\a_harness_manager.cs" />
     <Compile Include="Harnesses\for_HarnessManager\when_executing_one_suite_with_one_description_and_one_case.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

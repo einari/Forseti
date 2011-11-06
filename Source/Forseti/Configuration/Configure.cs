@@ -1,6 +1,7 @@
 ﻿using Forseti.Harnesses;
 using Ninject;
 using Ninject.Extensions.Conventions;
+using Forseti.Modules;
 
 namespace Forseti.Configuration
 {
@@ -36,7 +37,9 @@ namespace Forseti.Configuration
 
         static IKernel GetKernel()
         {
-            var kernel = new StandardKernel();
+            var kernel = new StandardKernel(
+                    //new SparkModule()
+                );
 
             var scanner = new AssemblyScanner();
             scanner.FromCallingAssembly();

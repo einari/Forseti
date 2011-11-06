@@ -2,6 +2,6 @@
 {
     public interface IScriptEngine
     {
-        void Execute(Harness execution);
+        void Execute(Page page);
     }
 }

@@ -5,10 +5,12 @@ namespace Forseti.Harnesses
     public class HarnessManager : IHarnessManager
     {
         IScriptEngine _scriptEngine;
+        IPageGenerator _pageGenerator;
 
-        public HarnessManager(IScriptEngine scriptEngine)
+        public HarnessManager(IScriptEngine scriptEngine, IPageGenerator pageGenerator)
         {
             _scriptEngine = scriptEngine;
+            _pageGenerator = pageGenerator;
         }
 
 
@@ -23,7 +25,8 @@ namespace Forseti.Harnesses
 
             harness.Cases = cases;
 
-            _scriptEngine.Execute(harness);
+            var page = _pageGenerator.GenerateFrom(harness);
+            _scriptEngine.Execute(page);
 
             return harness;
         }

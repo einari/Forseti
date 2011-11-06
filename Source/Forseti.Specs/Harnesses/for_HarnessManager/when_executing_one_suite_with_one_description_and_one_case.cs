@@ -6,14 +6,13 @@ using It=Machine.Specifications.It;
 namespace Forseti.Specs.for_HarnessManager
 {
     [Subject(typeof(HarnessManager))]
-    public class when_executing_one_suite_with_one_description_and_one_case
+    public class when_executing_one_suite_with_one_description_and_one_case : given.a_harness_manager
     {
         static Suite suite;
         static SuiteDescription description;
         static Case @case;
-        static HarnessManager manager;
-        static Mock<IScriptEngine>  script_engine_mock;
         static Harness harness_result;
+        static Page expected_page;
 
         Establish context = () =>
         {
@@ -23,16 +22,14 @@ namespace Forseti.Specs.for_HarnessManager
             
             @case = new Case();
             description.AddCase(@case);
-
-            script_engine_mock = new Mock<IScriptEngine>();
-            manager = new HarnessManager(script_engine_mock.Object);
-
-            script_engine_mock.Setup(s=>s.Execute(Moq.It.IsAny<Harness>())).Callback((Harness h) => harness_result = h);
+            expected_page = new Page();
+            page_generator_mock.Setup(p=>p.GenerateFrom(Moq.It.IsAny<Harness>())).Callback((Harness h) => harness_result = h).Returns(expected_page);
         };
 
-        Because of = () => manager.Execute(new[] {suite});
+        Because of = () => harness_manager.Execute(new[] {suite});
 
-        It should_forward_a_harness_to_the_script_engine = () => harness_result.ShouldNotBeNull();
-        It should_forward_case = () => harness_result.Cases.ShouldContainOnly(@case);
+        It should_generate_a_page = () => page_generator_mock.Verify(p => p.GenerateFrom(Moq.It.IsAny<Harness>()));
+        It should_generate_a_page_from_cases = () => harness_result.Cases.ShouldContainOnly(@case);
+        It should_execute_script_for_page = () => script_engine_mock.Verify(s => s.Execute(expected_page));
     }
 }

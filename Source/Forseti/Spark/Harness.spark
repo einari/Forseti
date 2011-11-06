@@ -1,0 +1,12 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<for each="var @case in Harness.Cases">
+			Its a case
+		</for>
+	
+	</body>
+</html>
