@@ -1205,8 +1205,8 @@ jasmine.Matchers.prototype.toNotBe = function(expected) {
  *
  * @param expected
  */
-jasmine.Matchers.prototype.toEqual = function(expected) {
-  return this.env.equals_(this.actual, expected);
+jasmine.Matchers.prototype.toEqual = function (expected) {
+    return this.env.equals_(this.actual, expected);
 };
 
 /**
@@ -1749,58 +1749,58 @@ jasmine.Queue.prototype.isRunning = function() {
 
 jasmine.Queue.LOOP_DONT_RECURSE = true;
 
-jasmine.Queue.prototype.next_ = function() {
-  var self = this;
-  var goAgain = true;
+jasmine.Queue.prototype.next_ = function () {
+    var self = this;
+    var goAgain = true;
 
-  while (goAgain) {
-    goAgain = false;
-    
-    if (self.index < self.blocks.length && !this.abort) {
-      var calledSynchronously = true;
-      var completedSynchronously = false;
+    while (goAgain) {
+        goAgain = false;
 
-      var onComplete = function () {
-        if (jasmine.Queue.LOOP_DONT_RECURSE && calledSynchronously) {
-          completedSynchronously = true;
-          return;
-        }
+        if (self.index < self.blocks.length && !this.abort) {
+            var calledSynchronously = true;
+            var completedSynchronously = false;
 
-        if (self.blocks[self.index].abort) {
-          self.abort = true;
-        }
+            var onComplete = function () {
+                if (jasmine.Queue.LOOP_DONT_RECURSE && calledSynchronously) {
+                    completedSynchronously = true;
+                    return;
+                }
 
-        self.offset = 0;
-        self.index++;
+                if (self.blocks[self.index].abort) {
+                    self.abort = true;
+                }
 
-        var now = new Date().getTime();
-        if (self.env.updateInterval && now - self.env.lastUpdate > self.env.updateInterval) {
-          self.env.lastUpdate = now;
-          self.env.setTimeout(function() {
-            self.next_();
-          }, 0);
+                self.offset = 0;
+                self.index++;
+
+                var now = new Date().getTime();
+                if (self.env.updateInterval && now - self.env.lastUpdate > self.env.updateInterval) {
+                    self.env.lastUpdate = now;
+                    self.env.setTimeout(function () {
+                        self.next_();
+                    }, 0);
+                } else {
+                    if (jasmine.Queue.LOOP_DONT_RECURSE && completedSynchronously) {
+                        goAgain = true;
+                    } else {
+                        self.next_();
+                    }
+                }
+            };
+            self.blocks[self.index].execute(onComplete);
+
+            calledSynchronously = false;
+            if (completedSynchronously) {
+                onComplete();
+            }
+
         } else {
-          if (jasmine.Queue.LOOP_DONT_RECURSE && completedSynchronously) {
-            goAgain = true;
-          } else {
-            self.next_();
-          }
+            self.running = false;
+            if (self.onComplete) {
+                self.onComplete();
+            }
         }
-      };
-      self.blocks[self.index].execute(onComplete);
-
-      calledSynchronously = false;
-      if (completedSynchronously) {
-        onComplete();
-      }
-      
-    } else {
-      self.running = false;
-      if (self.onComplete) {
-        self.onComplete();
-      }
     }
-  }
 };
 
 jasmine.Queue.prototype.results = function() {
@@ -1960,7 +1960,7 @@ jasmine.Spec.prototype.addMatcherResult = function(result) {
   this.results_.addResult(result);
 };
 
-jasmine.Spec.prototype.expect = function(actual) {
+jasmine.Spec.prototype.expect = function (actual) {
   var positive = new (this.getMatchersClass_())(this.env, actual, this);
   positive.not = new (this.getMatchersClass_())(this.env, actual, this, true);
   return positive;
@@ -2037,12 +2037,13 @@ jasmine.Spec.prototype.finishCallback = function() {
   this.env.reporter.reportSpecResults(this);
 };
 
-jasmine.Spec.prototype.finish = function(onComplete) {
-  this.removeAllSpies();
-  this.finishCallback();
-  if (onComplete) {
-    onComplete();
-  }
+jasmine.Spec.prototype.finish = function (onComplete) {
+    
+    this.removeAllSpies();
+    this.finishCallback();
+    if (onComplete) {
+        onComplete();
+    }
 };
 
 jasmine.Spec.prototype.after = function(doAfter) {
@@ -2053,23 +2054,24 @@ jasmine.Spec.prototype.after = function(doAfter) {
   }
 };
 
-jasmine.Spec.prototype.execute = function(onComplete) {
-  var spec = this;
-  if (!spec.env.specFilter(spec)) {
-    spec.results_.skipped = true;
-    spec.finish(onComplete);
-    return;
-  }
+jasmine.Spec.prototype.execute = function (onComplete) {
+    var spec = this;
 
-  this.env.reporter.reportSpecStarting(this);
+    if (!spec.env.specFilter(spec)) {
+        spec.results_.skipped = true;
+        spec.finish(onComplete);
+        return;
+    }
 
-  spec.env.currentSpec = spec;
+    this.env.reporter.reportSpecStarting(this);
 
-  spec.addBeforesAndAftersToQueue();
+    spec.env.currentSpec = spec;
 
-  spec.queue.start(function () {
-    spec.finish(onComplete);
-  });
+    spec.addBeforesAndAftersToQueue();
+
+    spec.queue.start(function () {
+        spec.finish(onComplete);
+    });
 };
 
 jasmine.Spec.prototype.addBeforesAndAftersToQueue = function() {
@@ -2210,11 +2212,12 @@ jasmine.Suite.prototype.children = function() {
   return this.children_;
 };
 
-jasmine.Suite.prototype.execute = function(onComplete) {
-  var self = this;
-  this.queue.start(function () {
-    self.finish(onComplete);
-  });
+jasmine.Suite.prototype.execute = function (onComplete) {
+    var self = this;
+    this.queue.start(function () {
+        
+        self.finish(onComplete);
+    });
 };
 jasmine.WaitsBlock = function(env, timeout, spec) {
   this.timeout = timeout;
@@ -2472,5 +2475,5 @@ jasmine.version_= {
   "major": 1,
   "minor": 1,
   "build": 0,
-  "revision": 1315677058
+  "revision": 1320442951
 };

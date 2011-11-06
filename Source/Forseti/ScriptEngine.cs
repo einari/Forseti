@@ -18,15 +18,15 @@ namespace Forseti
         public void Execute(Harness harness)
         {
             var context = _scriptEngineContextManager.Create();
-            context.EvaluateString(_framework.Script, "framework");
+            context.EvaluateString(_framework.Script, _framework.ScriptName);
+            context.EvaluateString(_framework.ReportScript, _framework.ReportScriptName);
             foreach (var @case in harness.Cases)
             {
                 context.EvaluateFile(@case.Description.Suite.SystemFile);
                 context.EvaluateFile(@case.Description.File);
             }
-
             
-            context.EvaluateString(_framework.ExecuteScript, "framework");
+            context.EvaluateString(_framework.ExecuteScript, _framework.ExecuteScriptName);
         }
     }
 }

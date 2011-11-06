@@ -52,7 +52,7 @@
       <Link>JS\jasmine.js</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="JS\jasmine-executor.js" />
-    <EmbeddedResource Include="JS\reporter.js" />
+    <EmbeddedResource Include="JS\jasmine-reporter.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forseti\Forseti.csproj">
