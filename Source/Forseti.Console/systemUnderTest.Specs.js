@@ -1,8 +1,6 @@
-﻿
-describe("systemUnderTest", function () {
+﻿describe("systemUnderTest", function () {
     it("should fail", function () {
         print("Should fail");
-
         expect(true).toEqual(false);
     });
 });
