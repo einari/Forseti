@@ -1,8 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using Forseti.Resources;
 using Spark;
 using Spark.FileSystem;
-using Forseti.Resources;
 
 namespace Forseti.Spark
 {
@@ -11,13 +10,14 @@ namespace Forseti.Spark
         const string TemplateName = "Harness";
         SparkViewDescriptor _descriptor;
         SparkViewEngine _engine;
+        IFramework _framework;
 
 
-
-        public PageGenerator(IResourceManager resourceManager )
+        public PageGenerator(IResourceManager resourceManager, IFramework framework)
         {
             var template = resourceManager.GetStringFromAssemblyOf<PageGenerator>("Forseti.Spark.Harness.spark");
 
+            _framework = framework;
 
             var settings = new SparkSettings().SetPageBaseType(typeof(HarnessView));
             var templates = new InMemoryViewFolder();
@@ -27,7 +27,6 @@ namespace Forseti.Spark
             };
             templates.Add(TemplateName, template); //"<for each=\"var s in Stuff\"><p>${s}</p></for>");
             _descriptor = new SparkViewDescriptor().AddTemplate(TemplateName);
-
         }
 
 
@@ -41,6 +40,7 @@ namespace Forseti.Spark
             harnessView.RenderView(writer);
 
             var result = writer.ToString();
+            File.WriteAllText("c:\\jasmine-runner.html", result);
 
             return page;
         }
