@@ -6,11 +6,11 @@
 		<script type="text/javascript" src="${FrameworkReportingScript}"></script>
 
 		<for each="var system in SystemScripts">
-			<script type="text/javascript" src="${}"></script>
+			<script type="text/javascript" src="${system}"></script>
 		</for>
 
 		<for each="var @case in CaseScripts">
-			<script type="text/javascript" src="${}"></script>
+			<script type="text/javascript" src="${@case}"></script>
 		</for>
 
 		<script type="text/javascript" src="${FrameworkExecutionScript}"></script>
