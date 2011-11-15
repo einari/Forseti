@@ -8,29 +8,36 @@
         this.finished = false;
 
         this.reportRunnerStarting = function (runner) {
-            print("Runner starting");
+            //print("Runner starting");
         };
 
         this.reportRunnerResults = function (runner) {
-            print("Runner results");
+            //print("Runner results");
         };
 
         this.reportSuiteResults = function (suite) {
-            print("Suite Results");
+            //print("Suite Results");
         };
 
         this.reportSpecStarting = function (spec) {
-            print("SpecStarting : " + spec);
+            //print("SpecStarting : " + spec);
         };
 
         this.reportSpecResults = function (spec) {
+            //print("Spec : " + spec.description);
+
+            var messages = spec.results().getItems();
+            for (var messageIndex = 0; messageIndex < messages.length; messageIndex++) {
+                print("Message : " + messages[messageIndex].toString());
+            }
+
             //var items = spec.getResults().getItems();
             //print("Items : "+items);
-            print("Spec : " + spec);
+            //print("Spec : " + spec);
         };
 
         this.log = function (str) {
-            print("LOG : " + str);
+            //print("LOG : " + str);
         };
     };
 

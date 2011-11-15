@@ -18,8 +18,8 @@ namespace Forseti
         public void Execute(Page page)
         {
             var context = _scriptEngineContextManager.Create();
-            context.EvaluateString("var something = \"Hello world from the horse\";","internal");
-
+            //context.EvaluateString("var something = \"Hello world from the horse\";","internal");
+            
             var bootstrapper = _resourceManager.GetStringFromAssemblyOf<ScriptEngine>("Forseti.JS.env.bootstrapper.js");
             context.EvaluateString(bootstrapper, "bootstrapper.js");
 
