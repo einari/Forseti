@@ -6,11 +6,11 @@ namespace Forseti.Jasmine
         public Framework(IResourceManager resourceManager)
         {
             ScriptName = "jasmine.js";
-            Script = resourceManager.GetStringFromAssemblyOf<Framework>("Forseti.Jasmine.JS.jasmine.js");
+            Script = resourceManager.GetStringFromAssemblyOf<Framework>("Forseti.Jasmine.Scripts.jasmine.js");
             ExecuteScriptName = "jasmine-executor.js";
-            ExecuteScript = resourceManager.GetStringFromAssemblyOf<Framework>("Forseti.Jasmine.JS.jasmine-executor.js");
+            ExecuteScript = resourceManager.GetStringFromAssemblyOf<Framework>("Forseti.Jasmine.Scripts.jasmine-executor.js");
             ReportScriptName = "jasmine-reporter.js";
-            ReportScript = resourceManager.GetStringFromAssemblyOf<Framework>("Forseti.Jasmine.JS.jasmine-reporter.js");
+            ReportScript = resourceManager.GetStringFromAssemblyOf<Framework>("Forseti.Jasmine.Scripts.jasmine-reporter.js");
         }
 
 
