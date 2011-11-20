@@ -16,7 +16,7 @@ namespace Forseti.Pages.Spark
 
         public PageGenerator(IResourceManager resourceManager, IFramework framework)
         {
-            var template = resourceManager.GetStringFromAssemblyOf<PageGenerator>("Forseti.Spark.Harness.spark");
+            var template = resourceManager.GetStringFromAssemblyOf<PageGenerator>("Forseti.Pages.Spark.Harness.spark");
 
             _framework = framework;
 
