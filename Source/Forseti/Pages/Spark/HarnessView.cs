@@ -2,7 +2,7 @@
 using Spark;
 using System.Collections.Generic;
 
-namespace Forseti.Spark
+namespace Forseti.Pages.Spark
 {
     public class HarnessView : AbstractSparkView
     {

@@ -1,10 +1,10 @@
 ﻿using System.IO;
+using System.Text;
 using Forseti.Resources;
 using Spark;
 using Spark.FileSystem;
-using System.Text;
 
-namespace Forseti.Spark
+namespace Forseti.Pages.Spark
 {
     public class PageGenerator : IPageGenerator
     {

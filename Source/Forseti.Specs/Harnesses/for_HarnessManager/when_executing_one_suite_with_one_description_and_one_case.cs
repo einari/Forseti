@@ -1,4 +1,5 @@
 ﻿using Forseti.Harnesses;
+using Forseti.Pages;
 using Forseti.Suites;
 using Machine.Specifications;
 using It = Machine.Specifications.It;

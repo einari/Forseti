@@ -1,4 +1,4 @@
-﻿namespace Forseti
+﻿namespace Forseti.Pages
 {
     public interface IPageGenerator
     {

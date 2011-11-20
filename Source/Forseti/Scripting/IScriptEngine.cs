@@ -1,4 +1,6 @@
-﻿namespace Forseti.Scripting
+﻿using Forseti.Pages;
+
+namespace Forseti.Scripting
 {
     public interface IScriptEngine
     {
