@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace Forseti.Harnesses
 {
@@ -20,13 +21,15 @@ namespace Forseti.Harnesses
             var cases = new List<Case>();
 
             foreach (var suite in suites)
+            {
                 foreach (var description in suite.Descriptions)
                     cases.AddRange(description.Cases);
 
-            harness.Cases = cases;
+                harness.Cases = cases;
 
-            var page = _pageGenerator.GenerateFrom(harness);
-            _scriptEngine.Execute(page);
+                var page = _pageGenerator.GenerateFrom(harness);
+                _scriptEngine.Execute(page);
+            }
 
             return harness;
         }

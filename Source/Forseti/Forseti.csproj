@@ -67,7 +67,6 @@
     <Compile Include="IPageGenerator.cs" />
     <Compile Include="IScriptEngineContext.cs" />
     <Compile Include="IScriptEngineContextManager.cs" />
-    <Compile Include="Modules\SparkModule.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="Spark\PageGenerator.cs" />
     <Compile Include="ScriptEngineContext.cs" />

@@ -25,7 +25,7 @@ namespace Forseti.Console
 
             suite.AddDescription(description);
 
-            var harness = configuration.HarnessManager.Execute(new[] {suite});
+            var harness = configuration.HarnessManager.Execute(new[] {suite, suite});
 
             return 0;
         }
