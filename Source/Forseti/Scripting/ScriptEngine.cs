@@ -1,7 +1,7 @@
 ﻿using Forseti.Resources;
 using System;
 
-namespace Forseti
+namespace Forseti.Scripting
 {
     public class ScriptEngine : IScriptEngine
     {

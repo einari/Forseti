@@ -1,7 +1,7 @@
-﻿using Machine.Specifications;
-using Forseti.Harnesses;
-using Moq;
-using It=Machine.Specifications.It;
+﻿using Forseti.Harnesses;
+using Forseti.Suites;
+using Machine.Specifications;
+using It = Machine.Specifications.It;
 
 namespace Forseti.Specs.for_HarnessManager
 {

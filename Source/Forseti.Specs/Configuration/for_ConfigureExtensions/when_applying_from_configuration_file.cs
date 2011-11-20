@@ -4,8 +4,9 @@ using Moq;
 using Ninject;
 using It = Machine.Specifications.It;
 
-namespace Forseti.Specs.Configuration.for_ConfigurationExtensions
+namespace Forseti.Specs.Configuration.for_ConfigureExtensions
 {
+    [Subject(typeof(ConfigureExtensions))]
     public class when_applying_from_configuration_file
     {
         const string Filename = "configFile.cfg";

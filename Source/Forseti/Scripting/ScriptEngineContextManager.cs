@@ -1,6 +1,6 @@
-﻿
-using Ninject;
-namespace Forseti
+﻿using Ninject;
+
+namespace Forseti.Scripting
 {
     public class ScriptEngineContextManager : IScriptEngineContextManager
     {

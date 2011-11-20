@@ -4,7 +4,7 @@ using java.lang;
 using java.lang.reflect;
 using org.mozilla.javascript;
 
-namespace Forseti
+namespace Forseti.Scripting
 {
     public class ScriptEngineContext : IScriptEngineContext
     {

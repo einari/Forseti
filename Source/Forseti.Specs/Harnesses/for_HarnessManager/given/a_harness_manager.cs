@@ -1,6 +1,7 @@
 ﻿using Moq;
 using Machine.Specifications;
 using Forseti.Harnesses;
+using Forseti.Scripting;
 
 namespace Forseti.Specs.for_HarnessManager.given
 {

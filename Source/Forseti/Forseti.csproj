@@ -63,16 +63,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Case.cs" />
+    <Compile Include="Suites\Case.cs" />
     <Compile Include="IPageGenerator.cs" />
-    <Compile Include="IScriptEngineContext.cs" />
-    <Compile Include="IScriptEngineContextManager.cs" />
+    <Compile Include="Scripting\IScriptEngineContext.cs" />
+    <Compile Include="Scripting\IScriptEngineContextManager.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="Spark\PageGenerator.cs" />
-    <Compile Include="ScriptEngineContext.cs" />
-    <Compile Include="ScriptEngineContextManager.cs" />
+    <Compile Include="Scripting\ScriptEngineContext.cs" />
+    <Compile Include="Scripting\ScriptEngineContextManager.cs" />
     <Compile Include="Spark\HarnessView.cs" />
-    <Compile Include="SuiteDescription.cs" />
+    <Compile Include="Suites\SuiteDescription.cs" />
     <Compile Include="Configuration\ConfigurationFileReader.cs" />
     <Compile Include="Configuration\Configure.cs" />
     <Compile Include="Configuration\ConfigureExtensions.cs" />
@@ -80,16 +80,16 @@
     <Compile Include="Configuration\IConfigure.cs" />
     <Compile Include="Configuration\PathConfiguration.cs" />
     <Compile Include="Harnesses\Harness.cs" />
-    <Compile Include="Suite.cs" />
+    <Compile Include="Suites\Suite.cs" />
     <Compile Include="IFramework.cs" />
     <Compile Include="Harnesses\IHarnessManager.cs" />
-    <Compile Include="IScriptEngine.cs" />
+    <Compile Include="Scripting\IScriptEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Harnesses\HarnessManager.cs" />
     <Compile Include="Resources\IResourceManager.cs" />
     <Compile Include="Resources\ResourceManager.cs" />
-    <Compile Include="ScriptEngine.cs" />
-    <Compile Include="SystemConsole.cs" />
+    <Compile Include="Scripting\ScriptEngine.cs" />
+    <Compile Include="Scripting\SystemConsole.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\..\Libraries\Env\env.js">
@@ -105,6 +105,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Spark\Harness.spark" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

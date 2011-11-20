@@ -1,5 +1,6 @@
 ﻿using System;
 using Forseti.Configuration;
+using Forseti.Suites;
 
 namespace Forseti.Console
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Forseti
+namespace Forseti.Suites
 {
     public class Case
     {

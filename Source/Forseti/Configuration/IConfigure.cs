@@ -1,5 +1,6 @@
 ﻿using Forseti.Harnesses;
 using Ninject;
+using Forseti.Scripting;
 
 namespace Forseti.Configuration
 {

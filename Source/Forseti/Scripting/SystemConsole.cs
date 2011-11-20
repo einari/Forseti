@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Forseti
+namespace Forseti.Scripting
 {
     public class SystemConsole
     {

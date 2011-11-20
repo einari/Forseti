@@ -1,7 +1,8 @@
 ﻿using System.Linq;
 using Machine.Specifications;
+using Forseti.Suites;
 
-namespace Forseti.Specs.for_Suite
+namespace Forseti.Specs.Suites.for_Suite
 {
     [Subject(typeof(Suite))]
     public class when_adding_suite_description

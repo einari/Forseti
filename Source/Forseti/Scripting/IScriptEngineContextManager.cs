@@ -1,4 +1,4 @@
-﻿namespace Forseti
+﻿namespace Forseti.Scripting
 {
     public interface IScriptEngineContextManager
     {

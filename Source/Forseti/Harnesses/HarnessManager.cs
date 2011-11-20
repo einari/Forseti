@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
+using Forseti.Scripting;
+using Forseti.Suites;
 
 namespace Forseti.Harnesses
 {

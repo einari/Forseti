@@ -49,10 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\for_ConfigurationExtensions\when_applying_from_configuration_file.cs" />
-    <Compile Include="for_Case\when_adding_child_case.cs" />
-    <Compile Include="for_SuiteDescription\when_adding_case.cs" />
-    <Compile Include="for_Suite\when_adding_suite_description.cs" />
+    <Compile Include="Configuration\for_ConfigureExtensions\when_applying_from_configuration_file.cs" />
+    <Compile Include="Suites\for_Case\when_adding_child_case.cs" />
+    <Compile Include="Suites\for_SuiteDescription\when_adding_case.cs" />
+    <Compile Include="Suites\for_Suite\when_adding_suite_description.cs" />
     <Compile Include="Harnesses\for_HarnessManager\given\a_harness_manager.cs" />
     <Compile Include="Harnesses\for_HarnessManager\when_executing_one_suite_with_one_description_and_one_case.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Configuration\for_Configure\" />
+    <Folder Include="Scripting\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forseti\Forseti.csproj">

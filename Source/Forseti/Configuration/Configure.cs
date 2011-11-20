@@ -1,4 +1,5 @@
 ﻿using Forseti.Harnesses;
+using Forseti.Scripting;
 using Ninject;
 using Ninject.Extensions.Conventions;
 

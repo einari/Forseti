@@ -1,8 +1,10 @@
 ﻿using System.Linq;
+using Forseti.Suites;
 using Machine.Specifications;
 
-namespace Forseti.Specs.for_SuiteDescription
+namespace Forseti.Specs.Suites.for_SuiteDescription
 {
+    [Subject(typeof(SuiteDescription))]
     public class when_adding_case
     {
         static SuiteDescription description;
