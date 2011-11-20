@@ -48,11 +48,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\..\Libraries\Jasmine\jasmine.js">
-      <Link>JS\jasmine.js</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="JS\jasmine-executor.js" />
-    <EmbeddedResource Include="JS\jasmine-reporter.js" />
+    <EmbeddedResource Include="Scripts\jasmine-executor.js" />
+    <EmbeddedResource Include="Scripts\jasmine-reporter.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forseti\Forseti.csproj">
@@ -62,6 +59,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\Libraries\Jasmine\jasmine.js">
+      <Link>Scripts\jasmine.js</Link>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
