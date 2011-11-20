@@ -13,7 +13,7 @@ namespace Forseti.Scripting
 
         public ScriptEngineContext(IResourceManager resourceManager)
         {
-            string envJs = resourceManager.GetStringFromAssemblyOf<ScriptEngine>("Forseti.JS.env.js");
+            string envJs = resourceManager.GetStringFromAssemblyOf<ScriptEngine>("Forseti.Scripting.Scripts.env.js");
 
             _context = Context.enter();
             _context.setOptimizationLevel(-1);

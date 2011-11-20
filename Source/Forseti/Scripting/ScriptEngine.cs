@@ -21,7 +21,7 @@ namespace Forseti.Scripting
         public void Execute(Page page)
         {
             var context = _scriptEngineContextManager.Create();
-            var bootstrapper = _resourceManager.GetStringFromAssemblyOf<ScriptEngine>("Forseti.JS.env.bootstrapper.js");
+            var bootstrapper = _resourceManager.GetStringFromAssemblyOf<ScriptEngine>("Forseti.Scripting.Scripts.env.bootstrapper.js");
             context.EvaluateString(bootstrapper, "bootstrapper.js");
             context.EvaluateString("executeSpecs()", "");
         }

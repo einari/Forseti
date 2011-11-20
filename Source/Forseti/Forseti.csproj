@@ -93,14 +93,14 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\..\Libraries\Env\env.js">
-      <Link>JS\env.js</Link>
+      <Link>Scripting\Scripts\env.js</Link>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="JS\env.bootstrapper.js" />
+    <EmbeddedResource Include="Scripting\Scripts\env.bootstrapper.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\Spark\Harness.spark" />
