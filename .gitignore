@@ -4,6 +4,8 @@ source/**/obj
 *.ldf
 *.LDF
 *.user
+*.fbl7
+*.fbpInf
 
 # OS generated files #
 ######################
