@@ -6,6 +6,7 @@ source/**/obj
 *.user
 *.fbl7
 *.fbpInf
+*.fb7lck
 
 # OS generated files #
 ######################
