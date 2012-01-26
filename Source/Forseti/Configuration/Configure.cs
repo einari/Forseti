@@ -2,6 +2,7 @@
 using Forseti.Scripting;
 using Ninject;
 using Ninject.Extensions.Conventions;
+using Ninject.Extensions.Conventions.Syntax;
 
 namespace Forseti.Configuration
 {
@@ -39,7 +40,15 @@ namespace Forseti.Configuration
         {
             var kernel = new StandardKernel();
 
-            kernel.Scan(a =>
+            kernel.Bind(s =>
+            {
+                s.FromThisAssembly().SelectAllTypes().
+                
+                
+            });
+
+            /*
+            kernel.Bind(a =>
             {
                 a.FromCallingAssembly();
                 a.Excluding<IScriptEngine>();
@@ -47,7 +56,7 @@ namespace Forseti.Configuration
                 a.Excluding<IHarnessManager>();
                 a.Excluding<HarnessManager>();
                 a.BindWithDefaultConventions();
-            });
+            });*/
 
             kernel.Bind<IScriptEngine>().To<ScriptEngine>().InSingletonScope();
             kernel.Bind<IHarnessManager>().To<HarnessManager>().InSingletonScope();
