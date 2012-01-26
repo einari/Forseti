@@ -8,7 +8,15 @@ namespace Forseti.Suites
 
         public Suite Suite { get; set; }
         public string File { get; set; }
-        public IEnumerable<Case> Cases { get { return _cases; } }
+        public IEnumerable<Case> Cases 
+        { 
+            get { return _cases; }
+            set
+            {
+                _cases.Clear();
+                _cases.AddRange(value);
+            }
+        }
 
         public void AddCase(Case @case)
         {

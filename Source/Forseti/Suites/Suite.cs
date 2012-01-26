@@ -8,7 +8,15 @@ namespace Forseti.Suites
 
         public string System { get; set; }
         public string SystemFile { get; set; }
-        public IEnumerable<SuiteDescription> Descriptions { get { return _descriptions; } }
+        public IEnumerable<SuiteDescription> Descriptions  
+        { 
+            get { return _descriptions; }
+            set 
+            { 
+                _descriptions.Clear();
+                _descriptions.AddRange(value);
+            }
+        }
 
         public void AddDescription(SuiteDescription description)
         {

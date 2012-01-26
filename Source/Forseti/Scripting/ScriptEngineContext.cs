@@ -13,7 +13,7 @@ namespace Forseti.Scripting
 
         public ScriptEngineContext(IResourceManager resourceManager)
         {
-            string envJs = resourceManager.GetStringFromAssemblyOf<ScriptEngine>("Forseti.Scripting.Scripts.env.js");
+            var envJs = resourceManager.GetStringFromAssemblyOf<ScriptEngine>("Forseti.Scripting.Scripts.env.js");
 
             _context = Context.enter();
             _context.setOptimizationLevel(-1);
@@ -23,7 +23,10 @@ namespace Forseti.Scripting
             Member method = myJClass.getMethod("Print", typeof(string));
             Scriptable function = new FunctionObject("print", method, _scope);
             _scope.put("print", _scope, function);
+
+            SystemConsole.LoggingEnabled = false;
             _context.evaluateString(_scope, envJs, "env.js", 1, null);
+            SystemConsole.LoggingEnabled = true;
         }
 
         public void EvaluateString(string script, string source)

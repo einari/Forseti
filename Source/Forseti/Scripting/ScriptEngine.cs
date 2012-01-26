@@ -12,7 +12,6 @@ namespace Forseti.Scripting
 
         public ScriptEngine(IResourceManager resourceManager, IScriptEngineContextManager scriptEngineContextManager, IFramework framework)
         {
-            Console.WriteLine("ScriptEngine()");
             _resourceManager = resourceManager;
             _scriptEngineContextManager = scriptEngineContextManager;
             _framework = framework;

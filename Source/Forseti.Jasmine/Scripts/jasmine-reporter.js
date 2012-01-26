@@ -16,7 +16,20 @@
         };
 
         this.reportSuiteResults = function (suite) {
-            //print("Suite Results");
+            print("\nSuite(" + suite.description + ")");
+
+            var specs = suite.specs();
+            for (var specIndex = 0; specIndex < specs.length; specIndex++) {
+                var spec = specs[specIndex];
+                var messages = spec.results().getItems();
+                for (var messageIndex = 0; messageIndex < messages.length; messageIndex++) {
+                    var message = messages[messageIndex];
+                    var passed = message.passed ? message.passed() : true;
+                    if (passed !== true) {
+                        print("  Spec(" + spec.description + ") failed with message : " + messages[messageIndex].toString());
+                    }
+                }
+            }
         };
 
         this.reportSpecStarting = function (spec) {
@@ -25,15 +38,6 @@
 
         this.reportSpecResults = function (spec) {
             //print("Spec : " + spec.description);
-
-            var messages = spec.results().getItems();
-            for (var messageIndex = 0; messageIndex < messages.length; messageIndex++) {
-                print("Message : " + messages[messageIndex].toString());
-            }
-
-            //var items = spec.getResults().getItems();
-            //print("Items : "+items);
-            //print("Spec : " + spec);
         };
 
         this.log = function (str) {

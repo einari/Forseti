@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using Forseti.Configuration;
 using Forseti.Suites;
+using Newtonsoft.Json;
+
+
 
 namespace Forseti.Console
 {
@@ -9,24 +14,38 @@ namespace Forseti.Console
         [STAThread]
         public static int Main(string[] args)
         {
+            if (args.Length != 1)
+            {
+                System.Console.WriteLine("\nUsage : forseti <config file>");
+                return -1;
+            }
+
+
+            var json = File.ReadAllText("forseti.config");
+            var suites = JsonConvert.DeserializeObject<IEnumerable<Suite>>(json);
+
+            foreach (var suite in suites)
+            {
+                foreach (var description in suite.Descriptions)
+                {
+                    description.Suite = suite;
+
+                    foreach( var @case in description.Cases )
+                    {
+                        @case.Description = description;
+                    }                   
+                }
+            }
+
             var configuration = Configure.
                 WithStandardKernel().
                 UsingJasmin().
                 Initialize();
 
-            var suite = new Suite();
-            suite.System = "systemUnderTest";
-            suite.SystemFile = "systemUnderTest.js";
+            var harness = configuration.HarnessManager.Execute(suites);
 
-            var description = new SuiteDescription();
-            description.File = "systemUnderTest.Specs.js";
+            System.Console.ReadLine();
 
-            var @case = new Case();
-            description.AddCase(@case);
-
-            suite.AddDescription(description);
-
-            var harness = configuration.HarnessManager.Execute(new[] { suite, suite, suite, suite});
 
             return 0;
         }

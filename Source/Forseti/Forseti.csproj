@@ -46,6 +46,9 @@
     <Reference Include="js">
       <HintPath>..\..\Libraries\Rhino\js.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Solutions\packages\Newtonsoft.Json.4.0.7\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Solutions\packages\Ninject.3.0.0-rc3\lib\net40\Ninject.dll</HintPath>
