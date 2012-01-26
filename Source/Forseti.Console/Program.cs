@@ -14,14 +14,14 @@ namespace Forseti.Console
         [STAThread]
         public static int Main(string[] args)
         {
-            if (args.Length != 1)
+            var configFile = "forseti.config";
+            if (!File.Exists(configFile))
             {
-                System.Console.WriteLine("\nUsage : forseti <config file>");
+                System.Console.WriteLine("You need a config file!");
                 return -1;
             }
 
-
-            var json = File.ReadAllText("forseti.config");
+            var json = File.ReadAllText(configFile);
             var suites = JsonConvert.DeserializeObject<IEnumerable<Suite>>(json);
 
             foreach (var suite in suites)
