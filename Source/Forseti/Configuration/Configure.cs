@@ -42,21 +42,14 @@ namespace Forseti.Configuration
 
             kernel.Bind(s =>
             {
-                s.FromThisAssembly().SelectAllTypes().
-                
-                
+                s.FromThisAssembly()
+                    .SelectAllTypes()
+                        .Excluding<IScriptEngine>()
+                        .Excluding<ScriptEngine>()
+                        .Excluding<IHarnessManager>()
+                        .Excluding<HarnessManager>()
+                    .BindToDefaultInterfaces();
             });
-
-            /*
-            kernel.Bind(a =>
-            {
-                a.FromCallingAssembly();
-                a.Excluding<IScriptEngine>();
-                a.Excluding<ScriptEngine>();
-                a.Excluding<IHarnessManager>();
-                a.Excluding<HarnessManager>();
-                a.BindWithDefaultConventions();
-            });*/
 
             kernel.Bind<IScriptEngine>().To<ScriptEngine>().InSingletonScope();
             kernel.Bind<IHarnessManager>().To<HarnessManager>().InSingletonScope();
