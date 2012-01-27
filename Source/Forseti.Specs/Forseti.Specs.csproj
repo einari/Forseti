@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Configuration\for_Configure\" />
+    <Folder Include="Files\" />
     <Folder Include="Scripting\" />
   </ItemGroup>
   <ItemGroup>
