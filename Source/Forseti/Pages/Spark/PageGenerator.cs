@@ -4,6 +4,7 @@ using Forseti.Resources;
 using Spark;
 using Spark.FileSystem;
 using System;
+using System.Collections.Generic;
 
 namespace Forseti.Pages.Spark
 {
@@ -42,19 +43,36 @@ namespace Forseti.Pages.Spark
             harnessView.FrameworkExecutionScript = _framework.ExecuteScriptName;
             harnessView.FrameworkReportingScript = _framework.ReportScriptName;
 
+            page.RootPath = Path.GetTempPath() + @"Forseti\";
+            page.Filename = string.Format("{0}jasmine-runner.html", page.RootPath);
+
+            if (!Directory.Exists(page.RootPath))
+                Directory.CreateDirectory(page.RootPath);
+
+            var dependenciesFile = "dependencies.config";
+            if (File.Exists(dependenciesFile))
+            {
+                var actualDependencies = new List<string>();
+                var dependencies = File.ReadAllLines(dependenciesFile);
+                foreach (var dependency in dependencies)
+                {
+                    CopyScript(page.RootPath, dependency);
+                    actualDependencies.Add(dependency);
+                }
+                harnessView.Dependencies = actualDependencies.ToArray();
+            }
+
             var writer = new StringWriter();
             harnessView.RenderView(writer);
 
             var result = writer.ToString();
 
             
-            page.RootPath = Path.GetTempPath() + "\\Forseti\\";
-            if (!Directory.Exists(page.RootPath))
-                Directory.CreateDirectory(page.RootPath);
 
             File.WriteAllText(page.RootPath + _framework.ScriptName, _framework.Script);
             File.WriteAllText(page.RootPath + _framework.ExecuteScriptName, _framework.ExecuteScript);
             File.WriteAllText(page.RootPath + _framework.ReportScriptName, _framework.ReportScript);
+
 
 
             foreach (var scriptFile in harnessView.SystemScripts)
@@ -66,7 +84,7 @@ namespace Forseti.Pages.Spark
                 //File.Copy(scriptFile, page.RootPath + scriptFile, true);
             
 
-            page.Filename = string.Format("{0}jasmine-runner.html", page.RootPath);
+            
 
             File.WriteAllText(page.Filename, result);
 

@@ -33,6 +33,8 @@ namespace Forseti.Pages.Spark
         public string[] SystemScripts { get; set; }
         public string[] CaseScripts { get; set; }
 
+        public string[] Dependencies { get; set; }
+
         public override Guid GeneratedViewId { get { return Guid.NewGuid(); } }
         public override void Render()
         {

@@ -91,6 +91,9 @@ namespace Forseti.Harnesses
 
             }
             var page = _pageGenerator.GenerateFrom(harness);
+
+            
+
             _scriptEngine.Execute(page);
 
             var delta = DateTime.Now.Subtract(timeBefore);

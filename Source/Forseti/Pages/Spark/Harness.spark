@@ -5,6 +5,10 @@
 		<script type="text/javascript" src="${FrameworkScript}"></script>
 		<script type="text/javascript" src="${FrameworkReportingScript}"></script>
 
+		<for each="var dependency in Dependencies">
+			<script type="text/javascript" src="${dependency}"></script>
+		</for>
+
 		<for each="var system in SystemScripts">
 			<script type="text/javascript" src="${system}"></script>
 		</for>

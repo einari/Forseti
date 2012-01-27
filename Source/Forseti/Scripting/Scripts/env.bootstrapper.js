@@ -17,8 +17,9 @@
         window.onload = function () {
             //print("DONE");
         }
-        window.location = "file:///jasmine-runner.html";
+
+        window.location = window.pagePath; 
     } catch( exception ) {
-        print("EXCEPTION");
+        print("EXCEPTION : "+exception);
     }
 }
