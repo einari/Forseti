@@ -3,6 +3,7 @@ using System.Text;
 using Forseti.Resources;
 using Spark;
 using Spark.FileSystem;
+using System;
 
 namespace Forseti.Pages.Spark
 {
@@ -46,7 +47,10 @@ namespace Forseti.Pages.Spark
 
             var result = writer.ToString();
 
-            page.RootPath = "c:\\";
+            
+            page.RootPath = Path.GetTempPath() + "\\Forseti\\";
+            if (!Directory.Exists(page.RootPath))
+                Directory.CreateDirectory(page.RootPath);
 
             File.WriteAllText(page.RootPath + _framework.ScriptName, _framework.Script);
             File.WriteAllText(page.RootPath + _framework.ExecuteScriptName, _framework.ExecuteScript);
@@ -62,7 +66,7 @@ namespace Forseti.Pages.Spark
                 //File.Copy(scriptFile, page.RootPath + scriptFile, true);
             
 
-            page.Filename = "c:\\jasmine-runner.html";
+            page.Filename = string.Format("{0}jasmine-runner.html", page.RootPath);
 
             File.WriteAllText(page.Filename, result);
 
@@ -72,8 +76,14 @@ namespace Forseti.Pages.Spark
 
         void CopyScript(string rootPath, string scriptFile)
         {
+            var target = rootPath + scriptFile;
             var script = File.ReadAllText(scriptFile);
-            File.WriteAllText(rootPath + scriptFile, script, Encoding.ASCII);
+
+            var dir = Path.GetDirectoryName(target);
+            if (!Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
+
+            File.WriteAllText(target, script, Encoding.ASCII);
         }
     }
 }
