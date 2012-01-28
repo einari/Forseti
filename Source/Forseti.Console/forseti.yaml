@@ -1,4 +1,14 @@
 ﻿---
+ScriptEngines:
+  - Rhino
+  - V8
+
+Frameworks:
+  - Jasmine
+
+MockFrameworks:
+  - Sinon
+
 Systems: 
   - "**/*.js"
 

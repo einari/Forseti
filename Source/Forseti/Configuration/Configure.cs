@@ -12,15 +12,11 @@ namespace Forseti.Configuration
         public IFramework Framework { get; private set; }
         public IKernel Kernel { get; private set; }
         public IScriptEngine ScriptEngine { get; private set; }
-        public PathConfiguration SystemPaths { get; private set; }
-        public PathConfiguration CasePaths { get; private set; }
 
 
         Configure(IKernel kernel)
         {
             Kernel = kernel;
-            SystemPaths = new PathConfiguration();
-            CasePaths = new PathConfiguration();
         }
 
         public static IConfigure WithStandardKernel()

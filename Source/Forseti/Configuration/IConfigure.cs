@@ -10,8 +10,6 @@ namespace Forseti.Configuration
         IHarnessManager HarnessManager { get; }
         IFramework Framework { get; }
         IScriptEngine ScriptEngine { get; }
-        PathConfiguration SystemPaths { get; }
-        PathConfiguration CasePaths { get; }
 
         IConfigure Initialize();
 

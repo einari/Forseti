@@ -103,7 +103,6 @@
     <Compile Include="Configuration\ConfigureExtensions.cs" />
     <Compile Include="Configuration\IConfigurationFileReader.cs" />
     <Compile Include="Configuration\IConfigure.cs" />
-    <Compile Include="Configuration\PathConfiguration.cs" />
     <Compile Include="Harnesses\Harness.cs" />
     <Compile Include="Suites\Suite.cs" />
     <Compile Include="IFramework.cs" />
