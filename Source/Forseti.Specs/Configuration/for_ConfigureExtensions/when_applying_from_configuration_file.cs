@@ -3,6 +3,7 @@ using Machine.Specifications;
 using Moq;
 using Ninject;
 using It = Machine.Specifications.It;
+using Forseti.Files;
 
 namespace Forseti.Specs.Configuration.for_ConfigureExtensions
 {
@@ -22,6 +23,6 @@ namespace Forseti.Specs.Configuration.for_ConfigureExtensions
 
         Because of = () => configure_mock.Object.FromConfigurationFile(Filename);
 
-        It should_apply_configuration_from_file = () => reader_mock.Verify(r=>r.Apply(configure_mock.Object, Filename));
+        It should_apply_configuration_from_file = () => reader_mock.Verify(r=>r.Apply(configure_mock.Object, Moq.It.IsAny<File>()));
     }
 }

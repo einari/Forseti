@@ -1,4 +1,5 @@
 ﻿using System;
+using Forseti.Files;
 
 namespace Forseti.Configuration
 {
@@ -19,7 +20,7 @@ namespace Forseti.Configuration
         public static IConfigure FromConfigurationFile(this IConfigure configure, string path)
         {
             var reader = configure.GetInstanceOf<IConfigurationFileReader>();
-            reader.Apply(configure, path);
+            reader.Apply(configure, (File)path);
             return configure;
         }
     }

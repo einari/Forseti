@@ -14,7 +14,7 @@ namespace Forseti.Configuration
             _fileSystemWatcher = fileSystemWatcher;
         }
 
-        public void Apply(IConfigure configure, File file)
+        public void Apply(IConfigure configure, IFile file)
         {
             var stream = new StringReader(file.ReadAllText());
             var yaml = new YamlStream();
