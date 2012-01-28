@@ -79,10 +79,14 @@
     <Compile Include="Files\FileAdded.cs" />
     <Compile Include="Files\FileChanged.cs" />
     <Compile Include="Files\FileManager.cs" />
+    <Compile Include="Files\FileSearcher.cs" />
+    <Compile Include="Files\FileSearchResult.cs" />
     <Compile Include="Files\FileSystemWatcher.cs" />
     <Compile Include="Files\FolderWatch.cs" />
     <Compile Include="Files\IFile.cs" />
     <Compile Include="Files\IFileManager.cs" />
+    <Compile Include="Files\IFileSearcher.cs" />
+    <Compile Include="Files\IFileSystem.cs" />
     <Compile Include="Files\IFileSystemWatcher.cs" />
     <Compile Include="Suites\Case.cs" />
     <Compile Include="Pages\IPageGenerator.cs" />
