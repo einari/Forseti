@@ -1,5 +1,4 @@
 ﻿using System;
-using Ninject;
 
 namespace Forseti.Configuration
 {
@@ -17,10 +16,10 @@ namespace Forseti.Configuration
             return configure;
         }
 
-        public static IConfigure FromConfigurationFile(this IConfigure configure, string filename)
+        public static IConfigure FromConfigurationFile(this IConfigure configure, string path)
         {
             var reader = configure.GetInstanceOf<IConfigurationFileReader>();
-            reader.Apply(configure, filename);
+            reader.Apply(configure, path);
             return configure;
         }
     }

@@ -1,0 +1,6 @@
+﻿---
+Systems: 
+  - "**/*.js"
+
+Specs:
+  - "**/Specs/for_{system}/*.js"

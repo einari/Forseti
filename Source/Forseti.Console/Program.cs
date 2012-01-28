@@ -37,10 +37,11 @@ namespace Forseti.Console
                 }
             }
 
-            var configuration = Configure.
-                WithStandardKernel().
-                UsingJasmin().
-                Initialize();
+            var configuration = Configure
+                .WithStandardKernel()
+                .FromConfigurationFile("forseti.yaml")
+                .UsingJasmin()
+                .Initialize();
 
             var harness = configuration.HarnessManager.Execute(suites);
 
