@@ -1,7 +1,6 @@
 ﻿using Forseti.Configuration;
 using Machine.Specifications;
 using Moq;
-using Ninject;
 using It = Machine.Specifications.It;
 using Forseti.Files;
 
