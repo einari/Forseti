@@ -1,8 +1,7 @@
 ﻿using Forseti.Harnesses;
+using Forseti.Registries;
 using Forseti.Scripting;
-using Ninject;
-using Ninject.Extensions.Conventions;
-using Ninject.Extensions.Conventions.Syntax;
+using StructureMap;
 
 namespace Forseti.Configuration
 {
@@ -10,54 +9,41 @@ namespace Forseti.Configuration
     {
         public IHarnessManager HarnessManager { get; private set; }
         public IFramework Framework { get; private set; }
-        public IKernel Kernel { get; private set; }
+        public IContainer Container { get; private set; }
         public IScriptEngine ScriptEngine { get; private set; }
 
 
-        Configure(IKernel kernel)
+        Configure(IContainer container)
         {
-            Kernel = kernel;
+            Container = container;
         }
 
-        public static IConfigure WithStandardKernel()
+        public static IConfigure WithStandard()
         {
-            var kernel = GetKernel();
-            return With(kernel);
+            var container = GetContainer();
+            return With(container);
         }
 
-        public static IConfigure With(IKernel kernel)
+        
+        public static IConfigure With(IContainer container)
         {
-            var instance = new Configure(kernel);
+            var instance = new Configure(container);
             return instance;
         }
 
-
-        static IKernel GetKernel()
+        static IContainer GetContainer()
         {
-            var kernel = new StandardKernel();
-
-            kernel.Bind(s =>
-            {
-                s.FromThisAssembly()
-                    .SelectAllTypes()
-                        .Excluding<IScriptEngine>()
-                        .Excluding<ScriptEngine>()
-                        .Excluding<IHarnessManager>()
-                        .Excluding<HarnessManager>()
-                    .BindToDefaultInterfaces();
-            });
-
-            kernel.Bind<IScriptEngine>().To<ScriptEngine>().InSingletonScope();
-            kernel.Bind<IHarnessManager>().To<HarnessManager>().InSingletonScope();
-
-            return kernel;
+            var container = new Container(new MainRegistry());
+            return container;
         }
+
+
 
         public IConfigure Initialize()
         {
-            HarnessManager = Kernel.Get<IHarnessManager>();
-            Framework = Kernel.Get<IFramework>();
-            ScriptEngine = Kernel.Get<IScriptEngine>();
+            HarnessManager = Container.GetInstance<IHarnessManager>();
+            Framework = Container.GetInstance<IFramework>();
+            ScriptEngine = Container.GetInstance<IScriptEngine>();
 
             return this;
         }
@@ -65,7 +51,7 @@ namespace Forseti.Configuration
 
         public T GetInstanceOf<T>()
         {
-            return Kernel.Get<T>();
+            return Container.GetInstance<T>();
         }
     }
 }

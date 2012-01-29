@@ -1,19 +1,20 @@
-﻿using Ninject;
+﻿using StructureMap;
 
 namespace Forseti.Scripting
 {
     public class ScriptEngineContextManager : IScriptEngineContextManager
     {
-        IKernel _kernel;
+        IContainer _container;
 
-        public ScriptEngineContextManager(IKernel kernel)
+        public ScriptEngineContextManager(IContainer container)
         {
-            _kernel = kernel;
+            _container = container;
         }
 
         public IScriptEngineContext Create()
         {
-            var context = _kernel.Get<ScriptEngineContext>();
+            
+            var context = _container.GetInstance<ScriptEngineContext>();
             return context;
         }
     }

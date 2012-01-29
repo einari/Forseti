@@ -1,12 +1,12 @@
 ﻿using Forseti.Harnesses;
-using Ninject;
 using Forseti.Scripting;
+using StructureMap;
 
 namespace Forseti.Configuration
 {
     public interface IConfigure
     {
-        IKernel Kernel { get; }
+        IContainer Container { get; }
         IHarnessManager HarnessManager { get; }
         IFramework Framework { get; }
         IScriptEngine ScriptEngine { get; }

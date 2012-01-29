@@ -4,7 +4,11 @@
     {
         public static IConfigure UsingJasmin(this IConfigure configure)
         {
-            configure.Kernel.Bind<IFramework>().To<Jasmine.Framework>().InSingletonScope();
+            configure.Container.Configure(
+                c => 
+                    c   .For<IFramework>()
+                        .Singleton()
+                        .Use<Jasmine.Framework>());
             return configure;
         }
     }
