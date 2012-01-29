@@ -7,9 +7,13 @@ source/**/obj
 *.fbl7
 *.fbpInf
 *.fb7lck
+*.userprefs
+*.pidb
+
 
 # OS generated files #
 ######################
+*.DS_Store*
 .DS_Store?
 ehthumbs.db
 Icon?

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -10,7 +10,6 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Forseti</RootNamespace>
     <AssemblyName>Forseti</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -49,14 +48,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\Solutions\packages\Newtonsoft.Json.4.0.7\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Solutions\packages\Ninject.3.0.0-rc3\lib\net40\Ninject.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject.Extensions.Conventions, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Solutions\packages\ninject.extensions.conventions.3.0.0-rc3\lib\net40\Ninject.Extensions.Conventions.dll</HintPath>
-    </Reference>
     <Reference Include="Spark">
       <HintPath>..\..\Libraries\Spark\Spark.dll</HintPath>
     </Reference>
@@ -71,6 +62,12 @@
     </Reference>
     <Reference Include="YamlDotNet.RepresentationModel">
       <HintPath>..\Solutions\packages\YamlDotNet.RepresentationModel.1.1.12\lib\YamlDotNet.RepresentationModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\Solutions\packages\Ninject.3.0.0-rc3\lib\net40\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Conventions">
+      <HintPath>..\Solutions\packages\ninject.extensions.conventions.3.0.0-rc3\lib\net40\Ninject.Extensions.Conventions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
