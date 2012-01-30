@@ -43,7 +43,7 @@ namespace Forseti.Pages.Spark
             harnessView.FrameworkExecutionScript = _framework.ExecuteScriptName;
             harnessView.FrameworkReportingScript = _framework.ReportScriptName;
 
-            page.RootPath = Path.GetTempPath() + @"Forseti\";
+            page.RootPath = Path.GetTempPath() + @"Forseti/";
             page.Filename = string.Format("{0}jasmine-runner.html", page.RootPath);
 
             if (!Directory.Exists(page.RootPath))

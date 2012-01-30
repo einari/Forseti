@@ -14,6 +14,8 @@ namespace Forseti.Console
         [STAThread]
         public static int Main(string[] args)
         {
+			
+			
             var configFile = "forseti.config";
             if (!File.Exists(configFile))
             {

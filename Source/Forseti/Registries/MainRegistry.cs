@@ -1,6 +1,8 @@
-﻿using StructureMap.Configuration.DSL;
+﻿using System;
+using StructureMap.Configuration.DSL;
 using Forseti.Scripting;
 using Forseti.Harnesses;
+using Forseti.Files;
 
 namespace Forseti.Registries
 {
@@ -19,7 +21,13 @@ namespace Forseti.Registries
                     x.WithDefaultConventions();
                 }
             );
-
+			
+			if( Environment.OSVersion.Platform == PlatformID.Unix )
+				For<IFileSystem>().Singleton().Use<Files.Unix.FileSystem>();
+			else
+				For<IFileSystem>().Singleton().Use<Files.Windows.FileSystem>();
+			
+			
 
             For<IScriptEngine>().Singleton().Use<ScriptEngine>();
             For<IHarnessManager>().Singleton().Use<HarnessManager>();

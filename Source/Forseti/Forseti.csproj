@@ -112,6 +112,9 @@
     <Compile Include="Resources\ResourceManager.cs" />
     <Compile Include="Scripting\ScriptEngine.cs" />
     <Compile Include="Scripting\SystemConsole.cs" />
+    <Compile Include="Files\FileSystem.cs" />
+    <Compile Include="Files\Windows\FileSystem.cs" />
+    <Compile Include="Files\Unix\FileSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\..\Libraries\Env\env.js">
@@ -135,4 +138,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Files\Windows\" />
+    <Folder Include="Files\Unix\" />
+  </ItemGroup>
 </Project>
