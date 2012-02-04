@@ -1,4 +1,8 @@
-﻿namespace Forseti.Files
+using System;
+
+namespace Forseti.Files
 {
-    public delegate void FileChanged(File file);
+	public delegate void FileChanged(FileChange change, File file);
 }
+
+

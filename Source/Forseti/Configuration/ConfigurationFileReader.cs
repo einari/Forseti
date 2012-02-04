@@ -8,17 +8,18 @@ namespace Forseti.Configuration
     public class ConfigurationFileReader : IConfigurationFileReader
     {
         IFileSystemWatcher _fileSystemWatcher;
+		IYamlParser _yamlParser;
 
-        public ConfigurationFileReader(IFileSystemWatcher fileSystemWatcher)
+        public ConfigurationFileReader(IFileSystemWatcher fileSystemWatcher, IYamlParser yamlParser)
         {
             _fileSystemWatcher = fileSystemWatcher;
+			_yamlParser = yamlParser;
         }
 
         public void Apply(IConfigure configure, IFile file)
         {
-            var stream = new StringReader(file.ReadAllText());
-            var yaml = new YamlStream();
-            yaml.Load(stream);
+			var fileContent = file.ReadAllText();
+			var yamlDocument = _yamlParser.Parse (fileContent);
         }
     }
 }
