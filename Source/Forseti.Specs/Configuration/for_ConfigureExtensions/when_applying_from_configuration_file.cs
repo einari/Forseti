@@ -22,6 +22,6 @@ namespace Forseti.Specs.Configuration.for_ConfigureExtensions
 
         Because of = () => configure_mock.Object.FromConfigurationFile(Filename);
 
-        It should_apply_configuration_from_file = () => reader_mock.Verify(r=>r.Apply(configure_mock.Object, Moq.It.IsAny<File>()));
+        It should_apply_configuration_from_file = () => reader_mock.Verify(r=>r.Apply(Moq.It.IsAny<File>()));
     }
 }

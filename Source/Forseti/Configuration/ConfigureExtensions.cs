@@ -8,7 +8,7 @@ namespace Forseti.Configuration
         public static IConfigure FromConfigurationFile(this IConfigure configure, string path)
         {
             var reader = configure.GetInstanceOf<IConfigurationFileReader>();
-            reader.Apply(configure, (File)path);
+            reader.Apply((File)path);
             return configure;
         }
     }

@@ -6,7 +6,7 @@ namespace Forseti.Files
     {
 		public void SubscribeToChanges (FileChanged changed)
 		{
-			throw new NotImplementedException ();
+			
 		}
     }
 }

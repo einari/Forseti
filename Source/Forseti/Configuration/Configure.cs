@@ -28,6 +28,7 @@ namespace Forseti.Configuration
         public static IConfigure With(IContainer container)
         {
             var instance = new Configure(container);
+			container.Configure(c=>c.For<IConfigure>().Use (instance));
             return instance;
         }
 

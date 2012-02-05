@@ -63,7 +63,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\for_ConfigurationFileReader\when_applying_a_file.cs" />
     <Compile Include="Configuration\for_ConfigurationFileReader\given\a_configuration_file_reader.cs" />
-    <Compile Include="Configuration\for_ConfigurationFileReader\given\a_configuration_file_reader_and_a_configure_instance.cs" />
+    <Compile Include="Configuration\for_ConfigurationFileReader\when_file_is_changed.cs" />
+    <Compile Include="Configuration\for_ConfigurationFileReader\when_file_changed_but_apply_has_never_been_called_before.cs" />
+    <Compile Include="Configuration\for_ConfigurationFileReader\when_other_file_than_already_applied_file_is_changed.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
