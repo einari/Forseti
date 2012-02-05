@@ -9,6 +9,7 @@ source/**/obj
 *.fb7lck
 *.userprefs
 *.pidb
+_ReSharper.*
 
 
 # OS generated files #
