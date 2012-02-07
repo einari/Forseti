@@ -1,6 +1,5 @@
-﻿using YamlDotNet.RepresentationModel;
-using Forseti.Files;
-using System.IO;
+﻿using Forseti.Files;
+using Forseti.Harnesses;
 using File = Forseti.Files.File;
 
 namespace Forseti.Configuration
@@ -11,7 +10,11 @@ namespace Forseti.Configuration
 		IYamlParser _yamlParser;
 		IFile _appliedConfigFile;
 
-        public ConfigurationFileReader(IConfigure configure, IFileSystemWatcher fileSystemWatcher, IYamlParser yamlParser)
+        public ConfigurationFileReader(
+			IConfigure configure, 
+			IFileSystemWatcher fileSystemWatcher, 
+			IYamlParser yamlParser,
+			IHarnessManager harnessManager)
         {
             _fileSystemWatcher = fileSystemWatcher;
 			_yamlParser = yamlParser;
@@ -34,6 +37,7 @@ namespace Forseti.Configuration
 			_appliedConfigFile = file;
 			var fileContent = file.ReadAllText();
 			var yamlDocument = _yamlParser.Parse (fileContent);
+			
         }
     }
 }

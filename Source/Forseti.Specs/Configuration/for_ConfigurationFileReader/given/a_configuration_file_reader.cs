@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Forseti.Configuration;
 using Forseti.Files;
+using Forseti.Harnesses;
 using Machine.Specifications;
 using Moq;
 
@@ -14,6 +15,7 @@ namespace Forseti.Specs.Configuration.for_ConfigurationFileReader.given
 		protected static Mock<IFileSystemWatcher> file_system_watcher_mock;
 		protected static Mock<IYamlParser> yaml_parser;
 		protected static Mock<IConfigure>	configure_mock;
+		protected static Mock<IHarnessManager> harness_manager_mock;
 		
 		Establish context = () => 
 		{ 
@@ -21,12 +23,14 @@ namespace Forseti.Specs.Configuration.for_ConfigurationFileReader.given
 			
 			file_system_watcher_mock.Setup (f=>f.SubscribeToChanges(Moq.It.IsAny<FileChanged>())).Callback ((FileChanged f)=>file_changed_delegates.Add(f));
 			configure_mock = new Mock<IConfigure>();
+			harness_manager_mock = new Mock<IHarnessManager>();
 			
 			yaml_parser = new Mock<IYamlParser>();
 			reader = new ConfigurationFileReader(
 				configure_mock.Object,
 				file_system_watcher_mock.Object,
-				yaml_parser.Object
+				yaml_parser.Object,
+				harness_manager_mock.Object
 			);
 		};
 		

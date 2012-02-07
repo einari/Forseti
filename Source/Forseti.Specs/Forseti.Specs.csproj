@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <NoWarn>0414</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -43,12 +44,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Ninject">
-      <HintPath>..\Solutions\packages\Ninject.3.0.0-rc3\lib\net40\Ninject.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject.Extensions.Conventions">
-      <HintPath>..\Solutions\packages\Ninject.Extensions.Conventions.3.0.0-rc3\lib\net40\Ninject.Extensions.Conventions.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\for_ConfigureExtensions\when_applying_from_configuration_file.cs" />
@@ -66,6 +61,7 @@
     <Compile Include="Configuration\for_ConfigurationFileReader\when_file_is_changed.cs" />
     <Compile Include="Configuration\for_ConfigurationFileReader\when_file_changed_but_apply_has_never_been_called_before.cs" />
     <Compile Include="Configuration\for_ConfigurationFileReader\when_other_file_than_already_applied_file_is_changed.cs" />
+    <Compile Include="Configuration\for_ConfigurationFileReader\when_applying_a_file_with_a_harness_in_it.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

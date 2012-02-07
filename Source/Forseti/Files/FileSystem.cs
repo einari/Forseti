@@ -17,7 +17,7 @@ namespace Forseti.Files
 		public IEnumerable<File> GetAllFiles(string filter)
 		{
 			var files = Directory.GetFiles(_currentDirectory,filter,SearchOption.AllDirectories);
-			return files.Select(f=>(File)f);
+			return files.Select(f=>(File)f).ToArray ();
 		}
 		
 		public virtual string GetActualPath (string path)

@@ -27,15 +27,6 @@ namespace Forseti.Harnesses
 			_fileSystem = fileSystem;
 			_fileSystemWatcher = fileSystemWatcher;
 			
-			// Subscribe to changes from the filesystem
-			// When a change occurs - walk through existing suites in the harness and see if there was a change to one of them - if so, rerun it
-			
-			// If a change is to a non existing suite, filter through the configuration : 
-			//    - Does it match the regex of the SystemsSearchPath and does not match the DescriptionsSearchPath - add it as a system
-			//    - Does it match the regex of the DescriptionSearchPath and not the SystemsSearchPath - look for the system in existing list, if exist add it, if not - try to find it in the filesystem based on configuration - add it if so
-			
-			// If the change is a delete - walk through existing suites in the harness and see some one is affected and just update the suite or remove the suite if the system was removed
-
             var currentDir = Directory.GetCurrentDirectory();
 
             var w = new System.IO.FileSystemWatcher(currentDir, "*.js");
@@ -45,6 +36,7 @@ namespace Forseti.Harnesses
             w.EnableRaisingEvents = true;
             
         }
+		
 
         DateTime _lastTrigger = DateTime.Now;
         IEnumerable<Suite> _currentSuites;
@@ -87,7 +79,16 @@ namespace Forseti.Harnesses
 
 		public void Add (Harness harness)
 		{
-			throw new NotImplementedException ();
+			// Subscribe to changes from the filesystem
+			// When a change occurs - walk through existing suites in the harness and see if there was a change to one of them - if so, rerun it
+			
+			// If a change is to a non existing suite, filter through the configuration : 
+			//    - Does it match the regex of the SystemsSearchPath and does not match the DescriptionsSearchPath - add it as a system
+			//    - Does it match the regex of the DescriptionSearchPath and not the SystemsSearchPath - look for the system in existing list, if exist add it, if not - try to find it in the filesystem based on configuration - add it if so
+			
+			// If the change is a delete - walk through existing suites in the harness and see some one is affected and just update the suite or remove the suite if the system was removed
+			
+			var allFiles = _fileSystem.GetAllFiles("*.js");
 		}
 
 		public void Reset ()
