@@ -1,16 +1,16 @@
 ﻿---
-ScriptEngines:
-  - Rhino
-  - V8
+#ScriptEngines:
+#  - Rhino
+#  - V8
 
-Frameworks:
-  - Jasmine
+#Frameworks:
+#  - Jasmine
 
-MockFrameworks:
-  - Sinon
+#MockFrameworks:
+#  - Sinon
 
-Systems: 
-  - "**/*.js"
-
-Specs:
-  - "**/Specs/for_{system}/*.js"
+Harnesses:
+  - Harness:
+    - Name						: "Something"
+      SystemsSearchPath 		: "Scripts"
+      DescriptionsSearchPath	: "Specs/for_{system}"

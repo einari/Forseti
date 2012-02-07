@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Forseti.Files;
 using Forseti.Pages;
 using Forseti.Scripting;
 using Forseti.Suites;
@@ -11,17 +12,24 @@ namespace Forseti.Harnesses
     {
         IScriptEngine _scriptEngine;
         IPageGenerator _pageGenerator;
+		IFileSystem _fileSystem;
+		IFileSystemWatcher _fileSystemWatcher;
 
 
-        public HarnessManager(IScriptEngine scriptEngine, IPageGenerator pageGenerator)
+        public HarnessManager(
+			IScriptEngine scriptEngine, 
+			IPageGenerator pageGenerator, 
+			IFileSystem fileSystem,
+			IFileSystemWatcher fileSystemWatcher)
         {
             _scriptEngine = scriptEngine;
             _pageGenerator = pageGenerator;
-
+			_fileSystem = fileSystem;
+			_fileSystemWatcher = fileSystemWatcher;
 
             var currentDir = Directory.GetCurrentDirectory();
 
-            FileSystemWatcher w = new FileSystemWatcher(currentDir, "*.js");
+            var w = new System.IO.FileSystemWatcher(currentDir, "*.js");
             w.IncludeSubdirectories = true;
             w.NotifyFilter = NotifyFilters.LastWrite;
             w.Changed += new FileSystemEventHandler(w_Changed);
@@ -68,6 +76,15 @@ namespace Forseti.Harnesses
             }
         }
 
+		public void Add (Harness harness)
+		{
+			throw new NotImplementedException ();
+		}
+
+		public void Reset ()
+		{
+			throw new NotImplementedException ();
+		}
         
 
 
