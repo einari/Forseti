@@ -13,7 +13,7 @@ namespace Forseti.Specs.Configuration.for_ConfigurationFileReader.given
 		
 		protected static ConfigurationFileReader reader;
 		protected static Mock<IFileSystemWatcher> file_system_watcher_mock;
-		protected static Mock<IYamlParser> yaml_parser;
+		protected static Mock<IYamlParser> yaml_parser_mock;
 		protected static Mock<IConfigure>	configure_mock;
 		protected static Mock<IHarnessManager> harness_manager_mock;
 		
@@ -25,11 +25,11 @@ namespace Forseti.Specs.Configuration.for_ConfigurationFileReader.given
 			configure_mock = new Mock<IConfigure>();
 			harness_manager_mock = new Mock<IHarnessManager>();
 			
-			yaml_parser = new Mock<IYamlParser>();
+			yaml_parser_mock = new Mock<IYamlParser>();
 			reader = new ConfigurationFileReader(
 				configure_mock.Object,
 				file_system_watcher_mock.Object,
-				yaml_parser.Object,
+				yaml_parser_mock.Object,
 				harness_manager_mock.Object
 			);
 		};

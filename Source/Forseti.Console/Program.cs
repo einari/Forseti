@@ -37,8 +37,8 @@ namespace Forseti.Console
 
             var configuration = Configure
                 .WithStandard()
-                .FromConfigurationFile("forseti.yaml")
                 .UsingJasmin()
+                .FromConfigurationFile("forseti.yaml")
                 .Initialize();
 			
             var harness = configuration.HarnessManager.Execute(suites);

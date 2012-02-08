@@ -14,7 +14,7 @@ namespace Forseti.Specs.Configuration.for_ConfigurationFileReader
 		Because of = () => reader.Apply(file_mock.Object);
 		
 		It should_read_the_file = () => file_mock.Verify(f=>f.ReadAllText(), Times.Once ());
-		It should_parse_the_yaml = () => yaml_parser.Verify(y=>y.Parse(Moq.It.IsAny<string>()), Times.Once ());
+		It should_parse_the_yaml = () => yaml_parser_mock.Verify(y=>y.Parse(Moq.It.IsAny<string>()), Times.Once ());
 	}
 }
 

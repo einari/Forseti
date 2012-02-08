@@ -1,4 +1,5 @@
-﻿using Forseti.Files;
+﻿using System.Linq;
+using Forseti.Files;
 using Forseti.Harnesses;
 using File = Forseti.Files.File;
 
@@ -8,6 +9,7 @@ namespace Forseti.Configuration
     {
         IFileSystemWatcher _fileSystemWatcher;
 		IYamlParser _yamlParser;
+		IHarnessManager _harnessManager;
 		IFile _appliedConfigFile;
 
         public ConfigurationFileReader(
@@ -18,6 +20,7 @@ namespace Forseti.Configuration
         {
             _fileSystemWatcher = fileSystemWatcher;
 			_yamlParser = yamlParser;
+			_harnessManager = harnessManager;
 			
 			fileSystemWatcher.SubscribeToChanges(FileChanged);
         }
@@ -37,7 +40,37 @@ namespace Forseti.Configuration
 			_appliedConfigFile = file;
 			var fileContent = file.ReadAllText();
 			var yamlDocument = _yamlParser.Parse (fileContent);
+			foreach( var node in yamlDocument.First().AllNodes ) 
+			{
+				if( node.Tag == "Harnesses" ) 
+				{
+					foreach( var childNode in node.AllNodes )
+					{
+						if( childNode.Tag == "Harness") 
+						{
+							foreach( var parameter in childNode.AllNodes )
+							{
+								switch( parameter.Tag ) 
+								{
+								case "Name":
+									{
+										
+										var i=0;
+										i++;
+										
+									}break;
+								}
+								
+							}
+							
+						}
+					}
+				}
+				
+			}
 			
+			var harness = new Harness();
+			_harnessManager.Add (harness);
         }
     }
 }
