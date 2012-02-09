@@ -26,7 +26,9 @@
                     var message = messages[messageIndex];
                     var passed = message.passed ? message.passed() : true;
                     if (passed !== true) {
-                        print("  Spec(" + spec.description + ") failed with message : " + messages[messageIndex].toString());
+                        reportFailedCase(spec.description, messages[messageIndex].toString());
+                    } else {
+                        reportPassedCase(spec.description);
                     }
                 }
             }
@@ -45,7 +47,7 @@
         };
     };
 
-    var reporter = new ForsetiReporter()
+    var reporter = new ForsetiReporter();
     jasmine.getEnv().addReporter(reporter);
 })();
 
