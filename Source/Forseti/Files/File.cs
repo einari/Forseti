@@ -30,5 +30,11 @@ namespace Forseti.Files
                 Folder = System.IO.Path.GetDirectoryName(path)
             };
         }
+		
+		
+		public override string ToString ()
+		{
+			return string.Format ("[File: Filename={0}, Folder={1}, FullPath={2}]", Filename, Folder, FullPath);
+		}
     }
 }

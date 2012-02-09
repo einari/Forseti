@@ -2,6 +2,6 @@
 {
     public interface IFileSystemWatcher
     {
-        FolderWatch WatchFolder(string path, string filter, bool recursive);
+		void SubscribeToChanges(FileChanged changed);
     }
 }

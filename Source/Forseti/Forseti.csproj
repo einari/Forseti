@@ -73,16 +73,10 @@
   <ItemGroup>
     <Compile Include="Conventions\IConventionManager.cs" />
     <Compile Include="Files\File.cs" />
-    <Compile Include="Files\FileAdded.cs" />
-    <Compile Include="Files\FileChanged.cs" />
     <Compile Include="Files\FileManager.cs" />
-    <Compile Include="Files\FileSearcher.cs" />
-    <Compile Include="Files\FileSearchResult.cs" />
     <Compile Include="Files\FileSystemWatcher.cs" />
-    <Compile Include="Files\FolderWatch.cs" />
     <Compile Include="Files\IFile.cs" />
     <Compile Include="Files\IFileManager.cs" />
-    <Compile Include="Files\IFileSearcher.cs" />
     <Compile Include="Files\IFileSystem.cs" />
     <Compile Include="Files\IFileSystemWatcher.cs" />
     <Compile Include="Registries\MainRegistry.cs" />
@@ -113,6 +107,13 @@
     <Compile Include="Resources\ResourceManager.cs" />
     <Compile Include="Scripting\ScriptEngine.cs" />
     <Compile Include="Scripting\SystemConsole.cs" />
+    <Compile Include="Files\FileSystem.cs" />
+    <Compile Include="Files\Windows\FileSystem.cs" />
+    <Compile Include="Files\Unix\FileSystem.cs" />
+    <Compile Include="Files\FileChanged.cs" />
+    <Compile Include="Files\FileChange.cs" />
+    <Compile Include="Configuration\IYamlParser.cs" />
+    <Compile Include="Configuration\YamlParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\..\Libraries\Env\env.js">
@@ -136,4 +137,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Files\Windows\" />
+    <Folder Include="Files\Unix\" />
+  </ItemGroup>
 </Project>

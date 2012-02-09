@@ -5,8 +5,6 @@ using Forseti.Configuration;
 using Forseti.Suites;
 using Newtonsoft.Json;
 
-
-
 namespace Forseti.Console
 {
     public class Program
@@ -39,14 +37,13 @@ namespace Forseti.Console
 
             var configuration = Configure
                 .WithStandard()
-                .FromConfigurationFile("forseti.yaml")
                 .UsingJasmin()
+                .FromConfigurationFile("forseti.yaml")
                 .Initialize();
-
+			
             var harness = configuration.HarnessManager.Execute(suites);
 
             System.Console.ReadLine();
-
 
             return 0;
         }
