@@ -1,19 +1,15 @@
 using System.Collections.Generic;
 using System.IO;
-using YamlDotNet.RepresentationModel;
+using System.Yaml;
 
 namespace Forseti.Configuration
 {
 	public class YamlParser : IYamlParser
 	{
-		public IEnumerable<YamlDocument> Parse (string yaml)
+		public IEnumerable<YamlNode> Parse (string yaml)
 		{
-			using (var stream = new StringReader(yaml)) 
-			{
-				var yamlStream = new YamlStream();
-				yamlStream.Load (stream);
-				return yamlStream.Documents;
-			}
+			var nodes = YamlNode.FromYaml(yaml);
+			return nodes;
 		}
 		
 	}

@@ -2,6 +2,7 @@
 using Forseti.Files;
 using Forseti.Harnesses;
 using File = Forseti.Files.File;
+using System.Yaml;
 
 namespace Forseti.Configuration
 {
@@ -39,38 +40,30 @@ namespace Forseti.Configuration
         {
 			_appliedConfigFile = file;
 			var fileContent = file.ReadAllText();
-			var yamlDocument = _yamlParser.Parse (fileContent);
-			foreach( var node in yamlDocument.First().AllNodes ) 
+			
+			var nodes = _yamlParser.Parse (fileContent);
+			var root = nodes.First () as YamlMapping;
+			
+			if( root != null && root.ContainsKey("Harnesses") ) 
 			{
-				if( node.Tag == "Harnesses" ) 
+				var harnesses = root["Harnesses"] as YamlSequence;
+				if( harnesses != null )
 				{
-					foreach( var childNode in node.AllNodes )
+					foreach( YamlMapping harnessConfig in harnesses ) 
 					{
-						if( childNode.Tag == "Harness") 
+						if( harnessConfig.ContainsKey("Harness") )
 						{
-							foreach( var parameter in childNode.AllNodes )
-							{
-								switch( parameter.Tag ) 
-								{
-								case "Name":
-									{
-										
-										var i=0;
-										i++;
-										
-									}break;
-								}
-								
-							}
+							var values = harnessConfig["Harness"] as YamlMapping;
 							
+							var harness = new Harness();
+							harness.Name = ((YamlScalar)values["Name"]).Value;
+							harness.SystemsSearchPath = ((YamlScalar)values["SystemsSearchPath"]).Value;
+							harness.DescriptionsSearchPath = ((YamlScalar)values["DescriptionsSearchPath"]).Value;
+							_harnessManager.Add (harness);
 						}
 					}
 				}
-				
 			}
-			
-			var harness = new Harness();
-			_harnessManager.Add (harness);
         }
     }
 }

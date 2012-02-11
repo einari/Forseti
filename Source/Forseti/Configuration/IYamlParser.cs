@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using YamlDotNet.RepresentationModel;
+using System.Yaml;
 
 namespace Forseti.Configuration
 {
 	public interface IYamlParser
 	{
-		IEnumerable<YamlDocument> Parse(string yaml);
+		IEnumerable<YamlNode> Parse(string yaml);
 	}
 }
 

@@ -11,6 +11,6 @@
 
 Harnesses:
   - Harness:
-    - Name						: "Something"
-      SystemsSearchPath 		: "Scripts"
-      DescriptionsSearchPath	: "Specs/for_{system}"
+      Name						: Something
+      SystemsSearchPath 		: Scripts
+      DescriptionsSearchPath	: Specs/for_{system}
