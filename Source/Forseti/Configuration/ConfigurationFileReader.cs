@@ -1,8 +1,8 @@
 ﻿using System.Linq;
+using System.Yaml;
 using Forseti.Files;
 using Forseti.Harnesses;
 using File = Forseti.Files.File;
-using System.Yaml;
 
 namespace Forseti.Configuration
 {
