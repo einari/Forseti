@@ -4,7 +4,7 @@ using Forseti.Suites;
 using Machine.Specifications;
 using It = Machine.Specifications.It;
 
-namespace Forseti.Specs.for_HarnessManager
+namespace Forseti.Specs.Harnesses.for_HarnessManager
 {
     [Subject(typeof(HarnessManager))]
     public class when_executing_one_suite_with_one_description_and_one_case : given.a_harness_manager

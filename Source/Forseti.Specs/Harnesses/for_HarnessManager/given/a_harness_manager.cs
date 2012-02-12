@@ -5,7 +5,7 @@ using Forseti.Scripting;
 using Machine.Specifications;
 using Moq;
 
-namespace Forseti.Specs.for_HarnessManager.given
+namespace Forseti.Specs.Harnesses.for_HarnessManager.given
 {
     public class a_harness_manager
     {

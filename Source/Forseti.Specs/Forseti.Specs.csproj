@@ -65,6 +65,7 @@
     <Compile Include="Configuration\for_ConfigurationFileReader\when_file_changed_but_apply_has_never_been_called_before.cs" />
     <Compile Include="Configuration\for_ConfigurationFileReader\when_other_file_than_already_applied_file_is_changed.cs" />
     <Compile Include="Configuration\for_ConfigurationFileReader\when_applying_a_file_with_a_harness_in_it.cs" />
+    <Compile Include="Harnesses\for_Harness\when_checking_if_file_is_system_file_and_it_is.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -74,6 +75,7 @@
     <Folder Include="Scripting\" />
     <Folder Include="Configuration\for_ConfigurationFileReader\" />
     <Folder Include="Configuration\for_ConfigurationFileReader\given\" />
+    <Folder Include="Harnesses\for_Harness\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forseti\Forseti.csproj">
