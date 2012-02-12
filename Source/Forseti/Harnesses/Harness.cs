@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Forseti.Suites;
@@ -11,6 +12,7 @@ namespace Forseti
 		string _descriptionsSearchPath;
 		Regex _systemsSearchPathRegex;
 		Regex _descriptionsSearchPathRegex;
+        IEnumerable<string> _components;
 		
 		public string Name { get; set; }
 		public string SystemsSearchPath 
@@ -19,6 +21,7 @@ namespace Forseti
 			set
 			{
 				_systemsSearchPath = value;
+                _systemsSearchPathRegex = BuildSearchRegex(value);
 			}
 		}
 		
@@ -28,14 +31,22 @@ namespace Forseti
 			set
 			{
 				_descriptionsSearchPath = value;
+                _descriptionsSearchPathRegex = BuildSearchRegex(value);
 			}
 		}
 		
 		
-		Regex BuildSearchRegex() 
+		Regex BuildSearchRegex(string path) 
 		{
-			var pattern = string.Empty;
-			
+            var replacePattern = "\\{[a-zA-Z]*\\}";
+            var componentMatches = Regex.Match(path, replacePattern);
+            var components = new List<string>();
+            foreach (Group group in componentMatches.Groups)
+                components.Add(group.Value);
+
+            _components = components.ToArray();
+
+            var pattern = Regex.Replace(path,replacePattern,"([\\w.]*)");
 			return new Regex(pattern);
 		}
 		
@@ -45,7 +56,7 @@ namespace Forseti
 		
 		public bool IsSystemFile(string relativePath)
 		{
-			throw new NotImplementedException();
+            return _systemsSearchPathRegex.IsMatch(relativePath);
 		}
 		
 		public bool IsDescriptionsFile(string relativePath)
