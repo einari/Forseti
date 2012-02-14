@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,6 +53,7 @@
     <Compile Include="Files\for_File\when_getting_full_path_and_folder_has_trailing_slash.cs" />
     <Compile Include="Files\for_File\when_getting_full_path_and_folder_is_not_set.cs" />
     <Compile Include="Files\for_File\when_getting_full_path_and_folder_is_set_without_trailing_slash.cs" />
+    <Compile Include="Harnesses\for_Harness\when_checking_if_file_is_system_file_and_it_matches_as_system_and_description.cs" />
     <Compile Include="Suites\for_Case\when_adding_child_case.cs" />
     <Compile Include="Suites\for_SuiteDescription\when_adding_case.cs" />
     <Compile Include="Suites\for_Suite\when_adding_suite_description.cs" />
@@ -65,7 +66,7 @@
     <Compile Include="Configuration\for_ConfigurationFileReader\when_file_changed_but_apply_has_never_been_called_before.cs" />
     <Compile Include="Configuration\for_ConfigurationFileReader\when_other_file_than_already_applied_file_is_changed.cs" />
     <Compile Include="Configuration\for_ConfigurationFileReader\when_applying_a_file_with_a_harness_in_it.cs" />
-    <Compile Include="Harnesses\for_Harness\when_checking_if_file_is_system_file_and_it_is.cs" />
+    <Compile Include="Harnesses\for_Harness\when_checking_if_file_is_system_file_and_it_should_match.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -73,9 +74,6 @@
   <ItemGroup>
     <Folder Include="Configuration\for_Configure\" />
     <Folder Include="Scripting\" />
-    <Folder Include="Configuration\for_ConfigurationFileReader\" />
-    <Folder Include="Configuration\for_ConfigurationFileReader\given\" />
-    <Folder Include="Harnesses\for_Harness\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forseti\Forseti.csproj">

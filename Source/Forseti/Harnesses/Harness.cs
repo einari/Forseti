@@ -56,7 +56,7 @@ namespace Forseti
 		
 		public bool IsSystemFile(string relativePath)
 		{
-            return _systemsSearchPathRegex.IsMatch(relativePath);
+            return _systemsSearchPathRegex.IsMatch(relativePath) && !_descriptionsSearchPathRegex.IsMatch(relativePath);
 		}
 		
 		public bool IsDescriptionsFile(string relativePath)
