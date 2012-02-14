@@ -10,7 +10,7 @@ source/**/obj
 *.userprefs
 *.pidb
 _ReSharper.*
-
+source/solutions/packages
 
 # OS generated files #
 ######################

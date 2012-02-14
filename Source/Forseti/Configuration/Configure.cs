@@ -2,6 +2,8 @@
 using Forseti.Registries;
 using Forseti.Scripting;
 using StructureMap;
+using Microsoft.Practices.ServiceLocation;
+using StructureMap.ServiceLocatorAdapter;
 
 namespace Forseti.Configuration
 {
@@ -35,6 +37,7 @@ namespace Forseti.Configuration
         static IContainer GetContainer()
         {
             var container = new Container(new MainRegistry());
+            ServiceLocator.SetLocatorProvider(()=>new StructureMapServiceLocator(container));
             return container;
         }
 

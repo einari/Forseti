@@ -5,6 +5,7 @@ using Spark;
 using Spark.FileSystem;
 using System;
 using System.Collections.Generic;
+using Forseti.Harnesses;
 
 namespace Forseti.Pages.Spark
 {

@@ -1,9 +1,9 @@
-using Forseti.Configuration;
+using System.Yaml;
 using Forseti.Files;
+using Forseti.Harnesses;
 using Machine.Specifications;
 using Moq;
-using It=Machine.Specifications.It;
-using System.Yaml;
+using It = Machine.Specifications.It;
 
 namespace Forseti.Specs.Configuration.for_ConfigurationFileReader
 {

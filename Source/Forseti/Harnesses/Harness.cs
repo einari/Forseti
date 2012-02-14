@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Forseti.Suites;
 
-namespace Forseti
+namespace Forseti.Harnesses
 {
     public class Harness
     {

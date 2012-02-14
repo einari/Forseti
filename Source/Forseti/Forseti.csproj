@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -11,6 +11,8 @@
     <RootNamespace>Forseti</RootNamespace>
     <AssemblyName>Forseti</AssemblyName>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\Solutions\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,6 +47,9 @@
     <Reference Include="js">
       <HintPath>..\..\Libraries\Rhino\js.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\Solutions\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\Solutions\packages\Newtonsoft.Json.4.0.7\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -53,6 +58,9 @@
     </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\Solutions\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMapAdapter">
+      <HintPath>..\Solutions\packages\CommonServiceLocator.StructureMapAdapter.1.1.0.3\lib\StructureMapAdapter.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -77,6 +85,9 @@
     <Compile Include="Files\IFileSystem.cs" />
     <Compile Include="Files\IFileSystemWatcher.cs" />
     <Compile Include="Registries\MainRegistry.cs" />
+    <Compile Include="Scripting\IScriptDependencyManager.cs" />
+    <Compile Include="Scripting\ScriptDependencies.cs" />
+    <Compile Include="Scripting\ScriptDependencyManager.cs" />
     <Compile Include="Suites\Case.cs" />
     <Compile Include="Pages\IPageGenerator.cs" />
     <Compile Include="Scripting\IScriptEngineContext.cs" />
@@ -134,8 +145,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Folder Include="Files\Windows\" />
-    <Folder Include="Files\Unix\" />
-  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>
