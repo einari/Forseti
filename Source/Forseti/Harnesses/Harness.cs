@@ -10,8 +10,8 @@ namespace Forseti
     {
 		string _systemsSearchPath;
 		string _descriptionsSearchPath;
-		Regex _systemsSearchPathRegex;
-		Regex _descriptionsSearchPathRegex;
+        Regex _systemsSearchPathRegex;
+        Regex _descriptionsSearchPathRegex;
         IEnumerable<string> _components;
 		
 		public string Name { get; set; }
@@ -35,7 +35,6 @@ namespace Forseti
 			}
 		}
 		
-		
 		Regex BuildSearchRegex(string path) 
 		{
             var replacePattern = "\\{[a-zA-Z]*\\}";
@@ -50,20 +49,21 @@ namespace Forseti
 			return new Regex(pattern);
 		}
 		
-		
 		public IEnumerable<Suite> Suites { get; set; }
         public IEnumerable<Case> Cases { get; set; }
 		
-		public bool IsSystemFile(string relativePath)
+		public bool IsSystem(string relativePath)
 		{
-            return _systemsSearchPathRegex.IsMatch(relativePath) && !_descriptionsSearchPathRegex.IsMatch(relativePath);
+            return _systemsSearchPathRegex.IsMatch(relativePath) && 
+                (_descriptionsSearchPathRegex == null) ? 
+                    true : !_descriptionsSearchPathRegex.IsMatch(relativePath);
 		}
 		
-		public bool IsDescriptionsFile(string relativePath)
+		public bool IsDescription(string relativePath)
 		{
-			throw new NotImplementedException();
+            return _descriptionsSearchPathRegex.IsMatch(relativePath) && 
+                (_systemsSearchPathRegex == null) ?
+                true : !_systemsSearchPathRegex.IsMatch(relativePath);
 		}
-		
-		
     }
 }
