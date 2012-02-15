@@ -13,9 +13,10 @@ namespace Forseti.Files
                 if (string.IsNullOrEmpty(Folder))
                     return Filename;
 
-                return string.Format("{0}{1}{2}", Folder, Folder.EndsWith(@"\")?string.Empty:@"\", Filename);
+                return string.Format("{0}{1}{2}", Folder, EndsWithPathSeparator(Folder)?string.Empty:@"/", Filename);
             }
         }
+		
 
         public string ReadAllText()
         {
@@ -35,6 +36,11 @@ namespace Forseti.Files
 		public override string ToString ()
 		{
 			return string.Format ("[File: Filename={0}, Folder={1}, FullPath={2}]", Filename, Folder, FullPath);
+		}
+		
+		bool EndsWithPathSeparator(string path)
+		{
+			return path.EndsWith(@"\") || path.EndsWith(@"/");
 		}
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Forseti.Suites;
+using Forseti.Files;
 
 namespace Forseti.Harnesses
 {
@@ -52,18 +53,30 @@ namespace Forseti.Harnesses
 		public IEnumerable<Suite> Suites { get; set; }
         public IEnumerable<Case> Cases { get; set; }
 		
-		public bool IsSystem(string relativePath)
+		public bool IsSystem(IFile file)
 		{
-            return _systemsSearchPathRegex.IsMatch(relativePath) && 
-                (_descriptionsSearchPathRegex == null) ? 
-                    true : !_descriptionsSearchPathRegex.IsMatch(relativePath);
+			var path = file.FullPath;
+			if( _systemsSearchPathRegex == null )
+				return false;
+			
+			var isDescription = false;
+			if( _descriptionsSearchPathRegex != null )
+				isDescription = _descriptionsSearchPathRegex.IsMatch(path);
+			
+            return _systemsSearchPathRegex.IsMatch(path) && !isDescription;
 		}
 		
-		public bool IsDescription(string relativePath)
+		public bool IsDescription(IFile file)
 		{
-            return _descriptionsSearchPathRegex.IsMatch(relativePath) && 
-                (_systemsSearchPathRegex == null) ?
-                true : !_systemsSearchPathRegex.IsMatch(relativePath);
+			var path = file.FullPath;
+			if( _descriptionsSearchPathRegex == null )
+				return false;
+			
+			var isSystem = false;
+			if( _systemsSearchPathRegex != null )
+				isSystem = _systemsSearchPathRegex.IsMatch(path);
+			
+            return _descriptionsSearchPathRegex.IsMatch(path) && !isSystem; 
 		}
     }
 }

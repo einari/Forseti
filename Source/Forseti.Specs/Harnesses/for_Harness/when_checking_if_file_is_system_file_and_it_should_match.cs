@@ -1,4 +1,5 @@
 using Forseti.Harnesses;
+using Forseti.Files;
 using Machine.Specifications;
 
 namespace Forseti.Specs.Harnesses.for_Harness
@@ -16,7 +17,7 @@ namespace Forseti.Specs.Harnesses.for_Harness
             };
 		};
 
-        Because of = () => result = harness.IsSystem("Scripts/something.js");
+        Because of = () => result = harness.IsSystem((File)"Scripts/something.js");
 
         It should_acknowledge_file_as_a_system_file = () => result.ShouldBeTrue();
 	}

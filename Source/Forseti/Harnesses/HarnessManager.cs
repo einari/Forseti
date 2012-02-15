@@ -27,6 +27,8 @@ namespace Forseti.Harnesses
 			_fileSystem = fileSystem;
 			_fileSystemWatcher = fileSystemWatcher;
 			
+			_fileSystemWatcher.SubscribeToChanges(FileChanged);
+			
             var currentDir = Directory.GetCurrentDirectory();
 
             var w = new System.IO.FileSystemWatcher(currentDir, "*.js");
@@ -34,8 +36,12 @@ namespace Forseti.Harnesses
             w.NotifyFilter = NotifyFilters.LastWrite;
             w.Changed += new FileSystemEventHandler(w_Changed);
             w.EnableRaisingEvents = true;
-            
         }
+		
+		void FileChanged(FileChange change, IFile file)
+		{
+			
+		}
 		
 
         DateTime _lastTrigger = DateTime.Now;
