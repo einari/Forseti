@@ -41,6 +41,7 @@ namespace Forseti.Harnesses
 		void FileChanged(FileChange change, IFile file)
 		{
 			
+			
 		}
 		
 
@@ -95,6 +96,12 @@ namespace Forseti.Harnesses
 			// If the change is a delete - walk through existing suites in the harness and see some one is affected and just update the suite or remove the suite if the system was removed
 			
 			var allFiles = _fileSystem.GetAllFiles("*.js");
+			foreach( var file in allFiles ) 
+			{
+				var isSystem = harness.IsSystem(file);
+				var isDescription = harness.IsDescription(file);
+			}
+			
 		}
 
 		public void Reset ()
