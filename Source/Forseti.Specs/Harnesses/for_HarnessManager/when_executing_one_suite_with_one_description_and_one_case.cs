@@ -3,6 +3,7 @@ using Forseti.Pages;
 using Forseti.Suites;
 using Machine.Specifications;
 using It = Machine.Specifications.It;
+using Forseti.Files;
 
 namespace Forseti.Specs.Harnesses.for_HarnessManager
 {
@@ -10,15 +11,15 @@ namespace Forseti.Specs.Harnesses.for_HarnessManager
     public class when_executing_one_suite_with_one_description_and_one_case : given.a_harness_manager
     {
         static Suite suite;
-        static SuiteDescription description;
+        static Description description;
         static Case @case;
         static Harness harness_result;
         static Page expected_page;
 
         Establish context = () =>
         {
-            suite = new Suite();
-            description = new SuiteDescription();
+            suite = new Suite((File)"Script/something.js");
+            description = new Description((File)"Specs/for_something/when_doing_stuff.js");
             suite.AddDescription(description);
             
             @case = new Case();

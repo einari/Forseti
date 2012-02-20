@@ -10,6 +10,7 @@ namespace Forseti.Harnesses
 {
     public class HarnessManager : IHarnessManager
     {
+        List<Harness> _harnesses = new List<Harness>();
         IScriptEngine _scriptEngine;
         IPageGenerator _pageGenerator;
 		IFileSystem _fileSystem;
@@ -29,21 +30,53 @@ namespace Forseti.Harnesses
 			
 			_fileSystemWatcher.SubscribeToChanges(FileChanged);
 			
+            /*
             var currentDir = Directory.GetCurrentDirectory();
 
             var w = new System.IO.FileSystemWatcher(currentDir, "*.js");
             w.IncludeSubdirectories = true;
             w.NotifyFilter = NotifyFilters.LastWrite;
             w.Changed += new FileSystemEventHandler(w_Changed);
-            w.EnableRaisingEvents = true;
+            w.EnableRaisingEvents = true;*/
         }
 		
 		void FileChanged(FileChange change, IFile file)
 		{
-			
-			
+            foreach (var harness in _harnesses)
+            {
+                if (harness.IsSystem(file) || harness.IsDescription(file))
+                {
+                    
+                    foreach (var suite in harness.Suites)
+                    {
+                        var runSuite = false;
+                        var suiteOrDescription = Path.GetFileNameWithoutExtension(file.Filename);
+                        if (suite.System == suiteOrDescription)
+                            runSuite = true;
+
+                        foreach (var description in suite.Descriptions)
+                        {
+                            if (description.Name == suiteOrDescription)
+                                runSuite = true;
+                        }
+
+                        if (runSuite)
+                        {
+                            var now = DateTime.Now;
+                            var delta = now.Subtract(suite.LastRun);
+                            if (delta.TotalSeconds > 1)
+                            {
+                                Execute(new[] { suite });
+                                suite.LastRun = now;
+                            }
+                        }
+                    }
+
+                }
+            }
 		}
-		
+
+		/*
 
         DateTime _lastTrigger = DateTime.Now;
         IEnumerable<Suite> _currentSuites;
@@ -57,7 +90,7 @@ namespace Forseti.Harnesses
             {
                 var suiteChanged = false;
 
-                var systemFile = Path.GetFileName(suite.SystemFile).ToLowerInvariant();
+                var systemFile = Path.GetFileName(suite.SystemFile.FullPath).ToLowerInvariant();
                 if (systemFile == name)
                     suiteChanged = true;
                 else
@@ -83,6 +116,7 @@ namespace Forseti.Harnesses
                 }
             }
         }
+         * */
 
 		public void Add (Harness harness)
 		{
@@ -96,12 +130,8 @@ namespace Forseti.Harnesses
 			// If the change is a delete - walk through existing suites in the harness and see some one is affected and just update the suite or remove the suite if the system was removed
 			
 			var allFiles = _fileSystem.GetAllFiles("*.js");
-			foreach( var file in allFiles ) 
-			{
-				var isSystem = harness.IsSystem(file);
-				var isDescription = harness.IsDescription(file);
-			}
-			
+            harness.HandleFiles(allFiles);
+            _harnesses.Add(harness);
 		}
 
 		public void Reset ()
@@ -110,11 +140,11 @@ namespace Forseti.Harnesses
 		}
         
 
-
         public Harness Execute(IEnumerable<Suite> suites)
         {
+            /*
             if( _currentSuites == null ) 
-                _currentSuites = suites;
+                _currentSuites = suites;*/
 
 
             var harness = new Harness();
@@ -128,11 +158,8 @@ namespace Forseti.Harnesses
                     cases.AddRange(description.Cases);
 
                 harness.Cases = cases;
-
             }
             var page = _pageGenerator.GenerateFrom(harness);
-
-            
 
             _scriptEngine.Execute(page);
 
@@ -142,7 +169,13 @@ namespace Forseti.Harnesses
             return harness;
         }
 
+        public void Run()
+        {
+            foreach (var harness in _harnesses)
+                Execute(harness.Suites);
+        }
 
 
+        public IEnumerable<Harness> Harnesses { get { return _harnesses; } }
     }
 }

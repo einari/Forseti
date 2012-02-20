@@ -1,24 +1,30 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using Forseti.Files;
+using System;
 
 namespace Forseti.Suites
 {
     public class Suite
     {
-        List<SuiteDescription> _descriptions = new List<SuiteDescription>();
+        List<Description> _descriptions = new List<Description>();
 
-        public string System { get; set; }
-        public string SystemFile { get; set; }
-        public IEnumerable<SuiteDescription> Descriptions  
-        { 
-            get { return _descriptions; }
-            set 
-            { 
-                _descriptions.Clear();
-                _descriptions.AddRange(value);
-            }
+        public string System { get; private set; }
+        public IFile SystemFile { get; private set; }
+
+        public DateTime LastRun { get; set; }
+
+        public Suite(IFile systemFile)
+        {
+            System = Path.GetFileNameWithoutExtension(systemFile.FullPath);
+            SystemFile = systemFile;
+
+            LastRun = DateTime.MinValue;
         }
 
-        public void AddDescription(SuiteDescription description)
+        public IEnumerable<Description> Descriptions { get { return _descriptions; } }
+
+        public void AddDescription(Description description)
         {
             _descriptions.Add(description);
             description.Suite = this;

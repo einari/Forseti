@@ -61,19 +61,6 @@ namespace Forseti.Scripting
             }
         }
 
-        void AddConsoleFunctionsToScope()
-        {
-            var consoleLoggingMethods = typeof(SystemConsole).GetMethods(BindingFlags.Public | BindingFlags.Static);
-            Class myJClass = typeof(SystemConsole);
-            foreach (var method in consoleLoggingMethods)
-            {
-                Member methodMember = myJClass.getMethod(method.Name, GetParametersForMethod(method));
-                var functionName = method.Name.ToCamelCase();
-                Scriptable methodFunction = new FunctionObject(functionName, methodMember, _scope);
-                _scope.put(functionName, _scope, methodFunction);
-            }
-        }
-
         Class[] GetParametersForMethod(MethodInfo method)
         {
             var listOfParamTypes = new List<Class>();

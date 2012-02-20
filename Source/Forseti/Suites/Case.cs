@@ -6,7 +6,7 @@ namespace Forseti.Suites
     {
         List<Case> _children = new List<Case>();
 
-        public SuiteDescription Description { get; set; }
+        public Description Description { get; set; }
         public Case Parent { get; set; }
         public string Name { get; set; }
 

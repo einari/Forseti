@@ -49,11 +49,11 @@ namespace Forseti.Pages.Spark
 
             foreach (var @case in _harness.Cases)
             {
-                var caseScript = @case.Description.File;
+                var caseScript = @case.Description.File.RelativePath;
                 if( !caseScripts.Contains(caseScript) )
                     caseScripts.Add(caseScript);
 
-                var systemScript = @case.Description.Suite.SystemFile;
+                var systemScript = @case.Description.Suite.SystemFile.RelativePath;
                 if (!systemScripts.Contains(systemScript))
                     systemScripts.Add(systemScript);
             }

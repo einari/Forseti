@@ -1,18 +1,19 @@
 ﻿using System.Linq;
 using Forseti.Suites;
 using Machine.Specifications;
+using Forseti.Files;
 
-namespace Forseti.Specs.Suites.for_SuiteDescription
+namespace Forseti.Specs.Suites.for_Description
 {
-    [Subject(typeof(SuiteDescription))]
+    [Subject(typeof(Description))]
     public class when_adding_case
     {
-        static SuiteDescription description;
+        static Description description;
         static Case @case;
 
         Establish context = () =>
         {
-            description = new SuiteDescription();
+            description = new Description((File)"Specs/for_something/when_doing_stuff.js");
             @case = new Case();
         };
 

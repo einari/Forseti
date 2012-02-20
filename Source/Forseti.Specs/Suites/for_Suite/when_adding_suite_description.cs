@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Machine.Specifications;
 using Forseti.Suites;
+using Forseti.Files;
 
 namespace Forseti.Specs.Suites.for_Suite
 {
@@ -8,12 +9,12 @@ namespace Forseti.Specs.Suites.for_Suite
     public class when_adding_suite_description
     {
         static Suite    suite;
-        static SuiteDescription description;
+        static Description description;
 
         Establish context = () =>
         {
-            suite = new Suite();
-            description = new SuiteDescription();
+            suite = new Suite((File)"Script/something.js");
+            description = new Description((File)"Specs/for_something/when_doing_stuff.js");
         };
 
         Because of = () => suite.AddDescription(description);

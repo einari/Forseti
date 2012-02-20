@@ -6,6 +6,7 @@ namespace Forseti.Files
         string Filename { get; set; }
         string Folder { get; set; }
         string FullPath { get; }
+        string RelativePath { get; }
 
         string ReadAllText();
     }

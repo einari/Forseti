@@ -9,11 +9,18 @@ namespace Forseti.Harnesses
 {
     public class Harness
     {
+        const   string SystemComponentName = "{system}";
+
+
 		string _systemsSearchPath;
 		string _descriptionsSearchPath;
         Regex _systemsSearchPathRegex;
         Regex _descriptionsSearchPathRegex;
-        IEnumerable<string> _components;
+        Dictionary<string,int> _systemComponents;
+        Dictionary<string,int> _descriptionComponents;
+
+        List<Suite> _suites = new List<Suite>();
+
 		
 		public string Name { get; set; }
 		public string SystemsSearchPath 
@@ -22,7 +29,7 @@ namespace Forseti.Harnesses
 			set
 			{
 				_systemsSearchPath = value;
-                _systemsSearchPathRegex = BuildSearchRegex(value);
+                _systemsSearchPathRegex = BuildSearchRegex(value, out _systemComponents);
 			}
 		}
 		
@@ -32,25 +39,24 @@ namespace Forseti.Harnesses
 			set
 			{
 				_descriptionsSearchPath = value;
-                _descriptionsSearchPathRegex = BuildSearchRegex(value);
+                _descriptionsSearchPathRegex = BuildSearchRegex(value, out _descriptionComponents);
 			}
 		}
 		
-		Regex BuildSearchRegex(string path) 
+		Regex BuildSearchRegex(string path, out Dictionary<string,int> extractedComponents) 
 		{
-            var replacePattern = "\\{[a-zA-Z]*\\}";
+            var replacePattern = @"\{[a-zA-Z]*\}";
             var componentMatches = Regex.Match(path, replacePattern);
-            var components = new List<string>();
-            foreach (Group group in componentMatches.Groups)
-                components.Add(group.Value);
 
-            _components = components.ToArray();
+            extractedComponents = new Dictionary<string, int>();
+            for (var matchIndex = 0; matchIndex < componentMatches.Length; matchIndex++, componentMatches = componentMatches.NextMatch())
+                extractedComponents[componentMatches.Value] = matchIndex;
 
             var pattern = Regex.Replace(path,replacePattern,"([\\w.]*)");
 			return new Regex(pattern);
 		}
-		
-		public IEnumerable<Suite> Suites { get; set; }
+
+        public IEnumerable<Suite> Suites { get { return _suites; } }
         public IEnumerable<Case> Cases { get; set; }
 		
 		public bool IsSystem(IFile file)
@@ -78,5 +84,37 @@ namespace Forseti.Harnesses
 			
             return _descriptionsSearchPathRegex.IsMatch(path) && !isSystem; 
 		}
+
+
+        public void HandleFiles(IEnumerable<IFile> files)
+        {
+            foreach (var file in files)
+            {
+                var isSystem = IsSystem(file);
+                if (isSystem)
+                {
+                    var suite = new Suite(file);
+                    _suites.Add(suite);
+                }
+
+                var isDescription = IsDescription(file);
+                if (isDescription && _descriptionComponents.ContainsKey(SystemComponentName))
+                {
+                    var systemComponentIndex = _descriptionComponents[SystemComponentName];
+                    foreach (var suite in _suites)
+                    {
+                        var match = _descriptionsSearchPathRegex.Match(file.FullPath);
+                        if (match.Groups[systemComponentIndex+1].Value == suite.System)
+                        {
+                            var description = new Description(file);
+
+                            // Todo: Hack for now
+                            description.AddCase(new Case());
+                            suite.AddDescription(description);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

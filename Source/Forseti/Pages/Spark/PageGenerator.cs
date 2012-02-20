@@ -74,8 +74,6 @@ namespace Forseti.Pages.Spark
             File.WriteAllText(page.RootPath + _framework.ExecuteScriptName, _framework.ExecuteScript);
             File.WriteAllText(page.RootPath + _framework.ReportScriptName, _framework.ReportScript);
 
-
-
             foreach (var scriptFile in harnessView.SystemScripts)
                 CopyScript(page.RootPath, scriptFile);
                 //File.Copy(scriptFile, page.RootPath + scriptFile, true);

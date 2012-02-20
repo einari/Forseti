@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Forseti.Suites;
 using Machine.Specifications;
+using Forseti.Files;
 
 namespace Forseti.Specs.Suites.for_Case
 {
@@ -14,7 +15,7 @@ namespace Forseti.Specs.Suites.for_Case
         Establish context = () =>
         {
             parent = new Case();
-            parent.Description = new SuiteDescription();
+            parent.Description = new Description((File)"Specs/for_something/when_doing_stuff.js");
             child = new Case();
         };
 

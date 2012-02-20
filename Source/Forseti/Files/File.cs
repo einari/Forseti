@@ -1,9 +1,20 @@
 ﻿using System;
+using System.IO;
 
 namespace Forseti.Files
 {
     public class File : IFile
     {
+        static string _currentDirectory;
+
+        static File()
+        {
+            _currentDirectory = Directory.GetCurrentDirectory().Replace("\\", "/");
+            if (!EndsWithPathSeparator(_currentDirectory))
+                _currentDirectory += "/";
+        }
+
+
         public string Filename { get; set; }
         public string Folder { get; set; }
         public string FullPath
@@ -28,7 +39,7 @@ namespace Forseti.Files
             return new File
             {
                 Filename = System.IO.Path.GetFileName(path),
-                Folder = System.IO.Path.GetDirectoryName(path)
+                Folder = System.IO.Path.GetDirectoryName(path).Replace("\\","/")
             };
         }
 		
@@ -38,9 +49,11 @@ namespace Forseti.Files
 			return string.Format ("[File: Filename={0}, Folder={1}, FullPath={2}]", Filename, Folder, FullPath);
 		}
 		
-		bool EndsWithPathSeparator(string path)
+		static bool EndsWithPathSeparator(string path)
 		{
 			return path.EndsWith(@"\") || path.EndsWith(@"/");
 		}
+
+        public string RelativePath { get { return FullPath.Replace(_currentDirectory, string.Empty); } }
     }
 }

@@ -12,6 +12,7 @@ namespace Forseti.Console
         [STAThread]
         public static int Main(string[] args)
         {
+            /*
             var configFile = "forseti.config";
             if (!File.Exists(configFile))
             {
@@ -33,17 +34,23 @@ namespace Forseti.Console
                         @case.Description = description;
                     }                   
                 }
-            }
+            }*/
 
             var configuration = Configure
                 .WithStandard()
                 .UsingJasmin()
                 .FromConfigurationFile("forseti.yaml")
                 .Initialize();
-			
-            var harness = configuration.HarnessManager.Execute(suites);
+
+            configuration
+                    .HarnessManager.Run();
 
             System.Console.ReadLine();
+
+
+            //var harness = configuration.HarnessManager.Execute(suites);
+
+            
 
             return 0;
         }

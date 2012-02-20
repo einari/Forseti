@@ -76,7 +76,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Conventions\IConventionManager.cs" />
     <Compile Include="Files\File.cs" />
     <Compile Include="Files\FileManager.cs" />
     <Compile Include="Files\FileSystemWatcher.cs" />
@@ -97,7 +96,7 @@
     <Compile Include="Scripting\ScriptEngineContext.cs" />
     <Compile Include="Scripting\ScriptEngineContextManager.cs" />
     <Compile Include="Pages\Spark\HarnessView.cs" />
-    <Compile Include="Suites\SuiteDescription.cs" />
+    <Compile Include="Suites\Description.cs" />
     <Compile Include="Configuration\ConfigurationFileReader.cs" />
     <Compile Include="Configuration\Configure.cs" />
     <Compile Include="Configuration\ConfigureExtensions.cs" />
