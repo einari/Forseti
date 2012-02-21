@@ -27,96 +27,58 @@ namespace Forseti.Harnesses
             _pageGenerator = pageGenerator;
 			_fileSystem = fileSystem;
 			_fileSystemWatcher = fileSystemWatcher;
-			
 			_fileSystemWatcher.SubscribeToChanges(FileChanged);
-			
-            /*
-            var currentDir = Directory.GetCurrentDirectory();
-
-            var w = new System.IO.FileSystemWatcher(currentDir, "*.js");
-            w.IncludeSubdirectories = true;
-            w.NotifyFilter = NotifyFilters.LastWrite;
-            w.Changed += new FileSystemEventHandler(w_Changed);
-            w.EnableRaisingEvents = true;*/
         }
 		
 		void FileChanged(FileChange change, IFile file)
 		{
             foreach (var harness in _harnesses)
             {
+				IEnumerable<Suite> affectedSuites = null;
+				
                 if (harness.IsSystem(file) || harness.IsDescription(file))
                 {
-                    
-                    foreach (var suite in harness.Suites)
-                    {
-                        var runSuite = false;
-                        var suiteOrDescription = Path.GetFileNameWithoutExtension(file.Filename);
-                        if (suite.System == suiteOrDescription)
-                            runSuite = true;
-
-                        foreach (var description in suite.Descriptions)
-                        {
-                            if (description.Name == suiteOrDescription)
-                                runSuite = true;
-                        }
-
-                        if (runSuite)
-                        {
-                            var now = DateTime.Now;
-                            var delta = now.Subtract(suite.LastRun);
-                            if (delta.TotalSeconds > 1)
-                            {
-                                Execute(new[] { suite });
-                                suite.LastRun = now;
-                            }
-                        }
-                    }
-
+					if( change == FileChange.Added ) 
+					{
+						affectedSuites = harness.HandleFiles(new[] {file});
+					} 
+					else
+					{
+	                    foreach (var suite in harness.Suites)
+	                    {
+	                        var runSuite = false;
+	                        var suiteOrDescription = Path.GetFileNameWithoutExtension(file.Filename);
+	                        if (suite.System == suiteOrDescription)
+	                            runSuite = true;
+	
+	                        foreach (var description in suite.Descriptions)
+	                        {
+	                            if (description.Name == suiteOrDescription)
+	                                runSuite = true;
+	                        }
+	
+	                        if (runSuite)
+								affectedSuites = new[] { suite };
+	                    }
+					}
                 }
+				
+				if( affectedSuites != null )
+				{
+					foreach( var suite in affectedSuites )
+					{
+	                    var now = DateTime.Now;
+	                    var delta = now.Subtract(suite.LastRun);
+	                    if (delta.TotalSeconds > 1)
+	                    {
+	                        Execute(new[] { suite });
+	                        suite.LastRun = now;
+	                    }
+					}
+				}
             }
 		}
 
-		/*
-
-        DateTime _lastTrigger = DateTime.Now;
-        IEnumerable<Suite> _currentSuites;
-
-        Dictionary<Suite, DateTime> _lastTriggered = new Dictionary<Suite, DateTime>();
-
-        void w_Changed(object sender, FileSystemEventArgs e)
-        {
-            var name = Path.GetFileName(e.Name).ToLowerInvariant();
-            foreach (var suite in _currentSuites)
-            {
-                var suiteChanged = false;
-
-                var systemFile = Path.GetFileName(suite.SystemFile.FullPath).ToLowerInvariant();
-                if (systemFile == name)
-                    suiteChanged = true;
-                else
-                {
-                    foreach (var description in suite.Descriptions)
-                    {
-                        var suiteDescriptionFile = Path.GetFileName(description.File).ToLowerInvariant();
-                        if (suiteDescriptionFile == name)
-                            suiteChanged = true;
-
-                    }
-                }
-
-                if (suiteChanged)
-                {
-                    var delta = _lastTriggered.ContainsKey(suite) ?
-                        DateTime.Now.Subtract(_lastTriggered[suite]) :
-                        TimeSpan.MaxValue;
-                    if( delta.Seconds >= 1 ) 
-                        Execute(new[] { suite });
-
-                    _lastTriggered[suite] = DateTime.Now;
-                }
-            }
-        }
-         * */
 
 		public void Add (Harness harness)
 		{
@@ -142,11 +104,6 @@ namespace Forseti.Harnesses
 
         public Harness Execute(IEnumerable<Suite> suites)
         {
-            /*
-            if( _currentSuites == null ) 
-                _currentSuites = suites;*/
-
-
             var harness = new Harness();
             var cases = new List<Case>();
 

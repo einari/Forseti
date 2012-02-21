@@ -86,8 +86,10 @@ namespace Forseti.Harnesses
 		}
 
 
-        public void HandleFiles(IEnumerable<IFile> files)
+        public IEnumerable<Suite> HandleFiles(IEnumerable<IFile> files)
         {
+			var affectedSuites = new List<Suite>();
+			
             foreach (var file in files)
             {
                 var isSystem = IsSystem(file);
@@ -111,10 +113,16 @@ namespace Forseti.Harnesses
                             // Todo: Hack for now
                             description.AddCase(new Case());
                             suite.AddDescription(description);
+							
+							if( !affectedSuites.Contains(suite) ) {
+								affectedSuites.Add (suite);
+							}
                         }
                     }
                 }
             }
+			
+			return affectedSuites;
         }
     }
 }
