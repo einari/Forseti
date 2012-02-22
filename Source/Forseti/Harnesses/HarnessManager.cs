@@ -69,7 +69,7 @@ namespace Forseti.Harnesses
 					{
 	                    var now = DateTime.Now;
 	                    var delta = now.Subtract(suite.LastRun);
-	                    if (delta.TotalSeconds > 1)
+	                    if (delta.TotalSeconds > 2)
 	                    {
 	                        Execute(new[] { suite });
 	                        suite.LastRun = now;

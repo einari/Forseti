@@ -15,11 +15,20 @@ namespace Forseti.Files
             _actualWatcher = new System.IO.FileSystemWatcher(currentDirectory, "*.js");
             _actualWatcher.Changed += _actualWatcher_Changed;
 			_actualWatcher.Created += _actualWatcher_Created;
+            _actualWatcher.Renamed += _actualWatcher_Renamed;
             _actualWatcher.IncludeSubdirectories = true;
             //_actualWatcher.NotifyFilter = System.IO.NotifyFilters.LastWrite|System.IO.NotifyFilters.CreationTime;
             _actualWatcher.EnableRaisingEvents = true;
         }
-		
+
+        void _actualWatcher_Renamed(object sender, System.IO.RenamedEventArgs e)
+        {
+            var file = (File)e.FullPath;
+            NotifySubscribers(FileChange.Added, file);
+            var oldFile = (File)e.OldFullPath;
+            NotifySubscribers(FileChange.Deleted, file);
+        }
+
 		void _actualWatcher_Created(object sender, System.IO.FileSystemEventArgs e)
 		{
 			var file = (File)e.FullPath;
