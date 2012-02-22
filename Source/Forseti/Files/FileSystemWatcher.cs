@@ -16,7 +16,7 @@ namespace Forseti.Files
             _actualWatcher.Changed += _actualWatcher_Changed;
 			_actualWatcher.Created += _actualWatcher_Created;
             _actualWatcher.IncludeSubdirectories = true;
-            _actualWatcher.NotifyFilter = System.IO.NotifyFilters.LastWrite|System.IO.NotifyFilters.CreationTime;
+            //_actualWatcher.NotifyFilter = System.IO.NotifyFilters.LastWrite|System.IO.NotifyFilters.CreationTime;
             _actualWatcher.EnableRaisingEvents = true;
         }
 		
