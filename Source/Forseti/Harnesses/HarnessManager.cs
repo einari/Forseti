@@ -54,7 +54,7 @@ namespace Forseti.Harnesses
                                 var descriptionsToRemove = new List<Description>();
                                 foreach (var description in suite.Descriptions)
                                 {
-                                    if (description.File == file)
+                                    if (description.File.FullPath == file.FullPath)
                                         descriptionsToRemove.Add(description);
                                 }
                                 suite.RemoveDescriptions(descriptionsToRemove);

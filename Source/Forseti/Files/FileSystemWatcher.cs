@@ -23,10 +23,10 @@ namespace Forseti.Files
 
         void _actualWatcher_Renamed(object sender, System.IO.RenamedEventArgs e)
         {
+            var oldFile = (File)e.OldFullPath;
+            NotifySubscribers(FileChange.Deleted, oldFile);
             var file = (File)e.FullPath;
             NotifySubscribers(FileChange.Added, file);
-            var oldFile = (File)e.OldFullPath;
-            NotifySubscribers(FileChange.Deleted, file);
         }
 
 		void _actualWatcher_Created(object sender, System.IO.FileSystemEventArgs e)
