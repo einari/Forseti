@@ -41,26 +41,46 @@ namespace Forseti.Harnesses
 					if( change == FileChange.Added ) 
 					{
 						affectedSuites = harness.HandleFiles(new[] {file});
-					} 
-					else
-					{
-	                    foreach (var suite in harness.Suites)
-	                    {
-	                        var runSuite = false;
-	                        var suiteOrDescription = Path.GetFileNameWithoutExtension(file.Filename);
-	                        if (suite.System == suiteOrDescription)
-	                            runSuite = true;
-	
-	                        foreach (var description in suite.Descriptions)
-	                        {
-	                            if (description.Name == suiteOrDescription)
-	                                runSuite = true;
-	                        }
-	
-	                        if (runSuite)
-								affectedSuites = new[] { suite };
-	                    }
 					}
+                    else if (change == FileChange.Deleted)
+                    {
+                        var suitesToRemove = new List<Suite>();
+                        foreach (var suite in harness.Suites)
+                        {
+                            if (suite.SystemFile == file)
+                                suitesToRemove.Add(suite);
+                            else
+                            {
+                                var descriptionsToRemove = new List<Description>();
+                                foreach (var description in suite.Descriptions)
+                                {
+                                    if (description.File == file)
+                                        descriptionsToRemove.Add(description);
+                                }
+                                suite.RemoveDescriptions(descriptionsToRemove);
+                            }
+                        }
+                        harness.RemoveSuites(suitesToRemove);
+                    }
+                    else
+                    {
+                        foreach (var suite in harness.Suites)
+                        {
+                            var runSuite = false;
+                            var suiteOrDescription = Path.GetFileNameWithoutExtension(file.Filename);
+                            if (suite.System == suiteOrDescription)
+                                runSuite = true;
+
+                            foreach (var description in suite.Descriptions)
+                            {
+                                if (description.Name == suiteOrDescription)
+                                    runSuite = true;
+                            }
+
+                            if (runSuite)
+                                affectedSuites = new[] { suite };
+                        }
+                    }
                 }
 				
 				if( affectedSuites != null )

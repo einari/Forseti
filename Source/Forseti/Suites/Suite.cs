@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Forseti.Files;
-using System;
 
 namespace Forseti.Suites
 {
@@ -28,6 +28,12 @@ namespace Forseti.Suites
         {
             _descriptions.Add(description);
             description.Suite = this;
+        }
+
+        public void RemoveDescriptions(IEnumerable<Description> descriptions)
+        {
+            foreach (var description in descriptions)
+                _descriptions.Remove(description);
         }
     }
 }

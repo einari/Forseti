@@ -1,16 +1,13 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Forseti.Suites;
 using Forseti.Files;
+using Forseti.Suites;
 
 namespace Forseti.Harnesses
 {
     public class Harness
     {
         const   string SystemComponentName = "{system}";
-
 
 		string _systemsSearchPath;
 		string _descriptionsSearchPath;
@@ -20,7 +17,6 @@ namespace Forseti.Harnesses
         Dictionary<string,int> _descriptionComponents;
 
         List<Suite> _suites = new List<Suite>();
-
 		
 		public string Name { get; set; }
 		public string SystemsSearchPath 
@@ -43,21 +39,15 @@ namespace Forseti.Harnesses
 			}
 		}
 		
-		Regex BuildSearchRegex(string path, out Dictionary<string,int> extractedComponents) 
-		{
-            var replacePattern = @"\{[a-zA-Z]*\}";
-            var componentMatches = Regex.Match(path, replacePattern);
-
-            extractedComponents = new Dictionary<string, int>();
-            for (var matchIndex = 0; matchIndex < componentMatches.Length; matchIndex++, componentMatches = componentMatches.NextMatch())
-                extractedComponents[componentMatches.Value] = matchIndex;
-
-            var pattern = Regex.Replace(path,replacePattern,"([\\w.]*)");
-			return new Regex(pattern);
-		}
 
         public IEnumerable<Suite> Suites { get { return _suites; } }
         public IEnumerable<Case> Cases { get; set; }
+
+        public void RemoveSuites(IEnumerable<Suite> suites)
+        {
+            foreach (var suite in suites)
+                _suites.Remove(suite);
+        }
 		
 		public bool IsSystem(IFile file)
 		{
@@ -124,5 +114,19 @@ namespace Forseti.Harnesses
 			
 			return affectedSuites;
         }
+
+        Regex BuildSearchRegex(string path, out Dictionary<string, int> extractedComponents)
+        {
+            var replacePattern = @"\{[a-zA-Z]*\}";
+            var componentMatches = Regex.Match(path, replacePattern);
+
+            extractedComponents = new Dictionary<string, int>();
+            for (var matchIndex = 0; matchIndex < componentMatches.Length; matchIndex++, componentMatches = componentMatches.NextMatch())
+                extractedComponents[componentMatches.Value] = matchIndex;
+
+            var pattern = Regex.Replace(path, replacePattern, "([\\w.]*)");
+            return new Regex(pattern);
+        }
+
     }
 }

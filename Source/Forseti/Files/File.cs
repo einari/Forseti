@@ -55,5 +55,10 @@ namespace Forseti.Files
 		}
 
         public string RelativePath { get { return FullPath.Replace(_currentDirectory, string.Empty); } }
+
+        public override bool Equals(object obj)
+        {
+            return ((IFile)obj).FullPath == FullPath;
+        }
     }
 }
