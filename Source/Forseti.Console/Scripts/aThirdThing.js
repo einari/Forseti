@@ -1,5 +1,5 @@
 ﻿print("Should require");
-require("./lakk.js","");
+requireDependency("./lakk.js","");
 
 print("Hello world");
 doStuff();

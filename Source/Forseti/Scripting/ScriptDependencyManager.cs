@@ -10,7 +10,7 @@ namespace Forseti.Scripting
             
         }
 
-        public void Require(string sourcePath, string path)
+        public void RequireDependency(string sourcePath, string path)
         {
             Console.WriteLine("Dependency : " + sourcePath);
         }

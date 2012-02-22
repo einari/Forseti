@@ -5,6 +5,6 @@ namespace Forseti.Scripting
     public interface IScriptDependencyManager
     {
         void SetCurrentHarness(Harness harness);
-        void Require(string sourcePath, string path);
+        void RequireDependency(string sourcePath, string path);
     }
 }

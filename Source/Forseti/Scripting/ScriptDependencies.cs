@@ -5,10 +5,10 @@ namespace Forseti.Scripting
 {
     public class ScriptDependencies
     {
-        public static void Require(string sourcePath, string scriptPath)
+        public static void RequireDependency(string sourcePath, string scriptPath)
         {
             var scriptDependencyManager = ServiceLocator.Current.GetInstance<IScriptDependencyManager>();
-            scriptDependencyManager.Require(sourcePath, scriptPath);
+            scriptDependencyManager.RequireDependency(sourcePath, scriptPath);
         }
     }
 }
