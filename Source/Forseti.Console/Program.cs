@@ -35,7 +35,7 @@ namespace Forseti.Console
                     }                   
                 }
             }*/
-
+			
             var configuration = Configure
                 .WithStandard()
                 .UsingJasmin()

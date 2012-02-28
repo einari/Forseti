@@ -61,7 +61,9 @@ namespace Forseti.Pages.Spark
                     actualDependencies.Add(dependency);
                 }
                 harnessView.Dependencies = actualDependencies.ToArray();
-            }
+            } else {
+				harnessView.Dependencies = new string[0];
+			}
 
             var writer = new StringWriter();
             harnessView.RenderView(writer);
