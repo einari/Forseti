@@ -1,10 +1,10 @@
-﻿using Forseti.Harnesses;
+﻿using System.Collections.Generic;
+using Forseti.Files;
 
 namespace Forseti.Scripting
 {
     public interface IScriptDependencyManager
     {
-        void SetCurrentHarness(Harness harness);
-        void RequireDependency(string sourcePath, string path);
+        IEnumerable<File>	GetDependencies(File file);
     }
 }

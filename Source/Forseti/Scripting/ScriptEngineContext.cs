@@ -24,7 +24,6 @@ namespace Forseti.Scripting
             _scope = _context.initStandardObjects();
 
             AddClassAndMethods(typeof(SystemConsole));
-            AddClassAndMethods(typeof(ScriptDependencies),"RequireDependency");
 
             SystemConsole.LoggingEnabled = false;
             _context.evaluateString(_scope, envJs, "env.js", 1, null);

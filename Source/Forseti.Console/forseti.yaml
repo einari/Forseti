@@ -14,3 +14,6 @@ Harnesses:
       Name						: Something
       SystemsSearchPath 		: Scripts/{system}.js
       DescriptionsSearchPath	: Specs/for_{system}/{description}.js
+      Dependencies:
+        - Scripts/dependency.js
+  

@@ -1,18 +1,19 @@
 ﻿using System;
-using Forseti.Harnesses;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using Forseti.Files;
 
 namespace Forseti.Scripting
 {
     public class ScriptDependencyManager : IScriptDependencyManager
     {
-        public void SetCurrentHarness(Harness harness)
-        {
-            
-        }
-
-        public void RequireDependency(string sourcePath, string path)
-        {
-            Console.WriteLine("Dependency : " + sourcePath);
-        }
+		
+		
+		public IEnumerable<File> GetDependencies (File file)
+		{
+			
+			
+			throw new NotImplementedException ();
+		}
     }
 }
