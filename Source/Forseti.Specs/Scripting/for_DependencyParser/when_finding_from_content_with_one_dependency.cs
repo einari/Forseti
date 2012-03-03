@@ -8,7 +8,7 @@ namespace Forseti.Specs
 	public class when_finding_from_content_with_one_dependency
 	{
 		static string file = "some_script_file.js";
-		static string content = string.Format ("/// <dependency path=\"{0}\"/>", file);
+		static string content = string.Format ("/// <reference path=\"{0}\"/>", file);
 		static DependencyParser parser;
 		static IEnumerable<string> result;
 		
