@@ -17,6 +17,7 @@ namespace Forseti.Harnesses
         Dictionary<string,int> _descriptionComponents;
 
         List<Suite> _suites = new List<Suite>();
+		List<IFile> _dependencies = new List<IFile>();
 		
 		public string Name { get; set; }
 		public string SystemsSearchPath 
@@ -39,7 +40,7 @@ namespace Forseti.Harnesses
 			}
 		}
 		
-
+		public IEnumerable<IFile> Dependencies { get { return _dependencies; } }
         public IEnumerable<Suite> Suites { get { return _suites; } }
         public IEnumerable<Case> Cases { get; set; }
 

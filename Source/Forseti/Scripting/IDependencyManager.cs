@@ -3,8 +3,8 @@ using Forseti.Files;
 
 namespace Forseti.Scripting
 {
-    public interface IScriptDependencyManager
+    public interface IDependencyManager
     {
-        IEnumerable<File>	GetDependencies(File file);
+        IEnumerable<IFile>	GetDependencies(IFile file);
     }
 }

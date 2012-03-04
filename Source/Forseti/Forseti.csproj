@@ -84,8 +84,6 @@
     <Compile Include="Files\IFileSystem.cs" />
     <Compile Include="Files\IFileSystemWatcher.cs" />
     <Compile Include="Registries\MainRegistry.cs" />
-    <Compile Include="Scripting\IScriptDependencyManager.cs" />
-    <Compile Include="Scripting\ScriptDependencyManager.cs" />
     <Compile Include="Suites\Case.cs" />
     <Compile Include="Pages\IPageGenerator.cs" />
     <Compile Include="Scripting\IScriptEngineContext.cs" />
@@ -122,6 +120,8 @@
     <Compile Include="Scripting\Extensions\StringExtensions.cs" />
     <Compile Include="Scripting\IDependencyParser.cs" />
     <Compile Include="Scripting\DependencyParser.cs" />
+    <Compile Include="Scripting\DependencyManager.cs" />
+    <Compile Include="Scripting\IDependencyManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\..\Libraries\Env\env.js">

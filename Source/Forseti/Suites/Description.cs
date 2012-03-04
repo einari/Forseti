@@ -6,6 +6,7 @@ namespace Forseti.Suites
 {
     public class Description
     {
+		List<IFile> _dependencies = new List<IFile>();
         List<Case> _cases = new List<Case>();
 
         public Suite Suite { get; set; }
@@ -17,7 +18,8 @@ namespace Forseti.Suites
             Name = Path.GetFileNameWithoutExtension(file.Filename);
             File = file;
         }
-
+		
+		public IEnumerable<IFile> Dependencies { get { return _dependencies; } }
         public IEnumerable<Case> Cases 
         { 
             get { return _cases; }

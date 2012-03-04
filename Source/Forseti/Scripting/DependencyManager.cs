@@ -5,14 +5,10 @@ using Forseti.Files;
 
 namespace Forseti.Scripting
 {
-    public class ScriptDependencyManager : IScriptDependencyManager
+    public class DependencyManager : IDependencyManager
     {
-		
-		
-		public IEnumerable<File> GetDependencies (File file)
+		public IEnumerable<IFile> GetDependencies (IFile file)
 		{
-			
-			
 			throw new NotImplementedException ();
 		}
     }

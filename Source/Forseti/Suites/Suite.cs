@@ -7,6 +7,7 @@ namespace Forseti.Suites
 {
     public class Suite
     {
+		List<IFile> _dependencies = new List<IFile>();
         List<Description> _descriptions = new List<Description>();
 
         public string System { get; private set; }
@@ -21,7 +22,8 @@ namespace Forseti.Suites
 
             LastRun = DateTime.MinValue;
         }
-
+		
+		public IEnumerable<IFile> Dependencies { get { return _dependencies; } }
         public IEnumerable<Description> Descriptions { get { return _descriptions; } }
 
         public void AddDescription(Description description)

@@ -15,7 +15,7 @@ namespace Forseti.Scripting
         Scriptable _scope;
         Context _context;
 
-        public ScriptEngineContext(IResourceManager resourceManager, IScriptDependencyManager scriptDependencies)
+        public ScriptEngineContext(IResourceManager resourceManager, IDependencyManager scriptDependencies)
         {
             var envJs = resourceManager.GetStringFromAssemblyOf<ScriptEngine>("Forseti.Scripting.Scripts.env.js");
 
