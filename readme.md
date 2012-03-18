@@ -1,4 +1,4 @@
-# Foreword #
+# The What #
 Forseti is a headless test / spec runner for JavaScript written to be independent of testing / specification frameworks and also independent of JavaScript engines.
 
 # No browser #
