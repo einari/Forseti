@@ -30,7 +30,7 @@ namespace Forseti.Pages.Spark
         public string FrameworkScript { get; set; }
         public string FrameworkExecutionScript { get; set; }
         public string FrameworkReportingScript { get; set; }
-
+		
         public string[] SystemScripts { get; set; }
         public string[] CaseScripts { get; set; }
 
