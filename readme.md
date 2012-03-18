@@ -57,3 +57,6 @@ Another reason we wanted to create our own runner is that most runners was hard 
 
 ### Why write it in .net ###
 Well. The short answer; this is what we know best. Even though not considered the most cross platform friendly platforms, we have had great success with Mono.
+
+# Future #
+Please keep an eye open in the issues part of this site to see what we're working on, what features we're adding. Please contribute to the project through the issues list, or fork it and add features and send us a pull request. 
