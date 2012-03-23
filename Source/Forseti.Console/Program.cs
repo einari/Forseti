@@ -38,7 +38,7 @@ namespace Forseti.Console
 			
             var configuration = Configure
                 .WithStandard()
-                .UsingJasmin()
+                .UsingJasmine()
                 .FromConfigurationFile("forseti.yaml")
                 .Initialize();
 

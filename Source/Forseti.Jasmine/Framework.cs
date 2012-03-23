@@ -1,4 +1,5 @@
 ﻿using Forseti.Resources;
+
 namespace Forseti.Jasmine
 {
     public class Framework : IFramework
