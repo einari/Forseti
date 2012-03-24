@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Forseti.Files;
 using Forseti.Pages;
 using Forseti.Scripting;
@@ -124,10 +125,21 @@ namespace Forseti.Harnesses
 
         public void Execute(Harness harness, IEnumerable<Suite> suites)
         {
+			Console.WriteLine("<--- Run Suite(s) for {0} on {1} framework --->", harness.Name, harness.Framework.Name);
+			
+			if( suites.Count() == 0 ) 
+			{
+				Console.WriteLine ("No suites");
+				return;
+			}
+				
+				
+			
+			
             var cases = new List<Case>();
 
             var timeBefore = DateTime.Now;
-            Console.WriteLine("<--- Run Suite(s) --->");
+            
             foreach (var suite in suites)
             {
                 foreach (var description in suite.Descriptions)
@@ -135,9 +147,15 @@ namespace Forseti.Harnesses
 
                 harness.Cases = cases;
             }
-            var page = _pageGenerator.GenerateFrom(harness);
-
-            _scriptEngine.Execute(page);
+			
+			if( harness.Cases.Count () == 0 )
+			{
+				Console.WriteLine("no cases");
+			} else 
+			{
+	            var page = _pageGenerator.GenerateFrom(harness);
+	            _scriptEngine.Execute(page);
+			}
 
             var delta = DateTime.Now.Subtract(timeBefore);
 

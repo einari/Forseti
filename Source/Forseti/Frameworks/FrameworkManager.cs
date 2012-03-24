@@ -17,11 +17,11 @@ namespace Forseti.Frameworks
 		{
 			// HACK
 			if( name == "Jasmine" )
-				return (IFramework)_configure.GetInstanceOf(Type.GetType ("Forseti.Jasmine.Framework"));
+				return (IFramework)_configure.GetInstanceOf(Type.GetType ("Forseti.Jasmine.Framework, Forseti.Jasmine"));
 			if( name == "Buster" )
-				return (IFramework)_configure.GetInstanceOf(Type.GetType ("Forseti.Buster.Framework"));
+				return (IFramework)_configure.GetInstanceOf(Type.GetType ("Forseti.Buster.Framework, Forseti.Buster"));
 			if( name == "QUnit" )
-				return (IFramework)_configure.GetInstanceOf(Type.GetType ("Forseti.QUnit.Framework"));
+				return (IFramework)_configure.GetInstanceOf(Type.GetType ("Forseti.QUnit.Framework, Forseti.QUnit"));
 
 			return null;
 		}
