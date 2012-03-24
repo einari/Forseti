@@ -29,6 +29,7 @@ For now, the only thing up and running is the console runner. It relies on a con
 
 	Harnesses:
 		- Harness:
+			Framework				: [name of testing/specification framework]
 			Name					: [name of harness]
 			SystemsSearchPath		: [relative path from current directory]/{placeholders}.js
 			DescriptionsSearchPath	: [relative path from current directory]/{placeholders}.js
@@ -37,6 +38,7 @@ A concrete configuration could be something like this :
 
 	Harnesses:
 		- Harness
+			Framework				: Jasmine
 			Name					: Something
 			SystemsSearchPath		: Scripts/{system}.js
 			DescriptionsSearchPath	: Specs/for_{system}/{description}.js
