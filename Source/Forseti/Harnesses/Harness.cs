@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using Forseti.Files;
 using Forseti.Suites;
+using Forseti.Frameworks;
 
 namespace Forseti.Harnesses
 {
@@ -18,6 +19,14 @@ namespace Forseti.Harnesses
 
         List<Suite> _suites = new List<Suite>();
 		List<IFile> _dependencies = new List<IFile>();
+		
+		public Harness(IFramework framework)
+		{
+			Framework = framework;
+		}
+		
+		
+		public IFramework Framework { get; private set; }
 		
 		public string Name { get; set; }
 		public string SystemsSearchPath 

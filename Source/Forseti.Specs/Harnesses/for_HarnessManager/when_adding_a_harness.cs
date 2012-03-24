@@ -5,11 +5,11 @@ using It = Machine.Specifications.It;
 
 namespace Forseti.Specs.Harnesses.for_HarnessManager
 {
-    public class when_adding_a_harness : given.a_harness_manager
+    public class when_adding_a_harness : given.a_harness_manager_and_a_framework
     {
         static Harness harness;
 
-        Establish context = () => harness = new Harness();
+        Establish context = () => harness = new Harness(framework_mock.Object);
 
         Because of = () => harness_manager.Add(harness);
 

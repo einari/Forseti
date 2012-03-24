@@ -75,6 +75,20 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="Jasmine\Scripts\aThirdThing.js" />
+    <None Include="Jasmine\Scripts\dependency.js" />
+    <None Include="Jasmine\Scripts\otherSystemUnderTest.js" />
+    <None Include="Jasmine\Scripts\systemUnderTest.js" />
+    <None Include="Jasmine\Specs\for_aThirdThing\when_it_is_renamed.js" />
+    <None Include="Jasmine\Specs\for_otherSystemUnderTest\when_doing_other_stuff.js" />
+    <None Include="Jasmine\Specs\for_systemUnderTest\when_doing_stuff.js" />
+    <None Include="Buster\Scripts\aThirdThing.js" />
+    <None Include="Buster\Scripts\dependency.js" />
+    <None Include="Buster\Scripts\otherSystemUnderTest.js" />
+    <None Include="Buster\Scripts\systemUnderTest.js" />
+    <None Include="Buster\Specs\for_aThirdThing\when_it_is_renamed.js" />
+    <None Include="Buster\Specs\for_otherSystemUnderTest\when_doing_other_stuff.js" />
+    <None Include="Buster\Specs\for_systemUnderTest\when_doing_stuff.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forseti.Jasmine\Forseti.Jasmine.csproj">
@@ -95,29 +109,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\aThirdThing.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\dependency.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\otherSystemUnderTest.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Specs\for_aThirdThing\when_it_is_renamed.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Specs\for_otherSystemUnderTest\when_doing_other_stuff.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts\systemUnderTest.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Specs\for_systemUnderTest\when_doing_stuff.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -129,4 +120,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Jasmine\" />
+  </ItemGroup>
 </Project>

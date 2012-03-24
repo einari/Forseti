@@ -4,13 +4,13 @@ using Forseti.Scripting;
 using StructureMap;
 using Microsoft.Practices.ServiceLocation;
 using StructureMap.ServiceLocatorAdapter;
+using System;
 
 namespace Forseti.Configuration
 {
     public class Configure : IConfigure
     {
         public IHarnessManager HarnessManager { get; private set; }
-        public IFramework Framework { get; private set; }
         public IContainer Container { get; private set; }
         public IScriptEngine ScriptEngine { get; private set; }
 
@@ -46,7 +46,6 @@ namespace Forseti.Configuration
         public IConfigure Initialize()
         {
             HarnessManager = Container.GetInstance<IHarnessManager>();
-            Framework = Container.GetInstance<IFramework>();
             ScriptEngine = Container.GetInstance<IScriptEngine>();
 
             return this;
@@ -57,5 +56,10 @@ namespace Forseti.Configuration
         {
             return Container.GetInstance<T>();
         }
+		
+		public object GetInstanceOf(Type type)
+		{
+			return Container.GetInstance(type);
+		}
     }
 }

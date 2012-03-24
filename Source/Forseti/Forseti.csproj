@@ -101,7 +101,6 @@
     <Compile Include="Configuration\IConfigure.cs" />
     <Compile Include="Harnesses\Harness.cs" />
     <Compile Include="Suites\Suite.cs" />
-    <Compile Include="IFramework.cs" />
     <Compile Include="Harnesses\IHarnessManager.cs" />
     <Compile Include="Scripting\IScriptEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -122,6 +121,9 @@
     <Compile Include="Scripting\DependencyParser.cs" />
     <Compile Include="Scripting\DependencyManager.cs" />
     <Compile Include="Scripting\IDependencyManager.cs" />
+    <Compile Include="Frameworks\IFramework.cs" />
+    <Compile Include="Frameworks\IFrameworkManager.cs" />
+    <Compile Include="Frameworks\FrameworkManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\..\Libraries\Env\env.js">
@@ -147,4 +149,7 @@
   -->
   <ItemGroup />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <ItemGroup>
+    <Folder Include="Frameworks\" />
+  </ItemGroup>
 </Project>

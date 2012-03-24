@@ -17,7 +17,7 @@ namespace Forseti.Specs.Harnesses.for_Harness
 
         Establish context = () =>
         {
-            harness = new Harness
+            harness = new Harness(null)
             {
                 SystemsSearchPath = "Scripts/{system}.js",
                 DescriptionsSearchPath = "Specs/for_{system}/{description}.js"

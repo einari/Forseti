@@ -1,4 +1,5 @@
 ﻿using Forseti.Resources;
+using Forseti.Frameworks;
 
 namespace Forseti.Jasmine
 {
@@ -14,7 +15,7 @@ namespace Forseti.Jasmine
             ReportScript = resourceManager.GetStringFromAssemblyOf<Framework>("Forseti.Jasmine.Scripts.jasmine-reporter.js");
         }
 
-
+		public string Name { get { return "Jasmine"; } }
         public string ScriptName { get; private set; }
         public string Script { get; private set; }
         public string ExecuteScriptName { get; private set; }

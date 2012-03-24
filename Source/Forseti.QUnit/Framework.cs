@@ -1,4 +1,5 @@
 ﻿using Forseti.Resources;
+using Forseti.Frameworks;
 
 namespace Forseti.QUnit
 {
@@ -14,7 +15,7 @@ namespace Forseti.QUnit
             ReportScript = resourceManager.GetStringFromAssemblyOf<Framework>("Forseti.QUnit.Scripts.qunit-reporter.js");
         }
 
-
+		public string Name { get { return "QUnit"; } }
         public string ScriptName { get; private set; }
         public string Script { get; private set; }
         public string ExecuteScriptName { get; private set; }

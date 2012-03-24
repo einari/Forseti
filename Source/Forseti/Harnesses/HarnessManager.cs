@@ -91,7 +91,7 @@ namespace Forseti.Harnesses
 	                    var delta = now.Subtract(suite.LastRun);
 	                    if (delta.TotalSeconds > 2)
 	                    {
-	                        Execute(new[] { suite });
+	                        Execute(harness, new[] { suite });
 	                        suite.LastRun = now;
 	                    }
 					}
@@ -122,9 +122,8 @@ namespace Forseti.Harnesses
 		}
         
 
-        public Harness Execute(IEnumerable<Suite> suites)
+        public void Execute(Harness harness, IEnumerable<Suite> suites)
         {
-            var harness = new Harness();
             var cases = new List<Case>();
 
             var timeBefore = DateTime.Now;
@@ -143,13 +142,12 @@ namespace Forseti.Harnesses
             var delta = DateTime.Now.Subtract(timeBefore);
 
             Console.WriteLine("<--- Took {0} seconds --->\n", delta.TotalSeconds);
-            return harness;
         }
 
         public void Run()
         {
             foreach (var harness in _harnesses)
-                Execute(harness.Suites);
+                Execute(harness, harness.Suites);
         }
 
 

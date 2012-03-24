@@ -60,5 +60,10 @@ namespace Forseti.Files
         {
             return ((IFile)obj).FullPath == FullPath;
         }
+		
+		public override int GetHashCode ()
+		{
+			return base.GetHashCode ();
+		}
     }
 }

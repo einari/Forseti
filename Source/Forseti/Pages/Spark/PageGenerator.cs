@@ -14,14 +14,10 @@ namespace Forseti.Pages.Spark
         const string TemplateName = "Harness";
         SparkViewDescriptor _descriptor;
         SparkViewEngine _engine;
-        IFramework _framework;
 
-
-        public PageGenerator(IResourceManager resourceManager, IFramework framework)
+        public PageGenerator(IResourceManager resourceManager)
         {
             var template = resourceManager.GetStringFromAssemblyOf<PageGenerator>("Forseti.Pages.Spark.Harness.spark");
-
-            _framework = framework;
 
             var settings = new SparkSettings().SetPageBaseType(typeof(HarnessView));
             var templates = new InMemoryViewFolder();
@@ -29,7 +25,7 @@ namespace Forseti.Pages.Spark
             {
                 ViewFolder = templates
             };
-            templates.Add(TemplateName, template); //"<for each=\"var s in Stuff\"><p>${s}</p></for>");
+            templates.Add(TemplateName, template); 
             _descriptor = new SparkViewDescriptor().AddTemplate(TemplateName);
         }
 
@@ -40,12 +36,12 @@ namespace Forseti.Pages.Spark
 
             var harnessView = (HarnessView)_engine.CreateInstance(_descriptor);
             harnessView.Harness = harness;
-            harnessView.FrameworkScript = _framework.ScriptName;
-            harnessView.FrameworkExecutionScript = _framework.ExecuteScriptName;
-            harnessView.FrameworkReportingScript = _framework.ReportScriptName;
+            harnessView.FrameworkScript = harness.Framework.ScriptName;
+            harnessView.FrameworkExecutionScript = harness.Framework.ExecuteScriptName;
+            harnessView.FrameworkReportingScript = harness.Framework.ReportScriptName;
 
             page.RootPath = Path.GetTempPath() + @"Forseti/";
-            page.Filename = string.Format("{0}jasmine-runner.html", page.RootPath);
+            page.Filename = string.Format("{0}runner.html", page.RootPath);
 
             if (!Directory.Exists(page.RootPath))
                 Directory.CreateDirectory(page.RootPath);
@@ -72,9 +68,9 @@ namespace Forseti.Pages.Spark
 
             
 
-            File.WriteAllText(page.RootPath + _framework.ScriptName, _framework.Script);
-            File.WriteAllText(page.RootPath + _framework.ExecuteScriptName, _framework.ExecuteScript);
-            File.WriteAllText(page.RootPath + _framework.ReportScriptName, _framework.ReportScript);
+            File.WriteAllText(page.RootPath + harness.Framework.ScriptName, harness.Framework.Script);
+            File.WriteAllText(page.RootPath + harness.Framework.ExecuteScriptName, harness.Framework.ExecuteScript);
+            File.WriteAllText(page.RootPath + harness.Framework.ReportScriptName, harness.Framework.ReportScript);
 
             foreach (var scriptFile in harnessView.SystemScripts)
                 CopyScript(page.RootPath, scriptFile);

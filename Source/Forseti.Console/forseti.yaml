@@ -3,17 +3,22 @@
 #  - Rhino
 #  - V8
 
-#Frameworks:
-#  - Jasmine
-
 #MockFrameworks:
 #  - Sinon
 
 Harnesses:
   - Harness:
-      Name						: Something
-      SystemsSearchPath 		: Scripts/{system}.js
-      DescriptionsSearchPath	: Specs/for_{system}/{description}.js
+      Framework					: Jasmine
+      Name						: Jasmine Specs
+      SystemsSearchPath 		: Jasmine/Scripts/{system}.js
+      DescriptionsSearchPath	: Jasmine/Specs/for_{system}/{description}.js
+      Dependencies:
+        - Scripts/dependency.js
+  - Harness:
+      Framework					: Buster
+      Name						: Buster Specs
+      SystemsSearchPath 		: Buster/Scripts/{system}.js
+      DescriptionsSearchPath	: Buster/Specs/for_{system}/{description}.js
       Dependencies:
         - Scripts/dependency.js
   

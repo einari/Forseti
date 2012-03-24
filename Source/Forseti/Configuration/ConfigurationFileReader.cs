@@ -3,6 +3,7 @@ using System.Yaml;
 using Forseti.Files;
 using Forseti.Harnesses;
 using File = Forseti.Files.File;
+using Forseti.Frameworks;
 
 namespace Forseti.Configuration
 {
@@ -12,16 +13,19 @@ namespace Forseti.Configuration
 		IYamlParser _yamlParser;
 		IHarnessManager _harnessManager;
 		IFile _appliedConfigFile;
+		IFrameworkManager _frameworkManager;
 
         public ConfigurationFileReader(
 			IConfigure configure, 
 			IFileSystemWatcher fileSystemWatcher, 
 			IYamlParser yamlParser,
-			IHarnessManager harnessManager)
+			IHarnessManager harnessManager,
+			IFrameworkManager frameworkManager)
         {
             _fileSystemWatcher = fileSystemWatcher;
 			_yamlParser = yamlParser;
 			_harnessManager = harnessManager;
+			_frameworkManager = frameworkManager;
 			
 			fileSystemWatcher.SubscribeToChanges(FileChanged);
         }
@@ -55,7 +59,10 @@ namespace Forseti.Configuration
 						{
 							var values = harnessConfig["Harness"] as YamlMapping;
 							
-							var harness = new Harness();
+							var frameworkName = ((YamlScalar)values["Framework"]).Value;
+							var framework = _frameworkManager.GetByName(frameworkName);
+							
+							var harness = new Harness(framework);
 							harness.Name = ((YamlScalar)values["Name"]).Value;
 							harness.SystemsSearchPath = ((YamlScalar)values["SystemsSearchPath"]).Value;
 							harness.DescriptionsSearchPath = ((YamlScalar)values["DescriptionsSearchPath"]).Value;

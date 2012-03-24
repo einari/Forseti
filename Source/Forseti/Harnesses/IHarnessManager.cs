@@ -11,6 +11,6 @@ namespace Forseti.Harnesses
 
         IEnumerable<Harness> Harnesses { get; }
 		
-        Harness Execute(IEnumerable<Suite> suites);
+        void Execute(Harness harness, IEnumerable<Suite> suites);
     }
 }

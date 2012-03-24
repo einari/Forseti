@@ -1,4 +1,5 @@
 using Forseti.Resources;
+using Forseti.Frameworks;
 
 namespace Forseti.Buster
 {
@@ -13,7 +14,8 @@ namespace Forseti.Buster
             ReportScriptName = "buster-reporter.js";
             ReportScript = resourceManager.GetStringFromAssemblyOf<Framework>("Forseti.Buster.Scripts.buster-reporter.js");
 		}
-
+		
+		public string Name { get { return "Buster"; } }
 		public string ScriptName { get; private set; }
 		public string Script { get; private set; }
 		public string ExecuteScriptName { get; private set; }

@@ -4,6 +4,7 @@ using System.Text;
 using Forseti.Pages;
 using Forseti.Resources;
 using Forseti.Files;
+using Forseti.Frameworks;
 
 namespace Forseti.Scripting
 {
@@ -11,17 +12,14 @@ namespace Forseti.Scripting
     {
         IResourceManager _resourceManager;
         IScriptEngineContextManager _scriptEngineContextManager;
-        IFramework _framework;
 		IFileSystem _fileSystem;
 		
         public ScriptEngine(IResourceManager resourceManager, 
 		                    IScriptEngineContextManager scriptEngineContextManager, 
-		                    IFramework framework,
 		                    IFileSystem fileSystem)
         {
             _resourceManager = resourceManager;
             _scriptEngineContextManager = scriptEngineContextManager;
-            _framework = framework;
 			_fileSystem = fileSystem;
         }
 
@@ -33,7 +31,7 @@ namespace Forseti.Scripting
             var path = string.Format("{0}{1}", Path.GetTempPath(), @"Forseti/");
 			path = _fileSystem.GetActualPath(path);
 
-            var htmlFile = string.Format("{0}{1}", path, @"jasmine-runner.html").Replace(@"\", @"/");
+            var htmlFile = string.Format("{0}{1}", path, @"runner.html").Replace(@"\", @"/");
             context.EvaluateString("window.pagePath = \"file:///" + htmlFile + "\"", "");
             context.EvaluateString(bootstrapper, "bootstrapper.js");
             context.EvaluateString("executeSpecs()", "");

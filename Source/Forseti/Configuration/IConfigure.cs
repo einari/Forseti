@@ -1,4 +1,5 @@
-﻿using Forseti.Harnesses;
+﻿using System;
+using Forseti.Harnesses;
 using Forseti.Scripting;
 using StructureMap;
 
@@ -8,11 +9,11 @@ namespace Forseti.Configuration
     {
         IContainer Container { get; }
         IHarnessManager HarnessManager { get; }
-        IFramework Framework { get; }
         IScriptEngine ScriptEngine { get; }
 
         IConfigure Initialize();
 
         T GetInstanceOf<T>();
+		object GetInstanceOf(Type type);
     }
 }
