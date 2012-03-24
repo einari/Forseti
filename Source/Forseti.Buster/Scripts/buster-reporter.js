@@ -29,6 +29,9 @@ function reportFailedCase(name, message) {
 			print("\nSuite("+context.name+")");
 		},
 		
+		contextEnd: function(context) {
+		},
+		
 		testSuccess: function(test) {
 			reportPassedCase(test.name);
 		},
@@ -37,11 +40,32 @@ function reportFailedCase(name, message) {
 			reportFailedCase(test.name,test.error.message);
 		},
 		
+		testError: function(test) {
+			print("ERROR");
+		},
+		
+		testTimeout: function(test) {
+			print("TIMEOUT");
+		},
+		
+		testDeferred: function(test) {
+			print("DEFERRED");
+		},
+		
+		suiteEnd: function(suite) {
+			print("SUITE END");
+		},
+		
 		listen: function(runner) {
 			runner.bind(this, {
 				"context:start" : "contextStart",
+				"context:end" : "contextEnd",
 				"test:success" : "testSuccess",
-				"test:failure" : "testFailure"
+				"test:failure" : "testFailure",
+				"test:error" : "testError",
+				"test:timeout" : "testTimeout",
+				"test:deferred" : "testDeferred"
+				//"suite:end", "suiteEnd"
 			});
 		}
 	};
