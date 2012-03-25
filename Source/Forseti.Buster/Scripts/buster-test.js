@@ -3311,7 +3311,7 @@ if (typeof module === "object" && typeof require === "function") {
                     opt = buster.extend(buster.autoRun.envOptions(env()), opt);
                     buster.autoRun.run(contexts, opt, done);
                 }
-            }, 0);
+            }, 10);
         };
     };
 
