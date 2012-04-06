@@ -4,6 +4,7 @@ using System.IO;
 using Forseti.Configuration;
 using Forseti.Suites;
 using Newtonsoft.Json;
+using System.Threading;
 
 namespace Forseti.Console
 {
@@ -12,29 +13,8 @@ namespace Forseti.Console
         [STAThread]
         public static int Main(string[] args)
         {
-            /*
-            var configFile = "forseti.config";
-            if (!File.Exists(configFile))
-            {
-                System.Console.WriteLine("You need a config file!");
-                return -1;
-            }
-
-            var json = File.ReadAllText(configFile);
-            var suites = JsonConvert.DeserializeObject<IEnumerable<Suite>>(json);
-
-            foreach (var suite in suites)
-            {
-                foreach (var description in suite.Descriptions)
-                {
-                    description.Suite = suite;
-
-                    foreach( var @case in description.Cases )
-                    {
-                        @case.Description = description;
-                    }                   
-                }
-            }*/
+			System.Console.WriteLine("Keys : \n  R : Rerun\n  Esc : Exit\n\n");
+			
 			
             var configuration = Configure
                 .WithStandard()
@@ -43,13 +23,20 @@ namespace Forseti.Console
 
             configuration
                     .HarnessManager.Run();
-
-            System.Console.ReadLine();
-
-
-            //var harness = configuration.HarnessManager.Execute(suites);
-
-            
+			
+			
+			for( ;; ) 
+			{
+				var key = System.Console.ReadKey();
+				if( key.Key == ConsoleKey.R )
+					configuration.HarnessManager.Run ();
+				
+				if( key.Key == ConsoleKey.Escape )
+					break;
+				
+				Thread.Sleep(20);
+			}
+			
 
             return 0;
         }

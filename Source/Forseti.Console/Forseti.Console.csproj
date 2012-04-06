@@ -102,10 +102,6 @@
       <Project>{E12A4B4F-04A1-4AD3-A5BC-6C3801428BEC}</Project>
       <Name>Forseti.Jasmine</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Forseti\Forseti.csproj">
-      <Project>{F4DC4B9D-BE5F-4DA6-9E18-CA1A242739A5}</Project>
-      <Name>Forseti</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Forseti.Buster\Forseti.Buster.csproj">
       <Project>{0BCEAD10-6A48-444E-A8B3-841275529002}</Project>
       <Name>Forseti.Buster</Name>
@@ -113,6 +109,10 @@
     <ProjectReference Include="..\Forseti.QUnit\Forseti.QUnit.csproj">
       <Project>{77E4DF53-BEB2-4A63-AF73-A0CDF9CB8BD7}</Project>
       <Name>Forseti.QUnit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forseti\Forseti.csproj">
+      <Project>{F4DC4B9D-BE5F-4DA6-9E18-CA1A242739A5}</Project>
+      <Name>Forseti</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
