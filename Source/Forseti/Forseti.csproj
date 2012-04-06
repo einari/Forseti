@@ -74,6 +74,9 @@
     <Reference Include="YamlSerializer">
       <HintPath>..\Solutions\packages\YamlSerializer.1.0\lib\Net35\YamlSerializer.dll</HintPath>
     </Reference>
+    <Reference Include="FSWatcher">
+      <HintPath>..\..\Libraries\FSWatcher\FSWatcher.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Files\File.cs" />

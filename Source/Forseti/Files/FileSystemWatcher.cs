@@ -1,24 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using FSWatcher;
+	
 
 namespace Forseti.Files
 {
     public class FileSystemWatcher : IFileSystemWatcher
     {
-        System.IO.FileSystemWatcher _actualWatcher;
+        //System.IO.FileSystemWatcher _actualWatcher;
         List<FileChanged> _subscribers = new List<FileChanged>();
-
+		Watcher _watcher;
 
         public FileSystemWatcher()
         { 
             var currentDirectory = System.IO.Directory.GetCurrentDirectory();
-            _actualWatcher = new System.IO.FileSystemWatcher(currentDirectory, "*.js");
-            _actualWatcher.Changed += _actualWatcher_Changed;
+			
+			
+			_watcher = new Watcher(currentDirectory,
+				(createdDir) => {},
+				(deletedDir) => {},
+				(createdFile) => NotifySubscribers(FileChange.Added, (File)createdFile),
+				(changedFile) => NotifySubscribers(FileChange.Modified, (File)changedFile),
+				(deletedFile) => NotifySubscribers(FileChange.Deleted, (File)deletedFile));
+			
+			_watcher.Watch();
+			
+            //_actualWatcher = new System.IO.FileSystemWatcher(currentDirectory, "*.js");
+			
+            //_actualWatcher.Changed += _actualWatcher_Changed;
+			/*
 			_actualWatcher.Created += _actualWatcher_Created;
-            _actualWatcher.Renamed += _actualWatcher_Renamed;
-            _actualWatcher.IncludeSubdirectories = true;
+            _actualWatcher.Renamed += _actualWatcher_Renamed;*/
+            //_actualWatcher.IncludeSubdirectories = true;
             //_actualWatcher.NotifyFilter = System.IO.NotifyFilters.LastWrite|System.IO.NotifyFilters.CreationTime;
-            _actualWatcher.EnableRaisingEvents = true;
+            //_actualWatcher.EnableRaisingEvents = true;
         }
 
         void _actualWatcher_Renamed(object sender, System.IO.RenamedEventArgs e)
