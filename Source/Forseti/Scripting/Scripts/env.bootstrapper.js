@@ -15,7 +15,6 @@
         var self = this;
 
         window.onload = function () {
-            //print("DONE");
         }
 
         window.location = window.pagePath; 

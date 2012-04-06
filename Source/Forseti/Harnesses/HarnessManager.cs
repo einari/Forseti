@@ -132,12 +132,8 @@ namespace Forseti.Harnesses
 				Console.WriteLine ("No suites");
 				return;
 			}
-				
-				
-			
 			
             var cases = new List<Case>();
-
             var timeBefore = DateTime.Now;
             
             foreach (var suite in suites)

@@ -60,13 +60,12 @@ namespace Forseti.Pages.Spark
             } else {
 				harnessView.Dependencies = new string[0];
 			}
+							
 
             var writer = new StringWriter();
             harnessView.RenderView(writer);
 
             var result = writer.ToString();
-
-            
 
             File.WriteAllText(page.RootPath + harness.Framework.ScriptName, harness.Framework.Script);
             File.WriteAllText(page.RootPath + harness.Framework.ExecuteScriptName, harness.Framework.ExecuteScript);
@@ -74,14 +73,11 @@ namespace Forseti.Pages.Spark
 
             foreach (var scriptFile in harnessView.SystemScripts)
                 CopyScript(page.RootPath, scriptFile);
-                //File.Copy(scriptFile, page.RootPath + scriptFile, true);
-
+			
+			
+			
             foreach (var scriptFile in harnessView.CaseScripts)
                 CopyScript(page.RootPath, scriptFile);
-                //File.Copy(scriptFile, page.RootPath + scriptFile, true);
-            
-
-            
 
             File.WriteAllText(page.Filename, result);
 
