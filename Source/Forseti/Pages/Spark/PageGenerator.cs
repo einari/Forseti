@@ -89,10 +89,11 @@ namespace Forseti.Pages.Spark
         }
 
 
-        void CopyScript(string rootPath, string scriptFile)
+        void CopyScript(string rootPath, Files.File scriptFile)
         {
             var target = rootPath + scriptFile;
-            var script = File.ReadAllText(scriptFile);
+            var script = scriptFile.ReadAllText();
+				//File.ReadAllText(scriptFile);
 
             var dir = Path.GetDirectoryName(target);
             if (!Directory.Exists(dir))

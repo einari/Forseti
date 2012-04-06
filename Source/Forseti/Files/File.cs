@@ -6,17 +6,31 @@ namespace Forseti.Files
     public class File : IFile
     {
         static string _currentDirectory;
+		
+		string _fileName;
+		string _folder;
 
         static File()
         {
-            _currentDirectory = Directory.GetCurrentDirectory().Replace("\\", "/");
+            _currentDirectory = AdjustPath(Directory.GetCurrentDirectory());
             if (!EndsWithPathSeparator(_currentDirectory))
                 _currentDirectory += "/";
         }
+		
+		
 
-
-        public string Filename { get; set; }
-        public string Folder { get; set; }
+        public string Filename 
+		{ 
+			get { return _fileName; }
+			set { _fileName = AdjustPath (value); }
+		}
+		
+        public string Folder 
+		{ 
+			get { return _folder; }
+			set { _folder = AdjustPath(value); }
+		}
+		
         public string FullPath
         {
             get
@@ -39,9 +53,19 @@ namespace Forseti.Files
             return new File
             {
                 Filename = System.IO.Path.GetFileName(path),
-                Folder = System.IO.Path.GetDirectoryName(path).Replace("\\","/")
+                Folder = System.IO.Path.GetDirectoryName(path)
             };
         }
+		
+		public static string operator +(string a, File b)
+		{
+			return string.Format ("{0}{1}{2}",
+			                      a,
+			                      (a.EndsWith("\\") || a.EndsWith("/")) ? string.Empty : "/",
+			                      b.FullPath
+			                      );
+		}
+		
 		
 		
 		public override string ToString ()
@@ -64,6 +88,13 @@ namespace Forseti.Files
 		public override int GetHashCode ()
 		{
 			return base.GetHashCode ();
+		}
+		
+		static string AdjustPath(string path)
+		{
+			return path
+				.Replace ("\\\\","/")
+				.Replace("\\","/");
 		}
     }
 }
