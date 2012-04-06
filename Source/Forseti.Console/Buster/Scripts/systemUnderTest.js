@@ -1,5 +1,5 @@
-﻿print("Should require");
+﻿//print("Should require");
 //require("./lakk.js","");
 
-print("Hello world");
-doStuff();
+//print("Hello world");
+//doStuff();

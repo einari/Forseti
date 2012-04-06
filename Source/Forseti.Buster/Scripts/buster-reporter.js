@@ -1,20 +1,5 @@
 buster.spec.expose();
 
-/*
-function print(m) {
-	console.log(m);
-}
-
-function reportPassedCase(name) {
-	print("  SPEC( "+name+" ) PASSED");
-
-}
-
-function reportFailedCase(name, message) {
-	print("  SPEC( "+name+" ) FAILED with message : "+message);
-}*/
-
-
 (function() {
 	var forsetiReporter = {
 		create: function(opt) {
@@ -41,19 +26,15 @@ function reportFailedCase(name, message) {
 		},
 		
 		testError: function(test) {
-			print("ERROR");
 		},
 		
 		testTimeout: function(test) {
-			print("TIMEOUT");
 		},
 		
 		testDeferred: function(test) {
-			print("DEFERRED");
 		},
 		
 		suiteEnd: function(suite) {
-			print("SUITE END");
 		},
 		
 		listen: function(runner) {
@@ -64,8 +45,8 @@ function reportFailedCase(name, message) {
 				"test:failure" : "testFailure",
 				"test:error" : "testError",
 				"test:timeout" : "testTimeout",
-				"test:deferred" : "testDeferred"
-				//"suite:end", "suiteEnd"
+				"test:deferred" : "testDeferred",
+				"suite:end" : "suiteEnd"
 			});
 		}
 	};
