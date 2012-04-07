@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forseti.Buster", "..\Forset
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forseti.QUnit", "..\Forseti.QUnit\Forseti.QUnit.csproj", "{77E4DF53-BEB2-4A63-AF73-A0CDF9CB8BD7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forseti.OSX", "..\Forseti.OSX\Forseti.OSX.csproj", "{EF366B9B-0C1A-41BD-BD67-E6D344A5DF76}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,18 @@ Global
 		{E12A4B4F-04A1-4AD3-A5BC-6C3801428BEC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E12A4B4F-04A1-4AD3-A5BC-6C3801428BEC}.Release|x86.ActiveCfg = Release|Any CPU
 		{E12A4B4F-04A1-4AD3-A5BC-6C3801428BEC}.Release|x86.Build.0 = Release|Any CPU
+		{EF366B9B-0C1A-41BD-BD67-E6D344A5DF76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF366B9B-0C1A-41BD-BD67-E6D344A5DF76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF366B9B-0C1A-41BD-BD67-E6D344A5DF76}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{EF366B9B-0C1A-41BD-BD67-E6D344A5DF76}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{EF366B9B-0C1A-41BD-BD67-E6D344A5DF76}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EF366B9B-0C1A-41BD-BD67-E6D344A5DF76}.Debug|x86.Build.0 = Debug|Any CPU
+		{EF366B9B-0C1A-41BD-BD67-E6D344A5DF76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF366B9B-0C1A-41BD-BD67-E6D344A5DF76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF366B9B-0C1A-41BD-BD67-E6D344A5DF76}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{EF366B9B-0C1A-41BD-BD67-E6D344A5DF76}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{EF366B9B-0C1A-41BD-BD67-E6D344A5DF76}.Release|x86.ActiveCfg = Release|Any CPU
+		{EF366B9B-0C1A-41BD-BD67-E6D344A5DF76}.Release|x86.Build.0 = Release|Any CPU
 		{F483D6B1-BA8B-4BFA-95CC-F17F6C5B1D26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F483D6B1-BA8B-4BFA-95CC-F17F6C5B1D26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F483D6B1-BA8B-4BFA-95CC-F17F6C5B1D26}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
