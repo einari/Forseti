@@ -121,6 +121,10 @@
       <Project>{F4DC4B9D-BE5F-4DA6-9E18-CA1A242739A5}</Project>
       <Name>Forseti</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Forseti.OSX\Forseti.OSX.csproj">
+      <Project>{EF366B9B-0C1A-41BD-BD67-E6D344A5DF76}</Project>
+      <Name>Forseti.OSX</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

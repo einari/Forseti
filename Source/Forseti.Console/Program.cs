@@ -14,9 +14,9 @@ namespace Forseti.Console
         public static int Main(string[] args)
         {
 			
-			//System.IO.Directory.SetCurrentDirectory("/Users/einari/Projects/Bifrost/Source/");
+			System.IO.Directory.SetCurrentDirectory("/Users/einari/Projects/Bifrost/Source/");
 			
-			System.Console.WriteLine("Keys : \n  R : Rerun\n  Esc : Exit\n\n");
+			System.Console.WriteLine("Keys : \n  R : Rerun\n  Any other key : Exit\n\n");
 			
 			
             var configuration = Configure
@@ -31,11 +31,18 @@ namespace Forseti.Console
 			for( ;; ) 
 			{
 				var key = System.Console.ReadKey();
-				if( key.Key == ConsoleKey.R )
-					configuration.HarnessManager.Run ();
+				if( key.KeyChar != 0x0 ) 
+				{
+					if( key.Key == ConsoleKey.R ) {
+						configuration.HarnessManager.Run ();
+					} 
+					else 
+					{
+						System.Diagnostics.Process.GetCurrentProcess().Kill ();
+						break;
+					}
+				}
 				
-				if( key.Key == ConsoleKey.Escape )
-					break;
 				
 				Thread.Sleep(20);
 			}

@@ -74,9 +74,6 @@
     <Reference Include="YamlSerializer">
       <HintPath>..\Solutions\packages\YamlSerializer.1.0\lib\Net35\YamlSerializer.dll</HintPath>
     </Reference>
-    <Reference Include="FSWatcher">
-      <HintPath>..\..\Libraries\FSWatcher\FSWatcher.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Files\File.cs" />
@@ -114,7 +111,6 @@
     <Compile Include="Scripting\SystemConsole.cs" />
     <Compile Include="Files\FileSystem.cs" />
     <Compile Include="Files\Windows\FileSystem.cs" />
-    <Compile Include="Files\Unix\FileSystem.cs" />
     <Compile Include="Files\FileChanged.cs" />
     <Compile Include="Files\FileChange.cs" />
     <Compile Include="Configuration\IYamlParser.cs" />
@@ -127,6 +123,10 @@
     <Compile Include="Frameworks\IFramework.cs" />
     <Compile Include="Frameworks\IFrameworkManager.cs" />
     <Compile Include="Frameworks\FrameworkManager.cs" />
+    <Compile Include="Extensions\ExpressionExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Extensions\ITypeInfo.cs" />
+    <Compile Include="Extensions\TypeInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\..\Libraries\Env\env.js">
@@ -154,5 +154,6 @@
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <ItemGroup>
     <Folder Include="Frameworks\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>
