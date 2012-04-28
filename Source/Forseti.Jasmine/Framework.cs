@@ -1,5 +1,8 @@
 ﻿using Forseti.Resources;
 using Forseti.Frameworks;
+using System.Collections.Generic;
+using Forseti.Suites;
+using Forseti.Files;
 
 namespace Forseti.Jasmine
 {
@@ -22,5 +25,10 @@ namespace Forseti.Jasmine
         public string ExecuteScript { get; private set; }
         public string ReportScriptName { get; private set; }
         public string ReportScript { get; private set; }
+
+		public IEnumerable<Case> DiscoverCasesFrom (File file)
+		{
+			throw new System.NotImplementedException ();
+		}
     }
 }
