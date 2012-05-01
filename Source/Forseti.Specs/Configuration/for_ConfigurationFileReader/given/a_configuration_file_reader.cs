@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Forseti.Configuration;
 using Forseti.Files;
 using Forseti.Harnesses;
+using Forseti.Scripting;
 using Machine.Specifications;
 using Moq;
 using Forseti.Frameworks;
@@ -18,6 +19,7 @@ namespace Forseti.Specs.Configuration.for_ConfigurationFileReader.given
 		protected static Mock<IConfigure>	configure_mock;
 		protected static Mock<IHarnessManager> harness_manager_mock;
 		protected static Mock<IFrameworkManager> framework_manager_mock;
+		protected static Mock<IDependencyResolver> dependency_resolver_mock;
 		
 		Establish context = () => 
 		{ 
@@ -27,6 +29,7 @@ namespace Forseti.Specs.Configuration.for_ConfigurationFileReader.given
 			configure_mock = new Mock<IConfigure>();
 			harness_manager_mock = new Mock<IHarnessManager>();
 			framework_manager_mock = new Mock<IFrameworkManager>();
+            dependency_resolver_mock = new Mock<IDependencyResolver>();
 			
 			yaml_parser_mock = new Mock<IYamlParser>();
 			reader = new ConfigurationFileReader(
@@ -34,7 +37,8 @@ namespace Forseti.Specs.Configuration.for_ConfigurationFileReader.given
 				file_system_watcher_mock.Object,
 				yaml_parser_mock.Object,
 				harness_manager_mock.Object,
-				framework_manager_mock.Object
+				framework_manager_mock.Object,
+                dependency_resolver_mock.Object
 			);
 		};
 		
