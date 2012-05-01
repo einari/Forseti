@@ -6,6 +6,9 @@
 #MockFrameworks:
 #  - Sinon
 
+Dependencies:
+  - Scripts/globalDependency.js
+
 Harnesses:
    - Harness:
        Framework				: Jasmine

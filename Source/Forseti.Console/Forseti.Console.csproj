@@ -134,6 +134,9 @@
   -->
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Scripts\globalDependency.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Buster\Scripts\another_dependency.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

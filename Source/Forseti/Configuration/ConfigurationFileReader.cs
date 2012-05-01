@@ -48,6 +48,16 @@ namespace Forseti.Configuration
 			
 			var nodes = _yamlParser.Parse (fileContent);
 			var root = nodes.First() as YamlMapping;
+            var globalDependencies = new List<File>();
+
+            if(root != null && root.ContainsKey("Dependencies"))
+            {
+                var globalDependenciesConfig = root["Dependencies"] as YamlSequence;
+                globalDependencies = globalDependenciesConfig
+                                    .Select((node) => (File)((YamlScalar)node).Value)
+                                    .ToList();
+                
+            }
 			
 			if( root != null && root.ContainsKey("Harnesses") ) 
 			{
@@ -69,12 +79,14 @@ namespace Forseti.Configuration
 							harness.DescriptionsSearchPath = ((YamlScalar)values["DescriptionsSearchPath"]).Value;
                             if (values.ContainsKey("Dependencies"))
                             {
-                                var dependencies =
+                                var harnessDependencies =
                                     ((YamlSequence) values["Dependencies"])
-                                    .Select((node) => ((YamlScalar) node).Value)
+                                    .Select((node) => (File)((YamlScalar) node).Value)
                                     .ToList();
 
-                                dependencies.ForEach(dependency => harness.AddDependency((File) dependency));
+                                globalDependencies.AddRange(harnessDependencies);
+
+                                globalDependencies.ForEach(harness.AddDependency);
                             }
 
 						    _harnessManager.Add (harness);
