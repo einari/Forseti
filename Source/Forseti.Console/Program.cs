@@ -16,7 +16,8 @@ namespace Forseti.Console
 			
 			//System.IO.Directory.SetCurrentDirectory("/Users/einari/Projects/Bifrost/Source/");
 			
-			System.Console.WriteLine("Keys : \n  R : Rerun\n  Any other key : Exit\n\n");
+			System.Console.WriteLine("Keys : \n  R : Rerun\n  B : Run in browser\n  Any other key : Exit\n\n");
+			
 			
 			
             var configuration = Configure
@@ -35,6 +36,9 @@ namespace Forseti.Console
 				{
 					if( key.Key == ConsoleKey.R ) {
 						configuration.HarnessManager.Run ();
+					} if( key.Key == ConsoleKey.B ) {
+						var target = Path.GetTempPath() + @"Forseti/runner.html";
+						System.Diagnostics.Process.Start (target);
 					} 
 					else 
 					{
