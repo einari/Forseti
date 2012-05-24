@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using Forseti.Configuration;
-using Forseti.Suites;
-using Newtonsoft.Json;
 using System.Threading;
+using Forseti.Configuration;
 
 namespace Forseti.Console
 {
@@ -13,13 +10,8 @@ namespace Forseti.Console
         [STAThread]
         public static int Main(string[] args)
         {
-			
-			//System.IO.Directory.SetCurrentDirectory("/Users/einari/Projects/Bifrost/Source/");
-			
 			System.Console.WriteLine("Keys : \n  R : Rerun\n  B : Run in browser\n  Any other key : Exit\n\n");
-			
-			
-			
+
             var configuration = Configure
                 .WithStandard()
                 .FromConfigurationFile("forseti.yaml")
