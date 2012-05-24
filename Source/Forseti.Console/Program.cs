@@ -26,19 +26,20 @@ namespace Forseti.Console
 				var key = System.Console.ReadKey();
 				if( key.KeyChar != 0x0 ) 
 				{
-					if( key.Key == ConsoleKey.R ) {
-						configuration.HarnessManager.Run ();
-					} if( key.Key == ConsoleKey.B ) {
-						var target = Path.GetTempPath() + @"Forseti/runner.html";
-						System.Diagnostics.Process.Start (target);
-					} 
-					else 
-					{
-						System.Diagnostics.Process.GetCurrentProcess().Kill ();
-						break;
-					}
+                    switch (key.Key)
+                    {
+                        case ConsoleKey.R:
+						    configuration.HarnessManager.Run ();
+                            break;
+                        case ConsoleKey.B:
+                            var target = Path.GetTempPath() + @"Forseti/runner.html";
+                            System.Diagnostics.Process.Start(target);
+                            break;
+                        default:
+						    System.Diagnostics.Process.GetCurrentProcess().Kill ();
+						    break;
+                    }
 				}
-				
 				
 				Thread.Sleep(20);
 			}
