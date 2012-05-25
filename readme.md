@@ -39,7 +39,7 @@ For now, the only thing up and running is the console runner. It relies on a con
 A concrete configuration could be something like this : 
 
 	Harnesses:
-	  - Harness
+	  - Harness:
           Framework					: Jasmine
           Name						: Something
           SystemsSearchPath			: Scripts/{system}.js
@@ -60,7 +60,7 @@ Forseti also supports multiple Harness', which can be useful when speccing diffe
 	  - Scripts/libs/jquery-1.7.2.min.js
 
 	Harnesses:
-	  - Harness
+	  - Harness:
           Framework					: Jasmine
           Name						: Something
           SystemsSearchPath			: Scripts/{system}.js
@@ -68,7 +68,7 @@ Forseti also supports multiple Harness', which can be useful when speccing diffe
           Dependencies              :
             - Scripts/plugins/jquery.someplugin.js
 
-	  - Harness
+	  - Harness:
           Framework					: Buster
           Name						: Something
           SystemsSearchPath			: Scripts/{system}.js
@@ -85,7 +85,7 @@ Forseti supports multiple testing/specification frameworks. In the YAML file, yo
 A sample of a Buster configuration : 
 
 	Harnesses:
-	  - Harness
+	  - Harness:
 	      Framework					: Buster
           Name						: Something
           SystemsSearchPath			: Scripts/{system}.js
