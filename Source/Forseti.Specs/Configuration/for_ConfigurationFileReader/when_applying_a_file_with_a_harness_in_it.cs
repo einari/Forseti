@@ -11,7 +11,6 @@ namespace Forseti.Specs.Configuration.for_ConfigurationFileReader
 	{
 		const string framework_name = "MagicalFramework";
 		const string harness_name = "Something";
-		const string framework_name = "SomeFrameWork";
 		const string systems_search_path = "Scripts";
 		const string descriptions_search_path = "Specs/for_{system}";
 		
