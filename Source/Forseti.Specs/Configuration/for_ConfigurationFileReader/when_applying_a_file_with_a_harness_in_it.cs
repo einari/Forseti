@@ -11,6 +11,7 @@ namespace Forseti.Specs.Configuration.for_ConfigurationFileReader
 	{
 		const string framework_name = "MagicalFramework";
 		const string harness_name = "Something";
+		const string framework_name = "SomeFrameWork";
 		const string systems_search_path = "Scripts";
 		const string descriptions_search_path = "Specs/for_{system}";
 		
@@ -24,11 +25,11 @@ namespace Forseti.Specs.Configuration.for_ConfigurationFileReader
 			
 			config_node = YamlNode.FromYaml (
 "Harnesses:\n"+
-"  - Harness:\n" +
-"      Framework				: \""+framework_name+"\"\n"+
-"      Name						: \""+harness_name+"\"\n"+
-"      SystemsSearchPath 		: \""+systems_search_path+"\"\n"+
-"      DescriptionsSearchPath	: \""+descriptions_search_path+"\"")[0];
+"  - Harness:\n"+
+"      Framework                : \"" + framework_name + "\"\n" + 
+"      Name						: \"" + harness_name +"\"\n"+
+"      SystemsSearchPath 		: \"" + systems_search_path +"\"\n"+
+"      DescriptionsSearchPath	: \"" + descriptions_search_path +"\"")[0];
 			
 			yaml_parser_mock.Setup(y=>y.Parse(Moq.It.IsAny<string>())).Returns(new[] { config_node });
 			harness_manager_mock.Setup(h=>h.Add(Moq.It.IsAny<Harness>())).Callback((Harness h)=>result = h);

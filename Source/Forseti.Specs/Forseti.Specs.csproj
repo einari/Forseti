@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -51,11 +51,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\for_ConfigurationFileReader\given\a_configuration_file_reader_and_a_configure_instance.cs" />
+    <Compile Include="Configuration\for_ConfigurationFileReader\when_applying_a_file_with_dependencies.cs" />
+    <Compile Include="Configuration\for_ConfigurationFileReader\when_applying_a_file_with_global_dependencies.cs" />
     <Compile Include="Configuration\for_ConfigureExtensions\when_applying_from_configuration_file.cs" />
     <Compile Include="Files\for_File\when_getting_full_path_and_folder_has_trailing_slash.cs" />
     <Compile Include="Files\for_File\when_getting_full_path_and_folder_is_not_set.cs" />
     <Compile Include="Files\for_File\when_getting_full_path_and_folder_is_set_without_trailing_slash.cs" />
     <Compile Include="Harnesses\for_HarnessManager\when_adding_a_harness.cs" />
+    <Compile Include="Harnesses\for_Harness\when_checking_a_valid_system_file.cs" />
     <Compile Include="Harnesses\for_Harness\when_checking_if_file_is_description_file_and_it_matches_as_system_and_description.cs" />
     <Compile Include="Harnesses\for_Harness\when_checking_if_file_is_description_file_and_it_should_match.cs" />
     <Compile Include="Harnesses\for_Harness\when_checking_if_file_is_system_file_and_it_matches_as_system_and_description.cs" />

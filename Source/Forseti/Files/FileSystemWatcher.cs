@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Forseti.Files
 {
@@ -18,7 +19,7 @@ namespace Forseti.Files
 			_actualWatcher.Created += _actualWatcher_Created;
             _actualWatcher.Renamed += _actualWatcher_Renamed;
             _actualWatcher.IncludeSubdirectories = true;
-            _actualWatcher.NotifyFilter = System.IO.NotifyFilters.LastWrite|System.IO.NotifyFilters.CreationTime;
+            _actualWatcher.NotifyFilter = NotifyFilters.LastWrite|NotifyFilters.CreationTime|NotifyFilters.FileName;
             _actualWatcher.EnableRaisingEvents = true;
         }
 

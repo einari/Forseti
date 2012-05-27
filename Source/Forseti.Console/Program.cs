@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using Forseti.Configuration;
-using Forseti.Suites;
-using Newtonsoft.Json;
 using System.Threading;
+using Forseti.Configuration;
 
 namespace Forseti.Console
 {
@@ -13,12 +10,8 @@ namespace Forseti.Console
         [STAThread]
         public static int Main(string[] args)
         {
-			
-			//System.IO.Directory.SetCurrentDirectory("/Users/einari/Projects/Bifrost/Source/");
-			
-			System.Console.WriteLine("Keys : \n  R : Rerun\n  Any other key : Exit\n\n");
-			
-			
+			System.Console.WriteLine("Keys : \n  R : Rerun\n  B : Run in browser\n  Any other key : Exit\n\n");
+
             var configuration = Configure
                 .WithStandard()
                 .FromConfigurationFile("forseti.yaml")
@@ -33,16 +26,20 @@ namespace Forseti.Console
 				var key = System.Console.ReadKey();
 				if( key.KeyChar != 0x0 ) 
 				{
-					if( key.Key == ConsoleKey.R ) {
-						configuration.HarnessManager.Run ();
-					} 
-					else 
-					{
-						System.Diagnostics.Process.GetCurrentProcess().Kill ();
-						break;
-					}
+                    switch (key.Key)
+                    {
+                        case ConsoleKey.R:
+						    configuration.HarnessManager.Run ();
+                            break;
+                        case ConsoleKey.B:
+                            var target = Path.GetTempPath() + @"Forseti/runner.html";
+                            System.Diagnostics.Process.Start(target);
+                            break;
+                        default:
+						    System.Diagnostics.Process.GetCurrentProcess().Kill ();
+						    break;
+                    }
 				}
-				
 				
 				Thread.Sleep(20);
 			}

@@ -127,6 +127,12 @@
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Extensions\ITypeInfo.cs" />
     <Compile Include="Extensions\TypeInfo.cs" />
+    <Compile Include="Suites\CaseResult.cs" />
+    <Compile Include="Observables\IObservable.cs" />
+    <Compile Include="Observables\PropertyChanged.cs" />
+    <Compile Include="Observables\IObservableCollection.cs" />
+    <Compile Include="Observables\CollectionChanged.cs" />
+    <Compile Include="Observables\CollectionAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\..\Libraries\Env\env.js">
@@ -155,5 +161,6 @@
   <ItemGroup>
     <Folder Include="Frameworks\" />
     <Folder Include="Extensions\" />
+    <Folder Include="Observables\" />
   </ItemGroup>
 </Project>

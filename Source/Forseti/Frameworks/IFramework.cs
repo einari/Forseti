@@ -1,4 +1,8 @@
-﻿namespace Forseti.Frameworks
+﻿using System.Collections.Generic;
+using Forseti.Files;
+using Forseti.Suites;
+
+namespace Forseti.Frameworks
 {
     public interface IFramework
     {
@@ -9,5 +13,7 @@
         string ExecuteScript { get; }
         string ReportScriptName { get; }
         string ReportScript { get; }
+		
+		IEnumerable<Case>	DiscoverCasesFrom(File file);
     }
 }

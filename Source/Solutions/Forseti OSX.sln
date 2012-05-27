@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forseti.QUnit", "..\Forseti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forseti.OSX", "..\Forseti.OSX\Forseti.OSX.csproj", "{EF366B9B-0C1A-41BD-BD67-E6D344A5DF76}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forseti.OSX.Client", "..\Forseti.OSX.Client\Forseti.OSX.Client.csproj", "{7ACD1C91-C9CF-4FB0-AB65-68C2AF84D6A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,7 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x86 = Release|x86
+		AppStore|Any CPU = AppStore|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{0BCEAD10-6A48-444E-A8B3-841275529002}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -49,6 +52,20 @@ Global
 		{77E4DF53-BEB2-4A63-AF73-A0CDF9CB8BD7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{77E4DF53-BEB2-4A63-AF73-A0CDF9CB8BD7}.Release|x86.ActiveCfg = Release|Any CPU
 		{77E4DF53-BEB2-4A63-AF73-A0CDF9CB8BD7}.Release|x86.Build.0 = Release|Any CPU
+		{7ACD1C91-C9CF-4FB0-AB65-68C2AF84D6A4}.AppStore|Any CPU.ActiveCfg = AppStore|Any CPU
+		{7ACD1C91-C9CF-4FB0-AB65-68C2AF84D6A4}.AppStore|Any CPU.Build.0 = AppStore|Any CPU
+		{7ACD1C91-C9CF-4FB0-AB65-68C2AF84D6A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ACD1C91-C9CF-4FB0-AB65-68C2AF84D6A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ACD1C91-C9CF-4FB0-AB65-68C2AF84D6A4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7ACD1C91-C9CF-4FB0-AB65-68C2AF84D6A4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7ACD1C91-C9CF-4FB0-AB65-68C2AF84D6A4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7ACD1C91-C9CF-4FB0-AB65-68C2AF84D6A4}.Debug|x86.Build.0 = Debug|Any CPU
+		{7ACD1C91-C9CF-4FB0-AB65-68C2AF84D6A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ACD1C91-C9CF-4FB0-AB65-68C2AF84D6A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ACD1C91-C9CF-4FB0-AB65-68C2AF84D6A4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7ACD1C91-C9CF-4FB0-AB65-68C2AF84D6A4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{7ACD1C91-C9CF-4FB0-AB65-68C2AF84D6A4}.Release|x86.ActiveCfg = Release|Any CPU
+		{7ACD1C91-C9CF-4FB0-AB65-68C2AF84D6A4}.Release|x86.Build.0 = Release|Any CPU
 		{96231F82-9EC4-4326-B641-8D29CEF56F58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{96231F82-9EC4-4326-B641-8D29CEF56F58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96231F82-9EC4-4326-B641-8D29CEF56F58}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -109,7 +126,7 @@ Global
 		{F4DC4B9D-BE5F-4DA6-9E18-CA1A242739A5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = ..\Forseti.Console\Forseti.Console.csproj
+		StartupItem = ..\Forseti.OSX.Client\Forseti.OSX.Client.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
