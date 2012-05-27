@@ -12,7 +12,7 @@ namespace Forseti.Specs.Files.for_File
         static File file;
 
         Establish context = () => file = new File { Filename = filename, Folder = folder };
-
+		
         It should_concatenate_folder_and_filename = () => file.FullPath.ShouldEqual(expected);
     }
 }
