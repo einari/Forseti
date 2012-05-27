@@ -45,18 +45,24 @@ namespace Forseti.Configuration
         {
 			_appliedConfigFile = file;
 			var fileContent = file.ReadAllText();
-			
-			var nodes = _yamlParser.Parse (fileContent);
-			var root = nodes.First() as YamlMapping;
+
+            YamlMapping root = null;
             var globalDependencies = new List<File>();
 
-            if(root != null && root.ContainsKey("Dependencies"))
+			var nodes = _yamlParser.Parse (fileContent);
+            if (nodes.Count() > 0)
             {
-                var globalDependenciesConfig = root["Dependencies"] as YamlSequence;
-                globalDependencies = globalDependenciesConfig
-                                    .Select((node) => (File)((YamlScalar)node).Value)
-                                    .ToList();
+                root = nodes.First() as YamlMapping;
                 
+
+                if (root != null && root.ContainsKey("Dependencies"))
+                {
+                    var globalDependenciesConfig = root["Dependencies"] as YamlSequence;
+                    globalDependencies = globalDependenciesConfig
+                                        .Select((node) => (File)((YamlScalar)node).Value)
+                                        .ToList();
+
+                }
             }
 			
 			if( root != null && root.ContainsKey("Harnesses") ) 
