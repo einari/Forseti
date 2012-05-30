@@ -2,9 +2,11 @@ using Machine.Specifications;
 using Moq;
 using It = Machine.Specifications.It;
 using Forseti.Files;
+using Forseti.Configuration;
 
 namespace Forseti.Specs.Configuration.for_ConfigurationFileReader
 {
+	[Subject(typeof(ConfigurationFileReader))]
 	public class when_applying_a_file : given.a_configuration_file_reader
 	{
 		static Mock<IFile>	file_mock;

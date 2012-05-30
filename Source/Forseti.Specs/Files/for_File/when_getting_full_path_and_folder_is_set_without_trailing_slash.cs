@@ -6,8 +6,8 @@ namespace Forseti.Specs.Files.for_File
     public class when_getting_full_path_and_folder_is_set_without_trailing_slash
     {
         const string filename = "something.txt";
-        const string folder = @"c:\a_folder";
-        const string expected = folder + @"\" + filename;
+        const string folder = @"c:/a_folder";
+        const string expected = folder + @"/" + filename;
 
         static File file;
 
