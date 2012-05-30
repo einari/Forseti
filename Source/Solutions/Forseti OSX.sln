@@ -126,7 +126,7 @@ Global
 		{F4DC4B9D-BE5F-4DA6-9E18-CA1A242739A5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = ..\Forseti.OSX.Client\Forseti.OSX.Client.csproj
+		StartupItem = ..\Forseti.Console\Forseti.Console.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
