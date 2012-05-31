@@ -82,6 +82,7 @@
     <Compile Include="Suites\for_Suite\when_creating_a_suite_with_a_file.cs" />
     <Compile Include="Scripting\for_DependencyParser\when_finding_from_content_with_one_dependency.cs" />
     <Compile Include="Harnesses\for_HarnessManager\given\a_harness_manager_and_a_framework.cs" />
+    <Compile Include="Harnesses\for_Harness\when_handling_two_systems_with_same_name_and_one_description_that_matches_both_systems.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
