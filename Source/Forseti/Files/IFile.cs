@@ -1,4 +1,5 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace Forseti.Files
 {
     public interface IFile
@@ -9,5 +10,7 @@ namespace Forseti.Files
         string RelativePath { get; }
 
         string ReadAllText();
+		
+		KeyValuePair<string,string>	Fragments { get; }
     }
 }

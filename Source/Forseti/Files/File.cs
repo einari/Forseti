@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Forseti.Files
 {
@@ -17,6 +18,10 @@ namespace Forseti.Files
                 _currentDirectory += "/";
         }
 		
+		public File()
+		{
+			Fragments = new KeyValuePair<string,string>();
+		}
 		
 
         public string Filename 
@@ -47,6 +52,8 @@ namespace Forseti.Files
         {
             return System.IO.File.ReadAllText(FullPath);
         }
+		
+		public KeyValuePair<string,string>	Fragments { get; private set; }
 
         public static implicit operator File(string path)
         {
