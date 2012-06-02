@@ -87,6 +87,7 @@
     <Compile Include="Files\for_PatchMatcher\when_matching_a_file_without_any_folders_against_a_pattern_without_fragments.cs" />
     <Compile Include="Files\for_PatchMatcher\when_matching_a_file_with_two_fragments_and_pattern_with_matching_fragments.cs" />
     <Compile Include="Files\for_PatchMatcher\when_matching_a_file_without_any_folders_with_spaces_in_filename_against_a_pattern_for_single_files.cs" />
+    <Compile Include="Files\for_PatchMatcher\when_matching_a_file_with_two_fragments_and_space_in_path_and_pattern_with_matching_fragments.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
