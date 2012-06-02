@@ -133,7 +133,8 @@
     <Compile Include="Observables\IObservableCollection.cs" />
     <Compile Include="Observables\CollectionChanged.cs" />
     <Compile Include="Observables\CollectionAction.cs" />
-    <Compile Include="Files\IFileFragmentProvider.cs" />
+    <Compile Include="Files\IPathMatcher.cs" />
+    <Compile Include="Files\PathMatcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\..\Libraries\Env\env.js">

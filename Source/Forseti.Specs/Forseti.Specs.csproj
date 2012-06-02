@@ -83,12 +83,17 @@
     <Compile Include="Scripting\for_DependencyParser\when_finding_from_content_with_one_dependency.cs" />
     <Compile Include="Harnesses\for_HarnessManager\given\a_harness_manager_and_a_framework.cs" />
     <Compile Include="Harnesses\for_Harness\when_handling_two_systems_with_same_name_and_one_description_that_matches_both_systems.cs" />
+    <Compile Include="Files\for_PatchMatcher\when_matching_a_file_without_any_folders_against_a_pattern_for_single_files.cs" />
+    <Compile Include="Files\for_PatchMatcher\when_matching_a_file_without_any_folders_against_a_pattern_without_fragments.cs" />
+    <Compile Include="Files\for_PatchMatcher\when_matching_a_file_with_two_fragments_and_pattern_with_matching_fragments.cs" />
+    <Compile Include="Files\for_PatchMatcher\when_matching_a_file_without_any_folders_with_spaces_in_filename_against_a_pattern_for_single_files.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Configuration\for_Configure\" />
+    <Folder Include="Files\for_PatchMatcher\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forseti\Forseti.csproj">

@@ -1,7 +1,8 @@
 namespace Forseti.Files
 {
-	public interface IPathResolver
+	public interface IPathMatcher
 	{
+		bool Matches(IFile file);
 	}
 }
 

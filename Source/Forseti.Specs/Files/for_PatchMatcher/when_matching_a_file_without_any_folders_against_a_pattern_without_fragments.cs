@@ -3,7 +3,7 @@ using Forseti.Files;
 
 namespace Forseti.Specs
 {
-	public class when_matching_a_file_without_any_folders_against_an_empty_pattern
+	public class when_matching_a_file_without_any_folders_against_a_pattern_without_fragments
 	{
 		static PathMatcher matcher = new PathMatcher("Something");
 		static bool result;
