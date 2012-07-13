@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -83,6 +83,10 @@
     <Compile Include="Files\IFileManager.cs" />
     <Compile Include="Files\IFileSystem.cs" />
     <Compile Include="Files\IFileSystemWatcher.cs" />
+    <Compile Include="Harnesses\HarnessChangeType.cs" />
+    <Compile Include="Harnesses\HarnessChangeManager.cs" />
+    <Compile Include="Harnesses\IHarnessChangeManager.cs" />
+    <Compile Include="Harnesses\IHarnessWatcher.cs" />
     <Compile Include="Registries\MainRegistry.cs" />
     <Compile Include="Suites\Case.cs" />
     <Compile Include="Pages\IPageGenerator.cs" />
@@ -160,9 +164,5 @@
   -->
   <ItemGroup />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
-  <ItemGroup>
-    <Folder Include="Frameworks\" />
-    <Folder Include="Extensions\" />
-    <Folder Include="Observables\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

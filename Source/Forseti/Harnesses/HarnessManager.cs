@@ -16,19 +16,21 @@ namespace Forseti.Harnesses
         IPageGenerator _pageGenerator;
 		IFileSystem _fileSystem;
 		IFileSystemWatcher _fileSystemWatcher;
-
+        IHarnessChangeManager _harnessChangeManager;
 
         public HarnessManager(
 			IScriptEngine scriptEngine, 
 			IPageGenerator pageGenerator, 
 			IFileSystem fileSystem,
-			IFileSystemWatcher fileSystemWatcher)
+			IFileSystemWatcher fileSystemWatcher,
+            IHarnessChangeManager harnessChangeManager)
         {
             _scriptEngine = scriptEngine;
             _pageGenerator = pageGenerator;
 			_fileSystem = fileSystem;
 			_fileSystemWatcher = fileSystemWatcher;
 			_fileSystemWatcher.SubscribeToChanges(FileChanged);
+            _harnessChangeManager = harnessChangeManager;
         }
 		
 		void FileChanged(FileChange change, IFile file)
@@ -130,6 +132,7 @@ namespace Forseti.Harnesses
 			if( suites.Count() == 0 ) 
 			{
 				Console.WriteLine ("No suites");
+                _harnessChangeManager.NotifyChange(harness, HarnessChangeType.RunComplete);
 				return;
 			}
 			
@@ -154,6 +157,8 @@ namespace Forseti.Harnesses
 			}
 
             var delta = DateTime.Now.Subtract(timeBefore);
+
+            _harnessChangeManager.NotifyChange(harness, HarnessChangeType.RunComplete);
 
             Console.WriteLine("<--- Took {0} seconds --->\n", delta.TotalSeconds);
         }

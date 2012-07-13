@@ -13,6 +13,7 @@ namespace Forseti.Specs.Harnesses.for_HarnessManager.given
         protected static Mock<IPageGenerator> page_generator_mock;
 		protected static Mock<IFileSystem> file_system_mock;
 		protected static Mock<IFileSystemWatcher> file_system_watcher_mock;
+        protected static Mock<IHarnessChangeManager> harness_change_manager_mock;
         protected static HarnessManager harness_manager;
 
         Establish context = () =>
@@ -21,12 +22,15 @@ namespace Forseti.Specs.Harnesses.for_HarnessManager.given
             page_generator_mock = new Mock<IPageGenerator>();
 			file_system_mock = new Mock<IFileSystem>();
 			file_system_watcher_mock = new Mock<IFileSystemWatcher>();
+            harness_change_manager_mock = new Mock<IHarnessChangeManager>();
+
             harness_manager = 
 				new HarnessManager(
 					script_engine_mock.Object, 
 					page_generator_mock.Object,
 					file_system_mock.Object,
-					file_system_watcher_mock.Object
+					file_system_watcher_mock.Object,
+                    harness_change_manager_mock.Object
 				);
         };
     }
