@@ -9,6 +9,7 @@ namespace Forseti.Configuration
     {
         IContainer Container { get; }
         IHarnessManager HarnessManager { get; }
+        IHarnessChangeManager HarnessChangeManager { get; }
         IScriptEngine ScriptEngine { get; }
 
         IConfigure Initialize();

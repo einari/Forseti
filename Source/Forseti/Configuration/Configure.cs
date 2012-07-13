@@ -11,6 +11,7 @@ namespace Forseti.Configuration
     public class Configure : IConfigure
     {
         public IHarnessManager HarnessManager { get; private set; }
+        public IHarnessChangeManager HarnessChangeManager { get; private set; }
         public IContainer Container { get; private set; }
         public IScriptEngine ScriptEngine { get; private set; }
 
@@ -47,6 +48,7 @@ namespace Forseti.Configuration
         {
             HarnessManager = Container.GetInstance<IHarnessManager>();
             ScriptEngine = Container.GetInstance<IScriptEngine>();
+            HarnessChangeManager = Container.GetInstance<IHarnessChangeManager>();
 
             return this;
         }

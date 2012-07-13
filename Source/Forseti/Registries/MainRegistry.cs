@@ -45,6 +45,7 @@ namespace Forseti.Registries
 			var fileSystemType = FindImplementorOf(typeof(IFileSystem));
 			For(typeof(IFileSystem)).Singleton().Use(fileSystemType);
 			For(typeof(IFileSystemWatcher)).Singleton().Use(FindImplementorOf(typeof(IFileSystemWatcher)));
+            For(typeof(IHarnessChangeManager)).Singleton().Use(typeof(HarnessChangeManager));
         }
 		
 		void InitializePlatformTypes()

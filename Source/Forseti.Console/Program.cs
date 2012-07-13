@@ -20,8 +20,13 @@ namespace Forseti.Console
                 .Initialize();
 
             configuration
+                    .HarnessChangeManager.RegisterWatcher(typeof(Forseti.Windows.Growl.GrowlHarnessWatcher));
+
+            configuration
                     .HarnessManager.Run();
-			
+
+                    
+
 			
 			for( ;; ) 
 			{
