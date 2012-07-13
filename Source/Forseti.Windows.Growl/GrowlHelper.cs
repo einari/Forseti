@@ -10,13 +10,14 @@ namespace Forseti.Windows.Growl
 {
     class GrowlHelper
     {
+        public const string GrowlType = "TestRunResult";
         public static void simpleGrowl(string title, string message = "")
         {
             GrowlConnector simpleGrowl = new GrowlConnector();
-            global::Growl.Connector.Application thisApp = new global::Growl.Connector.Application(System.Windows.Forms.Application.ProductName);
-            NotificationType simpleGrowlType = new NotificationType("SIMPLEGROWL");
+            global::Growl.Connector.Application thisApp = new global::Growl.Connector.Application("Forseti");
+            NotificationType simpleGrowlType = new NotificationType(GrowlType, "JavaScript test/spec result");
             simpleGrowl.Register(thisApp, new NotificationType[] { simpleGrowlType });
-            Notification myGrowl = new Notification(System.Windows.Forms.Application.ProductName, "SIMPLEGROWL", title, title, message);
+            Notification myGrowl = new Notification("Forseti", GrowlType, title, title, message);
             simpleGrowl.Notify(myGrowl);
         }
     }
