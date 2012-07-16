@@ -85,6 +85,7 @@
     <Compile Include="Files\IFileSystemWatcher.cs" />
     <Compile Include="Harnesses\HarnessChangeType.cs" />
     <Compile Include="Harnesses\HarnessChangeManager.cs" />
+    <Compile Include="Harnesses\HarnessResult.cs" />
     <Compile Include="Harnesses\IHarnessChangeManager.cs" />
     <Compile Include="Harnesses\IHarnessWatcher.cs" />
     <Compile Include="Registries\MainRegistry.cs" />

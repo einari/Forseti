@@ -65,6 +65,9 @@
     <Compile Include="Harnesses\for_HarnessChangeManager\when_notifying_change_with_one_registered_watcher.cs" />
     <Compile Include="Harnesses\for_HarnessManager\when_adding_a_harness.cs" />
     <Compile Include="Harnesses\for_HarnessManager\when_executing.cs" />
+    <Compile Include="Harnesses\for_HarnessResult\given\an_empty_harness_result.cs" />
+    <Compile Include="Harnesses\for_HarnessResult\when_adding_affected_suite.cs" />
+    <Compile Include="Harnesses\for_HarnessResult\when_adding_same_suite_twice.cs" />
     <Compile Include="Harnesses\for_Harness\when_checking_a_valid_system_file.cs" />
     <Compile Include="Harnesses\for_Harness\when_checking_if_file_is_description_file_and_it_matches_as_system_and_description.cs" />
     <Compile Include="Harnesses\for_Harness\when_checking_if_file_is_description_file_and_it_should_match.cs" />
