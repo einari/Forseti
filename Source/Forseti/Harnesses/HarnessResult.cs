@@ -9,9 +9,9 @@ namespace Forseti.Harnesses
 
         public IEnumerable<Suite> AffectedSuites { get { return _affectedSuites; } }
 
-        public int TotalDescriptionCount { get; private set; }
-        public int SuccessfulDescriptionCount { get; private set; }
-        public int FailedDescriptionCount { get; private set; }
+        public int TotalCaseCount { get; private set; }
+        public int SuccessfulCaseCount { get; private set; }
+        public int FailedCaseCount { get; private set; }
 
         public void AddAffectedSuite(Suite suite)
         {
