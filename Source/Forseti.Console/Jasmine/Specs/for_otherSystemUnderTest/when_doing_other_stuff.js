@@ -1,4 +1,4 @@
-﻿describe("otherSystemUnderTest", function () {
+﻿describe("when doing other stuff", function () {
     it("We want to fail", function () {
         expect(true).toEqual(false);
     });

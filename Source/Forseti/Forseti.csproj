@@ -84,6 +84,7 @@
     <Compile Include="Files\IFileManager.cs" />
     <Compile Include="Files\IFileSystem.cs" />
     <Compile Include="Files\IFileSystemWatcher.cs" />
+    <Compile Include="Harnesses\HarnessCaseReporter.cs" />
     <Compile Include="Harnesses\HarnessChangeType.cs" />
     <Compile Include="Harnesses\HarnessChangeManager.cs" />
     <Compile Include="Harnesses\HarnessResult.cs" />

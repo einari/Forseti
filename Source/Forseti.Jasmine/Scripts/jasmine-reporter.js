@@ -26,9 +26,9 @@
                     var message = messages[messageIndex];
                     var passed = message.passed ? message.passed() : true;
                     if (passed !== true) {
-                        reportFailedCase(spec.description, messages[messageIndex].toString());
+                        reportFailedCase(suite.description, spec.description, messages[messageIndex].toString());
                     } else {
-                        reportPassedCase(spec.description);
+                        reportPassedCase(suite.description, spec.description);
                     }
                 }
             }

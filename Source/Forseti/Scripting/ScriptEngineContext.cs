@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Forseti.Harnesses;
 using Forseti.Resources;
 using Forseti.Scripting.Extensions;
 using java.lang;
@@ -23,7 +24,8 @@ namespace Forseti.Scripting
             _context.setOptimizationLevel(-1);
             _scope = _context.initStandardObjects();
 
-            AddClassAndMethods(typeof(SystemConsole));
+            AddGlobalMethodsFromStaticMethodsInType(typeof(SystemConsole));
+            AddGlobalMethodsFromStaticMethodsInType(typeof(HarnessCaseReporter));
 
             SystemConsole.LoggingEnabled = false;
             _context.evaluateString(_scope, envJs, "env.js", 1, null);
@@ -41,7 +43,7 @@ namespace Forseti.Scripting
             _context.evaluateString(_scope, script, file, 1, null);
         }
 
-        void AddClassAndMethods(System.Type type, params string[] methodNames)
+        void AddGlobalMethodsFromStaticMethodsInType(System.Type type, params string[] methodNames)
         {
             MethodInfo[] methods;
             var query = type.GetMethods(BindingFlags.Public | BindingFlags.Static).Select(m => m);

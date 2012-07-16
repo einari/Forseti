@@ -131,6 +131,7 @@ namespace Forseti.Harnesses
 			Console.WriteLine("<--- Run Suite(s) for {0} on {1} framework --->", harness.Name, harness.Framework.Name);
 
             var result = new HarnessResult(harness);
+            result.StartTime = DateTime.Now;
 			if( suites.Count() == 0 ) 
 			{
 				Console.WriteLine ("No suites");
@@ -156,11 +157,16 @@ namespace Forseti.Harnesses
 			} else 
 			{
 	            var page = _pageGenerator.GenerateFrom(harness);
+
+                // Todo: this is no good - just a temporary testing thing....
+                HarnessCaseReporter.HarnessResult = result;
 	            _scriptEngine.Execute(page);
 			}
 
+            result.EndTime = DateTime.Now;
             var delta = DateTime.Now.Subtract(timeBefore);
 
+            
             _harnessChangeManager.NotifyChange(result, HarnessChangeType.RunComplete);
 
             Console.WriteLine("<--- Took {0} seconds --->\n", delta.TotalSeconds);

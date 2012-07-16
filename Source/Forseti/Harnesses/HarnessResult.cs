@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Forseti.Extensions;
 using Forseti.Suites;
 
@@ -11,15 +12,20 @@ namespace Forseti.Harnesses
         public HarnessResult(Harness harness)
         {
             Harness = harness;
+            StartTime = DateTime.Now;
+            EndTime = DateTime.Now;
         }
-
 
         public Harness Harness { get; set; }
         public IEnumerable<Suite> AffectedSuites { get { return _affectedSuites; } }
 
-        public int TotalCaseCount { get; private set; }
-        public int SuccessfulCaseCount { get; private set; }
-        public int FailedCaseCount { get; private set; }
+        public int TotalCaseCount { get { return GetCount(); } }
+        public int SuccessfulCaseCount { get { return GetCount(r => r.Success == true); } }
+        public int FailedCaseCount { get { return GetCount(r => r.Success == false); } }
+
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public TimeSpan TotalTime { get { return EndTime.Subtract(StartTime); } }
 
         public void AddAffectedSuite(Suite suite)
         {
@@ -27,30 +33,29 @@ namespace Forseti.Harnesses
                 return;
 
             _affectedSuites.Add(suite);
-
-            HandleCaseCounts();
         }
 
-        void HandleCaseCounts()
+        int GetCount(Func<CaseResult, bool> filter = null)
         {
-            TotalCaseCount = 0;
-            SuccessfulCaseCount = 0;
-            FailedCaseCount = 0;
-
-            _affectedSuites.ForEach(s => 
+            var count = 0;
+            _affectedSuites.ForEach(s =>
             {
-                s.Descriptions.ForEach(d=> 
+                s.Descriptions.ForEach(d =>
                 {
                     d.Cases.ForEach(c =>
                     {
-                        TotalCaseCount++;
-                        if (c.Result.Success)
-                            SuccessfulCaseCount++;
-                        else
-                            FailedCaseCount++;
+                        // Todo : fix so that there is no default case added just so the runner can run...  In fact, detect cases upfront for each framework
+                        if (string.IsNullOrEmpty(c.Name))
+                            return;
+
+                        if (filter == null)
+                            count++;
+                        else if (filter(c.Result))
+                            count++;
                     });
                 });
             });
+            return count;
         }
     }
 }
