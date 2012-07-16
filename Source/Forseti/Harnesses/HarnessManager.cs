@@ -6,6 +6,7 @@ using Forseti.Files;
 using Forseti.Pages;
 using Forseti.Scripting;
 using Forseti.Suites;
+using Forseti.Extensions;
 
 namespace Forseti.Harnesses
 {
@@ -128,13 +129,15 @@ namespace Forseti.Harnesses
         public void Execute(Harness harness, IEnumerable<Suite> suites)
         {
 			Console.WriteLine("<--- Run Suite(s) for {0} on {1} framework --->", harness.Name, harness.Framework.Name);
-			
+
+            var result = new HarnessResult(harness);
 			if( suites.Count() == 0 ) 
 			{
 				Console.WriteLine ("No suites");
-                _harnessChangeManager.NotifyChange(harness, HarnessChangeType.RunComplete);
+                _harnessChangeManager.NotifyChange(result, HarnessChangeType.RunComplete);
 				return;
 			}
+            suites.ForEach(s => result.AddAffectedSuite(s));
 			
             var cases = new List<Case>();
             var timeBefore = DateTime.Now;
@@ -158,7 +161,7 @@ namespace Forseti.Harnesses
 
             var delta = DateTime.Now.Subtract(timeBefore);
 
-            _harnessChangeManager.NotifyChange(harness, HarnessChangeType.RunComplete);
+            _harnessChangeManager.NotifyChange(result, HarnessChangeType.RunComplete);
 
             Console.WriteLine("<--- Took {0} seconds --->\n", delta.TotalSeconds);
         }

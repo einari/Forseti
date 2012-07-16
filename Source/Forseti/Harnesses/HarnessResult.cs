@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Forseti.Extensions;
 using Forseti.Suites;
 
 namespace Forseti.Harnesses
@@ -7,6 +8,13 @@ namespace Forseti.Harnesses
     {
         List<Suite> _affectedSuites = new List<Suite>();
 
+        public HarnessResult(Harness harness)
+        {
+            Harness = harness;
+        }
+
+
+        public Harness Harness { get; set; }
         public IEnumerable<Suite> AffectedSuites { get { return _affectedSuites; } }
 
         public int TotalCaseCount { get; private set; }
@@ -19,6 +27,30 @@ namespace Forseti.Harnesses
                 return;
 
             _affectedSuites.Add(suite);
+
+            HandleCaseCounts();
+        }
+
+        void HandleCaseCounts()
+        {
+            TotalCaseCount = 0;
+            SuccessfulCaseCount = 0;
+            FailedCaseCount = 0;
+
+            _affectedSuites.ForEach(s => 
+            {
+                s.Descriptions.ForEach(d=> 
+                {
+                    d.Cases.ForEach(c =>
+                    {
+                        TotalCaseCount++;
+                        if (c.Result.Success)
+                            SuccessfulCaseCount++;
+                        else
+                            FailedCaseCount++;
+                    });
+                });
+            });
         }
     }
 }

@@ -15,6 +15,6 @@ namespace Forseti.Specs.Harnesses.for_HarnessManager
 
         Because of = () => harness_manager.Execute(harness, new Suite[0]);
 
-        It should_report_run_complete_to_change_manager = () => harness_change_manager_mock.Verify(h=>h.NotifyChange(harness, HarnessChangeType.RunComplete), Times.Once());
+        It should_report_run_complete_to_change_manager = () => harness_change_manager_mock.Verify(h=>h.NotifyChange(Moq.It.IsAny<HarnessResult>(), HarnessChangeType.RunComplete), Times.Once());
     }
 }

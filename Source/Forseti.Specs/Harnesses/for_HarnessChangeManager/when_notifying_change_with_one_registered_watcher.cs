@@ -14,6 +14,7 @@ namespace Forseti.Specs.Harnesses.for_HarnessChangeManager
         static Mock<IContainer>    container_mock;
         static HarnessChangeManager    manager;
         static Harness harness;
+        static HarnessResult result;
         static HarnessChangeType change_type;
         static Mock<IHarnessWatcher> watcher_mock;
         static Type watcher_type;
@@ -22,6 +23,7 @@ namespace Forseti.Specs.Harnesses.for_HarnessChangeManager
             framework_mock = new Mock<IFramework>();
             change_type = HarnessChangeType.RunComplete;
             harness = new Harness(framework_mock.Object);
+            result = new HarnessResult(harness);
             container_mock = new Mock<IContainer>();
             manager = new HarnessChangeManager(container_mock.Object);
             watcher_mock = new Mock<IHarnessWatcher>();
@@ -30,8 +32,8 @@ namespace Forseti.Specs.Harnesses.for_HarnessChangeManager
             manager.RegisterWatcher(watcher_type);
         };
 
-        Because of = () => manager.NotifyChange(harness, change_type);
+        Because of = () => manager.NotifyChange(result, change_type);
 
-        It should_notify_the_watcher = () => watcher_mock.Verify(w => w.HarnessChanged(change_type, harness), Times.Once());
+        It should_notify_the_watcher = () => watcher_mock.Verify(w => w.HarnessChanged(change_type, result), Times.Once());
     }
 }

@@ -20,10 +20,10 @@ namespace Forseti.Harnesses
             _watchers.Add(watcher);
         }
 
-        public void NotifyChange(Harness harness, HarnessChangeType changeType)
+        public void NotifyChange(HarnessResult harnessResult, HarnessChangeType changeType)
         {
             foreach (var watcher in _watchers)
-                watcher.HarnessChanged(changeType, harness);
+                watcher.HarnessChanged(changeType, harnessResult);
         }
     }
 }

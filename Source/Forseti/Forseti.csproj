@@ -76,6 +76,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Files\File.cs" />
     <Compile Include="Files\FileManager.cs" />
     <Compile Include="Files\FileSystemWatcher.cs" />

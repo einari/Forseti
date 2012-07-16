@@ -2,6 +2,6 @@
 {
     public interface IHarnessWatcher
     {
-        void HarnessChanged(HarnessChangeType changeType, Harness harness);
+        void HarnessChanged(HarnessChangeType changeType, HarnessResult harness);
     }
 }
