@@ -99,6 +99,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Forseti.ConsoleReporter\Forseti.ConsoleReporter.csproj">
+      <Project>{1f835984-a7d9-469f-b39c-50a23d51a161}</Project>
+      <Name>Forseti.ConsoleReporter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Forseti.Jasmine\Forseti.Jasmine.csproj">
       <Project>{E12A4B4F-04A1-4AD3-A5BC-6C3801428BEC}</Project>
       <Name>Forseti.Jasmine</Name>

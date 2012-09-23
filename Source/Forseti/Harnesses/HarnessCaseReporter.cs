@@ -15,12 +15,6 @@ namespace Forseti.Harnesses
             if (!SystemConsole.LoggingEnabled)
                 return;
 
-            Console.Write(" Spec( {0} ) ", description);
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("FAILED");
-            Console.ResetColor();
-            Console.WriteLine(" with message : {0}", message);
-
             Report(description, @case, false, message);
         }
 
@@ -28,11 +22,6 @@ namespace Forseti.Harnesses
         {
             if (!SystemConsole.LoggingEnabled)
                 return;
-
-            Console.Write(" Spec( {0} ) ", description);
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("PASSED");
-            Console.ResetColor();
 
             Report(description, @case);
         }
