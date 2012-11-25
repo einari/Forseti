@@ -2,6 +2,7 @@
 using Forseti.Extensions;
 using Forseti.Harnesses;
 using Forseti.Suites;
+using Microsoft.TeamFoundation.Client;
 
 namespace Forseti.TFSBuildActivities
 {
@@ -9,6 +10,10 @@ namespace Forseti.TFSBuildActivities
     {
         public void HarnessChanged(HarnessChangeType changeType, HarnessResult harness)
         {
+            
+            //TfsTeamProjectCollectionFactory.
+
+
             harness.AffectedSuites.ForEach(
                 suite => suite.Descriptions.ForEach(description =>
                 {
