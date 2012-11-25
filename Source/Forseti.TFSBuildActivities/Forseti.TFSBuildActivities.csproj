@@ -3,16 +3,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
+    <ProductVersion>10.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E12A4B4F-04A1-4AD3-A5BC-6C3801428BEC}</ProjectGuid>
+    <ProjectGuid>{98EC024C-6439-44B1-8B1E-29E457B2201F}</ProjectGuid>
+    <ProjectTypeGuids>{32f31d43-81cc-4c15-9de6-3fc5453562b6};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Forseti.Jasmine</RootNamespace>
-    <AssemblyName>Forseti.Jasmine</AssemblyName>
+    <RootNamespace>Forseti.TFSBuildActivities</RootNamespace>
+    <AssemblyName>Forseti.TFSBuildActivities</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\Solutions\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,41 +38,46 @@
     <AssemblyOriginatorKeyFile>..\Forseti.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="StructureMap">
-      <HintPath>..\Solutions\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.TeamFoundation.Build.Client, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Solutions\packages\TeamFoundation\Microsoft.TeamFoundation.Build.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activities" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Framework.cs" />
+    <Compile Include="HarnessWatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RunJavaScriptDescriptionsFromYaml.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Scripts\jasmine-executor.js" />
-    <EmbeddedResource Include="Scripts\jasmine-reporter.js" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\Forseti.Buster\Forseti.Buster.csproj">
+      <Project>{0bcead10-6a48-444e-a8b3-841275529002}</Project>
+      <Name>Forseti.Buster</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forseti.Jasmine\Forseti.Jasmine.csproj">
+      <Project>{e12a4b4f-04a1-4ad3-a5bc-6c3801428bec}</Project>
+      <Name>Forseti.Jasmine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Forseti\Forseti.csproj">
-      <Project>{F4DC4B9D-BE5F-4DA6-9E18-CA1A242739A5}</Project>
+      <Project>{f4dc4b9d-be5f-4da6-9e18-ca1a242739a5}</Project>
       <Name>Forseti</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="..\..\Libraries\Jasmine\jasmine.js">
-      <Link>Scripts\jasmine.js</Link>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
