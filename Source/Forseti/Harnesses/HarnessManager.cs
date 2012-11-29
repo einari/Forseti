@@ -126,7 +126,7 @@ namespace Forseti.Harnesses
 		}
         
 
-        public void Execute(Harness harness, IEnumerable<Suite> suites)
+        public HarnessResult Execute(Harness harness, IEnumerable<Suite> suites)
         {
 			Console.WriteLine("<--- Run Suite(s) for {0} on {1} framework --->", harness.Name, harness.Framework.Name);
 
@@ -136,7 +136,7 @@ namespace Forseti.Harnesses
 			{
 				Console.WriteLine ("No suites");
                 _harnessChangeManager.NotifyChange(result, HarnessChangeType.RunComplete);
-				return;
+				return null;
 			}
             suites.ForEach(s => result.AddAffectedSuite(s));
 			
@@ -170,12 +170,17 @@ namespace Forseti.Harnesses
             _harnessChangeManager.NotifyChange(result, HarnessChangeType.RunComplete);
 
             Console.WriteLine("<--- Took {0} seconds --->\n", delta.TotalSeconds);
+
+            return result;
         }
 
-        public void Run()
+        public IEnumerable<HarnessResult> Run()
         {
+            var results = new List<HarnessResult>();
             foreach (var harness in _harnesses)
-                Execute(harness, harness.Suites);
+                results.Add(Execute(harness, harness.Suites));
+
+            return results;
         }
 
 

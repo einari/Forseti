@@ -7,10 +7,10 @@ namespace Forseti.Harnesses
     {
 		void Add(Harness harness);
 		void Reset();
-        void Run();
+        IEnumerable<HarnessResult> Run();
 
         IEnumerable<Harness> Harnesses { get; }
 		
-        void Execute(Harness harness, IEnumerable<Suite> suites);
+        HarnessResult Execute(Harness harness, IEnumerable<Suite> suites);
     }
 }
