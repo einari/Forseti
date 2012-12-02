@@ -73,7 +73,7 @@ namespace Forseti.TFSBuildActivities
             var userId = ReadCurrentUsersIdentity();
 
             
-            
+            /*
             var testRun = new TestRun
             {
                 Title = "",
@@ -93,7 +93,7 @@ namespace Forseti.TFSBuildActivities
             };
               
             var result = client.CreateTestRun(testRun, Options.TeamProject);
-
+            */
 
 
             /*
