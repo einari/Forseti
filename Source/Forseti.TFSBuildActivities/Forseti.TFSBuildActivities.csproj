@@ -84,6 +84,16 @@
     <Compile Include="HarnessWatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RunJavaScriptDescriptionsFromYaml.cs" />
+    <Compile Include="Service References\TestResultsService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\IdentityManagementService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forseti.Buster\Forseti.Buster.csproj">
@@ -99,6 +109,127 @@
       <Name>Forseti</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.BlockedPointProperties.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.BugFieldMapping.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.BuildConfiguration.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.BuildCoverage.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.DataCollectorInformation.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.ImpactedPoint.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.ResultUpdateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.ServerTestSuite.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.SkinnyPlan.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.SuiteIdAndType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.SuitePointCount.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.TestActionResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.TestCaseResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.TestCaseResultIdentifier.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.TestConfiguration.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.TestController.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.TestEnvironment.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.TestExternalLink.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.TestMessageLogEntry.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.TestPlan.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.TestPoint.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.TestPointStatistic.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.TestResolutionState.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.TestResultAttachment.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.TestResultParameter.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.TestRun.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.TestRunCoverage.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.TestRunStatistic.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.TestSettings.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.TestVariable.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\Forseti.TFSBuildActivities.TestResultsService.UpdatedProperties.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TestResultsService\schema1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TestResultsService\schema2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TestResultsService\schema3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TestResultsService\schema4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TestResultsService\TestResults.wsdl" />
+    <None Include="Service References\TestResultsService\TestResults1.wsdl" />
+    <None Include="Service References\TestResultsService\TestResults2.wsdl" />
+    <None Include="Service References\IdentityManagementService\Forseti.TFSBuildActivities.IdentityManagementService.IdentityDescriptor.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\IdentityManagementService\Forseti.TFSBuildActivities.IdentityManagementService.TeamFoundationIdentity.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\IdentityManagementService\IdentityManagementService.wsdl" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
@@ -111,4 +242,20 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\TestResultsService\" />
+    <WCFMetadataStorage Include="Service References\IdentityManagementService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TestResultsService\configuration.svcinfo" />
+    <None Include="Service References\TestResultsService\configuration91.svcinfo" />
+    <None Include="Service References\TestResultsService\TestResults.disco" />
+    <None Include="Service References\IdentityManagementService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\IdentityManagementService\configuration.svcinfo" />
+    <None Include="Service References\IdentityManagementService\configuration91.svcinfo" />
+    <None Include="Service References\IdentityManagementService\IdentityManagementService.disco" />
+  </ItemGroup>
 </Project>

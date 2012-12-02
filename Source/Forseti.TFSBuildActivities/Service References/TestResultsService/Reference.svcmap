@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="8fa26051-3b45-44d8-a37b-c04ae5d75f12" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://tfs.dolittle.com:8080/tfs/TestManagement/v1.0/TestResults.asmx" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="schema3.xsd" MetadataType="Schema" ID="e240e466-235b-42c7-b490-7384f5ab30f8" SourceId="1" SourceUrl="http://tfs.dolittle.com:8080/tfs/_tfs_resources/TestManagement/v1.0/TestResults.asmx?schema=schema3" />
+    <MetadataFile FileName="TestResults.wsdl" MetadataType="Wsdl" ID="486780e6-ca7f-4ed1-ab5a-3f77ca5d27f0" SourceId="1" SourceUrl="http://tfs.dolittle.com:8080/tfs/_tfs_resources/TestManagement/v1.0/TestResults.asmx?wsdl" />
+    <MetadataFile FileName="schema2.xsd" MetadataType="Schema" ID="672c13fe-3958-4a3f-b8ac-8a445da37287" SourceId="1" SourceUrl="http://tfs.dolittle.com:8080/tfs/_tfs_resources/TestManagement/v1.0/TestResults.asmx?schema=schema2" />
+    <MetadataFile FileName="TestResults1.wsdl" MetadataType="Wsdl" ID="c76f7975-cf4b-4d75-8ae9-39f801488dad" SourceId="1" SourceUrl="http://tfs.dolittle.com:8080/tfs/_tfs_resources/TestManagement/v1.0/TestResults.asmx?wsdl=wsdl2" />
+    <MetadataFile FileName="schema1.xsd" MetadataType="Schema" ID="163c087a-9c35-48bc-97b3-dd602f31229a" SourceId="1" SourceUrl="http://tfs.dolittle.com:8080/tfs/_tfs_resources/TestManagement/v1.0/TestResults.asmx?schema=schema1" />
+    <MetadataFile FileName="TestResults.disco" MetadataType="Disco" ID="ac27c49d-ba07-416c-801f-ad9e51ee428e" SourceId="1" SourceUrl="http://tfs.dolittle.com:8080/tfs/_tfs_resources/TestManagement/v1.0/TestResults.asmx?disco" />
+    <MetadataFile FileName="TestResults2.wsdl" MetadataType="Wsdl" ID="c29806c7-70da-4373-a83e-d3fe83b61b71" SourceId="1" SourceUrl="http://tfs.dolittle.com:8080/tfs/_tfs_resources/TestManagement/v1.0/TestResults.asmx?wsdl=wsdl1" />
+    <MetadataFile FileName="schema4.xsd" MetadataType="Schema" ID="cef28d0e-13b0-46d9-b19c-87c43869a29e" SourceId="1" SourceUrl="http://tfs.dolittle.com:8080/tfs/_tfs_resources/TestManagement/v1.0/TestResults.asmx?schema=schema4" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

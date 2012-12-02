@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Admin/03" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Admin/03" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema targetNamespace="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Admin/03">
+      <s:include schemaLocation="http://tfs.dolittle.com:8080/tfs/_tfs_resources/TestManagement/v1.0/TestResults.asmx?schema=schema1" />
+      <s:import schemaLocation="http://tfs.dolittle.com:8080/tfs/_tfs_resources/TestManagement/v1.0/TestResults.asmx?schema=schema2" namespace="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Linking/03" />
+      <s:import schemaLocation="http://tfs.dolittle.com:8080/tfs/_tfs_resources/TestManagement/v1.0/TestResults.asmx?schema=schema3" namespace="http://schemas.microsoft.com/TeamFoundation/2007/02/TCM/TestResults/01" />
+      <s:import schemaLocation="http://tfs.dolittle.com:8080/tfs/_tfs_resources/TestManagement/v1.0/TestResults.asmx?schema=schema4" namespace="http://microsoft.com/wsdl/types/" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="DeleteProjectSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteProject" />
+  </wsdl:message>
+  <wsdl:message name="DeleteProjectSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteProjectResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IProjectMaintenanceBinding">
+    <wsdl:operation name="DeleteProject">
+      <wsdl:input message="tns:DeleteProjectSoapIn" />
+      <wsdl:output message="tns:DeleteProjectSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="IProjectMaintenanceBinding" type="tns:IProjectMaintenanceBinding">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DeleteProject">
+      <soap:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Admin/03/DeleteProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="IProjectMaintenanceBinding1" type="tns:IProjectMaintenanceBinding">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DeleteProject">
+      <soap12:operation soapAction="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Admin/03/DeleteProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+</wsdl:definitions>

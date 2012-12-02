@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Linking/03" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Linking/03" id="schema2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="GetArtifacts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="artifactUris" type="tns:ArrayOfString" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfString">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetArtifactsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GetArtifactsResult" type="tns:ArrayOfArtifact" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfArtifact">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Artifact" nillable="true" type="tns:Artifact" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Artifact">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Uri" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ArtifactTitle" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ExternalId" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ExtendedAttributes" type="tns:ArrayOfExtendedAttribute" />
+      <xs:element minOccurs="0" maxOccurs="1" name="OutboundLinks" type="tns:ArrayOfOutboundLink" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfExtendedAttribute">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ExtendedAttribute" nillable="true" type="tns:ExtendedAttribute" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExtendedAttribute">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Value" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FormatString" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfOutboundLink">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OutboundLink" nillable="true" type="tns:OutboundLink" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OutboundLink">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="LinkType" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ReferencedUri" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
