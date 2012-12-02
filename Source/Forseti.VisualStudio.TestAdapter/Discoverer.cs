@@ -13,6 +13,8 @@ namespace Forseti.VisualStudio.TestAdapter
     {
         public void DiscoverTests(IEnumerable<string> sources, IDiscoveryContext discoveryContext, IMessageLogger logger, ITestCaseDiscoverySink discoverySink)
         {
+            var i = 0;
+            i++;
         }
     }
 }

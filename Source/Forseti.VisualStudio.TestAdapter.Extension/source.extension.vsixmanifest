@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+  <Metadata>
+    <Identity Id="Forseti.VisualStudio.TestAdapter.Extension..f8a2f6ea-e825-47f9-ac11-1eca6a9cbe0e" Version="1.0" Language="en-US" Publisher="Dolittle" />
+    <DisplayName>Forseti</DisplayName>
+    <Description xml:space="preserve">Forseti is a headless JavaScript test / specification runner, built for keeping the feedback loop to a bare minimum. This package contains an adapter that integrates Forseti with Visual Studio 2012 and allows to run and see the tests / specifications inside Visual Studio. Forseti</Description>
+    <MoreInfo>http://forseti.dolittle.com</MoreInfo>
+    <License>MIT-LICENSE.txt</License>
+    <GettingStartedGuide>http://forseti.dolittle.com</GettingStartedGuide>
+    <Icon>Forseti-logo.png</Icon>
+    <PreviewImage>Forseti-logo.png</PreviewImage>
+    <Tags>JavaScript, Unit Testing, Visual Studio 2012, TDD, BDD, qunit, jasmine, buster</Tags>
+  </Metadata>
+  <Installation>
+    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="11.0" />
+    <InstallationTarget Version="[11.0,12.0)" Id="Microsoft.VisualStudio.Premium" />
+    <InstallationTarget Version="[11.0,12.0)" Id="Microsoft.VisualStudio.Ultimate" />
+  </Installation>
+  <Dependencies>
+    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="4.5" />
+    <Dependency d:Source="Installed" Id="Microsoft.VisualStudio.MPF" DisplayName="Visual Studio MPF" Version="[11.0,12.0)" />
+  </Dependencies>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
+    <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="Forseti.VisualStudio.TestAdapter" Path="|Forseti.VisualStudio.TestAdapter|" />
+    <Asset Type="UnitTestExtension" d:Source="Project" d:ProjectName="Forseti.VisualStudio.TestAdapter" Path="|Forseti.VisualStudio.TestAdapter|" />
+  </Assets>
+</PackageManifest>

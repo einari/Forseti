@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.TestWindow.Extensibility;
+using Microsoft.VisualStudio.Shell;
+
 
 namespace Forseti.VisualStudio.TestAdapter
 {
@@ -13,10 +15,10 @@ namespace Forseti.VisualStudio.TestAdapter
 
         [ImportingConstructor]
         public TestContainerDiscoverer(
-            IServiceProvider serviceProvider,
+            [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider,
             ILogger logger)
         {
-            
+            ExecutorUri = new Uri("executor://forseti");
         }
     }
 }
