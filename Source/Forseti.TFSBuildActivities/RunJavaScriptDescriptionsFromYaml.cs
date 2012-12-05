@@ -8,9 +8,11 @@ using Microsoft.TeamFoundation.Build.Workflow.Tracking;
 using Microsoft.TeamFoundation.Build.Workflow.Activities;
 using Microsoft.TeamFoundation.Client;
 using System;
-using Forseti.TFSBuildActivities.TestResultsService;
 using System.Security.Principal;
 using System.ServiceModel;
+using Microsoft.TeamFoundation.Framework.Client;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Forseti.TFSBuildActivities
 {
@@ -38,106 +40,92 @@ namespace Forseti.TFSBuildActivities
     public sealed class RunJavaScriptDescriptionsFromYaml : CodeActivity
     {
         public InArgument<string> YamlFile { get; set; }
+       
+        public InArgument<string> ForsetiPath { get; set; }
 
+        CodeActivityContext _context;
+
+        void Log(string message, params object[] parameters) 
+        {
+            if (_context == null)
+                return;
+            _context.Log(message, parameters);
+ 
+        }
 
         protected override void Execute(CodeActivityContext context)
         {
-            var currentDirectory = Directory.GetCurrentDirectory();
+            _context = context;
+            var buildDetail = context.GetExtension<IBuildDetail>();
+
+            
+            var buildDirectory  = System.Environment.ExpandEnvironmentVariables("%BuildDirectory%");
+
+            Log("BuildDirectory : {0}", buildDirectory);
+
+            
+
+
+            //var currentDirectory = Directory.GetCurrentDirectory();
+            var currentDirectory = @"C:\Builds\1\ForsetiTesting\Continuous\Sources\";
+            Log("CurrentDirectory : {0}", currentDirectory);
+
             var file = context.GetValue(this.YamlFile);
+            Log("YamlFile : {0}", file);
+            
             var fileDirectory = Path.GetDirectoryName(file);
+            Log("YamleFileDirectory : {0}",fileDirectory);
             Directory.SetCurrentDirectory(fileDirectory);
 
-            /*
-            var configuration = Configure
-                .WithStandard()
-                .FromConfigurationFile(file)
-                .Initialize();
 
-            configuration.HarnessChangeManager.RegisterWatcher(typeof(HarnessWatcher));
-
-            configuration
-                    .HarnessManager.Run();
-
-            */
-            
-            var buildDetails = context.GetExtension<IBuildDetail>();
+            string fullPath = currentDirectory + @"Tools\Forseti\Forseti.exe";
+            Log("ForsetiPath : {0}", fullPath);            
 
 
-            var binding = new BasicHttpBinding();
-            var address = new EndpointAddress("http://tfs:8080/tfs/_tfs_resources/TestManagement/v1.0/TestResults.asmx");
-            
-
-            var service = new TestResultsService.TestResultsServiceSoapClient();
-
-            
-            var userId = ReadCurrentUsersIdentity();
-
-            
-            /*
-            var testRun = new TestRun
-            {
-                Title = "",
-                Owner = userId,
-                State = (byte)TestRunState.NotStarted,
-                BuildUri = buildDetails.Uri,
-                BuildNumber = Options.Build,
-                BuildPlatform = Options.Platform,
-                BuildFlavor = Options.Flavour,
-                // TODO: Get correct times into <Times> element and use those instead.
-                StartDate = GetStartDate(trx),
-                CompleteDate = GetStartDate(trx).AddMinutes(1),
-                PostProcessState = (byte)PostProcessState.Complete,
-                Iteration = Options.TeamProject,
-                Version = 1000,
-                TeamProject = Options.TeamProject
-            };
-              
-            var result = client.CreateTestRun(testRun, Options.TeamProject);
-            */
+            string workingDirectory = Path.GetDirectoryName(buildDirectory);
+            Log("WorkingDirecrory : {0}", workingDirectory);
 
 
-            /*
-            context.Log("Build detail : {0}",buildDetails);
-
-
-
-            var projectCollection = TfsTeamProjectCollectionFactory.GetTeamProjectCollection(new Uri("http://tfs:8080/tfs/DefaultCollection"));
-                //buildDetail.Uri);
-            var testManagementService = projectCollection.GetService<ITestManagementService>();
-                //context.GetExtension<ITestManagementService>();
-            context.Log("Test management service : {0}", testManagementService);
-            
-            var project = testManagementService.GetTeamProject(buildDetails.TeamProject);
-            context.Log("Project : {0}", project);
-
-            var testRun = project.TestRuns.Create();
-            testRun.Title = "Forseti TestRun";
-            testRun.Save();
-            */
-
-            
-
-            context.Log("Set current dir");
             Directory.SetCurrentDirectory(currentDirectory);
+            var yamlPath = currentDirectory + "forseti.yaml";
+            Log("CurrentDirectory : {0}", Directory.GetCurrentDirectory());
+            
+            try
+            {
+        
+                var configuration = Configure.WithStandard().FromConfigurationFile(yamlPath).Initialize();
 
+                Log("Forseti configuration initialized : {0}", configuration);
+
+                configuration.HarnessChangeManager.RegisterWatcher(typeof( HarnessWatcher));
+
+
+                var results = configuration.HarnessManager.Run();
+                Log("Forseti Results : {0}", results);
+
+            }
+            catch (Exception e)
+            {
+                Log("Something went wrong! : {0}", e);
+                throw;
+            }
             context.Log("Done");
         }
 
-        private static Guid ReadCurrentUsersIdentity()
+        private static TeamFoundationIdentity ReadCurrentUsersIdentity(IIdentityManagementService identityManagementService)
         {
-            using (var client = new IdentityManagementService.IdentityManagementWebServiceSoapClient())
-            {
+
                 var currentUser = WindowsIdentity.GetCurrent();
 
                 if (currentUser == null)
                     throw new InvalidOperationException("Could not find current Windows user.");
 
-                var result = client.ReadIdentities(0, new[] { currentUser.Name }, 0, 0);
+                var result = identityManagementService.ReadIdentities(Microsoft.TeamFoundation.Framework.Common.IdentitySearchFactor.AccountName, new[] { currentUser.Name }, 0, 0);
                 if ((result == null) || (result.Length != 1) || (result[0].Length != 1))
                     throw new InvalidOperationException(string.Format("Could not find user {0} in TFS.", currentUser.Name));
 
-                return result[0][0].TeamFoundationId;
-            }
+                return result[0][0];
+
         }
 
     }

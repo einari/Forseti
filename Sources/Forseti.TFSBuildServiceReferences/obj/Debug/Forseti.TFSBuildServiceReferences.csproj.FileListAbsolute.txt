@@ -1,0 +1,6 @@
+C:\PSS\Forseti\Sources\Forseti.TFSBuildServiceReferences\bin\Debug\Forseti.TFSBuildServiceReferences.dll.config
+C:\PSS\Forseti\Sources\Forseti.TFSBuildServiceReferences\bin\Debug\Forseti.TFSBuildServiceReferences.dll
+C:\PSS\Forseti\Sources\Forseti.TFSBuildServiceReferences\bin\Debug\Forseti.TFSBuildServiceReferences.pdb
+C:\PSS\Forseti\Sources\Forseti.TFSBuildServiceReferences\obj\Debug\ResolveAssemblyReference.cache
+C:\PSS\Forseti\Sources\Forseti.TFSBuildServiceReferences\obj\Debug\Forseti.TFSBuildServiceReferences.dll
+C:\PSS\Forseti\Sources\Forseti.TFSBuildServiceReferences\obj\Debug\Forseti.TFSBuildServiceReferences.pdb
