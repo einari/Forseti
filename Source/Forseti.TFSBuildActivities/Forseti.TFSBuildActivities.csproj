@@ -89,6 +89,7 @@
     <Compile Include="HarnessWatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RunJavaScriptDescriptionsFromYaml.cs" />
+    <Compile Include="TestResultPublisher.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forseti.Buster\Forseti.Buster.csproj">

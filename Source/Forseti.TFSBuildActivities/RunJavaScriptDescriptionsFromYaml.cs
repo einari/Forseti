@@ -13,6 +13,7 @@ using System.ServiceModel;
 using Microsoft.TeamFoundation.Framework.Client;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Forseti.Harnesses;
 
 namespace Forseti.TFSBuildActivities
 {
@@ -56,6 +57,7 @@ namespace Forseti.TFSBuildActivities
         protected override void Execute(CodeActivityContext context)
         {
             _context = context;
+            var origianlCurrentDir = Directory.GetCurrentDirectory();
             var buildDetail = context.GetExtension<IBuildDetail>();
 
             
@@ -90,26 +92,53 @@ namespace Forseti.TFSBuildActivities
             var yamlPath = currentDirectory + "forseti.yaml";
             Log("CurrentDirectory : {0}", Directory.GetCurrentDirectory());
             
+            IEnumerable<HarnessResult> testResults = null;
             try
             {
-        
+
                 var configuration = Configure.WithStandard().FromConfigurationFile(yamlPath).Initialize();
 
                 Log("Forseti configuration initialized : {0}", configuration);
 
-                configuration.HarnessChangeManager.RegisterWatcher(typeof( HarnessWatcher));
+                configuration.HarnessChangeManager.RegisterWatcher(typeof(HarnessWatcher));
 
 
-                var results = configuration.HarnessManager.Run();
-                Log("Forseti Results : {0}", results);
+                //testResults = configuration.HarnessManager.Run();
+                //Log("Forseti Results : {0}", testResults);
 
             }
             catch (Exception e)
             {
-                Log("Something went wrong! : {0}", e);
-                throw;
+                Log("Something went wrong while running forseti tests! : {0}", e);
+            }
+            finally
+            {
+                Directory.SetCurrentDirectory(origianlCurrentDir);
+
+            }
+
+            //GenerateTRXResultFileForPublishing(testResults);
+            try
+            {
+
+                var publisher = new TestResultPublisher(context);
+
+                publisher.PublishResultsFromPath(currentDirectory + "test.trx");
+
+            }
+            catch (Exception e)
+            {
+                Log("Something went wrong while publishing tests! : {0}", e);
+
             }
             context.Log("Done");
+        }
+
+        
+
+        private void GenerateTRXResultFileForPublishing(IEnumerable<HarnessResult> testResults)
+        {
+            throw new NotImplementedException();
         }
 
         private static TeamFoundationIdentity ReadCurrentUsersIdentity(IIdentityManagementService identityManagementService)
