@@ -6,15 +6,15 @@ using System.Xml.Linq;
 
 namespace Forseti.TFSBuildActivities.Trx
 {
-    public class TrxBuilder
+    public class TrxBuilder 
     {
 
         public TestRun TestRun { get; private set; }
         public TestSettings RunSettings { get; private set; }
         public ResultSummary Summary { get; private set; }
         public Times Timing { get; private set; }
-        public IDictionary<string, Guid> TestLists { get; private set; }
-        public IList<TestResult> Results { get; private set; }
+        public TestLists TestLists { get; private set; }
+        public Results Results { get; private set; }
 
 
         public TrxBuilder()
@@ -23,8 +23,8 @@ namespace Forseti.TFSBuildActivities.Trx
             RunSettings = new TestSettings(); //TestSettings.WithDefaults
             Summary = new ResultSummary();
             Timing = new Times();
-            TestLists = new Dictionary<string, Guid>();
-            Results = new List<TestResult>();
+            TestLists = new TestLists();
+            Results = new Results();
         }
 
 
@@ -64,30 +64,34 @@ namespace Forseti.TFSBuildActivities.Trx
 
 
 
-        public TrxBuilder AddTestResult(string name, string id, string computerName, string testListName = "Default")
+        public TrxBuilder AddTestResult(string name, string id, string computerName, TestResult.ResultOutcome outcome ,string testListName = "Default")
         {
+
             var testResult = new TestResult 
                                     { 
                                         Name = name, 
                                         Id = id,
                                         ComputerName = computerName,
-                                        Type = Guid.NewGuid(),
-                                        ListId = GetOrCreateListTypeByName(testListName)
+                                        ListId = TestLists.GetOrCreateListTypeByName(testListName),
+                                        Outcome = outcome
                                     };
             Results.Add(testResult);
 
             return this;
         }
 
-        private Guid GetOrCreateListTypeByName(string testListName)
+        public XDocument Build() 
         {
-            if (TestLists.ContainsKey(testListName))
-                return TestLists[testListName];
+            var testRun = TestRun.ConvertToTrxNode();
+            testRun.Add( RunSettings.ConvertToTrxNode(),
+                         Timing.ConvertToTrxNode(),
+                         Summary.ConvertToTrxNode(),
+                         TestLists.ConvertToTrxNode(),
+                         Results.ConvertToTrxNode());
 
-            var testListId = Guid.NewGuid();
+            var trx = new XDocument(testRun);
 
-            TestLists.Add(testListName, testListId);
-            return testListId;
+            return trx;
         }
     }
 }

@@ -7,16 +7,16 @@ namespace Forseti.TFSBuildActivities.Trx
 {
     public class TestResult
     {
-        public class Outcome 
+        public enum ResultOutcome 
         {
-            public const string PASSED = "Passed";
-            public const string FAILED = "Failed";
+            passed = 0,
+            failed = 1
         }
 
         public string Id { get; set; }
         public string Name { get; set; }
         public string ComputerName { get; set; }
-        public Guid Type { get; set; }
         public Guid ListId { get; set;   }
+        public ResultOutcome Outcome { get; set; }
     }
 }

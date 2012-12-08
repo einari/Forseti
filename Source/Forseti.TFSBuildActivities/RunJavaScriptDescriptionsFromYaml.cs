@@ -14,6 +14,7 @@ using Microsoft.TeamFoundation.Framework.Client;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Forseti.Harnesses;
+using Forseti.TFSBuildActivities.Trx;
 
 namespace Forseti.TFSBuildActivities
 {
@@ -118,12 +119,27 @@ namespace Forseti.TFSBuildActivities
             }
 
             //GenerateTRXResultFileForPublishing(testResults);
+
+
             try
             {
+                var builder = new TrxBuilder();
+
+                var trx = builder.SetRunInformation(Guid.NewGuid(), "SomeName", "SomeUSer")
+                       .SetDefaultTestSettingsWithDescription("This is a hardcoded test")
+                       .SetResultSummary(1, 0)
+                       .SetRunTimes(DateTime.Now, DateTime.Now)
+                       .AddTestResult("should_be_a_test", "for_System_when_publishing_should_be_a_test", "BUILDSERVER" , TestResult.ResultOutcome.passed, "QUnit")
+                       .Build();
+
+                Log("XML {0} : ", trx);
+
+                trx.Save(currentDirectory + "forseti.trx");
 
                 var publisher = new TestResultPublisher(context);
 
-                publisher.PublishResultsFromPath(currentDirectory + "test.trx");
+                //publisher.PublishResultsFromPath(currentDirectory + "test.trx");
+                publisher.PublishResultsFromPath(currentDirectory + "forseti.trx");
 
             }
             catch (Exception e)

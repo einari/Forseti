@@ -26,13 +26,13 @@ namespace Forseti.TFSBuildActivities.Specs.for_TrxBuilder
 
         Because of = () =>
                         {
-                            builder.AddTestResult(name, id, computerName, testListName);
-                            builder.AddTestResult(name2, id2, computerName, testListName);
+                            builder.AddTestResult(name, id, computerName,TestResult.ResultOutcome.passed, testListName);
+                            builder.AddTestResult(name2, id2, computerName, TestResult.ResultOutcome.failed, testListName);
                         };
 
-        It should_have_two_tests_added = () => builder.Results.Count().ShouldEqual(2);
+        It should_have_two_tests_added = () => builder.Results.TestResults.Count().ShouldEqual(2);
 
-        It should_contain_two_list_type_for_test_list = () => builder.TestLists.ContainsKey(testListName).ShouldBeTrue();
+        It should_contain_two_list_type_for_test_list = () => builder.TestLists.Lists.ContainsKey(testListName).ShouldBeTrue();
        
     }
 } 

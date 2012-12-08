@@ -9,36 +9,36 @@ namespace Forseti.TFSBuildActivities
 {
     public static class Extensions
     {
-        public static TrxBuilder ConvertForTfs(this IEnumerable<HarnessResult> forsetiResults) 
-        {
-        //public void HarnessChanged(HarnessChangeType changeType, HarnessResult result)
+        //public static TrxBuilder ConvertForTfs(this IEnumerable<HarnessResult> forsetiResults) 
         //{
-        //    result.AffectedSuites.ForEach(
-        //        suite => suite.Descriptions.ForEach( description => {
-        //                PrintSuiteInformation(description);
-        //                description.Cases.ForEach(@case =>
-        //                                    {
-        //                                        if (CanBeResultBeReported(@case))
-        //                                            return;
+        ////public void HarnessChanged(HarnessChangeType changeType, HarnessResult result)
+        ////{
+        ////    result.AffectedSuites.ForEach(
+        ////        suite => suite.Descriptions.ForEach( description => {
+        ////                PrintSuiteInformation(description);
+        ////                description.Cases.ForEach(@case =>
+        ////                                    {
+        ////                                        if (CanBeResultBeReported(@case))
+        ////                                            return;
 
-        //                                        if (@case.Result.Success)
-        //                                            PrintPassedCase(@case);
-        //                                        else
-        //                                            PrintFailedCase(@case);
-        //                                    });
-        //                Console.WriteLine("");
+        ////                                        if (@case.Result.Success)
+        ////                                            PrintPassedCase(@case);
+        ////                                        else
+        ////                                            PrintFailedCase(@case);
+        ////                                    });
+        ////                Console.WriteLine("");
 
-        //        }));
+        ////        }));
 
-        //    PrintResultSummary(result);
+        ////    PrintResultSummary(result);
         
+        ////}
+
+        //    var builder = new TrxBuilder();
+
+
+
         //}
-
-            var builder = new TrxBuilder();
-
-
-
-        }
 
     }
 }

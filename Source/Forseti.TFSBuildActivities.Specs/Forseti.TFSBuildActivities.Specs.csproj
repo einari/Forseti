@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="for_TrxBuilder\when_adding_two_test_results.cs" />
     <Compile Include="for_TrxBuilder\when_adding_a_test_result.cs" />
+    <Compile Include="for_TrxBuilder\when_building_a_test_run.cs" />
     <Compile Include="for_TrxBuilder\when_setting_timing_values.cs" />
     <Compile Include="for_TrxBuilder\when_setting_result_summary.cs" />
     <Compile Include="for_TrxBuilder\given\a_builder.cs" />

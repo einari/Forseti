@@ -91,7 +91,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RunJavaScriptDescriptionsFromYaml.cs" />
     <Compile Include="TestResultPublisher.cs" />
+    <Compile Include="Trx\IConvertToTrx.cs" />
+    <Compile Include="Trx\Results.cs" />
     <Compile Include="Trx\ResultSummary.cs" />
+    <Compile Include="Trx\TestLists.cs" />
     <Compile Include="Trx\TestResult.cs" />
     <Compile Include="Trx\TestRun.cs" />
     <Compile Include="Trx\TestSettings.cs" />
@@ -117,15 +120,15 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>REM "C:\Program Files\Microsoft Visual Studio 10.0\Common7\IDE\tf.exe" checkout "C:\PSS\Forseti-tfs\ForsetiTesting\BuildProcessTemplates\Custom Assemblies\Forseti.dll"
+    <PostBuildEvent>"C:\Program Files\Microsoft Visual Studio 10.0\Common7\IDE\tf.exe" checkout "C:\PSS\Forseti-tfs\ForsetiTesting\BuildProcessTemplates\Custom Assemblies\Forseti.dll"
 
-REM "C:\Program Files\Microsoft Visual Studio 10.0\Common7\IDE\tf.exe" checkout "C:\PSS\Forseti-tfs\ForsetiTesting\BuildProcessTemplates\Custom Assemblies\Forseti.TFSBuildActivities.dll"
+"C:\Program Files\Microsoft Visual Studio 10.0\Common7\IDE\tf.exe" checkout "C:\PSS\Forseti-tfs\ForsetiTesting\BuildProcessTemplates\Custom Assemblies\Forseti.TFSBuildActivities.dll"
 
-REM xcopy /Y "C:\PSS\Forseti\Source\Forseti.TFSBuildActivities\bin\Debug\Forseti.TFSBuildActivities.dll" "C:\PSS\Forseti-tfs\ForsetiTesting\BuildProcessTemplates\Custom Assemblies\Forseti.TFSBuildActivities.dll"
+xcopy /Y "C:\PSS\Forseti\Source\Forseti.TFSBuildActivities\bin\Debug\Forseti.TFSBuildActivities.dll" "C:\PSS\Forseti-tfs\ForsetiTesting\BuildProcessTemplates\Custom Assemblies\Forseti.TFSBuildActivities.dll"
 
-REM xcopy /Y "C:\PSS\Forseti\Source\Forseti.TFSBuildActivities\bin\Debug\Forseti.dll" "C:\PSS\Forseti-tfs\ForsetiTesting\BuildProcessTemplates\Custom Assemblies\Forseti.dll"
+xcopy /Y "C:\PSS\Forseti\Source\Forseti.TFSBuildActivities\bin\Debug\Forseti.dll" "C:\PSS\Forseti-tfs\ForsetiTesting\BuildProcessTemplates\Custom Assemblies\Forseti.dll"
 
-REM "C:\Program Files\Microsoft Visual Studio 10.0\Common7\IDE\tf.exe" checkin /noprompt</PostBuildEvent>
+"C:\Program Files\Microsoft Visual Studio 10.0\Common7\IDE\tf.exe" checkin /noprompt</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

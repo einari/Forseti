@@ -25,9 +25,9 @@ namespace Forseti.TFSBuildActivities.Specs.for_TrxBuilder
 
         Because of = () =>
                         {
-                            builder.AddTestResult(name, id, computerName, testListName);
-                            testLists = builder.TestLists;
-                            results = builder.Results;
+                            builder.AddTestResult(name, id, computerName, TestResult.ResultOutcome.passed, testListName);
+                            testLists = builder.TestLists.Lists;
+                            results = builder.Results.TestResults;
                         };
 
         It should_have_one_test_added = () => results.Count().ShouldEqual(1);
