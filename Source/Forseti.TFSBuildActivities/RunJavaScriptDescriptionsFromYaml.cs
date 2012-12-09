@@ -8,6 +8,7 @@ using Microsoft.TeamFoundation.Build.Workflow.Tracking;
 using Microsoft.TeamFoundation.Build.Workflow.Activities;
 using Microsoft.TeamFoundation.Client;
 using System;
+using System.Linq;
 using System.Security.Principal;
 using System.ServiceModel;
 using Microsoft.TeamFoundation.Framework.Client;
@@ -15,6 +16,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Forseti.Harnesses;
 using Forseti.TFSBuildActivities.Trx;
+using Forseti.Extensions;
+using Forseti.Suites;
+
 
 namespace Forseti.TFSBuildActivities
 {
@@ -118,7 +122,7 @@ namespace Forseti.TFSBuildActivities
 
             }
 
-            //GenerateTRXResultFileForPublishing(testResults);
+            GenerateTRXResultFileForPublishing(testResults);
 
 
             try
@@ -154,7 +158,49 @@ namespace Forseti.TFSBuildActivities
 
         private void GenerateTRXResultFileForPublishing(IEnumerable<HarnessResult> testResults)
         {
-            throw new NotImplementedException();
+            var successfullTests = testResults.Sum(suite => suite.SuccessfulCaseCount);
+            var failingTests = testResults.Sum(suite => suite.FailedCaseCount);
+            var startTime = testResults.Min(suite => suite.StartTime);
+            var endTime = testResults.Max(suite => suite.EndTime);
+
+
+            var builder = new TrxBuilder();
+            builder.SetRunInformation(Guid.NewGuid(), "SomeName", "SomeUSer")
+                      .SetDefaultTestSettingsWithDescription("This is a hardcoded test")
+                      .SetResultSummary(successfullTests, failingTests)
+                      .SetRunTimes(startTime, endTime);
+
+
+
+             foreach (var harnessResult in testResults)
+             {
+                 harnessResult.AffectedSuites.ForEach(suite => 
+                        suite.Descriptions.ForEach(description =>
+                        {
+                            description.Cases.ForEach(@case =>
+                            {
+                                if (CantResultBeReported(@case))
+                                    return;
+
+                                builder.AddTestResult( @case.Name, 
+                                                        Guid.NewGuid(), 
+                                                        "TO BE FIXED", 
+                                                        @case.Result.Success ? UnitTestResult.ResultOutcome.Passed : UnitTestResult.ResultOutcome.Failed, 
+                                                        description.File.FullPath, 
+                                                        description.Name);
+                            });
+
+                        }));
+             }
+
+
+             var trx = builder.Build();
+
+        }
+
+        static bool CantResultBeReported(Case @case)
+        {
+            return String.IsNullOrEmpty(@case.Name);
         }
 
         private static TeamFoundationIdentity ReadCurrentUsersIdentity(IIdentityManagementService identityManagementService)
