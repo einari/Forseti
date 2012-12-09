@@ -17,11 +17,11 @@ namespace Forseti.TFSBuildActivities.Trx
 
         public XElement ConvertToTrxNode()
         {
-            var element = new XElement(XName.Get(_elementName,"http://microsoft.com/schemas/VisualStudio/TeamTest/2010"));
+            var element = new XElement(TrxBuilder.XMLNS + _elementName);
             element.SetAttributeValue("id", Id);
             element.SetAttributeValue("name", Name);
             element.SetAttributeValue("runUser", RunUser);
-            //element.SetAttributeValue("xmlns","http://microsoft.com/schemas/VisualStudio/TeamTest/2010");
+
             return element;
         }
     }

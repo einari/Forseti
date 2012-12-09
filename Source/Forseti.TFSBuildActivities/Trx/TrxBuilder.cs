@@ -8,12 +8,17 @@ namespace Forseti.TFSBuildActivities.Trx
 {
     public class TrxBuilder 
     {
+        //public const string XMLNS = "http://microsoft.com/schemas/VisualStudio/TeamTest/2010";
+        public static readonly XNamespace XMLNS = "http://microsoft.com/schemas/VisualStudio/TeamTest/2010";
 
         public TestRun TestRun { get; private set; }
         public TestSettings RunSettings { get; private set; }
         public ResultSummary Summary { get; private set; }
         public Times Timing { get; private set; }
         public TestLists TestLists { get; private set; }
+
+        public TestDefinitions Definitions { get; private set; }
+        public TestEntries TestEntries { get; private set; }
         public Results Results { get; private set; }
 
 
@@ -24,6 +29,9 @@ namespace Forseti.TFSBuildActivities.Trx
             Summary = new ResultSummary();
             Timing = new Times();
             TestLists = new TestLists();
+
+            Definitions = new TestDefinitions();
+            TestEntries = new TestEntries();
             Results = new Results();
         }
 
@@ -64,19 +72,17 @@ namespace Forseti.TFSBuildActivities.Trx
 
 
 
-        public TrxBuilder AddTestResult(string name, string id, string computerName, TestResult.ResultOutcome outcome ,string testListName = "Default")
+        public TrxBuilder AddTestResult(string name, Guid id, string computerName, UnitTestResult.ResultOutcome outcome ,string testFilePath = @"C:\TestFilePath\SomeTest", string testClassName = @"SomeTest")
         {
+            var testId = Guid.NewGuid();
+            var executionId = Guid.NewGuid();
 
-            var testResult = new TestResult 
-                                    { 
-                                        Name = name, 
-                                        Id = id,
-                                        ComputerName = computerName,
-                                        ListId = TestLists.GetOrCreateListTypeByName(testListName),
-                                        Outcome = outcome
-                                    };
-            Results.Add(testResult);
+            Definitions.AddDefinition(testId, name, executionId, testFilePath, testClassName);
 
+            TestEntries.AddEntry(testId, executionId);
+
+            Results.AddResult(name, testId, executionId, computerName, outcome);
+            
             return this;
         }
 
@@ -86,7 +92,9 @@ namespace Forseti.TFSBuildActivities.Trx
             testRun.Add( RunSettings.ConvertToTrxNode(),
                          Timing.ConvertToTrxNode(),
                          Summary.ConvertToTrxNode(),
+                         Definitions.ConvertToTrxNode(),
                          TestLists.ConvertToTrxNode(),
+                         TestEntries.ConvertToTrxNode(),
                          Results.ConvertToTrxNode());
 
             var trx = new XDocument(testRun);

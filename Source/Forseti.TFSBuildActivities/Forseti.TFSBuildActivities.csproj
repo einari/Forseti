@@ -94,8 +94,12 @@
     <Compile Include="Trx\IConvertToTrx.cs" />
     <Compile Include="Trx\Results.cs" />
     <Compile Include="Trx\ResultSummary.cs" />
+    <Compile Include="Trx\TestDefinitions.cs" />
+    <Compile Include="Trx\TestEntries.cs" />
+    <Compile Include="Trx\TestEntry.cs" />
     <Compile Include="Trx\TestLists.cs" />
-    <Compile Include="Trx\TestResult.cs" />
+    <Compile Include="Trx\UnitTestDefinition.cs" />
+    <Compile Include="Trx\UnitTestResult.cs" />
     <Compile Include="Trx\TestRun.cs" />
     <Compile Include="Trx\TestSettings.cs" />
     <Compile Include="Trx\Times.cs" />

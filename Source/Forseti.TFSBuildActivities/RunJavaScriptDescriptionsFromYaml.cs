@@ -129,7 +129,7 @@ namespace Forseti.TFSBuildActivities
                        .SetDefaultTestSettingsWithDescription("This is a hardcoded test")
                        .SetResultSummary(1, 0)
                        .SetRunTimes(DateTime.Now, DateTime.Now)
-                       .AddTestResult("should_be_a_test", "for_System_when_publishing_should_be_a_test", "BUILDSERVER" , TestResult.ResultOutcome.passed, "QUnit")
+                       .AddTestResult("should_be_a_test", Guid.NewGuid(), "BUILDSERVER" , UnitTestResult.ResultOutcome.Passed, "QUnit")
                        .Build();
 
                 Log("XML {0} : ", trx);

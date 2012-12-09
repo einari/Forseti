@@ -21,8 +21,9 @@ namespace Forseti.TFSBuildActivities.Trx
 
         public XElement ConvertToTrxNode()
         {
-            var resultSummary = new XElement(_elementName, new XAttribute("outcome", Outcome.COMPLETED));
-            resultSummary.Add(new XElement("Counters", new XAttribute("passed",Passed)
+            var resultSummary = new XElement(TrxBuilder.XMLNS + _elementName, new XAttribute("outcome", Outcome.COMPLETED));
+            resultSummary.Add(new XElement(TrxBuilder.XMLNS + "Counters", 
+                                                      new XAttribute("passed", Passed)
                                                     , new XAttribute("failed", Failed)
                                                     , new XAttribute("total", Total)));
             return resultSummary;

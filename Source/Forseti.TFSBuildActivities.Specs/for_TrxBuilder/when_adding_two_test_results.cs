@@ -10,24 +10,24 @@ namespace Forseti.TFSBuildActivities.Specs.for_TrxBuilder
 {
     public class when_adding_two_test_results : given.a_builder
     {
-        static string name, id, computerName, testListName;
-        static string name2, id2;
+        static Guid id, id2;
+        static string name, computerName, testListName,name2;
 
         Establish context = () => 
                             {
                                 name = "test name";
-                                id ="System.suite.name";
+                                id =Guid.NewGuid();
                                 computerName = "WTF";
                                 testListName = "Qunit";
 
                                 name2 = "another " + name;
-                                id2 = "Another." + id;
+                                id2 = Guid.NewGuid();
                             };
 
         Because of = () =>
                         {
-                            builder.AddTestResult(name, id, computerName,TestResult.ResultOutcome.passed, testListName);
-                            builder.AddTestResult(name2, id2, computerName, TestResult.ResultOutcome.failed, testListName);
+                            builder.AddTestResult(name, id, computerName,UnitTestResult.ResultOutcome.Passed, testListName);
+                            builder.AddTestResult(name2, id2, computerName, UnitTestResult.ResultOutcome.Failed, testListName);
                         };
 
         It should_have_two_tests_added = () => builder.Results.TestResults.Count().ShouldEqual(2);

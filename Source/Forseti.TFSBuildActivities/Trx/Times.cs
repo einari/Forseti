@@ -10,14 +10,16 @@ namespace Forseti.TFSBuildActivities.Trx
     {
         const string _elementName = "Times";
 
+        public DateTime Creation { get { return StartTime; } }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
 
         public XElement ConvertToTrxNode()
         {
-            var element = new XElement(_elementName);
+            var element = new XElement(TrxBuilder.XMLNS + _elementName);
+            element.SetAttributeValue("creation", Creation);
             element.SetAttributeValue("start", StartTime);
-            element.SetAttributeValue("end", EndTime);
+            element.SetAttributeValue("finish", EndTime);
             return element;
         }
     }

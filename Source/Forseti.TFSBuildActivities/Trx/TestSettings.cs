@@ -21,19 +21,19 @@ namespace Forseti.TFSBuildActivities.Trx
 
         public XElement ConvertToTrxNode()
         {
-            var testSettings = new XElement(XName.Get(_elementName, TrxBuilder.XMLNS));
-            testSettings.SetAttributeValue("name","Build");
-            testSettings.SetAttributeValue("id", Guid.NewGuid());
+            var testSettings = new XElement(TrxBuilder.XMLNS + _elementName);
+            testSettings.SetAttributeValue("name", "Default Test Settings");
+            testSettings.SetAttributeValue("id", Guid.Parse("8dfb34aa-91bc-45e3-8609-d0a4e732d982"));
 
-            var description = new XElement("Description",Description);
+            var description = new XElement(TrxBuilder.XMLNS + "Description", Description);
 
-            var deploymentElement = new XElement("Deployment");
+            var deploymentElement = new XElement(TrxBuilder.XMLNS + "Deployment");
             deploymentElement.SetAttributeValue("enabled", EnableDeployment);
             deploymentElement.SetAttributeValue("runDeploymentRoot", RunDeploymentRoot);
 
-            var execution = new XElement("Execution");
-            execution.SetElementValue("TestTypeSpecific","");
-            execution.Add(new XElement("AgentRule", new XAttribute("name", ExecutionAgentRule)));
+            var execution = new XElement(TrxBuilder.XMLNS + "Execution");
+            execution.Add(new XElement(TrxBuilder.XMLNS + "TestTypeSpecific", ""));
+            execution.Add(new XElement(TrxBuilder.XMLNS + "AgentRule", new XAttribute("name", ExecutionAgentRule)));
 
             
             testSettings.Add(description, deploymentElement, execution);

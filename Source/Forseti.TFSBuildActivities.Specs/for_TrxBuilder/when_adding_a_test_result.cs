@@ -10,14 +10,15 @@ namespace Forseti.TFSBuildActivities.Specs.for_TrxBuilder
 {
     public class when_adding_a_test_result : given.a_builder
     {
-        static string name, id, computerName, testListName;
-        static IEnumerable<TestResult> results;
+        static Guid id;
+        static string name, computerName, testListName;
+        static IEnumerable<UnitTestResult> results;
         static IDictionary<string, Guid> testLists;
 
         Establish context = () => 
                             {
                                 name = "test name";
-                                id ="System.suite.name";
+                                id = Guid.NewGuid();
                                 computerName = "WTF";
                                 testListName = "Qunit";
 
@@ -25,14 +26,29 @@ namespace Forseti.TFSBuildActivities.Specs.for_TrxBuilder
 
         Because of = () =>
                         {
-                            builder.AddTestResult(name, id, computerName, TestResult.ResultOutcome.passed, testListName);
-                            testLists = builder.TestLists.Lists;
-                            results = builder.Results.TestResults;
+                            builder.AddTestResult(name, id, computerName, UnitTestResult.ResultOutcome.Passed, testListName);
                         };
 
-        It should_have_one_test_added = () => results.Count().ShouldEqual(1);
 
-        It should_contain_a_list_type_for_test_list = () => testLists.ContainsKey(testListName).ShouldBeTrue();
-       
+        It should_create_a_test_definition = () => builder.Definitions.UnitTests.Count().ShouldEqual(1);
+
+        It should_create_a_test_entry = () => builder.TestEntries.Entries.Count().ShouldEqual(1);
+
+        It should_have_one_test_result_added = () => builder.Results.TestResults.Count().ShouldEqual(1);
+
+        It should_have_correct_matching_values = () =>
+                                                    {
+                                                        var definition = builder.Definitions.UnitTests.First();
+                                                        var testEntry = builder.TestEntries.Entries.First();
+                                                        var testResult = builder.Results.TestResults.First();
+
+                                                        testEntry.TestId.ShouldEqual(definition.Id);
+                                                        testEntry.ExecutionId.ShouldEqual(definition.ExecutionId);
+
+                                                        testResult.Id.ShouldEqual(definition.Id);
+                                                        testResult.ExecutionId.ShouldEqual(definition.ExecutionId);
+                                                        testResult.Name.ShouldEqual(definition.Name);
+
+                                                    };
     }
 } 
