@@ -18,6 +18,7 @@ using Forseti.Harnesses;
 using Forseti.TFSBuildActivities.Trx;
 using Forseti.Extensions;
 using Forseti.Suites;
+using System.Xml.Linq;
 
 
 namespace Forseti.TFSBuildActivities
@@ -122,7 +123,6 @@ namespace Forseti.TFSBuildActivities
 
             }
 
-            GenerateTRXResultFileForPublishing(testResults);
 
 
             try
@@ -135,6 +135,8 @@ namespace Forseti.TFSBuildActivities
                        .SetRunTimes(DateTime.Now, DateTime.Now)
                        .AddTestResult("should_be_a_test", Guid.NewGuid(), "BUILDSERVER" , UnitTestResult.ResultOutcome.Passed, "QUnit")
                        .Build();
+
+                //var trx = GenerateTRXResultFileForPublishing(testResults);
 
                 Log("XML {0} : ", trx);
 
@@ -156,7 +158,7 @@ namespace Forseti.TFSBuildActivities
 
         
 
-        private void GenerateTRXResultFileForPublishing(IEnumerable<HarnessResult> testResults)
+        private XDocument GenerateTRXResultFileForPublishing(IEnumerable<HarnessResult> testResults)
         {
             var successfullTests = testResults.Sum(suite => suite.SuccessfulCaseCount);
             var failingTests = testResults.Sum(suite => suite.FailedCaseCount);
@@ -195,6 +197,8 @@ namespace Forseti.TFSBuildActivities
 
 
              var trx = builder.Build();
+
+             return trx;
 
         }
 

@@ -38,8 +38,8 @@ namespace Forseti.TFSBuildActivities
             _context.Log("TrxFilePath : {0}", trxFilePath);
             var filePath = Path.GetFullPath(trxFilePath);
 
-            //if (!File.Exists(filePath))
-                //throw new FileNotFoundException("Could not locate the file path", trxFilePath);
+            if (!File.Exists(filePath))
+                throw new FileNotFoundException("Could not locate the trx to be published to the build at following path : {0}", trxFilePath);
 
             var mstestPath = Environment.ExpandEnvironmentVariables(@"C:\Program Files (X86)\Microsoft Visual Studio 10.0\Common7\IDE\MSTest.exe");//("%VS100COMNTOOLS%\\..\\IDE\\MSTest.exe");
             _context.Log("MSTEST Path : {0}", mstestPath);
