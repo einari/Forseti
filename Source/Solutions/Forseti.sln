@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forseti.TFSBuildActivities"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forseti.TFSBuildActivities.Specs", "..\Forseti.TFSBuildActivities.Specs\Forseti.TFSBuildActivities.Specs.csproj", "{DD9B901D-D29A-4B3B-8DA0-7D7AA7D66D12}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forseti.TRX", "..\Forseti.TRX\Forseti.TRX.csproj", "{1CC07CC7-F6C5-494B-900B-2CDE971E570D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -155,6 +157,16 @@ Global
 		{DD9B901D-D29A-4B3B-8DA0-7D7AA7D66D12}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{DD9B901D-D29A-4B3B-8DA0-7D7AA7D66D12}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DD9B901D-D29A-4B3B-8DA0-7D7AA7D66D12}.Release|x86.ActiveCfg = Release|Any CPU
+		{1CC07CC7-F6C5-494B-900B-2CDE971E570D}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{1CC07CC7-F6C5-494B-900B-2CDE971E570D}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{1CC07CC7-F6C5-494B-900B-2CDE971E570D}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{1CC07CC7-F6C5-494B-900B-2CDE971E570D}.Debug|x86.ActiveCfg = Debug|x86
+		{1CC07CC7-F6C5-494B-900B-2CDE971E570D}.Debug|x86.Build.0 = Debug|x86
+		{1CC07CC7-F6C5-494B-900B-2CDE971E570D}.Release|Any CPU.ActiveCfg = Release|x86
+		{1CC07CC7-F6C5-494B-900B-2CDE971E570D}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{1CC07CC7-F6C5-494B-900B-2CDE971E570D}.Release|Mixed Platforms.Build.0 = Release|x86
+		{1CC07CC7-F6C5-494B-900B-2CDE971E570D}.Release|x86.ActiveCfg = Release|x86
+		{1CC07CC7-F6C5-494B-900B-2CDE971E570D}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

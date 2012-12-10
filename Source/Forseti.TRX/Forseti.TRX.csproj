@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1CC07CC7-F6C5-494B-900B-2CDE971E570D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Forseti.TRX</RootNamespace>
+    <AssemblyName>Forseti.TRX</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reporting\ICanGeneratetTrxPart.cs" />
+    <Compile Include="Reporting\Results.cs" />
+    <Compile Include="Reporting\ResultSummary.cs" />
+    <Compile Include="Reporting\TestDefinitions.cs" />
+    <Compile Include="Reporting\TestEntries.cs" />
+    <Compile Include="Reporting\TestEntry.cs" />
+    <Compile Include="Reporting\TestLists.cs" />
+    <Compile Include="Reporting\TestRun.cs" />
+    <Compile Include="Reporting\TestSettings.cs" />
+    <Compile Include="Reporting\Times.cs" />
+    <Compile Include="Reporting\TrxBuilder.cs" />
+    <Compile Include="Reporting\UnitTestDefinition.cs" />
+    <Compile Include="Reporting\UnitTestResult.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Forseti.Buster\Forseti.Buster.csproj">
+      <Project>{0BCEAD10-6A48-444E-A8B3-841275529002}</Project>
+      <Name>Forseti.Buster</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forseti.Jasmine\Forseti.Jasmine.csproj">
+      <Project>{E12A4B4F-04A1-4AD3-A5BC-6C3801428BEC}</Project>
+      <Name>Forseti.Jasmine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forseti.OSX\Forseti.OSX.csproj">
+      <Project>{EF366B9B-0C1A-41BD-BD67-E6D344A5DF76}</Project>
+      <Name>Forseti.OSX</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forseti.QUnit\Forseti.QUnit.csproj">
+      <Project>{77E4DF53-BEB2-4A63-AF73-A0CDF9CB8BD7}</Project>
+      <Name>Forseti.QUnit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forseti\Forseti.csproj">
+      <Project>{F4DC4B9D-BE5F-4DA6-9E18-CA1A242739A5}</Project>
+      <Name>Forseti</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
