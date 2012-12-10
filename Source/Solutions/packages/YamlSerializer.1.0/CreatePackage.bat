@@ -1,1 +1,0 @@
-NuGet.exe pack YamlSerializer.nuspec
