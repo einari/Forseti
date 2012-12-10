@@ -19,6 +19,7 @@ using Forseti.TFSBuildActivities.Trx;
 using Forseti.Extensions;
 using Forseti.Suites;
 using System.Xml.Linq;
+using Microsoft.TeamFoundation.VersionControl.Client;
 
 
 namespace Forseti.TFSBuildActivities
@@ -50,6 +51,9 @@ namespace Forseti.TFSBuildActivities
        
         public InArgument<string> ForsetiPath { get; set; }
 
+        [RequiredArgument]
+        public InArgument<Workspace> Workspace { get; set; }
+
         CodeActivityContext _context;
 
         void Log(string message, params object[] parameters) 
@@ -64,39 +68,25 @@ namespace Forseti.TFSBuildActivities
         {
             _context = context;
             var origianlCurrentDir = Directory.GetCurrentDirectory();
+
+            var workspace = context.GetValue(Workspace);
+            var yamlFile = context.GetValue(YamlFile);
+            Log("InArgument Workspace : {0}", workspace);
+            Log("InArgument YamlFile : {0}", yamlFile);
+
+            var workingDirectory = Path.GetFullPath(workspace.Folders[0].LocalItem);
+            Log("WorkigDirectory : {0}",workingDirectory);
             var buildDetail = context.GetExtension<IBuildDetail>();
 
+            var yamlPath = Path.Combine(workingDirectory, "forseti.yaml");
+            Log("YamlPath : {0}", yamlPath);
             
-            var buildDirectory  = System.Environment.ExpandEnvironmentVariables("%BuildDirectory%");
-
-            Log("BuildDirectory : {0}", buildDirectory);
-
-            
+          
+            Directory.SetCurrentDirectory(workingDirectory);
 
 
-            //var currentDirectory = Directory.GetCurrentDirectory();
-            var currentDirectory = @"C:\Builds\1\ForsetiTesting\Continuous\Sources\";
-            Log("CurrentDirectory : {0}", currentDirectory);
-
-            var file = context.GetValue(this.YamlFile);
-            Log("YamlFile : {0}", file);
-            
-            var fileDirectory = Path.GetDirectoryName(file);
-            Log("YamleFileDirectory : {0}",fileDirectory);
-            Directory.SetCurrentDirectory(fileDirectory);
-
-
-            string fullPath = currentDirectory + @"Tools\Forseti\Forseti.exe";
-            Log("ForsetiPath : {0}", fullPath);            
-
-
-            string workingDirectory = Path.GetDirectoryName(buildDirectory);
-            Log("WorkingDirecrory : {0}", workingDirectory);
-
-
-            Directory.SetCurrentDirectory(currentDirectory);
-            var yamlPath = currentDirectory + "forseti.yaml";
-            Log("CurrentDirectory : {0}", Directory.GetCurrentDirectory());
+            //string forsetiPath = Path.Combine(workingDirectory,@"Tools\Forseti\Forseti.exe");
+            //Log("ForsetiPath : {0}", forsetiPath);            
             
             IEnumerable<HarnessResult> testResults = null;
             try
@@ -109,8 +99,8 @@ namespace Forseti.TFSBuildActivities
                 configuration.HarnessChangeManager.RegisterWatcher(typeof(HarnessWatcher));
 
 
-                //testResults = configuration.HarnessManager.Run();
-                //Log("Forseti Results : {0}", testResults);
+                testResults = configuration.HarnessManager.Run();
+                Log("Forseti Results : {0}", testResults);
 
             }
             catch (Exception e)
@@ -140,23 +130,22 @@ namespace Forseti.TFSBuildActivities
 
                 Log("XML {0} : ", trx);
 
-                trx.Save(currentDirectory + "forseti.trx");
+                trx.Save(workingDirectory + "forseti.trx");
 
                 var publisher = new TestResultPublisher(context);
 
                 //publisher.PublishResultsFromPath(currentDirectory + "test.trx");
-                publisher.PublishResultsFromPath(currentDirectory + "forseti.trx");
+                publisher.PublishResultsFromPath(workingDirectory + "forseti.trx");
 
             }
             catch (Exception e)
             {
                 Log("Something went wrong while publishing tests! : {0}", e);
 
-            }
+            }   
             context.Log("Done");
-        }
 
-        
+        }
 
         private XDocument GenerateTRXResultFileForPublishing(IEnumerable<HarnessResult> testResults)
         {
