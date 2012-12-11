@@ -85,7 +85,7 @@ namespace Forseti.Pages.Spark
 
         void CopyScript(string rootPath, Files.File scriptFile)
         {
-            var target = rootPath + scriptFile;
+            var target = rootPath + scriptFile.Filename;
             var script = scriptFile.ReadAllText();
 				//File.ReadAllText(scriptFile);
 
