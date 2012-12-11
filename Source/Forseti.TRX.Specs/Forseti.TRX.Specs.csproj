@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{DD9B901D-D29A-4B3B-8DA0-7D7AA7D66D12}</ProjectGuid>
+    <ProjectGuid>{66023350-4C8C-4944-9B2B-A41ACEE8F12A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Forseti.TFSBuildActivities.Specs</RootNamespace>
-    <AssemblyName>Forseti.TFSBuildActivities.Specs</AssemblyName>
+    <RootNamespace>Forseti.TRX.Specs</RootNamespace>
+    <AssemblyName>Forseti.TRX.Specs</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\Solutions\</SolutionDir>
@@ -33,18 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core">
-      <HintPath>..\Solutions\packages\Castle.Core.3.1.0\lib\net40-client\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="FakeItEasy">
-      <HintPath>..\Solutions\packages\FakeItEasy.1.7.4626.65\lib\NET40\FakeItEasy.dll</HintPath>
-    </Reference>
-    <Reference Include="Machine.Fakes">
-      <HintPath>..\Solutions\packages\Machine.Fakes.1.0.2\lib\net40\Machine.Fakes.dll</HintPath>
-    </Reference>
-    <Reference Include="Machine.Fakes.Adapters.FakeItEasy">
-      <HintPath>..\Solutions\packages\Machine.Fakes.FakeItEasy.1.0.2\lib\net40\Machine.Fakes.Adapters.FakeItEasy.dll</HintPath>
-    </Reference>
     <Reference Include="Machine.Specifications">
       <HintPath>..\Solutions\packages\Machine.Specifications.0.5.10\lib\net40\Machine.Specifications.dll</HintPath>
     </Reference>
@@ -63,15 +51,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="for_TrxBuilder\given\a_builder.cs" />
+    <Compile Include="for_TrxBuilder\when_adding_a_test_result.cs" />
+    <Compile Include="for_TrxBuilder\when_building_a_test_run.cs" />
+    <Compile Include="for_TrxBuilder\when_setting_default_test_settings.cs" />
+    <Compile Include="for_TrxBuilder\when_setting_result_summary.cs" />
+    <Compile Include="for_TrxBuilder\when_setting_run_information.cs" />
+    <Compile Include="for_TrxBuilder\when_setting_timing_values.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Forseti.TFSBuildActivities\Forseti.TFSBuildActivities.csproj">
-      <Project>{98EC024C-6439-44B1-8B1E-29E457B2201F}</Project>
-      <Name>Forseti.TFSBuildActivities</Name>
+    <ProjectReference Include="..\Forseti.TRX\Forseti.TRX.csproj">
+      <Project>{1CC07CC7-F6C5-494B-900B-2CDE971E570D}</Project>
+      <Name>Forseti.TRX</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

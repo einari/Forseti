@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using Machine.Specifications;
 using System.Xml.Linq;
-using Forseti.TFSBuildActivities.Trx;
+using Forseti.TRX.Transformation;
 
-namespace Forseti.TFSBuildActivities.Specs.for_TrxBuilder
+namespace Forseti.TRX.Specs.for_TrxBuilder
 {
     public class when_setting_run_information : given.a_builder
     {

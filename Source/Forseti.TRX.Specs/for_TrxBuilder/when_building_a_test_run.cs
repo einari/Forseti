@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
-using Forseti.TFSBuildActivities.Trx;
+using Forseti.TRX.Transformation;
 using Machine.Specifications;
 using System.Xml.Linq;
 
-namespace Forseti.TFSBuildActivities.Specs.for_TrxBuilder
+namespace Forseti.TRX.Specs.for_TrxBuilder
 {
     public class when_building_a_test_run
     {
@@ -23,7 +23,7 @@ namespace Forseti.TFSBuildActivities.Specs.for_TrxBuilder
                                        .SetResultSummary(1, 0)
                                        .SetRunTimes(DateTime.Now, DateTime.Now)
                                        .AddTestResult("should_be_a_test", Guid.NewGuid(), "BUILDSERVER", UnitTestResult.ResultOutcome.Passed, "QUnit")
-                                       .Build();
+                                       .AsTrxDocument();
 
                             
                         };

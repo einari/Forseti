@@ -1,6 +1,5 @@
 ﻿using System.Activities;
 using System.IO;
-using Forseti.Configuration;
 using Microsoft.TeamFoundation.Build.Client;
 using System.ComponentModel;
 using Microsoft.TeamFoundation.TestManagement.Client;
@@ -14,10 +13,6 @@ using System.ServiceModel;
 using Microsoft.TeamFoundation.Framework.Client;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Forseti.Harnesses;
-using Forseti.TFSBuildActivities.Trx;
-using Forseti.Extensions;
-using Forseti.Suites;
 using System.Xml.Linq;
 using Microsoft.TeamFoundation.VersionControl.Client;
 
@@ -81,61 +76,28 @@ namespace Forseti.TFSBuildActivities
             var yamlPath = Path.Combine(workingDirectory, "forseti.yaml");
             Log("YamlPath : {0}", yamlPath);
             
-          
-            Directory.SetCurrentDirectory(workingDirectory);
-
-
-            //string forsetiPath = Path.Combine(workingDirectory,@"Tools\Forseti\Forseti.exe");
-            //Log("ForsetiPath : {0}", forsetiPath);            
-            
-            IEnumerable<HarnessResult> testResults = null;
-            try
-            {
-
-                var configuration = Configure.WithStandard().FromConfigurationFile(yamlPath).Initialize();
-
-                Log("Forseti configuration initialized : {0}", configuration);
-
-                configuration.HarnessChangeManager.RegisterWatcher(typeof(HarnessWatcher));
-
-
-                testResults = configuration.HarnessManager.Run();
-                Log("Forseti Results : {0}", testResults);
-
-            }
-            catch (Exception e)
-            {
-                Log("Something went wrong while running forseti tests! : {0}", e);
-            }
-            finally
-            {
-                Directory.SetCurrentDirectory(origianlCurrentDir);
-
-            }
-
-
 
             try
             {
-                var builder = new TrxBuilder();
+                //var builder = new TrxBuilder();
 
-                var trx = builder.SetRunInformation(Guid.NewGuid(), "SomeName", "SomeUSer")
-                       .SetDefaultTestSettingsWithDescription("This is a hardcoded test")
-                       .SetResultSummary(1, 0)
-                       .SetRunTimes(DateTime.Now, DateTime.Now)
-                       .AddTestResult("should_be_a_test", Guid.NewGuid(), "BUILDSERVER" , UnitTestResult.ResultOutcome.Passed, "QUnit")
-                       .Build();
+                //var trx = builder.SetRunInformation(Guid.NewGuid(), "SomeName", "SomeUSer")
+                //       .SetDefaultTestSettingsWithDescription("This is a hardcoded test")
+                //       .SetResultSummary(1, 0)
+                //       .SetRunTimes(DateTime.Now, DateTime.Now)
+                //       .AddTestResult("should_be_a_test", Guid.NewGuid(), "BUILDSERVER" , UnitTestResult.ResultOutcome.Passed, "QUnit")
+                //       .Build();
 
                 //var trx = GenerateTRXResultFileForPublishing(testResults);
 
-                Log("XML {0} : ", trx);
+                //Log("XML {0} : ", trx);
 
-                trx.Save(workingDirectory + "forseti.trx");
+                //trx.Save(workingDirectory + "forseti.trx");
 
-                var publisher = new TestResultPublisher(context);
+                //var publisher = new testresultpublisher(context);
 
-                //publisher.PublishResultsFromPath(currentDirectory + "test.trx");
-                publisher.PublishResultsFromPath(workingDirectory + "forseti.trx");
+                ////publisher.publishresultsfrompath(currentdirectory + "test.trx");
+                //publisher.publishresultsfrompath(workingdirectory + "forseti.trx");
 
             }
             catch (Exception e)
@@ -145,55 +107,6 @@ namespace Forseti.TFSBuildActivities
             }   
             context.Log("Done");
 
-        }
-
-        private XDocument GenerateTRXResultFileForPublishing(IEnumerable<HarnessResult> testResults)
-        {
-            var successfullTests = testResults.Sum(suite => suite.SuccessfulCaseCount);
-            var failingTests = testResults.Sum(suite => suite.FailedCaseCount);
-            var startTime = testResults.Min(suite => suite.StartTime);
-            var endTime = testResults.Max(suite => suite.EndTime);
-
-
-            var builder = new TrxBuilder();
-            builder.SetRunInformation(Guid.NewGuid(), "SomeName", "SomeUSer")
-                      .SetDefaultTestSettingsWithDescription("This is a hardcoded test")
-                      .SetResultSummary(successfullTests, failingTests)
-                      .SetRunTimes(startTime, endTime);
-
-
-
-             foreach (var harnessResult in testResults)
-             {
-                 harnessResult.AffectedSuites.ForEach(suite => 
-                        suite.Descriptions.ForEach(description =>
-                        {
-                            description.Cases.ForEach(@case =>
-                            {
-                                if (CantResultBeReported(@case))
-                                    return;
-
-                                builder.AddTestResult( @case.Name, 
-                                                        Guid.NewGuid(), 
-                                                        "TO BE FIXED", 
-                                                        @case.Result.Success ? UnitTestResult.ResultOutcome.Passed : UnitTestResult.ResultOutcome.Failed, 
-                                                        description.File.FullPath, 
-                                                        description.Name);
-                            });
-
-                        }));
-             }
-
-
-             var trx = builder.Build();
-
-             return trx;
-
-        }
-
-        static bool CantResultBeReported(Case @case)
-        {
-            return String.IsNullOrEmpty(@case.Name);
         }
 
         private static TeamFoundationIdentity ReadCurrentUsersIdentity(IIdentityManagementService identityManagementService)

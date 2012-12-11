@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Forseti.TFSBuildActivities.Trx;
+using Forseti.TRX.Transformation;
 using Machine.Specifications;
 
-namespace Forseti.TFSBuildActivities.Specs.for_TrxBuilder.given
+namespace Forseti.TRX.Specs.for_TrxBuilder.given
 {
     public class a_builder
     {

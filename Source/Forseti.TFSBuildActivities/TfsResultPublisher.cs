@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace Forseti.TFSBuildActivities
 {
-    public class TestResultPublisher
+    public class TfsResultPublisher
     {
         CodeActivityContext _context;
         IBuildDetail _buildDetails;
@@ -17,7 +17,7 @@ namespace Forseti.TFSBuildActivities
         string _buildNumber;
         string _teamProjectName;
 
-        public TestResultPublisher(CodeActivityContext context)
+        public TfsResultPublisher(CodeActivityContext context)
         {
             _context = context;
             GetBuildDetails(context);
