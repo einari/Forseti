@@ -70,25 +70,27 @@ namespace Forseti.TFSBuildActivities
 
             var buildDetail = context.GetExtension<IBuildDetail>();
             _buildNumber = buildDetail.BuildNumber;
-            var identityManagementService = buildDetail.BuildServer.TeamProjectCollection.GetService<IIdentityManagementService>();
-
+            //var tfs = buildDetail.BuildServer.TeamProjectCollection;
+            //var identityManagementService = tfs.GetService<IIdentityManagementService>();
 
             try
             {
                 var trxPath = Path.Combine(_workspaceDirectory, string.Format("forseti_{0}.trx", _buildNumber));
                 var computerName = Environment.MachineName;
                 var userName = WindowsIdentity.GetCurrent().Name;
-                var tfsUserName = ReadCurrentUsersIdentity(identityManagementService).DisplayName;
+                var tfsUserName = buildDetail.RequestedBy;
 
-                var testRunner = new TestRunner(_forsetiConfigurationPath, trxPath, computerName, userName , tfsUserName.ToString());
+                var testRunner = new TestRunner(_forsetiConfigurationPath, trxPath, computerName, userName , tfsUserName);
                 testRunner.Log = (output) => Log(output);
                 testRunner.RunTests();
+                
                 
 
             var publisher = new TfsResultPublisher(buildDetail.BuildServer.TeamProjectCollection.Uri.ToString(),
                                                    _buildNumber,
                                                    buildDetail.TeamProject,
                                                    "x86","Debug");
+                publisher.Log = (s) => Log(s);
                 publisher.PublishResultsFromPath(trxPath);
 
             }
@@ -120,19 +122,19 @@ namespace Forseti.TFSBuildActivities
 
         }
 
-        private TeamFoundationIdentity ReadCurrentUsersIdentity(IIdentityManagementService identityManagementService)
-        {
-                var currentUser = WindowsIdentity.GetCurrent();
+        //private TeamFoundationIdentity ReadCurrentUsersIdentity(IIdentityManagementService identityManagementService)
+        //{
+        //        var currentUser = WindowsIdentity.GetCurrent();
 
-                if (currentUser == null)
-                    throw new InvalidOperationException("Could not find current Windows user.");
+        //        if (currentUser == null)
+        //            throw new InvalidOperationException("Could not find current Windows user.");
 
-                var result = identityManagementService.ReadIdentities(Microsoft.TeamFoundation.Framework.Common.IdentitySearchFactor.AccountName, new[] { currentUser.Name }, 0, 0);
-                if ((result == null) || (result.Length != 1) || (result[0].Length != 1))
-                    throw new InvalidOperationException(string.Format("Could not find user {0} in TFS.", currentUser.Name));
+        //        var result = identityManagementService.ReadIdentities(Microsoft.TeamFoundation.Framework.Common.IdentitySearchFactor.AccountName, new[] { currentUser.Name }, 0, 0);
+        //        if ((result == null) || (result.Length != 1) || (result[0].Length != 1))
+        //            throw new InvalidOperationException(string.Format("Could not find user {0} in TFS.", currentUser.Name));
 
-                return result[0][0];
-        }
+        //        return result[0][0];
+        //}
 
     }
 }

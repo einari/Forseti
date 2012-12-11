@@ -54,18 +54,16 @@ namespace Forseti.TFSBuildActivities
 
         public void PublishResultsFromPath(string trxFilePath)
         {
-            Log(string.Format("TrxFilePath : {0}", trxFilePath));
             var filePath = Path.GetFullPath(trxFilePath);
 
             if (!File.Exists(filePath))
                 throw new FileNotFoundException("Could not locate the trx to be published to the build at following path : {0}", trxFilePath);
 
             var mstestPath = LocateMstestPath();
-            Log(string.Format("MSTEST Path : {0}", mstestPath));
 
             var arguments = string.Format("/publish:{0} /publishbuild:{1} /platform:\"{2}\" /flavor:\"{3}\" /teamproject:{4} /publishresultsfile:{5}",
                                                     _teamProjectUrl, _buildNumber, _platform, _flavor, _teamProjectName, trxFilePath);
-           Log(string.Format("MSTEST Arguments : {0}", arguments));
+            Log(string.Format("{0} {1}",mstestPath, arguments));
 
             // Command-Line Options For puvlishing Test Results: http://msdn.microsoft.com/en-us/library/ms243151.aspx
             using (var msTest = new Process())
@@ -93,8 +91,6 @@ namespace Forseti.TFSBuildActivities
                     Log(errorStream);
                 }
                 msTest.WaitForExit();
-
-               Log(string.Format("Ran MSTEST for {0}", DateTime.Now.Subtract(startTime)));
             }
         }
     }

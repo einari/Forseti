@@ -39,9 +39,7 @@ namespace Forseti.TFSBuildActivities
 
         internal void RunTests()
         {
-            Log("Forseti exec: " + _forsetiExecutablePath);
-            Log("Forseti args: " + _forsetiArguments);
-            Log("Forseti workingdir: " + _forsetiWorkingDirectory);
+            Log(string.Format("{0} {1}",_forsetiExecutablePath,_forsetiArguments));
 
             using (var forsetiTrx = new Process())
             {
@@ -70,7 +68,6 @@ namespace Forseti.TFSBuildActivities
                 }
                 forsetiTrx.WaitForExit();
 
-                 Log(string.Format("Ran {0} for {1}", _forsetiExecutablePath, DateTime.Now.Subtract(startTime)));
             }
         }
     }
