@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Forseti.TRX.Reporting
+namespace Forseti.TRX.Transformation
 {
-    public class Times : ICanGeneratetTrxPart
+    public class Times : ITransformToTrx
     {
         const string _elementName = "Times";
 
@@ -14,7 +14,7 @@ namespace Forseti.TRX.Reporting
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
 
-        public XElement GenerateTrxPart()
+        public XElement TransformToTrx()
         {
             var element = new XElement(TrxBuilder.XMLNS + _elementName);
             element.SetAttributeValue("creation", Creation);

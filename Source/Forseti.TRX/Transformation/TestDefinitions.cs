@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Forseti.TRX.Reporting
+namespace Forseti.TRX.Transformation
 {
-    public class TestDefinitions : ICanGeneratetTrxPart
+    public class TestDefinitions : ITransformToTrx
     {
         const string _elementName = "TestDefinitions";
         public IList<UnitTestDefinition> UnitTests { get; set; }
@@ -30,7 +30,7 @@ namespace Forseti.TRX.Reporting
         }
 
 
-        public XElement GenerateTrxPart()
+        public XElement TransformToTrx()
         {
             var definitions = new XElement(TrxBuilder.XMLNS + _elementName);
             foreach (var testDefinition in UnitTests)

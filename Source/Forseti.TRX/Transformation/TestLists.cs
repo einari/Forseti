@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Forseti.TRX.Reporting
+namespace Forseti.TRX.Transformation
 {
-    public class TestLists : ICanGeneratetTrxPart
+    public class TestLists : ITransformToTrx
     {
         const string _elementName = "TestLists";
         public static readonly Guid RESULTSNOTINLIST = Guid.Parse("8c84fa94-04c1-424b-9868-57a2d4851a1d");
@@ -22,7 +22,7 @@ namespace Forseti.TRX.Reporting
         }
 
 
-        public XElement GenerateTrxPart()
+        public XElement TransformToTrx()
         {
             var testLists = new XElement(TrxBuilder.XMLNS + _elementName);
             foreach (var list in Lists)

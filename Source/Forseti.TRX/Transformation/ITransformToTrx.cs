@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Forseti.TRX.Reporting
+namespace Forseti.TRX.Transformation
 {
-    public interface ICanGeneratetTrxPart
+    public interface ITransformToTrx
     {
-        XElement GenerateTrxPart();
+        XElement TransformToTrx();
     }
 }

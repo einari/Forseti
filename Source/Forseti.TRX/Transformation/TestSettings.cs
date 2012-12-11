@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Forseti.TRX.Reporting
+namespace Forseti.TRX.Transformation
 {
-    public class TestSettings : ICanGeneratetTrxPart
+    public class TestSettings : ITransformToTrx
     {
         const string _elementName = "TestSettings";
 
@@ -19,7 +19,7 @@ namespace Forseti.TRX.Reporting
         public string RunDeploymentRoot { get; set; }
 
 
-        public XElement GenerateTrxPart()
+        public XElement TransformToTrx()
         {
             var testSettings = new XElement(TrxBuilder.XMLNS + _elementName);
             testSettings.SetAttributeValue("name", "Default Test Settings");

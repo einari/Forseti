@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Forseti.TRX.Reporting
+namespace Forseti.TRX.Transformation
 {
-    public class TestRun : ICanGeneratetTrxPart
+    public class TestRun : ITransformToTrx
     {
         const string _elementName = "TestRun";
 
@@ -15,7 +15,7 @@ namespace Forseti.TRX.Reporting
         public string RunUser { get; set; }
 
 
-        public XElement GenerateTrxPart()
+        public XElement TransformToTrx()
         {
             var element = new XElement(TrxBuilder.XMLNS + _elementName);
             element.SetAttributeValue("id", Id);

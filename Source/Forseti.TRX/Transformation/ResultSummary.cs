@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Forseti.TRX.Reporting
+namespace Forseti.TRX.Transformation
 {
 
-    public class ResultSummary : ICanGeneratetTrxPart
+    public class ResultSummary : ITransformToTrx
     {
         const string _elementName = "ResultSummary";
         public class Outcome 
@@ -19,7 +19,7 @@ namespace Forseti.TRX.Reporting
         public int Passed { get; set; }
         public int Total { get { return Passed + Failed; } }
 
-        public XElement GenerateTrxPart()
+        public XElement TransformToTrx()
         {
             var resultSummary = new XElement(TrxBuilder.XMLNS + _elementName, new XAttribute("outcome", Outcome.COMPLETED));
             resultSummary.Add(new XElement(TrxBuilder.XMLNS + "Counters", 

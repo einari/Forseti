@@ -11,7 +11,8 @@
     <RootNamespace>Forseti.TRX</RootNamespace>
     <AssemblyName>Forseti.TRX</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -33,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,43 +49,48 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reporting\ICanGeneratetTrxPart.cs" />
-    <Compile Include="Reporting\Results.cs" />
-    <Compile Include="Reporting\ResultSummary.cs" />
-    <Compile Include="Reporting\TestDefinitions.cs" />
-    <Compile Include="Reporting\TestEntries.cs" />
-    <Compile Include="Reporting\TestEntry.cs" />
-    <Compile Include="Reporting\TestLists.cs" />
-    <Compile Include="Reporting\TestRun.cs" />
-    <Compile Include="Reporting\TestSettings.cs" />
-    <Compile Include="Reporting\Times.cs" />
-    <Compile Include="Reporting\TrxBuilder.cs" />
-    <Compile Include="Reporting\UnitTestDefinition.cs" />
-    <Compile Include="Reporting\UnitTestResult.cs" />
+    <Compile Include="Transformation\ITransformToTrx.cs" />
+    <Compile Include="Transformation\Results.cs" />
+    <Compile Include="Transformation\ResultSummary.cs" />
+    <Compile Include="Transformation\Settings.cs" />
+    <Compile Include="Transformation\TestDefinitions.cs" />
+    <Compile Include="Transformation\TestEntries.cs" />
+    <Compile Include="Transformation\TestEntry.cs" />
+    <Compile Include="Transformation\TestLists.cs" />
+    <Compile Include="Transformation\TestRun.cs" />
+    <Compile Include="Transformation\TestSettings.cs" />
+    <Compile Include="Transformation\Times.cs" />
+    <Compile Include="Transformation\TrxBuilder.cs" />
+    <Compile Include="Transformation\TrxBuilderExtensions.cs" />
+    <Compile Include="Transformation\UnitTestDefinition.cs" />
+    <Compile Include="Transformation\UnitTestResult.cs" />
+    <Compile Include="Executor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forseti.Buster\Forseti.Buster.csproj">
       <Project>{0BCEAD10-6A48-444E-A8B3-841275529002}</Project>
       <Name>Forseti.Buster</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Forseti.ConsoleReporter\Forseti.ConsoleReporter.csproj">
+      <Project>{1F835984-A7D9-469F-B39C-50A23D51A161}</Project>
+      <Name>Forseti.ConsoleReporter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Forseti.Jasmine\Forseti.Jasmine.csproj">
       <Project>{E12A4B4F-04A1-4AD3-A5BC-6C3801428BEC}</Project>
       <Name>Forseti.Jasmine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Forseti.OSX\Forseti.OSX.csproj">
-      <Project>{EF366B9B-0C1A-41BD-BD67-E6D344A5DF76}</Project>
-      <Name>Forseti.OSX</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Forseti.QUnit\Forseti.QUnit.csproj">
-      <Project>{77E4DF53-BEB2-4A63-AF73-A0CDF9CB8BD7}</Project>
-      <Name>Forseti.QUnit</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forseti\Forseti.csproj">
       <Project>{F4DC4B9D-BE5F-4DA6-9E18-CA1A242739A5}</Project>
       <Name>Forseti</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>REM xcopy /Y $(ProjectDir)\bin\debug\*.* C:\PSS\Forseti-tfs\ForsetiTesting\Tools\Forseti.TRX\*.*</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

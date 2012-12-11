@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Forseti.TRX.Reporting
+namespace Forseti.TRX.Transformation
 {
     public class TrxBuilder 
     {
@@ -86,20 +86,21 @@ namespace Forseti.TRX.Reporting
             return this;
         }
 
-        public XDocument Build() 
+        public XDocument AsTrxDocument() 
         {
-            var testRun = TestRun.GenerateTrxPart();
-            testRun.Add( RunSettings.GenerateTrxPart(),
-                         Timing.GenerateTrxPart(),
-                         Summary.GenerateTrxPart(),
-                         Definitions.GenerateTrxPart(),
-                         TestLists.GenerateTrxPart(),
-                         TestEntries.GenerateTrxPart(),
-                         Results.GenerateTrxPart());
+            var testRun = TestRun.TransformToTrx();
+            testRun.Add( RunSettings.TransformToTrx(),
+                         Timing.TransformToTrx(),
+                         Summary.TransformToTrx(),
+                         Definitions.TransformToTrx(),
+                         TestLists.TransformToTrx(),
+                         TestEntries.TransformToTrx(),
+                         Results.TransformToTrx());
 
             var trx = new XDocument(testRun);
 
             return trx;
         }
+
     }
 }
