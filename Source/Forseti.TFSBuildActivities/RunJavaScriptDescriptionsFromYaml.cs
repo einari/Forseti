@@ -72,32 +72,28 @@ namespace Forseti.TFSBuildActivities
             var workingDirectory = Path.GetFullPath(workspace.Folders[0].LocalItem);
             Log("WorkigDirectory : {0}",workingDirectory);
             var buildDetail = context.GetExtension<IBuildDetail>();
+            var buildNumber = buildDetail.BuildNumber;
 
             var yamlPath = Path.Combine(workingDirectory, "forseti.yaml");
             Log("YamlPath : {0}", yamlPath);
+
+            var trxPath = Path.Combine(workingDirectory, string.Format("forseti_{0}.trx",buildNumber));
+            Log("TrxPath : {0}", trxPath);
+
             
 
             try
             {
-                //var builder = new TrxBuilder();
 
-                //var trx = builder.SetRunInformation(Guid.NewGuid(), "SomeName", "SomeUSer")
-                //       .SetDefaultTestSettingsWithDescription("This is a hardcoded test")
-                //       .SetResultSummary(1, 0)
-                //       .SetRunTimes(DateTime.Now, DateTime.Now)
-                //       .AddTestResult("should_be_a_test", Guid.NewGuid(), "BUILDSERVER" , UnitTestResult.ResultOutcome.Passed, "QUnit")
-                //       .Build();
+                var testRunner = new TestRunner(yamlPath, trxPath, "COMPUTER", "USER", "TFSUSER");
+                testRunner.Log = (output) => Log(output);
+                testRunner.RunTests();
+                
 
-                //var trx = GenerateTRXResultFileForPublishing(testResults);
-
-                //Log("XML {0} : ", trx);
-
-                //trx.Save(workingDirectory + "forseti.trx");
-
-                //var publisher = new testresultpublisher(context);
-
-                ////publisher.publishresultsfrompath(currentdirectory + "test.trx");
-                //publisher.publishresultsfrompath(workingdirectory + "forseti.trx");
+            var publisher = new TfsResultPublisher(buildDetail.BuildServer.TeamProjectCollection.Uri.ToString(),
+                                                   buildNumber,
+                                                   buildDetail.TeamProject );
+                publisher.PublishResultsFromPath(trxPath);
 
             }
             catch (Exception e)

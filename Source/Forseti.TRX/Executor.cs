@@ -18,19 +18,18 @@ namespace Forseti.TRX
             _forsetiConfiguration = Configure.WithStandard()
                                              .FromConfigurationFile(configurationFilePath)
                                              .Initialize();
-           _forsetiConfiguration.HarnessChangeManager.RegisterWatcher(typeof(ConsoleHarnessWatcher));
+            _forsetiConfiguration.HarnessChangeManager.RegisterWatcher(typeof(ConsoleHarnessWatcher));
         }
 
-        public static Executor WithForsetiConfigurationFile(File configurationFilePath) 
+        public static Executor WithForsetiConfigurationFile(string configurationFilePath) 
         {
-            var configurationDirectory = configurationFilePath.Folder;
+            var configurationDirectory = System.IO.Path.GetDirectoryName(configurationFilePath);
             if (System.IO.Directory.Exists(configurationDirectory))
             {
-                //Console.WriteLine("SettingCurrentDirectory to " + configurationDirectory);
                 System.IO.Directory.SetCurrentDirectory(configurationDirectory);
             }
 
-            return new Executor(configurationFilePath.Filename);
+            return new Executor(configurationFilePath);
         }
 
         public IEnumerable<HarnessResult> ExecuteTests()

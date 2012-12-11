@@ -11,42 +11,35 @@ namespace Forseti.TFSBuildActivities
 {
     public class TfsResultPublisher
     {
-        CodeActivityContext _context;
-        IBuildDetail _buildDetails;
         string _teamProjectUrl;
         string _buildNumber;
         string _teamProjectName;
 
-        public TfsResultPublisher(CodeActivityContext context)
+        public Action<string> Log { get; set; }
+
+        public TfsResultPublisher(string teamProjectUrl, string buildNumber, string teamProjectName)
         {
-            _context = context;
-            GetBuildDetails(context);
+            _teamProjectUrl = teamProjectUrl;
+            _buildNumber = buildNumber;
+            _teamProjectName = teamProjectName;
 
-        }
-
-        private void GetBuildDetails(CodeActivityContext context)
-        {
-            _buildDetails = context.GetExtension<IBuildDetail>();
-            _teamProjectUrl = _buildDetails.BuildServer.TeamProjectCollection.Uri.ToString();
-            _buildNumber = _buildDetails.BuildNumber;
-            _teamProjectName = _buildDetails.TeamProject;
-
+            Log = (s) => Console.WriteLine(s); 
         }
 
         public void PublishResultsFromPath(string trxFilePath)
         {
-            _context.Log("TrxFilePath : {0}", trxFilePath);
+            Log(string.Format("TrxFilePath : {0}", trxFilePath));
             var filePath = Path.GetFullPath(trxFilePath);
 
             if (!File.Exists(filePath))
                 throw new FileNotFoundException("Could not locate the trx to be published to the build at following path : {0}", trxFilePath);
 
             var mstestPath = Environment.ExpandEnvironmentVariables(@"C:\Program Files (X86)\Microsoft Visual Studio 10.0\Common7\IDE\MSTest.exe");//("%VS100COMNTOOLS%\\..\\IDE\\MSTest.exe");
-            _context.Log("MSTEST Path : {0}", mstestPath);
+            Log(string.Format("MSTEST Path : {0}", mstestPath));
 
             var arguments = string.Format(@"/publish:{0} /publishbuild:{1} /platform:{2} /flavor:{3} /teamproject:{4} /publishresultsfile:{5}",
                                                     _teamProjectUrl, _buildNumber, "\"x86\"", "Debug", _teamProjectName, trxFilePath);
-            _context.Log("MSTEST Arguments : {0}", arguments);
+           Log(string.Format("MSTEST Arguments : {0}", arguments));
 
             // Command-Line Options For puvlishing Test Results: http://msdn.microsoft.com/en-us/library/ms243151.aspx
             using (var msTest = new Process())
@@ -65,17 +58,17 @@ namespace Forseti.TFSBuildActivities
                 string outputStream = msTest.StandardOutput.ReadToEnd();
                 if (outputStream.Length > 0)
                 {
-                    _context.Log(outputStream);
+                    Log(outputStream);
                 }
 
                 string errorStream = msTest.StandardError.ReadToEnd();
                 if (errorStream.Length > 0)
                 {
-                    _context.Log(errorStream);
+                    Log(errorStream);
                 }
                 msTest.WaitForExit();
 
-                _context.Log("Ran MSTEST for {0}", DateTime.Now.Subtract(startTime));
+               Log(string.Format("Ran MSTEST for {0}", DateTime.Now.Subtract(startTime)));
             }
         }
     }
