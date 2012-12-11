@@ -17,7 +17,7 @@ namespace Forseti.TRX
             var executor = Executor.WithForsetiConfigurationFile(settings.ForsetiConfigurationFile);
             var results = executor.ExecuteTests();
 
-            var trxBuilder = new TrxBuilder().BuildFrom(results);
+            var trxBuilder = new TrxBuilder("COMPUTER", "USER", @"DOMAIN\TFSUSER").BuildFrom(results);
             var trx = trxBuilder.AsTrxDocument();
 
             trx.Save(settings.OutputFilePath);

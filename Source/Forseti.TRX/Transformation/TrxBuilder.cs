@@ -11,16 +11,20 @@ namespace Forseti.TRX.Transformation
         //public const string XMLNS = "http://microsoft.com/schemas/VisualStudio/TeamTest/2010";
         public static readonly XNamespace XMLNS = "http://microsoft.com/schemas/VisualStudio/TeamTest/2010";
 
-        public TestRun TestRun { get; private set; }
-        public TestSettings RunSettings { get; private set; }
-        public ResultSummary Summary { get; private set; }
-        public Times Timing { get; private set; }
-        public TestLists TestLists { get; private set; }
+        public readonly TestRun TestRun;
+        public readonly TestSettings RunSettings;
+        public readonly ResultSummary Summary;
+        public readonly Times Timing;
+        public readonly TestLists TestLists;
+        public readonly TestDefinitions Definitions;
+        public readonly TestEntries TestEntries;
+        public readonly Results Results;
 
-        public TestDefinitions Definitions { get; private set; }
-        public TestEntries TestEntries { get; private set; }
-        public Results Results { get; private set; }
+   
 
+        public string TfsUsername { get; set; }
+        public string LocalUserName { get; set; }
+        public string ComputerName { get; set; }
 
         public TrxBuilder()
         {
@@ -35,6 +39,12 @@ namespace Forseti.TRX.Transformation
             Results = new Results();
         }
 
+        public TrxBuilder(string machineName, string userName, string tfsUsername) : this()
+        {
+            ComputerName = machineName;
+            LocalUserName = userName;
+            TfsUsername = tfsUsername;
+        }
 
         public TrxBuilder SetRunInformation(Guid id, string name, string runUser)
         {
