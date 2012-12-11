@@ -92,9 +92,6 @@
     <Compile Include="TfsResultPublisher.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="postbuild.cmd" />
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
