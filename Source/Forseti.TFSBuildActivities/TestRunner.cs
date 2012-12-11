@@ -24,7 +24,7 @@ namespace Forseti.TFSBuildActivities
 
             var executingAssemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             _forsetiExecutablePath = Path.Combine(executingAssemblyFolder, ForsetiTrxExecutable);
-            _forsetiArguments = string.Format("{0} {1} {2} {3} {4}",
+            _forsetiArguments = string.Format("\"{0}\" \"{1}\" \"{2}\" \"{3}\" \"{4}\"",
                                                 forsetiConfiguration,
                                                 trxOutput,
                                                 computerName,

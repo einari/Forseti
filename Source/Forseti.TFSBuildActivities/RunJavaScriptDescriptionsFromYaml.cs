@@ -42,14 +42,17 @@ namespace Forseti.TFSBuildActivities
     [Description("Activity to run Forseti for JavaScript tests / specs")]
     public sealed class RunJavaScriptDescriptionsFromYaml : CodeActivity
     {
+
+        [Description("Override default path to forseti configuration file. Default is automatically set to WorkspaceRoot\\forseti.yaml")]
         public InArgument<string> YamlFile { get; set; }
-       
-        public InArgument<string> ForsetiPath { get; set; }
 
         [RequiredArgument]
         public InArgument<Workspace> Workspace { get; set; }
 
         CodeActivityContext _context;
+        string _workspaceDirectory;
+        string _forsetiConfigurationPath;
+        string _buildNumber;
 
         void Log(string message, params object[] parameters) 
         {
@@ -62,37 +65,30 @@ namespace Forseti.TFSBuildActivities
         protected override void Execute(CodeActivityContext context)
         {
             _context = context;
-            var origianlCurrentDir = Directory.GetCurrentDirectory();
+            SetWorkspaceDirectory(context);
+            SetForsetiConfigurationPath(context, _workspaceDirectory);
 
-            var workspace = context.GetValue(Workspace);
-            var yamlFile = context.GetValue(YamlFile);
-            Log("InArgument Workspace : {0}", workspace);
-            Log("InArgument YamlFile : {0}", yamlFile);
-
-            var workingDirectory = Path.GetFullPath(workspace.Folders[0].LocalItem);
-            Log("WorkigDirectory : {0}",workingDirectory);
             var buildDetail = context.GetExtension<IBuildDetail>();
-            var buildNumber = buildDetail.BuildNumber;
+            _buildNumber = buildDetail.BuildNumber;
+            var identityManagementService = buildDetail.BuildServer.TeamProjectCollection.GetService<IIdentityManagementService>();
 
-            var yamlPath = Path.Combine(workingDirectory, "forseti.yaml");
-            Log("YamlPath : {0}", yamlPath);
-
-            var trxPath = Path.Combine(workingDirectory, string.Format("forseti_{0}.trx",buildNumber));
-            Log("TrxPath : {0}", trxPath);
-
-            
 
             try
             {
+                var trxPath = Path.Combine(_workspaceDirectory, string.Format("forseti_{0}.trx", _buildNumber));
+                var computerName = Environment.MachineName;
+                var userName = WindowsIdentity.GetCurrent().Name;
+                var tfsUserName = ReadCurrentUsersIdentity(identityManagementService).DisplayName;
 
-                var testRunner = new TestRunner(yamlPath, trxPath, "COMPUTER", "USER", "TFSUSER");
+                var testRunner = new TestRunner(_forsetiConfigurationPath, trxPath, computerName, userName , tfsUserName.ToString());
                 testRunner.Log = (output) => Log(output);
                 testRunner.RunTests();
                 
 
             var publisher = new TfsResultPublisher(buildDetail.BuildServer.TeamProjectCollection.Uri.ToString(),
-                                                   buildNumber,
-                                                   buildDetail.TeamProject );
+                                                   _buildNumber,
+                                                   buildDetail.TeamProject,
+                                                   "x86","Debug");
                 publisher.PublishResultsFromPath(trxPath);
 
             }
@@ -100,14 +96,32 @@ namespace Forseti.TFSBuildActivities
             {
                 Log("Something went wrong while publishing tests! : {0}", e);
 
-            }   
-            context.Log("Done");
+            }
 
         }
 
-        private static TeamFoundationIdentity ReadCurrentUsersIdentity(IIdentityManagementService identityManagementService)
+        private void SetWorkspaceDirectory(CodeActivityContext context)
         {
 
+            var workspace = context.GetValue(Workspace);
+            _workspaceDirectory = Path.GetFullPath(workspace.Folders[0].LocalItem);
+        }
+
+        private void SetForsetiConfigurationPath(CodeActivityContext context, string workspaceDirectory)
+        {
+            var yamlFile = context.GetValue(YamlFile);
+            if (File.Exists(Path.GetFullPath(yamlFile)))
+                _forsetiConfigurationPath = yamlFile;
+            else
+                _forsetiConfigurationPath = Path.Combine(workspaceDirectory, "forseti.yaml");
+
+            if (!File.Exists(Path.GetFullPath(_forsetiConfigurationPath)))
+                throw new FileNotFoundException("Could not locate the forseti configuration file at: " + _forsetiConfigurationPath);
+
+        }
+
+        private TeamFoundationIdentity ReadCurrentUsersIdentity(IIdentityManagementService identityManagementService)
+        {
                 var currentUser = WindowsIdentity.GetCurrent();
 
                 if (currentUser == null)
@@ -118,7 +132,6 @@ namespace Forseti.TFSBuildActivities
                     throw new InvalidOperationException(string.Format("Could not find user {0} in TFS.", currentUser.Name));
 
                 return result[0][0];
-
         }
 
     }
