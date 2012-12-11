@@ -23,8 +23,8 @@ namespace Forseti.TRX.Transformation
 
 
             
-            builder.SetRunInformation(Guid.NewGuid(), "SomeName", "SomeUSer")
-                      .SetDefaultTestSettingsWithDescription("This is a hardcoded test")
+            builder.SetRunInformation(Guid.NewGuid(), builder.LocalUserName, builder.TfsUsername)
+                      .SetDefaultTestSettingsWithDescription("Forseti Javascript  test Run")
                       .SetResultSummary(successfullTests, failingTests)
                       .SetRunTimes(startTime, endTime);
 
@@ -42,7 +42,7 @@ namespace Forseti.TRX.Transformation
 
                                builder.AddTestResult(@case.Name,
                                                        Guid.NewGuid(),
-                                                       "TO BE FIXED",
+                                                       builder.ComputerName,
                                                        @case.Result.Success ? UnitTestResult.ResultOutcome.Passed : UnitTestResult.ResultOutcome.Failed,
                                                        description.File.FullPath,
                                                        description.Name);
