@@ -46,6 +46,17 @@ namespace Forseti.TFSBuildActivities
         [Description("Override default path to forseti configuration file. Default is automatically set to WorkspaceRoot\\forseti.yaml")]
         public InArgument<string> YamlFile { get; set; }
 
+        [Description("Boolean indicating if failing javscript tests should cause the build to fail. Default false")]
+        public InArgument<bool> ShouldFailingTestsBreakBuild { get; set; }
+
+        [RequiredArgument]
+        [Description("The configuration / flavor of the build (\"Debug\", \"Release\"etc. ). Needed for publishing test results. hint: platformConfiguration.Configuration")]
+        public InArgument<string> BuildConfiguration { get; set; }
+
+        [RequiredArgument]
+        [Description("The platform of the build (\"x86\", \"Any CPU\" etc.) . Needed for publishing test results. hint: platformConfiguration.Platform")]
+        public InArgument<string> BuildPlatForm { get; set; }
+
         [RequiredArgument]
         public InArgument<Workspace> Workspace { get; set; }
 
@@ -54,6 +65,8 @@ namespace Forseti.TFSBuildActivities
         string _forsetiConfigurationPath;
         string _buildNumber;
         bool _shouldBreakBuild;
+        string _buildFlavor;
+        string _buildPlatform;
 
         void Log(string message, params object[] parameters) 
         {
@@ -69,6 +82,8 @@ namespace Forseti.TFSBuildActivities
             SetWorkspaceDirectory(context);
             SetForsetiConfigurationPath(context, _workspaceDirectory);
             SetIfFailingTestsShouldBreakBuild(context);
+            SetBuildPlatform(context);
+            SetBuildFlavor(context);
 
             var buildDetail = context.GetExtension<IBuildDetail>();
             _buildNumber = buildDetail.BuildNumber;
@@ -94,19 +109,30 @@ namespace Forseti.TFSBuildActivities
             var publisher = new TfsResultPublisher(buildDetail.BuildServer.TeamProjectCollection.Uri.ToString(),
                                                    _buildNumber,
                                                    buildDetail.TeamProject,
-                                                   "x86","Debug");
+                                                   _buildPlatform,_buildFlavor);
                 publisher.LogTo((output) => Log(output));
                 publisher.PublishResultsFromPath(trxPath);
 
             }
             catch (Exception e)
             {
-                Log("Something went wrong while publishing tests! : {0}", e);
+                Log("Something went wrong while exdcuting javascrpit tests tests! : {0}", e);
 
             }
 
         }
 
+        private void SetBuildFlavor(CodeActivityContext context)
+        {
+            var flavor = context.GetValue(BuildConfiguration);
+            _buildFlavor = flavor;
+        }
+
+        private void SetBuildPlatform(CodeActivityContext context)
+        {
+            var platform = context.GetValue(BuildPlatForm);
+            _buildPlatform = platform;
+        }
 
         private void SetIfFailingTestsShouldBreakBuild(CodeActivityContext context)
         {
