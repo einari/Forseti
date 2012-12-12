@@ -25,7 +25,7 @@ namespace Forseti.TFSBuildActivities
                                             "C:\\Program Files (x86)\\Microsoft Visual Studio 10.0\\Common7\\IDE\\MSTest.exe"};
 
 
-        public Action<string> Log { get; set; }
+        Action<string> _logger;
 
         public TfsResultPublisher(string teamProjectUrl, string buildNumber, string teamProjectName, string platform, string flavor, string msTestPathHint = "")
         {
@@ -38,7 +38,12 @@ namespace Forseti.TFSBuildActivities
             if (!string.IsNullOrEmpty(msTestPathHint))
                 msTestPathHint.Insert(0, msTestPathHint);
 
-            Log = (s) => Console.WriteLine(s); 
+            _logger = (s) => Console.WriteLine(s); 
+        }
+
+        public void LogTo(Action<string> logOutputTo)
+        {
+            _logger = logOutputTo;
         }
 
         private string LocateMstestPath()

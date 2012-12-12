@@ -53,6 +53,7 @@ namespace Forseti.TFSBuildActivities
         string _workspaceDirectory;
         string _forsetiConfigurationPath;
         string _buildNumber;
+        bool _shouldBreakBuild;
 
         void Log(string message, params object[] parameters) 
         {
@@ -67,6 +68,7 @@ namespace Forseti.TFSBuildActivities
             _context = context;
             SetWorkspaceDirectory(context);
             SetForsetiConfigurationPath(context, _workspaceDirectory);
+            SetIfFailingTestsShouldBreakBuild(context);
 
             var buildDetail = context.GetExtension<IBuildDetail>();
             _buildNumber = buildDetail.BuildNumber;
@@ -81,16 +83,19 @@ namespace Forseti.TFSBuildActivities
                 var tfsUserName = buildDetail.RequestedBy;
 
                 var testRunner = new TestRunner(_forsetiConfigurationPath, trxPath, computerName, userName , tfsUserName);
-                testRunner.Log = (output) => Log(output);
-                testRunner.RunTests();
-                
+                testRunner.LogTo((output) => Log(output));
+                var allTestsPassed = testRunner.RunTests();
+
+
+                if (!allTestsPassed && _shouldBreakBuild)
+                    buildDetail.Status = BuildStatus.Failed;
                 
 
             var publisher = new TfsResultPublisher(buildDetail.BuildServer.TeamProjectCollection.Uri.ToString(),
                                                    _buildNumber,
                                                    buildDetail.TeamProject,
                                                    "x86","Debug");
-                publisher.Log = (s) => Log(s);
+                publisher.LogTo((output) => Log(output));
                 publisher.PublishResultsFromPath(trxPath);
 
             }
@@ -100,6 +105,13 @@ namespace Forseti.TFSBuildActivities
 
             }
 
+        }
+
+
+        private void SetIfFailingTestsShouldBreakBuild(CodeActivityContext context)
+        {
+            var shouldBreakBuild = context.GetValue(ShouldFailingTestsBreakBuild);
+            _shouldBreakBuild = shouldBreakBuild;
         }
 
         private void SetWorkspaceDirectory(CodeActivityContext context)

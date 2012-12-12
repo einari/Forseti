@@ -16,11 +16,11 @@ namespace Forseti.TFSBuildActivities
         string _forsetiArguments;
         string _forsetiWorkingDirectory;
 
-        public Action<string> Log { get; set; }
+       Action<string> _logger; 
 
         public TestRunner(string forsetiConfiguration, string trxOutput, string computerName, string localUser, string tfsUser) 
         {
-            Log = (s) => Console.WriteLine(s);
+            _logger = (s) => Console.WriteLine(s);
 
             var executingAssemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             _forsetiExecutablePath = Path.Combine(executingAssemblyFolder, ForsetiTrxExecutable);
@@ -35,12 +35,18 @@ namespace Forseti.TFSBuildActivities
             if (forsetiConfigfile.Exists)
                 _forsetiWorkingDirectory = forsetiConfigfile.DirectoryName;
 
+         }
+
+        public void LogTo(Action<string> logOutputTo) 
+        {
+            _logger = logOutputTo;
         }
 
-        internal void RunTests()
+        internal bool RunTests()
         {
             Log(string.Format("{0} {1}",_forsetiExecutablePath,_forsetiArguments));
 
+            bool allTestsPassed = false;
             using (var forsetiTrx = new Process())
             {
                 var startTime = DateTime.Now;
@@ -68,7 +74,11 @@ namespace Forseti.TFSBuildActivities
                 }
                 forsetiTrx.WaitForExit();
 
+                allTestsPassed = forsetiTrx.ExitCode == 0 ? true : false;
+
             }
+
+            return allTestsPassed;
         }
     }
 }

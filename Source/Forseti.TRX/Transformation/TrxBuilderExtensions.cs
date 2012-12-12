@@ -16,15 +16,15 @@ namespace Forseti.TRX.Transformation
             if (results.Count() == 0)
                 throw new ArgumentOutOfRangeException("No test results found!");
 
-            var successfullTests = results.Sum(suite => suite.SuccessfulCaseCount);
-            var failingTests = results.Sum(suite => suite.FailedCaseCount);
-            var startTime = results.Min(suite => suite.StartTime);
-            var endTime = results.Max(suite => suite.EndTime);
+            var successfullTests = results.SuccessfulCaseCount();
+            var failingTests = results.FailedCaseCount();
+            var startTime = results.StartTime();
+            var endTime = results.EndTime();
 
 
             
             builder.SetRunInformation(Guid.NewGuid(), builder.TfsUsername, builder.ComputerName)
-                      .SetDefaultTestSettingsWithDescription("Forseti Javascript  test Run")
+                      .SetDefaultTestSettingsWithDescription("Default test settings")
                       .SetResultSummary(successfullTests, failingTests)
                       .SetRunTimes(startTime, endTime);
 

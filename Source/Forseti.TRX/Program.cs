@@ -22,7 +22,7 @@ namespace Forseti.TRX
 
             trx.Save(settings.OutputFilePath);
 
-            return 0;
+            return results.IsSuccessful() ? 0 : 1;
         }
 
     }
