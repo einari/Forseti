@@ -55,7 +55,7 @@ namespace Forseti.TFSBuildActivities
 
         [RequiredArgument]
         [Description("The platform of the build (\"x86\", \"Any CPU\" etc.) . Needed for publishing test results. hint: platformConfiguration.Platform")]
-        public InArgument<string> BuildPlatForm { get; set; }
+        public InArgument<string> BuildPlatform { get; set; }
 
         [RequiredArgument]
         public InArgument<Workspace> Workspace { get; set; }
@@ -130,7 +130,7 @@ namespace Forseti.TFSBuildActivities
 
         private void SetBuildPlatform(CodeActivityContext context)
         {
-            var platform = context.GetValue(BuildPlatForm);
+            var platform = context.GetValue(BuildPlatform);
             _buildPlatform = platform;
         }
 
