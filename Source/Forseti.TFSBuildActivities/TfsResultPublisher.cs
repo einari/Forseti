@@ -68,7 +68,7 @@ namespace Forseti.TFSBuildActivities
 
             var arguments = string.Format("/publish:{0} /publishbuild:{1} /platform:\"{2}\" /flavor:\"{3}\" /teamproject:{4} /publishresultsfile:{5}",
                                                     _teamProjectUrl, _buildNumber, _platform, _flavor, _teamProjectName, trxFilePath);
-            Log(string.Format("{0} {1}",mstestPath, arguments));
+            _logger(string.Format("{0} {1}",mstestPath, arguments));
 
             // Command-Line Options For puvlishing Test Results: http://msdn.microsoft.com/en-us/library/ms243151.aspx
             using (var msTest = new Process())
@@ -87,13 +87,13 @@ namespace Forseti.TFSBuildActivities
                 string outputStream = msTest.StandardOutput.ReadToEnd();
                 if (outputStream.Length > 0)
                 {
-                    Log(outputStream);
+                    _logger(outputStream);
                 }
 
                 string errorStream = msTest.StandardError.ReadToEnd();
                 if (errorStream.Length > 0)
                 {
-                    Log(errorStream);
+                    _logger(errorStream);
                 }
                 msTest.WaitForExit();
             }

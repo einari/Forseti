@@ -44,7 +44,7 @@ namespace Forseti.TFSBuildActivities
 
         internal bool RunTests()
         {
-            Log(string.Format("{0} {1}",_forsetiExecutablePath,_forsetiArguments));
+            _logger(string.Format("{0} {1}",_forsetiExecutablePath,_forsetiArguments));
 
             bool allTestsPassed = false;
             using (var forsetiTrx = new Process())
@@ -64,13 +64,13 @@ namespace Forseti.TFSBuildActivities
                 string outputStream = forsetiTrx.StandardOutput.ReadToEnd();
                 if (outputStream.Length > 0)
                 {
-                    Log(outputStream);
+                    _logger(outputStream);
                 }
 
                 string errorStream = forsetiTrx.StandardError.ReadToEnd();
                 if (errorStream.Length > 0)
                 {
-                    Log(errorStream);
+                    _logger(errorStream);
                 }
                 forsetiTrx.WaitForExit();
 
