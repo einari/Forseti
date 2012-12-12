@@ -18,7 +18,7 @@ namespace Forseti.TRX.Specs.for_TrxBuilder
 
         Because of = () =>
                         {
-                            trx = builder.SetRunInformation(Guid.NewGuid(), "SomeName", "SomeUSer")
+                            trx = builder.SetRunInformation(Guid.NewGuid(), "SomeUSer","ComputerName" ,"SomeName")
                                        .SetDefaultTestSettingsWithDescription("This is a hardcoded test")
                                        .SetResultSummary(1, 0)
                                        .SetRunTimes(DateTime.Now, DateTime.Now)

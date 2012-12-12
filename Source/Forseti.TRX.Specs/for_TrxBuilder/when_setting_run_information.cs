@@ -12,18 +12,20 @@ namespace Forseti.TRX.Specs.for_TrxBuilder
     {
         static Guid runId;
         static string name, 
-                      runUser;
+                      runUser,
+                      computerName;
 
         Establish context = () =>
                         {
                             runId = Guid.NewGuid();
                             name = "run name";
                             runUser = "SomeUser";
+                            computerName = "computer Name";
 
                             builder = new TrxBuilder();
                         };
 
-        Because of = () => builder.SetRunInformation(runId, name, runUser);
+        Because of = () => builder.SetRunInformation(runId, runUser, computerName, name);
 
         It should_have_a_test_run_element_with_correct_values = () =>
                                                 {

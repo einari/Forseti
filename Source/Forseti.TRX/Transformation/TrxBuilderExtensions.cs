@@ -23,7 +23,7 @@ namespace Forseti.TRX.Transformation
 
 
             
-            builder.SetRunInformation(Guid.NewGuid(), builder.LocalUserName, builder.TfsUsername)
+            builder.SetRunInformation(Guid.NewGuid(), builder.TfsUsername, builder.ComputerName)
                       .SetDefaultTestSettingsWithDescription("Forseti Javascript  test Run")
                       .SetResultSummary(successfullTests, failingTests)
                       .SetRunTimes(startTime, endTime);

@@ -46,11 +46,12 @@ namespace Forseti.TRX.Transformation
             TfsUsername = tfsUsername;
         }
 
-        public TrxBuilder SetRunInformation(Guid id, string name, string runUser)
+        public TrxBuilder SetRunInformation(Guid id, string runUser, string computerName, string name = "")
         {
             TestRun.Id = id;
             TestRun.Name = name;
             TestRun.RunUser = runUser;
+            TestRun.ComputerName = computerName;
 
             return this;
         }
