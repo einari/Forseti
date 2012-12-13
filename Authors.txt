@@ -3,7 +3,7 @@ Copyright (c) 2012 DoLittle Studios, http://www.dolittle.com
 This software consists of voluntary contributions made by many
 individuals (AUTHORS.txt in the repository) For exact
 contribution history, see the revision history and logs, available
-at http://github.com/dolittlestudios/forseti
+at http://github.com/dolittle/forseti
 
 Einar Ingebrigtsen
 Pavneet Singh Saund
