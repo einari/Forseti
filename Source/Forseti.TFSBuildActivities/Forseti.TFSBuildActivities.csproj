@@ -119,15 +119,15 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>"C:\Program Files\Microsoft Visual Studio 10.0\Common7\IDE\tf.exe" checkout "C:\PSS\Forseti-tfs\ForsetiTesting\BuildProcessTemplates\Custom Assemblies\Forseti.dll"
+    <PostBuildEvent>REM "C:\Program Files\Microsoft Visual Studio 10.0\Common7\IDE\tf.exe" checkout "C:\PSS\Forseti-tfs\ForsetiTesting\BuildProcessTemplates\Custom Assemblies\Forseti.dll"
 
-"C:\Program Files\Microsoft Visual Studio 10.0\Common7\IDE\tf.exe" checkout "C:\PSS\Forseti-tfs\ForsetiTesting\BuildProcessTemplates\Custom Assemblies\Forseti.TFSBuildActivities.dll"
+REM "C:\Program Files\Microsoft Visual Studio 10.0\Common7\IDE\tf.exe" checkout "C:\PSS\Forseti-tfs\ForsetiTesting\BuildProcessTemplates\Custom Assemblies\Forseti.TFSBuildActivities.dll"
 
-xcopy /Y "C:\PSS\Forseti\Source\Forseti.TFSBuildActivities\bin\Debug\Forseti.TFSBuildActivities.dll" "C:\PSS\Forseti-tfs\ForsetiTesting\BuildProcessTemplates\Custom Assemblies\Forseti.TFSBuildActivities.dll"
+REM xcopy /Y "C:\PSS\Forseti\Source\Forseti.TFSBuildActivities\bin\Debug\Forseti.TFSBuildActivities.dll" "C:\PSS\Forseti-tfs\ForsetiTesting\BuildProcessTemplates\Custom Assemblies\Forseti.TFSBuildActivities.dll"
 
- xcopy /Y "C:\PSS\Forseti\Source\Forseti.TFSBuildActivities\bin\Debug\Forseti.dll" "C:\PSS\Forseti-tfs\ForsetiTesting\BuildProcessTemplates\Custom Assemblies\Forseti.dll"
+REM xcopy /Y "C:\PSS\Forseti\Source\Forseti.TFSBuildActivities\bin\Debug\Forseti.dll" "C:\PSS\Forseti-tfs\ForsetiTesting\BuildProcessTemplates\Custom Assemblies\Forseti.dll"
 
-"C:\Program Files\Microsoft Visual Studio 10.0\Common7\IDE\tf.exe" checkin /noprompt</PostBuildEvent>
+REM "C:\Program Files\Microsoft Visual Studio 10.0\Common7\IDE\tf.exe" checkin /noprompt</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
