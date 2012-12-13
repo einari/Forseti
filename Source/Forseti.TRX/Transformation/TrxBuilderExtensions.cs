@@ -45,7 +45,8 @@ namespace Forseti.TRX.Transformation
                                                        builder.ComputerName,
                                                        @case.Result.Success ? UnitTestResult.ResultOutcome.Passed : UnitTestResult.ResultOutcome.Failed,
                                                        description.File.FullPath,
-                                                       description.Name);
+                                                       description.Name,
+                                                       errorMessage: @case.Result.Message);
                            });
 
                        }));

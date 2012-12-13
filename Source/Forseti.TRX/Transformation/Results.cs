@@ -11,14 +11,14 @@ namespace Forseti.TRX.Transformation
         const string _elementName = "Results";
         readonly Guid _testType = Guid.Parse("82C80242-4F2C-4558-9678-0A1DBD440702");
 
-        public IList<UnitTestResult> TestResults { get; set; }
+        public IList<UnitTestResult> TestResults { get; private set; }
 
         public Results() 
         {
             TestResults = new List<UnitTestResult>();
         }
 
-        public void AddResult(string name, Guid testId, Guid executionId, string computerName, UnitTestResult.ResultOutcome outcome)
+        public void AddResult(string name, Guid testId, Guid executionId, string computerName, UnitTestResult.ResultOutcome outcome, string errorMessage)
         {
             TestResults.Add(new UnitTestResult
             {
@@ -26,7 +26,8 @@ namespace Forseti.TRX.Transformation
                 Id = testId,
                 ExecutionId = executionId,
                 ComputerName = computerName,
-                Outcome = outcome
+                Outcome = outcome,
+                ErrorMessage = errorMessage
             });
         }
 
@@ -43,6 +44,14 @@ namespace Forseti.TRX.Transformation
                                                       , new XAttribute("computerName",testResult.ComputerName)
                                                       , new XAttribute("testName",testResult.Name)
                                                       , new XAttribute("outcome", testResult.Outcome));
+
+                if (testResult.HasErrorMessage)
+                {
+                    var output = new XElement(TrxBuilder.XMLNS + "Output",
+                                        new XElement(TrxBuilder.XMLNS + "ErrorInfo",
+                                            new XElement(TrxBuilder.XMLNS + "Message", testResult.ErrorMessage)));
+                    result.Add(output);
+                }
 
 
                 results.Add(result);

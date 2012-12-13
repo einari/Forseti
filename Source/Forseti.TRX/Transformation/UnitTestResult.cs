@@ -18,5 +18,8 @@ namespace Forseti.TRX.Transformation
         public string ComputerName { get; set; }
         public Guid ExecutionId { get; set; }
         public ResultOutcome Outcome { get; set; }
+        public string ErrorMessage { get; set; }
+
+        public bool HasErrorMessage { get { return !string.IsNullOrEmpty(ErrorMessage); } }
     }
 }

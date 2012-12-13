@@ -83,7 +83,7 @@ namespace Forseti.TRX.Transformation
 
 
 
-        public TrxBuilder AddTestResult(string name, Guid id, string computerName, UnitTestResult.ResultOutcome outcome ,string testFilePath = @"C:\TestFilePath\SomeTest", string testClassName = @"SomeTest")
+        public TrxBuilder AddTestResult(string name, Guid id, string computerName, UnitTestResult.ResultOutcome outcome ,string testFilePath = @"C:\TestFilePath\SomeTest", string testClassName = @"SomeTest", string stackTrace = "", string errorMessage = "")
         {
             var testId = Guid.NewGuid();
             var executionId = Guid.NewGuid();
@@ -92,7 +92,7 @@ namespace Forseti.TRX.Transformation
 
             TestEntries.AddEntry(testId, executionId);
 
-            Results.AddResult(name, testId, executionId, computerName, outcome);
+            Results.AddResult(name, testId, executionId, computerName, outcome, errorMessage);
             
             return this;
         }

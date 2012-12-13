@@ -10,7 +10,11 @@ namespace Forseti.TRX
     {
         static int Main(string[] args)
         {
-            //args = new[] { @"C:\PSS\Forseti-tfs\ForsetiTesting\forseti.yaml", @"C:\PSS\Forseti-tfs\ForsetiTesting\forseti.trx" };
+            //args = new[] {  @"C:\PSS\Forseti-tfs\ForsetiTesting\FirstLevel\firstlevel.yaml",
+            //                @"C:\PSS\Forseti-tfs\ForsetiTesting\forseti.trx",
+            //                "COMPUTERNAME",
+            //                "USERNAME",
+            //                "TFS\\USERNAME"};
 
             var settings = Settings.FromArguments(args);
             
