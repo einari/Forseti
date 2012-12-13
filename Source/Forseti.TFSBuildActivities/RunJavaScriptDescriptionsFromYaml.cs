@@ -67,6 +67,7 @@ namespace Forseti.TFSBuildActivities
         bool _shouldBreakBuild;
         string _buildFlavor;
         string _buildPlatform;
+        IBuildDetail _buildDetail;
 
         void Log(string message, params object[] parameters) 
         {
@@ -78,24 +79,16 @@ namespace Forseti.TFSBuildActivities
 
         protected override void Execute(CodeActivityContext context)
         {
-            _context = context;
-            SetWorkspaceDirectory(context);
-            SetForsetiConfigurationPath(context, _workspaceDirectory);
-            SetIfFailingTestsShouldBreakBuild(context);
-            SetBuildPlatform(context);
-            SetBuildFlavor(context);
-
-            var buildDetail = context.GetExtension<IBuildDetail>();
-            _buildNumber = buildDetail.BuildNumber;
-            //var tfs = buildDetail.BuildServer.TeamProjectCollection;
-            //var identityManagementService = tfs.GetService<IIdentityManagementService>();
-
             try
             {
+
+                SetActivityVariables(context);
+
+
                 var trxPath = Path.Combine(_workspaceDirectory, string.Format("forseti_{0}.trx", _buildNumber));
                 var computerName = Environment.MachineName;
                 var userName = WindowsIdentity.GetCurrent().Name;
-                var tfsUserName = buildDetail.RequestedBy;
+                var tfsUserName = _buildDetail.RequestedBy;
 
                 var testRunner = new TestRunner(_forsetiConfigurationPath, trxPath, computerName, userName , tfsUserName);
                 testRunner.LogTo((output) => Log(output));
@@ -103,12 +96,12 @@ namespace Forseti.TFSBuildActivities
 
 
                 if (!allTestsPassed && _shouldBreakBuild)
-                    buildDetail.Status = BuildStatus.Failed;
+                    _buildDetail.Status = BuildStatus.PartiallySucceeded;
                 
 
-            var publisher = new TfsResultPublisher(buildDetail.BuildServer.TeamProjectCollection.Uri.ToString(),
+                var publisher = new TfsResultPublisher(_buildDetail.BuildServer.TeamProjectCollection.Uri.ToString(),
                                                    _buildNumber,
-                                                   buildDetail.TeamProject,
+                                                   _buildDetail.TeamProject,
                                                    _buildPlatform,_buildFlavor);
                 publisher.LogTo((output) => Log(output));
                 publisher.PublishResultsFromPath(trxPath);
@@ -117,9 +110,25 @@ namespace Forseti.TFSBuildActivities
             catch (Exception e)
             {
                 Log("Something went wrong while exdcuting javascrpit tests tests! : {0}", e);
+                _buildDetail.Status = BuildStatus.PartiallySucceeded;
 
             }
 
+        }
+
+        private void SetActivityVariables(CodeActivityContext context)
+        {
+            _context = context;
+            SetWorkspaceDirectory(context);
+            SetForsetiConfigurationPath(context, _workspaceDirectory);
+            SetIfFailingTestsShouldBreakBuild(context);
+            SetBuildPlatform(context);
+            SetBuildFlavor(context);
+
+            _buildDetail = context.GetExtension<IBuildDetail>();
+            _buildNumber = _buildDetail.BuildNumber;
+            //var tfs = buildDetail.BuildServer.TeamProjectCollection;
+            //var identityManagementService = tfs.GetService<IIdentityManagementService>();
         }
 
         private void SetBuildFlavor(CodeActivityContext context)
@@ -150,6 +159,7 @@ namespace Forseti.TFSBuildActivities
         private void SetForsetiConfigurationPath(CodeActivityContext context, string workspaceDirectory)
         {
             var yamlFile = context.GetValue(YamlFile);
+            _context.Log("YAML file input : {0}", yamlFile);
             if (File.Exists(Path.GetFullPath(yamlFile)))
                 _forsetiConfigurationPath = yamlFile;
             else
