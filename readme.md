@@ -82,7 +82,11 @@ Forseti also supports multiple Harness', which can be useful when speccing diffe
 
 
 # Frameworks #
-Forseti supports multiple testing/specification frameworks. In the YAML file, you can for now specify either [Jasmine](http://pivotal.github.com/jasmine/) or [BusterJS](http://www.busterjs.org) as frameworks. But we are working on support of multiple others as well, amongst others [QUnit](http://docs.jquery.com/QUnit).
+Forseti supports multiple testing/specification frameworks, which can be specified in the YAML file. We currently support the following assemblies:
+ - [Jasmine](http://pivotal.github.com/jasmine/) 
+ - [BusterJS](http://www.busterjs.org)
+ - [QUnit](http://docs.jquery.com/QUnit)
+ - JsUnit isn't supported yet, but [feel free to contribute!} https://github.com/dolittle/Forseti/issues/30
 
 A sample of a Buster configuration : 
 
