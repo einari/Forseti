@@ -86,7 +86,7 @@ Forseti supports multiple testing/specification frameworks, which can be specifi
  - [Jasmine](http://pivotal.github.com/jasmine/) 
  - [BusterJS](http://www.busterjs.org)
  - [QUnit](http://docs.jquery.com/QUnit)
- - JsUnit isn't supported yet, but [feel free to contribute!} https://github.com/dolittle/Forseti/issues/30
+ - JsUnit isn't supported yet, but [feel free to contribute!] (https://github.com/dolittle/Forseti/issues/30)
 
 A sample of a Buster configuration : 
 
