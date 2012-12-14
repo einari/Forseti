@@ -18,7 +18,7 @@ namespace Forseti.TRX
             _forsetiConfiguration = Configure.WithStandard()
                                              .FromConfigurationFile(configurationFilePath)
                                              .Initialize();
-            _forsetiConfiguration.HarnessChangeManager.RegisterWatcher(typeof(ConsoleHarnessWatcher));
+            //_forsetiConfiguration.HarnessChangeManager.RegisterWatcher(typeof(ConsoleHarnessWatcher));
         }
 
         public static Executor WithForsetiConfigurationFile(string configurationFilePath) 
