@@ -1,4 +1,7 @@
 ﻿describe("when doing stuff", function () {
+
+    system();
+
     it("Another fail", function () {
         expect(true).toEqual(false);
     });

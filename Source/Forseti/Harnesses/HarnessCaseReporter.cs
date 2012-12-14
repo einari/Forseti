@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Forseti.Extensions;
 using Forseti.Scripting;
 using Forseti.Suites;
@@ -27,8 +28,21 @@ namespace Forseti.Harnesses
         }
 
 
+        static string ParseMessage(string message)
+        {
+            var regex = new Regex("\\(line ([0-9]*)\\)");
+            var match = regex.Match(message);
+            message = regex.Replace(message, m =>
+            {
+                return string.Format("(line {0})", Int32.Parse(m.Groups[1].Value)+1);
+            });
+            return message;
+        }
+
         static void Report(string description, string @case, bool success = true, string message = "")
         {
+            ParseMessage(message);
+
             if (HarnessResult != null)
             {
                 HarnessResult.AffectedSuites.ForEach(s =>

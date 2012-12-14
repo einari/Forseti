@@ -1,1 +1,4 @@
-﻿
+﻿function system() {
+
+    undefined.toString();
+}
