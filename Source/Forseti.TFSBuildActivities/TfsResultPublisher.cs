@@ -66,7 +66,7 @@ namespace Forseti.TFSBuildActivities
 
             var mstestPath = LocateMstestPath();
 
-            var arguments = string.Format("/publish:{0} /publishbuild:{1} /platform:\"{2}\" /flavor:\"{3}\" /teamproject:{4} /publishresultsfile:{5}",
+            var arguments = string.Format("/publish:\"{0}\" /publishbuild:\"{1}\" /platform:\"{2}\" /flavor:\"{3}\" /teamproject:\"{4}\" /publishresultsfile:\"{5}\"",
                                                     _teamProjectUrl, _buildNumber, _platform, _flavor, _teamProjectName, trxFilePath);
             _logger(string.Format("{0} {1}",mstestPath, arguments));
 
