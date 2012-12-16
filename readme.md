@@ -14,7 +14,7 @@ A tip for Mono users is to set up Mono to by default run runtime version 4 in yo
 
 	export MONO_ENV_OPTIONS='--runtime=v4.0'
  
-
+ 
 # How to build #
 
 Forseti compiles fine in MonoDevelop 2 and Visual Studio 2010. Once you have the source, you navigate to the Source/Solutions path and you'll find two solution files, one that is tested under Windows and Visual Studio 2010 called *'Forseti.sln'* and another that has been tested with MonoDevelop 2 and Mac OSX; *'Forseti OSX.sln'*. If you're on OSX, you can't just go ahead and compile it, you need all the packages it depends on downloaded first. A rakefile has been created to do the downloads of these packages from [Nuget](http://www.nuget.org). 
