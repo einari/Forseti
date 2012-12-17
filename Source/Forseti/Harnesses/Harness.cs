@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Forseti.Files;
+using Forseti.Extensions;
 using Forseti.Suites;
 using Forseti.Frameworks;
 
@@ -8,7 +10,8 @@ namespace Forseti.Harnesses
 {
     public class Harness
     {
-        const   string SystemComponentName = "{system}";
+        const string SystemComponentName = "{system}";
+        const string DescriptionComponentName = "{description}";
 
 		string _systemsSearchPath;
 		string _descriptionsSearchPath;
@@ -100,13 +103,15 @@ namespace Forseti.Harnesses
                 }
 
                 var isDescription = IsDescription(file);
-                if (isDescription && _descriptionComponents.ContainsKey(SystemComponentName))
+                if (isDescription )//&& _descriptionComponents.ContainsKey(SystemComponentName))
                 {
-                    var systemComponentIndex = _descriptionComponents[SystemComponentName];
+                   // _suites.Where(s => IsDescriptionForSystem(new Description(file), s));//.ForEach();
+               //     var systemComponentIndex = _descriptionComponents[SystemComponentName];
                     foreach (var suite in _suites)
                     {
-                        var match = _descriptionsSearchPathRegex.Match(file.FullPath);
-                        if (match.Groups[systemComponentIndex+1].Value == suite.System)
+                 //       var match = _descriptionsSearchPathRegex.Match(file.FullPath);
+                 //       if (match.Groups[systemComponentIndex+1].Value == suite.System)
+                        if(IsDescriptionForSystem(new Description(file), suite))
                         {
                             var description = new Description(file);
 
@@ -123,6 +128,24 @@ namespace Forseti.Harnesses
             }
 			
 			return affectedSuites;
+        }
+
+        private bool IsDescriptionForSystem(Description description, Suite suite)
+        {
+            var systemComponents = _systemsSearchPathRegex.Match(suite.SystemFile.FullPath);
+            var descriptionComponents = _descriptionsSearchPathRegex.Match(description.File.FullPath);
+
+            for (int i = 0; i < _systemComponents.Count(); i++)
+            {
+                var customComponent = _systemComponents.ElementAt(i);
+                var matchIndex = customComponent.Value + 1;
+                if (systemComponents.Groups.Count >= matchIndex && descriptionComponents.Groups.Count >= matchIndex)
+                    if (systemComponents.Groups[matchIndex].Value == descriptionComponents.Groups[matchIndex].Value)
+                        continue;
+
+                return false;
+            }
+            return true;
         }
 
         Regex BuildSearchRegex(string path, out Dictionary<string, int> extractedComponents)
