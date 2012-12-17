@@ -103,27 +103,19 @@ namespace Forseti.Harnesses
                 }
 
                 var isDescription = IsDescription(file);
-                if (isDescription )//&& _descriptionComponents.ContainsKey(SystemComponentName))
+                if (isDescription)
                 {
-                   // _suites.Where(s => IsDescriptionForSystem(new Description(file), s));//.ForEach();
-               //     var systemComponentIndex = _descriptionComponents[SystemComponentName];
-                    foreach (var suite in _suites)
-                    {
-                 //       var match = _descriptionsSearchPathRegex.Match(file.FullPath);
-                 //       if (match.Groups[systemComponentIndex+1].Value == suite.System)
-                        if(IsDescriptionForSystem(new Description(file), suite))
-                        {
-                            var description = new Description(file);
+                    var description = new Description(file);
+                    _suites.Where(s => IsDescriptionForSystem(description, s))
+                           .ForEach(s =>
+                           {
+                                    // Todo: Hack for now
+                                description.AddCase(new Case());
+                                s.AddDescription(description);
 
-                            // Todo: Hack for now
-                            description.AddCase(new Case());
-                            suite.AddDescription(description);
-							
-							if( !affectedSuites.Contains(suite) ) {
-								affectedSuites.Add (suite);
-							}
-                        }
-                    }
+                                if (!affectedSuites.Contains(s))
+                                    affectedSuites.Add(s);
+                           });
                 }
             }
 			
