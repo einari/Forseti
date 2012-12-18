@@ -11,7 +11,7 @@ buster.spec.expose();
 		},
 		
 		contextStart: function(context) {
-			//print("\nSuite("+context.name+")");
+			//forseti.log("\nSuite("+context.name+")");
 		},
 		
 		contextEnd: function(context) {

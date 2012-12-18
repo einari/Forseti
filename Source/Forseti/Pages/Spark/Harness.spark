@@ -2,6 +2,10 @@
 <html>
 	<head>
 		<title>Forseti Runner Page</title>
+		<for each="var dependency in RunnerScripts">
+			<script type="text/javascript" src="${dependency}"></script>
+		</for>
+
 		<script type="text/javascript" src="${FrameworkScript}"></script>
 		<script type="text/javascript" src="${FrameworkReportingScript}"></script>
 

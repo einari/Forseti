@@ -171,7 +171,12 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Scripting\Scripts\forseti.js" />
+  </ItemGroup>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Scripting\Scripts\main.js" />
+    <EmbeddedResource Include="Scripting\Scripts\r.js" />
+  </ItemGroup>
 </Project>

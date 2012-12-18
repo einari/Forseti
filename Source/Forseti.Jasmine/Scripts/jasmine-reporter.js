@@ -8,15 +8,15 @@
         this.finished = false;
 
         this.reportRunnerStarting = function (runner) {
-            //print("Runner starting");
+            //forseti.log("Runner starting");
         };
 
         this.reportRunnerResults = function (runner) {
-            //print("Runner results");
+            //forseti.log("Runner results");
         };
 
         this.reportSuiteResults = function (suite) {
-            //print("\nSuite(" + suite.description + ")");
+            //forseti.log("\nSuite(" + suite.description + ")");
 
             var specs = suite.specs();
             for (var specIndex = 0; specIndex < specs.length; specIndex++) {
@@ -26,24 +26,24 @@
                     var message = messages[messageIndex];
                     var passed = message.passed ? message.passed() : true;
                     if (passed !== true) {
-                        reportFailedCase(suite.description, spec.description, messages[messageIndex].toString());
+                        forseti.reportFailedCase(suite.description, spec.description, messages[messageIndex].toString());
                     } else {
-                        reportPassedCase(suite.description, spec.description);
+                        forseti.reportPassedCase(suite.description, spec.description);
                     }
                 }
             }
         };
 
         this.reportSpecStarting = function (spec) {
-            //print("SpecStarting : " + spec);
+            //forseti.log("SpecStarting : " + spec);
         };
 
         this.reportSpecResults = function (spec) {
-            //print("Spec : " + spec.description);
+            //forseti.log("Spec : " + spec.description);
         };
 
         this.log = function (str) {
-            //print("LOG : " + str);
+            //forseti.log("LOG : " + str);
         };
     };
 

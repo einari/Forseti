@@ -27,6 +27,8 @@ namespace Forseti.Pages.Spark
             }
         }
 
+        public string[] RunnerScripts { get; set; }
+
         public string FrameworkScript { get; set; }
         public string FrameworkExecutionScript { get; set; }
         public string FrameworkReportingScript { get; set; }
@@ -61,5 +63,6 @@ namespace Forseti.Pages.Spark
             CaseScripts = caseScripts.ToArray();
             SystemScripts = systemScripts.ToArray();
         }
+
     }
 }

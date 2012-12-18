@@ -1,5 +1,5 @@
-﻿//print("Should require");
+﻿//forseti.log("Should require");
 //require("./lakk.js","");
 
-//print("Hello world");
+//forseti.log("Hello world");
 //doStuff();

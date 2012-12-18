@@ -1,1 +1,1 @@
-﻿print("This is a global dependency");
+﻿forseti.log("This is a global dependency");

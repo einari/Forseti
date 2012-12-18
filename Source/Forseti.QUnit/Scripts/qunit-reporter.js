@@ -23,7 +23,7 @@
         } else {
             console.log("FAIL");
         }
-        //print(result ? 'PASS' : 'FAIL');
+        //forseti.log(result ? 'PASS' : 'FAIL');
     }*/
 })();
 
