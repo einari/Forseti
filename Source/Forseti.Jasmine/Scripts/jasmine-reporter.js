@@ -16,7 +16,7 @@
         };
 
         this.reportSuiteResults = function (suite) {
-            print("\nSuite(" + suite.description + ")");
+            //print("\nSuite(" + suite.description + ")");
 
             var specs = suite.specs();
             for (var specIndex = 0; specIndex < specs.length; specIndex++) {
