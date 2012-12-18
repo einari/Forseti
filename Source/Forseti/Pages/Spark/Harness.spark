@@ -13,6 +13,7 @@
 			<script type="text/javascript" src="${dependency}"></script>
 		</for>
 
+		<!--
 		<for each="var system in SystemScripts">
 			<script type="text/javascript" src="${system}"></script>
 		</for>
@@ -20,8 +21,42 @@
 		<for each="var @case in CaseScripts">
 			<script type="text/javascript" src="${@case}"></script>
 		</for>
+		-->
 
+		<script type="text/javascript">
+		<for each="var system in SystemScripts">
+			forseti.systems.push("${system}");
+		</for>
+		<for each="var @case in CaseScripts">
+			forseti.descriptions.push("${@case}");
+		</for>
+
+		</script>
 		<script type="text/javascript" src="${FrameworkExecutionScript}"></script>
+		<!--<script type="text/javascript">
+		
+			 window.onload = function () {
+
+            //var systems = ["ForsetiTesting/Scripts/features_with_same_named_specs/secondSystem.js", "ForsetiTesting/Scripts/features_with_same_named_specs/someSystem.js"];
+            //var descriptions = ["ForsetiTesting/Specs/features_with_same_named_specs/for_someSystem/when_creating_a_test.js", "ForsetiTesting/Specs/features_with_same_named_specs/for_secondSystem/when_creating_a_test.js"];
+
+            var systems = forseti.systems;
+            var descriptions = forseti.descriptions;
+
+            for (var i = 0; i < descriptions.length; i++) {
+                var description = descriptions[i];
+                var dependencies = systems.splice(0);
+                dependencies.push(description);
+                require(dependencies, function () {
+                    var jasmineEnv = jasmine.getEnv();
+                    jasmineEnv.execute();
+
+                    forseti.log(description);
+
+                });
+            }
+        }
+		</script>-->
 	</head>
 	<body>
 	</body>
