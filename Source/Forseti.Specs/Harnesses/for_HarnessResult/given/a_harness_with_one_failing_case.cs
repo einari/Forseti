@@ -17,6 +17,7 @@ namespace Forseti.Specs.Harnesses.for_HarnessResult.given
             suite.AddDescription(description);
             @case = new Case
             {
+                Name = "it shuold fail",
                 Result = new CaseResult
                 {
                     Success = false
