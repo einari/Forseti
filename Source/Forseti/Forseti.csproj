@@ -179,4 +179,7 @@
     <EmbeddedResource Include="Scripting\Scripts\main.js" />
     <EmbeddedResource Include="Scripting\Scripts\r.js" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scripting\Scripts\require.js" />
+  </ItemGroup>
 </Project>
