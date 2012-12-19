@@ -41,7 +41,7 @@ namespace Forseti.Harnesses
 
         static void Report(string filename, string description, string @case, bool success = true, string message = "" )
         {
-            ParseMessage(message);
+            message = ParseMessage(message);
 
             if (HarnessResult != null)
             {
