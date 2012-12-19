@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Text;
 using Forseti.Resources;
 using Spark;
@@ -6,6 +7,7 @@ using Spark.FileSystem;
 using System;
 using System.Collections.Generic;
 using Forseti.Harnesses;
+using System.Security.AccessControl;
 
 namespace Forseti.Pages.Spark
 {
@@ -72,14 +74,36 @@ namespace Forseti.Pages.Spark
             foreach (var scriptFile in harnessView.SystemScripts)
                 CopyScript(page.RootPath, scriptFile);
 			
-			
-			
-            foreach (var scriptFile in harnessView.CaseScripts)
-                CopyScript(page.RootPath, scriptFile);
+            if (harness.IncludeSubFoldersFromDescriptions)
+                CopyDescriptionsRecursively(page, harnessView);
+            else
+            {
+                foreach (var scriptFile in harnessView.CaseScripts)
+                    CopyScript(page.RootPath, scriptFile);
+            }
 
             File.WriteAllText(page.Filename, result);
 
             return page;
+        }
+
+        private void CopyDescriptionsRecursively(Page page, HarnessView harnessView)
+        {
+            var folders = harnessView.CaseScripts.GroupBy(c => ((Files.File)c).Folder).Select(g => g.Key).ToArray();
+            foreach (var folder in folders)
+            {
+                var sourcePath = Path.Combine(Directory.GetCurrentDirectory(), folder);
+                var targetPath = Path.Combine(page.RootPath, folder);
+                CopyFilesRecursively(new DirectoryInfo(targetPath), new DirectoryInfo(sourcePath));
+            }
+        }
+
+        void CopyFilesRecursively(DirectoryInfo target, DirectoryInfo source)
+        {
+            foreach (var dir in source.GetDirectories())
+                CopyFilesRecursively(target.CreateSubdirectory(dir.Name), dir);
+            foreach (var file in source.GetFiles())
+                file.CopyTo(Path.Combine(target.FullName, file.Name),true);
         }
 
 
