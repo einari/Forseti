@@ -116,6 +116,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripting\for_forsetijs\forseti_stubs.js" />
     <Content Include="Scripting\for_forsetijs\forseti_specs.js" />
     <Content Include="Scripting\for_forsetijs\lib\jasmine-html.js" />
     <Content Include="Scripting\for_forsetijs\lib\jasmine.css" />
