@@ -11,20 +11,20 @@ namespace Forseti.Harnesses
     {
         public static HarnessResult HarnessResult;
 
-        public static void ReportFailedCase(string description, string @case, string message, string filename="")
+        public static void ReportFailedCase(string description, string @case, string message, string filename)
         {
             if (!SystemConsole.LoggingEnabled)
                 return;
 
-            Report(description, @case, false, message);
+            Report(filename, description, @case, false, message:message);
         }
 
-        public static void ReportPassedCase(string description, string @case, string filename = "")
+        public static void ReportPassedCase(string description, string @case, string filename)
         {
             if (!SystemConsole.LoggingEnabled)
                 return;
 
-            Report(description, @case);
+            Report(filename, description, @case);
         }
 
 
@@ -39,7 +39,7 @@ namespace Forseti.Harnesses
             return message;
         }
 
-        static void Report(string description, string @case, bool success = true, string message = "")
+        static void Report(string filename, string description, string @case, bool success = true, string message = "" )
         {
             ParseMessage(message);
 
@@ -49,9 +49,9 @@ namespace Forseti.Harnesses
                 {
                     s.Descriptions.ForEach(d =>
                     {
-                        var descriptionWithUnderscores = description.Replace(' ', '_');
+                        //var descriptionWithUnderscores = description.Replace(' ', '_');
 
-                        if (d.Name == description || d.Name == descriptionWithUnderscores)
+                        if (d.File.RelativePath == filename)
                         {
                             var actualCase = d.Cases.Where(c => c.Name == @case).FirstOrDefault();
                             if (actualCase == null)
