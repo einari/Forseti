@@ -1,29 +1,22 @@
 ﻿var forseti = (function (window) {
 
+    var nextDescriptionForExecutingIndex = 0;
 
     var inBrowser = function () {
         return typeof window.Envjs === "undefined";
     };
 
     window.onload = function () {
-        forseti.initialize();
-        var systems = forseti.systems;
-        var descriptions = forseti.descriptions;
-
-        for (var i = 0; i < descriptions.length; i++) {
-            var description = descriptions[i];
-            var dependencies = systems.splice(0);
-            dependencies.push(description);
-            require(dependencies, function () {
-                forseti.execute();
-            });
-        }
+        forseti.run();
     };
 
     return {
+        reset: function () {
+            nextDescriptionForExecutingIndex = 0;
+        },
         framework: {
-            instance : null,
-            initalize: function () { },
+            instance: null,
+            initialize: function () { },
             execute: function () { }
         },
         runningInBrowser: inBrowser(),
@@ -35,28 +28,65 @@
                 window.print(message);
         },
         reportPassedCase: function (description, caseName) {
+            var descriptionFile = this.currentDescription;
             if (this.runningInBrowser)
-                console.log("PASSED : " + description + " / " + caseName);
+                console.log("PASSED : " + description + " / " + caseName + " / " + descriptionFile);
             else
-                window.reportPassedCase(description, caseName);
+                window.reportPassedCase(description, caseName, descriptionFile);
         },
-        reportFailedCase: function (descriptiom, caseName, message) {
+        reportFailedCase: function (description, caseName, message) {
+            var descriptionFile = this.currentDescription;
             if (this.runningInBrowser)
-                console.log("FAILED : " + description + " / " + caseName + " / message: " + message);
+                console.log("FAILED : " + description + " / " + caseName + " / message: " + message + " / " + descriptionFile);
             else
-                window.reportPassedCase(description, caseName, message);
+                window.reportFailedCase(description, caseName, message, descriptionFile);
         },
         systems: [],
         descriptions: [],
         execute: function () {
-            if (this.framework)
+            if (this.framework) {
                 this.framework.execute();
+            }
+        },
+        hasUnexecutedDescriptions: function () {
+            return nextDescriptionForExecutingIndex < this.descriptions.length;
+        },
+        getNextDescriptionForExecuting: function () {
+            var description = this.descriptions[nextDescriptionForExecutingIndex];
+            return description;
         },
         initialize: function () {
-            if (this.framework)
+            if (this.framework) {
                 this.framework.initialize();
-        }
+                this.loadSystems();
+            }
+        },
+        prepareNextDescription: function () {
+            var nextDescription = this.getNextDescriptionForExecuting();
 
+            this.currentDescription = nextDescription;
+            nextDescriptionForExecutingIndex++;
+        },
+        currentDescription: "",
+        loadSystems: function (func) {
+            var sytems = require(this.systems);
+        },
+        run: function () {
+            this.initialize();
+            this.executeNextDescription();
+        },
+        reportingComplete: function () {
+            this.executeNextDescription();
+        },
+        executeNextDescription: function () {
+            var self = this;
+            if (self.hasUnexecutedDescriptions()) {
+                self.prepareNextDescription();
+                require([self.currentDescription], function () {
+                    self.execute();
+                });
+            }
+        }
     }
 
 })(window);

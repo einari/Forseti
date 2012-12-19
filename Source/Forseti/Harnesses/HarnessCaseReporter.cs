@@ -11,7 +11,7 @@ namespace Forseti.Harnesses
     {
         public static HarnessResult HarnessResult;
 
-        public static void ReportFailedCase(string description, string @case, string message)
+        public static void ReportFailedCase(string description, string @case, string message, string filename="")
         {
             if (!SystemConsole.LoggingEnabled)
                 return;
@@ -19,7 +19,7 @@ namespace Forseti.Harnesses
             Report(description, @case, false, message);
         }
 
-        public static void ReportPassedCase(string description, string @case)
+        public static void ReportPassedCase(string description, string @case, string filename = "")
         {
             if (!SystemConsole.LoggingEnabled)
                 return;

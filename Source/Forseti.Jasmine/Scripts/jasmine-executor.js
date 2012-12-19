@@ -11,12 +11,14 @@
             var jasmineEnv = jasmine.getEnv();
             jasmineEnv.updateInterval = 1000;
             framework.instance = jasmineEnv;
-            framework.instance.execute();
         }
     };
 
     framework.execute = function () {
-//        if (framework.instance)
-//            framework.instance.execute();
+        if (framework.instance) {
+            var jasmineEnv = framework.instance;
+            if (!jasmineEnv.currentRunner_.queue.isRunning())
+                jasmineEnv.execute();
+        }
     }
 })();

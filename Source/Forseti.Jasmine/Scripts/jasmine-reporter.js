@@ -32,6 +32,7 @@
                     }
                 }
             }
+            forseti.reportingComplete();
         };
 
         this.reportSpecStarting = function (spec) {
