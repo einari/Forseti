@@ -13,17 +13,11 @@ namespace Forseti.Harnesses
 
         public static void ReportFailedCase(string description, string @case, string message)
         {
-            if (!SystemConsole.LoggingEnabled)
-                return;
-
             Report(description, @case, false, message);
         }
 
         public static void ReportPassedCase(string description, string @case)
         {
-            if (!SystemConsole.LoggingEnabled)
-                return;
-
             Report(description, @case);
         }
 
@@ -42,7 +36,6 @@ namespace Forseti.Harnesses
         static void Report(string description, string @case, bool success = true, string message = "")
         {
             ParseMessage(message);
-
             if (HarnessResult != null)
             {
                 HarnessResult.AffectedSuites.ForEach(s =>
@@ -50,7 +43,6 @@ namespace Forseti.Harnesses
                     s.Descriptions.ForEach(d =>
                     {
                         var descriptionWithUnderscores = description.Replace(' ', '_');
-
                         if (d.Name == description || d.Name == descriptionWithUnderscores)
                         {
                             var actualCase = d.Cases.Where(c => c.Name == @case).FirstOrDefault();
