@@ -53,7 +53,7 @@ namespace Forseti.Pages.Spark
                 var actualDependencies = new List<string>();
                 foreach (var dependency in harness.Dependencies)
                 {
-                    CopyScript(page.RootPath, dependency.RelativePath);
+                    CopyScript(page, dependency.RelativePath);
                     actualDependencies.Add(dependency.RelativePath);
                 }
                 harnessView.Dependencies = actualDependencies.ToArray();
@@ -63,6 +63,20 @@ namespace Forseti.Pages.Spark
 							
 
             var writer = new StringWriter();
+
+            foreach (var scriptFile in harnessView.SystemScripts)
+                CopyScriptAndPossibleAdditionalReferences(harness, page, scriptFile);
+
+            var actualCaseScripts = new List<string>();
+            foreach (var scriptFile in harnessView.CaseScripts)
+            {
+                var additionalRefereces = CopyScriptAndPossibleAdditionalReferences(harness, page, scriptFile);
+                actualCaseScripts.AddRange(additionalRefereces);
+                actualCaseScripts.Add(scriptFile);
+            }
+            harnessView.CaseScripts = actualCaseScripts.ToArray();
+
+
             harnessView.RenderView(writer);
 
             var result = writer.ToString();
@@ -71,44 +85,51 @@ namespace Forseti.Pages.Spark
             File.WriteAllText(page.RootPath + harness.Framework.ExecuteScriptName, harness.Framework.ExecuteScript);
             File.WriteAllText(page.RootPath + harness.Framework.ReportScriptName, harness.Framework.ReportScript);
 
-            foreach (var scriptFile in harnessView.SystemScripts)
-                CopyScript(page.RootPath, scriptFile);
-
-            foreach (var scriptFile in harnessView.CaseScripts)
-                CopyScript(page.RootPath, scriptFile);
 			
-            if (harness.IncludeSubFoldersFromDescriptions)
-                CopyDescriptionsRecursively(page, harnessView);
             
             File.WriteAllText(page.Filename, result);
 
             return page;
         }
 
-        void CopyDescriptionsRecursively(Page page, HarnessView harnessView)
+        void CopyFilesRecursively(Page page, string descriptionRelativePath, Files.File descriptionFile, DirectoryInfo target, DirectoryInfo source, List<string> additionalReferences)
         {
-            
-            var folders = harnessView.CaseScripts.GroupBy(c => ((Files.File)c).Folder).Select(g => g.Key).ToArray();
-            foreach (var folder in folders)
+            foreach (var dir in source.GetDirectories())
+                CopyFilesRecursively(page, descriptionRelativePath, descriptionFile, target.CreateSubdirectory(dir.Name), dir, additionalReferences);
+            foreach (var file in source.GetFiles())
             {
-                var sourcePath = Path.Combine(Directory.GetCurrentDirectory(), folder);
-                var targetPath = Path.Combine(page.RootPath, folder);
-                CopyFilesRecursively(page.RootPath, new DirectoryInfo(targetPath), new DirectoryInfo(sourcePath));
+                var relativeFileName = string.Format("{0}/{1}/{2}", descriptionRelativePath, file.Directory.Name, file.Name);
+                additionalReferences.Add(((Files.File)relativeFileName).RelativePath);
+                CopyScript(page, file.FullName);
             }
         }
 
-        void CopyFilesRecursively(string rootPath, DirectoryInfo target, DirectoryInfo source)
+
+        IEnumerable<string> CopyScriptAndPossibleAdditionalReferences(Harness harness, Page page, Files.File descriptionFile)
         {
-            foreach (var dir in source.GetDirectories())
-                CopyFilesRecursively(rootPath, target.CreateSubdirectory(dir.Name), dir);
-            foreach (var file in source.GetFiles())
-                CopyScript(rootPath, file.FullName);
+            var currentDirectory = Directory.GetCurrentDirectory();
+            var additionalReferences = new List<string>();
+            if (harness.IncludeSubFoldersFromDescriptions)
+            {
+                var descriptionSourcePath = Path.GetDirectoryName(Path.Combine(currentDirectory, descriptionFile.Folder));
+                var descriptionRelativePath = descriptionFile.Folder;
+                var folders = Directory.GetDirectories(Path.GetDirectoryName(descriptionFile.FullPath));
+                foreach (var folder in folders)
+                {
+                    var sourcePath = Path.Combine(currentDirectory, folder);
+                    var targetPath = Path.Combine(page.RootPath, folder);
+                    
+                    CopyFilesRecursively(page, descriptionRelativePath, descriptionFile, new DirectoryInfo(targetPath), new DirectoryInfo(sourcePath), additionalReferences);
+                }
+            }
+            CopyScript(page, descriptionFile);
+
+            return additionalReferences;
         }
 
-
-        void CopyScript(string rootPath, Files.File scriptFile)
+        private static void CopyScript(Page page, Files.File scriptFile)
         {
-            var target = Path.Combine(rootPath,scriptFile.RelativePath);
+            var target = Path.Combine(page.RootPath, scriptFile.RelativePath);
             var script = scriptFile.ReadAllText();
             var dir = Path.GetDirectoryName(target);
             if (!Directory.Exists(dir))

@@ -1,1 +1,1 @@
-﻿
+﻿print("Hello from a given statement");
