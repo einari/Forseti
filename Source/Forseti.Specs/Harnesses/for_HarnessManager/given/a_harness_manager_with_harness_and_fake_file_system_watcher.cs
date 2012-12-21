@@ -20,13 +20,13 @@ namespace Forseti.Specs.Harnesses.for_HarnessManager.given
         protected static Case @case;
         protected static Page expected_page;
         protected static Harness harness;
-        protected static Harness harness_result;
+        protected static Harness harness_result_used_to_render_page;
         protected static string system_search_path;
         protected static string description_search_path;
 
         Establish context = () =>
                 {
-                    harness_result = null;
+                    harness_result_used_to_render_page = null;
                     file_system_watcher = new FakeFileSystemWatcher();
                         
                     system_search_path = "Script/{system}.js";
@@ -40,7 +40,7 @@ namespace Forseti.Specs.Harnesses.for_HarnessManager.given
                     description_for_another_system = (File)"Specs/for_nothing/when_doing_nothing.js";
 
                     expected_page = new Page();
-                    page_generator_mock.Setup(p => p.GenerateFrom(Moq.It.IsAny<Harness>())).Callback((Harness h) => harness_result = h).Returns(expected_page);
+                    page_generator_mock.Setup(p => p.GenerateFrom(Moq.It.IsAny<Harness>())).Callback((Harness h) => harness_result_used_to_render_page = h).Returns(expected_page);
 
 
                     harness = new Harness(framework_mock.Object);
@@ -67,6 +67,12 @@ namespace Forseti.Specs.Harnesses.for_HarnessManager.given
 
 
                 };
+
+        public static void ClearHarnessResults()
+        {
+            harness_result_used_to_render_page = null;
+
+        }
 	}
 }
 

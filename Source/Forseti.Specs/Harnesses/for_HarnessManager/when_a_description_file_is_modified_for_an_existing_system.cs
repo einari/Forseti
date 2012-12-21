@@ -14,18 +14,17 @@ namespace Forseti.Specs.Harnesses.for_HarnessManager
     {
         Because of = () => file_system_watcher.TriggerChange(Forseti.Files.FileChange.Modified, description_for_system);
 
-        It should_mark_something_suite_as_affected = () => harness_result.Suites.ShouldContain(s => s.SystemFile == system);
-        It should_contain_all_cases_for_the_system = () => 
+        It should_mark_all_cases_in__something__suite_for_execution = () => 
                                                         {
-                                                            harness_result.Cases.ShouldContain(c => c.Description.File == description_for_system);
-                                                            harness_result.Cases.ShouldContain(c => c.Description.File == description2_for_system);
+                                                            harness_result_used_to_render_page.Cases.ShouldContain(c => c.Description.File == description_for_system);
+                                                            harness_result_used_to_render_page.Cases.ShouldContain(c => c.Description.File == description2_for_system);
                                                         };
         It should_not_contain_cases_for_another_system = () =>
                                                         {
-                                                            harness_result.Cases.ShouldEachConformTo(c =>
-                                                                c.Description.Suite == harness_result.Suites.FirstOrDefault(s => s.SystemFile == system));
+                                                            harness_result_used_to_render_page.Cases.ShouldEachConformTo(c =>
+                                                                c.Description.Suite == harness_result_used_to_render_page.Suites.FirstOrDefault(s => s.SystemFile == system));
 
-                                                            harness_result.Cases.Count().ShouldEqual(2);
+                                                            harness_result_used_to_render_page.Cases.Count().ShouldEqual(2);
                                                         };
 
             

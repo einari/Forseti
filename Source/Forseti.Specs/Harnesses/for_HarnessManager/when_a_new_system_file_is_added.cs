@@ -23,7 +23,7 @@ namespace Forseti.Specs.Harnesses.for_HarnessManager
 
         Because of = () => file_system_watcher.TriggerChange(Forseti.Files.FileChange.Added, new_system_file);
 
-        It shouldnt_mark_any_suites_for_execution = () => harness_result.ShouldBeNull();
+        It shouldnt_mark_any_suites_for_execution = () => harness_result_used_to_render_page.ShouldBeNull();
 
     }
 

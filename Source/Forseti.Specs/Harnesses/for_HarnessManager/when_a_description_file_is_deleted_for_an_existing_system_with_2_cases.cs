@@ -16,7 +16,7 @@ namespace Forseti.Specs.Harnesses.for_HarnessManager
 
         Because of = () => file_system_watcher.TriggerChange(Forseti.Files.FileChange.Deleted, description_for_system);
 
-        It should_not_mark_any_suites_for_execution = () => harness_result.ShouldBeNull();
+        It should_not_mark_any_suites_for_execution = () => harness_result_used_to_render_page.ShouldBeNull();
         It should_remove_the_description_from_its_suite = () => harness.Suites.First(s => s.SystemFile == system).Descriptions
                                                                         .ShouldNotContain(d => d.File == description_for_system);
 

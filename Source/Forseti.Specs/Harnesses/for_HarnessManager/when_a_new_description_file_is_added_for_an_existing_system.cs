@@ -23,19 +23,18 @@ namespace Forseti.Specs.Harnesses.for_HarnessManager
 
         Because of = () => file_system_watcher.TriggerChange(Forseti.Files.FileChange.Added, added_description_file_for_system);
 
-        It should_mark__something__suite_for_execution = () => harness_result.Suites.ShouldContain(s => s.SystemFile == system);
         It should_mark_all_the_descriptions_in__something__suite_for_execution = () => 
                                                         {
-                                                            harness_result.Cases.ShouldContain(c => c.Description.File == description_for_system);
-                                                            harness_result.Cases.ShouldContain(c => c.Description.File == description2_for_system);
-                                                            harness_result.Cases.ShouldContain(c => c.Description.File == added_description_file_for_system); 
+                                                            harness_result_used_to_render_page.Cases.ShouldContain(c => c.Description.File == description_for_system);
+                                                            harness_result_used_to_render_page.Cases.ShouldContain(c => c.Description.File == description2_for_system);
+                                                            harness_result_used_to_render_page.Cases.ShouldContain(c => c.Description.File == added_description_file_for_system); 
                                                         };
         It should_not_mark_any_other_suites_for_execution = () =>
                                                             {
-                                                                harness_result.Cases.ShouldEachConformTo(c =>
-                                                                    c.Description.Suite == harness_result.Suites.FirstOrDefault(s => s.SystemFile == system));
+                                                                harness_result_used_to_render_page.Cases.ShouldEachConformTo(c =>
+                                                                    c.Description.Suite == harness_result_used_to_render_page.Suites.FirstOrDefault(s => s.SystemFile == system));
 
-                                                                harness_result.Cases.Count().ShouldEqual(3);
+                                                                harness_result_used_to_render_page.Cases.Count().ShouldEqual(3);
                                                             };
         It should_add_the_decription_to_the_harness_for_later_runs = () => harness.Suites.First(s => s.SystemFile == system).Descriptions.ShouldContain(d => d.File == added_description_file_for_system);
             

@@ -65,6 +65,8 @@
     <Compile Include="Files\for_File\when_getting_full_path_and_folder_is_set_without_trailing_slash.cs" />
     <Compile Include="Harnesses\for_HarnessCaseReporter\when_reporting_a_failed_case_should_update_the_harness_result.cs" />
     <Compile Include="Harnesses\for_HarnessChangeManager\when_notifying_change_with_one_registered_watcher.cs" />
+    <Compile Include="Harnesses\for_HarnessManager\when_a_description_file_is_modified_with_same_name_as_description_for_first_existing_system.cs" />
+    <Compile Include="Harnesses\for_HarnessManager\when_a_description_file_is_modified_with_same_name_as_description_for_another_existing_system.cs" />
     <Compile Include="Harnesses\for_HarnessManager\when_a_new_description_file_is_added_with_same_name_as_description_for_another_existing_system.cs" />
     <Compile Include="Harnesses\for_HarnessManager\when_a_new_system_file_is_added.cs" />
     <Compile Include="Harnesses\for_HarnessManager\when_a_description_file_is_deleted_for_an_existing_system_with_2_cases.cs" />
