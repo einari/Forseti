@@ -37,7 +37,8 @@ namespace Forseti.ConsoleReporter
 
         static void PrintSuiteInformation(Description description)
         {
-            Console.WriteLine("Suite( {0} ) ", description.FriendlyName());
+            Console.WriteLine("for( {0} ) ", description.Suite.FriendlyName());
+            Console.WriteLine(" describing( {0} ) ", description.FriendlyName());
         }
 
         static void PrintResultSummary(HarnessResult result)
@@ -62,14 +63,14 @@ namespace Forseti.ConsoleReporter
 
         void PrintPassedCase(Case @case)
         {
-            Console.Write(" Spec( {0} ) ", @case.FriendlyName());
+            Console.Write("  it( {0} ) ", @case.FriendlyName());
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("PASSED");
             Console.ResetColor();
         }
         void PrintFailedCase(Case @case)
         {
-            Console.Write(" Spec( {0} ) ", @case.FriendlyName());
+            Console.Write("  it( {0} ) ", @case.FriendlyName());
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("FAILED");
             Console.ResetColor();

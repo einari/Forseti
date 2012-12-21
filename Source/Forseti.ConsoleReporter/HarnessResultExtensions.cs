@@ -19,5 +19,11 @@ namespace Forseti.ConsoleReporter
         {
             return ToFriendlyName(description.Name);
         }
+
+        public static string FriendlyName(this Suite suite) 
+        {
+            return ToFriendlyName(suite.System);
+        
+        }
     }
 }
