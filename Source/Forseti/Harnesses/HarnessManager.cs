@@ -51,7 +51,7 @@ namespace Forseti.Harnesses
                         var suitesToRemove = new List<Suite>();
                         foreach (var suite in harness.Suites)
                         {
-                            if (suite.SystemFile == file)
+                            if (suite.SystemFile.FullPath == file.FullPath)
                                 suitesToRemove.Add(suite);
                             else
                             {
@@ -71,12 +71,12 @@ namespace Forseti.Harnesses
                         foreach (var suite in harness.Suites)
                         {
                             var runSuite = false;
-                            if (suite.SystemFile == file)
+                            if (suite.SystemFile.FullPath == file.FullPath)
                                 runSuite = true;
 
                             foreach (var description in suite.Descriptions)
                             {
-                                if (description.File == file)
+                                if (description.File.FullPath == file.FullPath)
                                     runSuite = true;
                             }
 
@@ -137,7 +137,11 @@ namespace Forseti.Harnesses
                 _harnessChangeManager.NotifyChange(result, HarnessChangeType.RunComplete);
 				return null;
 			}
-            suites.ForEach(s => result.AddAffectedSuite(s));
+            suites.ForEach(s => 
+                            {
+                                s = PrepareSuiteForReporting(s);
+                                result.AddAffectedSuite(s); 
+                            });
 			
             var cases = new List<Case>();
             var timeBefore = DateTime.Now;
@@ -171,6 +175,12 @@ namespace Forseti.Harnesses
             Console.WriteLine("<--- Took {0} seconds --->\n", delta.TotalSeconds);
 
             return result;
+        }
+
+        private Suite PrepareSuiteForReporting(Suite s)
+        {
+            s.Descriptions.ForEach(d => d.ResetCasesForReporting());
+            return s;
         }
 
         public IEnumerable<HarnessResult> Run()
