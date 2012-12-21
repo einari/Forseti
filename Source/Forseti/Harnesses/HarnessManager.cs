@@ -71,13 +71,12 @@ namespace Forseti.Harnesses
                         foreach (var suite in harness.Suites)
                         {
                             var runSuite = false;
-                            var suiteOrDescription = Path.GetFileNameWithoutExtension(file.Filename);
-                            if (suite.System == suiteOrDescription)
+                            if (suite.SystemFile == file)
                                 runSuite = true;
 
                             foreach (var description in suite.Descriptions)
                             {
-                                if (description.Name == suiteOrDescription)
+                                if (description.File == file)
                                     runSuite = true;
                             }
 
