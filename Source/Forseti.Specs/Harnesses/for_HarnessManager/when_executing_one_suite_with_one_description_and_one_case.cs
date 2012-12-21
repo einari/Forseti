@@ -16,9 +16,12 @@ namespace Forseti.Specs.Harnesses.for_HarnessManager
 		static Harness harness;
         static Harness harness_result;
         static Page expected_page;
+        static string system_search_path;
+        static string description_search_path;
 
         Establish context = () =>
         {
+
             suite = new Suite((File)"Script/something.js");
             description = new Description((File)"Specs/for_something/when_doing_stuff.js");
             suite.AddDescription(description);
