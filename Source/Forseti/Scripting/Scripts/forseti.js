@@ -14,6 +14,11 @@
         reset: function () {
             nextDescriptionForExecutingIndex = 0;
         },
+        require: function () {
+            if (!window.__require)
+                window.__require = require;
+            __require.apply(this,arguments);
+        },
         framework: {
             instance: null,
             initialize: function () { },
@@ -69,7 +74,7 @@
         },
         currentDescription: "",
         loadSystems: function (func) {
-            var sytems = require(this.systems);
+            var sytems = this.require(this.systems);
         },
         run: function () {
             this.initialize();
@@ -82,7 +87,7 @@
             var self = this;
             if (self.hasUnexecutedDescriptions()) {
                 self.prepareNextDescription();
-                require([self.currentDescription], function () {
+                this.require([self.currentDescription], function () {
                     self.execute();
                 });
             }

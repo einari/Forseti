@@ -10,7 +10,9 @@ namespace Forseti.Console
         [STAThread]
         public static int Main(string[] args)
         {
-			//System.IO.Directory.SetCurrentDirectory("~/Projects/Fludo/Source");
+            //System.IO.Directory.SetCurrentDirectory(Path.GetDirectoryName("c:/PSS/ForsetiTesting/Source/"));
+            System.IO.Directory.SetCurrentDirectory(Path.GetDirectoryName("C:/PSS/Bifrost/Source/"));
+           
 
 			System.Console.WriteLine("Keys : \n  R : Rerun\n  B : Run in browser\n  Any other key : Exit\n\n");
 
