@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Text;
 using Forseti.Resources;
 using Spark;
@@ -6,6 +7,7 @@ using Spark.FileSystem;
 using System;
 using System.Collections.Generic;
 using Forseti.Harnesses;
+using System.Security.AccessControl;
 
 namespace Forseti.Pages.Spark
 {
@@ -58,7 +60,7 @@ namespace Forseti.Pages.Spark
                 var actualDependencies = new List<string>();
                 foreach (var dependency in harness.Dependencies)
                 {
-                    CopyScriptTo(page.RootPath, dependency.RelativePath);
+                    CopyScript(page, dependency.RelativePath);
                     actualDependencies.Add(dependency.RelativePath);
                 }
                 harnessView.Dependencies = actualDependencies.ToArray();
@@ -68,6 +70,20 @@ namespace Forseti.Pages.Spark
 							
 
             var writer = new StringWriter();
+
+            foreach (var scriptFile in harnessView.SystemScripts)
+                CopyScriptAndPossibleAdditionalReferences(harness, page, scriptFile);
+
+            var actualCaseScripts = new List<string>();
+            foreach (var scriptFile in harnessView.CaseScripts)
+            {
+                var additionalRefereces = CopyScriptAndPossibleAdditionalReferences(harness, page, scriptFile);
+                actualCaseScripts.AddRange(additionalRefereces);
+                actualCaseScripts.Add(scriptFile);
+            }
+            harnessView.CaseScripts = actualCaseScripts.ToArray();
+
+
             harnessView.RenderView(writer);
 
             var result = writer.ToString();
@@ -79,42 +95,57 @@ namespace Forseti.Pages.Spark
             File.WriteAllText(page.RootPath + harness.Framework.ExecuteScriptName, harness.Framework.ExecuteScript);
             File.WriteAllText(page.RootPath + harness.Framework.ReportScriptName, harness.Framework.ReportScript);
 
-            foreach (var scriptFile in harnessView.SystemScripts)
-                CopyScriptTo(page.RootPath, scriptFile);
 			
-			
-			
-            foreach (var scriptFile in harnessView.CaseScripts)
-                CopyCaseDescriptionScriptTo(page.RootPath, scriptFile);
-
+            
             File.WriteAllText(page.Filename, result);
 
             return page;
         }
 
-        void CopyScriptTo(string destinationRootPath, Files.File systemFile)
+        void CopyFilesRecursively(Page page, string descriptionRelativePath, Files.File descriptionFile, DirectoryInfo target, DirectoryInfo source, List<string> additionalReferences)
         {
-            var destinationPath = destinationRootPath + systemFile.RelativePath;
-            var systemScript = systemFile.ReadAllText();
-
-            WriteFileTo(destinationPath, systemScript);
+            foreach (var dir in source.GetDirectories())
+                CopyFilesRecursively(page, descriptionRelativePath, descriptionFile, target.CreateSubdirectory(dir.Name), dir, additionalReferences);
+            foreach (var file in source.GetFiles())
+            {
+                var relativeFileName = string.Format("{0}/{1}/{2}", descriptionRelativePath, file.Directory.Name, file.Name);
+                additionalReferences.Add(((Files.File)relativeFileName).RelativePath);
+                CopyScript(page, file.FullName);
+            }
         }
 
-        void WriteFileTo(string destinationPath, string fileContents) {
-            var dir = Path.GetDirectoryName(destinationPath);
+
+        IEnumerable<string> CopyScriptAndPossibleAdditionalReferences(Harness harness, Page page, Files.File descriptionFile)
+        {
+            var currentDirectory = Directory.GetCurrentDirectory();
+            var additionalReferences = new List<string>();
+            if (harness.IncludeSubFoldersFromDescriptions)
+            {
+                var descriptionSourcePath = Path.GetDirectoryName(Path.Combine(currentDirectory, descriptionFile.Folder));
+                var descriptionRelativePath = descriptionFile.Folder;
+                var folders = Directory.GetDirectories(Path.GetDirectoryName(descriptionFile.FullPath));
+                foreach (var folder in folders)
+                {
+                    var sourcePath = Path.Combine(currentDirectory, folder);
+                    var targetPath = Path.Combine(page.RootPath, folder);
+
+                    CopyFilesRecursively(page, descriptionRelativePath, descriptionFile, new DirectoryInfo(targetPath), new DirectoryInfo(sourcePath), additionalReferences);
+                }
+            }
+            CopyScript(page, descriptionFile);
+
+            return additionalReferences;
+        }
+
+        private static void CopyScript(Page page, Files.File scriptFile)
+        {
+            var target = Path.Combine(page.RootPath, scriptFile.RelativePath);
+            var script = scriptFile.ReadAllText();
+            var dir = Path.GetDirectoryName(target);
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
 
-            File.WriteAllText(destinationPath, fileContents, Encoding.ASCII);
-        }
-
-
-        void CopyCaseDescriptionScriptTo(string destinationRootPath, Files.File systemFile)
-        {
-            var destinationPath = destinationRootPath + systemFile.RelativePath;
-            var systemScript = systemFile.ReadAllText();
-
-            WriteFileTo(destinationPath, systemScript);          
+            File.WriteAllText(target, script, Encoding.ASCII);
         }
     }
 }

@@ -32,6 +32,8 @@ namespace Forseti.Harnesses
 		public IFramework Framework { get; private set; }
 		
 		public string Name { get; set; }
+        public bool IncludeSubFoldersFromDescriptions { get; set; }
+
 		public string SystemsSearchPath 
 		{ 
 			get { return _systemsSearchPath; }

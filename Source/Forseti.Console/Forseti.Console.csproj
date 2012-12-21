@@ -145,6 +145,24 @@
   </Target>
   -->
   <ItemGroup>
+    <Content Include="Jasmine\SpecsWithSubFolders\for_aThirdThing\given\something.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Jasmine\SpecsWithSubFolders\for_aThirdThing\when_it_is_renamed.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Jasmine\SpecsWithSubFolders\for_otherSystemUnderTest\given\something.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Jasmine\SpecsWithSubFolders\for_otherSystemUnderTest\when_doing_other_stuff.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Jasmine\SpecsWithSubFolders\for_systemUnderTest\given\something.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Jasmine\SpecsWithSubFolders\for_systemUnderTest\when_doing_stuff.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="QUnit\Scripts\aThirdThing.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -194,4 +212,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>

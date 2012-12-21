@@ -10,21 +10,30 @@ Dependencies:
   - Scripts/globalDependency.js
 
 Harnesses:
+#   - Harness:
+#       Framework				: Jasmine
+#       Name						: Jasmine Specs
+#       SystemsSearchPath 		: Jasmine/Scripts/{system}.js
+#       DescriptionsSearchPath	: Jasmine/Specs/for_{system}/{description}.js
+#       Dependencies:
+#        - Jasmine/Scripts/dependency.js
+
    - Harness:
        Framework				: Jasmine
-       Name						: Jasmine Specs
+       Name						: Jasmine Specs including sub folders for specs
        SystemsSearchPath 		: Jasmine/Scripts/{system}.js
-       DescriptionsSearchPath	: Jasmine/Specs/for_{system}/{description}.js
+       DescriptionsSearchPath	: Jasmine/SpecsWithSubFolders/for_{system}/{description}.js
+       IncludeSubFoldersFromDescriptions : true
        Dependencies:
         - Jasmine/Scripts/dependency.js
 
-   - Harness:
-       Framework				: QUnit
-       Name						: QUnit Specs
-       SystemsSearchPath 		: QUnit/Scripts/{system}.js
-       DescriptionsSearchPath	: QUnit/Specs/for_{system}/{description}.js
-       Dependencies:
-        - Jasmine/Scripts/dependency.js
+#   - Harness:
+#       Framework				: QUnit
+#       Name						: QUnit Specs
+#       SystemsSearchPath 		: QUnit/Scripts/{system}.js
+#       DescriptionsSearchPath	: QUnit/Specs/for_{system}/{description}.js
+#       Dependencies:
+#        - Jasmine/Scripts/dependency.js
 
 # Buster support needs revisiting and more love!
 #   - Harness:

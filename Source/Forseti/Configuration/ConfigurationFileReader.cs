@@ -83,6 +83,12 @@ namespace Forseti.Configuration
 							harness.Name = ((YamlScalar)values["Name"]).Value;
 							harness.SystemsSearchPath = ((YamlScalar)values["SystemsSearchPath"]).Value;
 							harness.DescriptionsSearchPath = ((YamlScalar)values["DescriptionsSearchPath"]).Value;
+
+                            if (values.ContainsKey("IncludeSubFoldersFromDescriptions")) {
+                                var value = false;
+                                bool.TryParse(((YamlScalar)values["IncludeSubFoldersFromDescriptions"]).Value, out value);
+                                harness.IncludeSubFoldersFromDescriptions = value;
+                            }
                             if (values.ContainsKey("Dependencies"))
                             {
                                 var harnessDependencies =
