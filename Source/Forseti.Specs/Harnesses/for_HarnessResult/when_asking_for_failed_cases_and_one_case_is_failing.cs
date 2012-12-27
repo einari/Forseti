@@ -6,5 +6,7 @@ namespace Forseti.Specs.Harnesses.for_HarnessResult
     {
         It should_return_one_failing_case = () => result.FailedCaseCount.ShouldEqual(1);
         It should_return_zero_successful_cases = () => result.SuccessfulCaseCount.ShouldEqual(0);
+        It should_return_zero_inconclusive_cases = () => result.InconclusiveCaseCount.ShouldEqual(0);
+
     }
 }

@@ -2,6 +2,7 @@
 using Forseti.Harnesses;
 using Forseti.Extensions;
 using Forseti.Suites;
+using Forseti.Reporting;
 
 namespace Forseti.ConsoleReporter
 {
@@ -14,13 +15,13 @@ namespace Forseti.ConsoleReporter
                         PrintSuiteInformation(description);
                         description.Cases.ForEach(@case =>
                                             {
-                                                if (CanBeResultBeReported(@case))
-                                                    return;
-
-                                                if (@case.Result.Success)
-                                                    PrintPassedCase(@case);
-                                                else
-                                                    PrintFailedCase(@case);
+                                                if (@case.CanBeReportedOn())
+                                                {
+                                                    if (@case.Result.Success)
+                                                        PrintPassedCase(@case);
+                                                    else
+                                                        PrintFailedCase(@case);
+                                                }
                                             });
                         Console.WriteLine("");
 
@@ -28,11 +29,6 @@ namespace Forseti.ConsoleReporter
 
             PrintResultSummary(result);
         
-        }
-
-        static bool CanBeResultBeReported(Case @case)
-        {
-            return String.IsNullOrEmpty(@case.Name);
         }
 
         static void PrintSuiteInformation(Description description)
