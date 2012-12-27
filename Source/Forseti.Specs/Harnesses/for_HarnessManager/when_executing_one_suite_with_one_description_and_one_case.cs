@@ -12,7 +12,6 @@ namespace Forseti.Specs.Harnesses.for_HarnessManager
     {
         static Suite suite;
         static Description description;
-        static Case @case;
 		static Harness harness;
         static Harness harness_result;
         static Page expected_page;
@@ -25,9 +24,7 @@ namespace Forseti.Specs.Harnesses.for_HarnessManager
             suite = new Suite((File)"Script/something.js");
             description = new Description((File)"Specs/for_something/when_doing_stuff.js");
             suite.AddDescription(description);
-            
-            @case = new Case();
-            description.AddCase(@case);
+
             expected_page = new Page();
             page_generator_mock.Setup(p=>p.GenerateFrom(Moq.It.IsAny<Harness>())).Callback((Harness h) => harness_result = h).Returns(expected_page);
 			
@@ -37,7 +34,7 @@ namespace Forseti.Specs.Harnesses.for_HarnessManager
         Because of = () => harness_manager.Execute(harness, new[] {suite});
 
         It should_generate_a_page = () => page_generator_mock.Verify(p => p.GenerateFrom(Moq.It.IsAny<Harness>()));
-        It should_generate_a_page_from_cases = () => harness_result.Cases.ShouldContainOnly(@case);
+        It should_generate_a_page_from_cases = () => harness_result.Cases.ShouldContain(c => c.Name == Case.DummyCase.Name && c.Description == description);
         It should_execute_script_for_page = () => script_engine_mock.Verify(s => s.Execute(expected_page));
     }
 }

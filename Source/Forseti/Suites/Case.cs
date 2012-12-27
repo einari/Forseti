@@ -14,6 +14,8 @@ namespace Forseti.Suites
         public Description Description { get; set; }
         public Case Parent { get; set; }
         public string Name { get; set; }
+
+        public static Case DummyCase { get { return new Case { Name = "DUMMYCASE" }; } }
 		
 		public CaseResult Result { get; set; }
 
