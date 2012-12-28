@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Forseti.Extensions;
 using Forseti.Suites;
+using Forseti.Reporting;
 
 namespace Forseti.Harnesses
 {
@@ -49,7 +50,7 @@ namespace Forseti.Harnesses
            {
                s.Descriptions.ForEach(d =>
                {
-                   if (d.Cases.Count() == 0 || d.Cases.Count() == 1 && Case.IsDummyOrEmptyCase(d.Cases.First()))
+                   if (!d.HasExecutedCases())
                        count++;
                });
            });
