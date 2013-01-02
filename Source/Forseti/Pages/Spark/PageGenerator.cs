@@ -44,7 +44,7 @@ namespace Forseti.Pages.Spark
 
             var harnessView = (HarnessView)_engine.CreateInstance(_descriptor);
             harnessView.Harness = harness;
-            harnessView.RunnerScripts = new[] { "forseti.js" , "r.js"} ;
+            harnessView.RunnerScripts = new[] { "r.js", "forseti.js"} ;
             harnessView.FrameworkScript = harness.Framework.ScriptName;
             harnessView.FrameworkExecutionScript = harness.Framework.ExecuteScriptName;
             harnessView.FrameworkReportingScript = harness.Framework.ReportScriptName;

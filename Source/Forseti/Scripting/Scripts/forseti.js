@@ -1,10 +1,17 @@
 ﻿var forseti = (function (window) {
 
+
     var nextDescriptionForExecutingIndex = 0;
 
     var inBrowser = function () {
         return typeof window.Envjs === "undefined";
     };
+
+    if (!window.__require) {
+        window.__require = require;
+        require = undefined;
+        requirejs = undefined;
+    }
 
     window.onload = function () {
         forseti.run();
@@ -15,9 +22,7 @@
             nextDescriptionForExecutingIndex = 0;
         },
         require: function () {
-            if (!window.__require)
-                window.__require = require;
-            __require.apply(this,arguments);
+            __require.apply(this, arguments);
         },
         framework: {
             instance: null,
@@ -87,7 +92,7 @@
             var self = this;
             if (self.hasUnexecutedDescriptions()) {
                 self.prepareNextDescription();
-                this.require([self.currentDescription], function () {
+                self.require([self.currentDescription], function () {
                     self.execute();
                 });
             }
