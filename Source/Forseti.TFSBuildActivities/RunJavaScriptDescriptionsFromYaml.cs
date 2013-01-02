@@ -48,6 +48,9 @@ namespace Forseti.TFSBuildActivities
 
         [Description("Boolean indicating if failing javscript tests should cause the build to fail. Default false")]
         public InArgument<bool> ShouldFailingTestsBreakBuild { get; set; }
+        
+        [Description("Boolean to indiicate how verbose the output to build log should be. True will output all output from passing/failing/inconclusive specs. False outputs only failing specs. Default is false")]
+        public InArgument<bool> VerboseOutput { get; set; }
 
         [RequiredArgument]
         [Description("The configuration / flavor of the build (\"Debug\", \"Release\"etc. ). Needed for publishing test results. hint: platformConfiguration.Configuration")]
@@ -67,6 +70,7 @@ namespace Forseti.TFSBuildActivities
         bool _shouldBreakBuild;
         string _buildFlavor;
         string _buildPlatform;
+        bool _verboseOutput;
         IBuildDetail _buildDetail;
 
         void Log(string message, params object[] parameters) 
@@ -90,7 +94,7 @@ namespace Forseti.TFSBuildActivities
                 var userName = WindowsIdentity.GetCurrent().Name;
                 var tfsUserName = _buildDetail.RequestedBy;
 
-                var testRunner = new TestRunner(_forsetiConfigurationPath, trxPath, computerName, userName , tfsUserName);
+                var testRunner = new TestRunner(_forsetiConfigurationPath, trxPath, computerName, userName , tfsUserName, _verboseOutput);
                 testRunner.LogTo((output) => Log(output));
                 var allTestsPassed = testRunner.RunTests();
 
@@ -124,11 +128,18 @@ namespace Forseti.TFSBuildActivities
             SetIfFailingTestsShouldBreakBuild(context);
             SetBuildPlatform(context);
             SetBuildFlavor(context);
+            SetVerboseOutputSetting(context);
 
             _buildDetail = context.GetExtension<IBuildDetail>();
             _buildNumber = _buildDetail.BuildNumber;
             //var tfs = buildDetail.BuildServer.TeamProjectCollection;
             //var identityManagementService = tfs.GetService<IIdentityManagementService>();
+        }
+
+        private void SetVerboseOutputSetting(CodeActivityContext context)
+        {
+            var verbose = context.GetValue(VerboseOutput);
+            _verboseOutput = verbose;
         }
 
         private void SetBuildFlavor(CodeActivityContext context)
