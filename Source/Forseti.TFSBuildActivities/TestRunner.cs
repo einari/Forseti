@@ -65,13 +65,21 @@ namespace Forseti.TFSBuildActivities
                 string outputStream = forsetiTrx.StandardOutput.ReadToEnd();
                 if (outputStream.Length > 0)
                 {
-                    _logger(outputStream);                    
+                    var lines = outputStream.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+                    foreach (var line in lines)
+                    {
+                        _logger(line);
+                    }              
                 }
 
                 string errorStream = forsetiTrx.StandardError.ReadToEnd();
                 if (errorStream.Length > 0)
                 {
-                    _logger(errorStream);
+                    var lines = outputStream.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+                    foreach (var line in lines)
+                    {
+                        _logger(line);
+                    }
                 }
                 forsetiTrx.WaitForExit();
 
