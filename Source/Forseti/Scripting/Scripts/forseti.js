@@ -1,19 +1,23 @@
-﻿var forseti = (function (window) {
+﻿var forseti = (function (w) {
 
+    function createLocalRequire() {
 
+        var r = w.require;
+        delete w.require;
+        delete w.define;
+        delete w.requirejs;
+
+        w.__require = r;
+    };
+
+    createLocalRequire();
     var nextDescriptionForExecutingIndex = 0;
 
     var inBrowser = function () {
-        return typeof window.Envjs === "undefined";
+        return typeof w.Envjs === "undefined";
     };
 
-    if (!window.__require) {
-        window.__require = require;
-        require = undefined;
-        requirejs = undefined;
-    }
-
-    window.onload = function () {
+    w.onload = function () {
         forseti.run();
     };
 
@@ -35,21 +39,21 @@
                 typeof message === "string" ? console.log("Log : " + message)
                                             : console.log(message);
             else
-                window.print(message);
+                w.print(message);
         },
         reportPassedCase: function (description, caseName) {
             var descriptionFile = this.currentDescription;
             if (this.runningInBrowser)
                 console.log("PASSED : " + description + " / " + caseName + " / " + descriptionFile);
             else
-                window.reportPassedCase(description, caseName, descriptionFile);
+                w.reportPassedCase(description, caseName, descriptionFile);
         },
         reportFailedCase: function (description, caseName, message) {
             var descriptionFile = this.currentDescription;
             if (this.runningInBrowser)
                 console.log("FAILED : " + description + " / " + caseName + " / message: " + message + " / " + descriptionFile);
             else
-                window.reportFailedCase(description, caseName, message, descriptionFile);
+                w.reportFailedCase(description, caseName, message, descriptionFile);
         },
         systems: [],
         descriptions: [],

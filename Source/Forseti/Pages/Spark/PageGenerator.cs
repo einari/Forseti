@@ -18,14 +18,14 @@ namespace Forseti.Pages.Spark
         SparkViewEngine _engine;
         string _forsetiJs;
         string _requireJs;
-        string _mainJs;
+        string _forsetiBootstrapperJs;
 
         public PageGenerator(IResourceManager resourceManager)
         {
             var template = resourceManager.GetStringFromAssemblyOf<PageGenerator>("Forseti.Pages.Spark.Harness.spark");
             _forsetiJs = resourceManager.GetStringFromAssemblyOf<Forseti.Scripting.ScriptEngine>("Forseti.Scripting.Scripts.forseti.js");
             _requireJs = resourceManager.GetStringFromAssemblyOf<Forseti.Scripting.ScriptEngine>("Forseti.Scripting.Scripts.require.js");
-            _mainJs = resourceManager.GetStringFromAssemblyOf<Forseti.Scripting.ScriptEngine>("Forseti.Scripting.Scripts.main.js");
+            _forsetiBootstrapperJs = resourceManager.GetStringFromAssemblyOf<Forseti.Scripting.ScriptEngine>("Forseti.Scripting.Scripts.forseti.bootstrapper.js");
 
             var settings = new SparkSettings().SetPageBaseType(typeof(HarnessView));
             var templates = new InMemoryViewFolder();
@@ -44,7 +44,7 @@ namespace Forseti.Pages.Spark
 
             var harnessView = (HarnessView)_engine.CreateInstance(_descriptor);
             harnessView.Harness = harness;
-            harnessView.RunnerScripts = new[] { "r.js", "forseti.js"} ;
+            harnessView.RunnerScripts = new[] {"forseti.bootstrapper.js", "r.js", "forseti.js"} ;
             harnessView.FrameworkScript = harness.Framework.ScriptName;
             harnessView.FrameworkExecutionScript = harness.Framework.ExecuteScriptName;
             harnessView.FrameworkReportingScript = harness.Framework.ReportScriptName;
@@ -88,9 +88,9 @@ namespace Forseti.Pages.Spark
 
             var result = writer.ToString();
 
-            File.WriteAllText(page.RootPath + "forseti.js", _forsetiJs);
+            File.WriteAllText(page.RootPath + "forseti.bootstrapper.js", _forsetiBootstrapperJs);
             File.WriteAllText(page.RootPath + "r.js", _requireJs);
-            File.WriteAllText(page.RootPath + "main.js", _mainJs);
+            File.WriteAllText(page.RootPath + "forseti.js", _forsetiJs);
             File.WriteAllText(page.RootPath + harness.Framework.ScriptName, harness.Framework.Script);
             File.WriteAllText(page.RootPath + harness.Framework.ExecuteScriptName, harness.Framework.ExecuteScript);
             File.WriteAllText(page.RootPath + harness.Framework.ReportScriptName, harness.Framework.ReportScript);
