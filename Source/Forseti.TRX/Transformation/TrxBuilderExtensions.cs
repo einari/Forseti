@@ -5,6 +5,7 @@ using System.Text;
 using Forseti.Harnesses;
 using Forseti.Extensions;
 using Forseti.Suites;
+using Forseti.Reporting;
 
 namespace Forseti.TRX.Transformation
 {
@@ -18,6 +19,7 @@ namespace Forseti.TRX.Transformation
 
             var successfullTests = results.SuccessfulCaseCount();
             var failingTests = results.FailedCaseCount();
+            var inconclusiveTests = results.InconclusiveCaseCount();
             var startTime = results.StartTime();
             var endTime = results.EndTime();
 
@@ -35,30 +37,27 @@ namespace Forseti.TRX.Transformation
                 harnessResult.AffectedSuites.ForEach(suite =>
                        suite.Descriptions.ForEach(description =>
                        {
-                           description.Cases.ForEach(@case =>
+                           if (description.HasExecutedCases())
                            {
-                               if (CantResultBeReported(@case))
-                                   return;
-
-                               builder.AddTestResult(@case.Name,
-                                                       Guid.NewGuid(),
-                                                       builder.ComputerName,
-                                                       @case.Result.Success ? UnitTestResult.ResultOutcome.Passed : UnitTestResult.ResultOutcome.Failed,
-                                                       description.File.FullPath,
-                                                       description.Name,
-                                                       errorMessage: @case.Result.Message);
-                           });
-
+                               description.Cases.ForEach(@case =>
+                               {
+                                   if (@case.CanBeReportedOn())
+                                   {
+                                       builder.AddTestResult(@case.Name,
+                                                           Guid.NewGuid(),
+                                                           builder.ComputerName,
+                                                           @case.Result.Success ? UnitTestResult.ResultOutcome.Passed : UnitTestResult.ResultOutcome.Failed,
+                                                           description.File.FullPath,
+                                                           description.Name,
+                                                           errorMessage: @case.Result.Message);
+                                   }
+                               });
+                           }
                        }));
             }
 
             return builder;
         }
 
-
-        static bool CantResultBeReported(Case @case)
-        {
-            return String.IsNullOrEmpty(@case.Name);
-        }
     }
 }

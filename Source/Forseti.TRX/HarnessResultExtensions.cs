@@ -11,22 +11,27 @@ namespace Forseti.TRX
 
         public static int SuccessfulCaseCount(this IEnumerable<HarnessResult> harnessResults) 
         {
-            return harnessResults.Sum(suite => suite.SuccessfulCaseCount);
+            return harnessResults.Sum(result => result.SuccessfulCaseCount);
         }
 
         public static int FailedCaseCount(this IEnumerable<HarnessResult> harnessResults) 
         {
-            return harnessResults.Sum(suite => suite.FailedCaseCount);
+            return harnessResults.Sum(result => result.FailedCaseCount);
+        }
+
+        public static int InconclusiveCaseCount(this IEnumerable<HarnessResult> harnessResults)
+        {
+            return harnessResults.Sum(result => result.InconclusiveCaseCount);
         }
 
         public static DateTime StartTime(this IEnumerable<HarnessResult> harnessResults) 
         {
-            return harnessResults.Min(suite => suite.StartTime);
+            return harnessResults.Min(result => result.StartTime);
         }
 
         public static DateTime EndTime(this IEnumerable<HarnessResult> harnessResults) 
         {
-            return harnessResults.Max(suite => suite.EndTime);
+            return harnessResults.Max(result => result.EndTime);
         }
 
 
