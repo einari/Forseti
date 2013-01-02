@@ -64,10 +64,11 @@ namespace Forseti.TRX.Transformation
             return this;
         }
 
-        public TrxBuilder SetResultSummary(int passed, int failed) 
+        public TrxBuilder SetResultSummary(int passed, int failed, int inconclusive) 
         {
             Summary.Passed = passed;
             Summary.Failed = failed;
+            Summary.Inconclusive = inconclusive;
 
             return this;
         

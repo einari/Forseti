@@ -20,7 +20,7 @@ namespace Forseti.TRX.Specs.for_TrxBuilder
                         {
                             trx = builder.SetRunInformation(Guid.NewGuid(), "SomeUSer","ComputerName" ,"SomeName")
                                        .SetDefaultTestSettingsWithDescription("This is a hardcoded test")
-                                       .SetResultSummary(1, 0)
+                                       .SetResultSummary(1, 0,0)
                                        .SetRunTimes(DateTime.Now, DateTime.Now)
                                        .AddTestResult("should_be_a_test", Guid.NewGuid(), "BUILDSERVER", UnitTestResult.ResultOutcome.Passed, "QUnit")
                                        .AsTrxDocument();

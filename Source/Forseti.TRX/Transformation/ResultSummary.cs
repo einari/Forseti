@@ -17,7 +17,8 @@ namespace Forseti.TRX.Transformation
 
         public int Failed { get; set; }
         public int Passed { get; set; }
-        public int Total { get { return Passed + Failed; } }
+        public int Inconclusive { get; set; }
+        public int Total { get { return Passed + Failed + Inconclusive; } }
 
         public XElement TransformToTrx()
         {
@@ -25,6 +26,7 @@ namespace Forseti.TRX.Transformation
             resultSummary.Add(new XElement(TrxBuilder.XMLNS + "Counters", 
                                                       new XAttribute("passed", Passed)
                                                     , new XAttribute("failed", Failed)
+                                                    , new XAttribute("inconclusive", Inconclusive)
                                                     , new XAttribute("total", Total)));
             return resultSummary;
         }

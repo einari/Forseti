@@ -27,7 +27,7 @@ namespace Forseti.TRX.Transformation
             
             builder.SetRunInformation(Guid.NewGuid(), builder.TfsUsername, builder.ComputerName)
                       .SetDefaultTestSettingsWithDescription("Default test settings")
-                      .SetResultSummary(successfullTests, failingTests)
+                      .SetResultSummary(successfullTests, failingTests, inconclusiveTests)
                       .SetRunTimes(startTime, endTime);
 
 
