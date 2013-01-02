@@ -17,6 +17,7 @@ namespace Forseti.Suites
         {
             Name = Path.GetFileNameWithoutExtension(file.Filename);
             File = file;
+            //ResetCasesForReporting();
         }
 		
 		public IEnumerable<IFile> Dependencies { get { return _dependencies; } }
@@ -35,5 +36,14 @@ namespace Forseti.Suites
             @case.Description = this;
             _cases.Add(@case);
         }
+
+        public  void ResetCasesForReporting()
+        {
+            var dummyCaseForReportingPurposes = Case.DummyCase;
+            _cases.Clear();
+
+            AddCase(dummyCaseForReportingPurposes);
+        }
+
     }
 }

@@ -11,14 +11,14 @@ namespace Forseti.Harnesses
     {
         public static HarnessResult HarnessResult;
 
-        public static void ReportFailedCase(string description, string @case, string message)
+        public static void ReportFailedCase(string description, string @case, string message, string filename)
         {
-            Report(description, @case, false, message);
+            Report(filename, description, @case, false, message:message);
         }
 
-        public static void ReportPassedCase(string description, string @case)
+        public static void ReportPassedCase(string description, string @case, string filename)
         {
-            Report(description, @case);
+            Report(filename, description, @case);
         }
 
 
@@ -33,17 +33,17 @@ namespace Forseti.Harnesses
             return message;
         }
 
-        static void Report(string description, string @case, bool success = true, string message = "")
+        static void Report(string filename, string description, string @case, bool success = true, string message = "" )
         {
-            ParseMessage(message);
+            message = ParseMessage(message);
             if (HarnessResult != null)
             {
                 HarnessResult.AffectedSuites.ForEach(s =>
                 {
                     s.Descriptions.ForEach(d =>
                     {
-                        var descriptionWithUnderscores = description.Replace(' ', '_');
-                        if (d.Name == description || d.Name == descriptionWithUnderscores)
+                        //var descriptionWithUnderscores = description.Replace(' ', '_');
+                        if (d.File.RelativePath == filename)
                         {
                             var actualCase = d.Cases.Where(c => c.Name == @case).FirstOrDefault();
                             if (actualCase == null)

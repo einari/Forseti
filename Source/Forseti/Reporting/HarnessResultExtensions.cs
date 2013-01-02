@@ -1,7 +1,7 @@
 ﻿using System;
 using Forseti.Suites;
 
-namespace Forseti.ConsoleReporter
+namespace Forseti.Reporting
 {
     public static class HarnessResultExtensions
     {
@@ -18,6 +18,12 @@ namespace Forseti.ConsoleReporter
         public static string FriendlyName(this Description description)
         {
             return ToFriendlyName(description.Name);
+        }
+
+        public static string FriendlyName(this Suite suite) 
+        {
+            return ToFriendlyName(suite.System);
+        
         }
     }
 }

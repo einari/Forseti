@@ -6,6 +6,7 @@ using Forseti.Harnesses;
 using Forseti.Configuration;
 using Forseti.Files;
 using Forseti.ConsoleReporter;
+using Forseti.Reporting;
 
 namespace Forseti.TRX
 {
@@ -13,15 +14,16 @@ namespace Forseti.TRX
     {
         IConfigure _forsetiConfiguration;
 
-        Executor(string configurationFilePath) 
+        Executor(string configurationFilePath, bool verbose) 
         {
             _forsetiConfiguration = Configure.WithStandard()
+                                             .WithReportingOptions(new ReportingOptions(onlyOutputFailed: !verbose))
                                              .FromConfigurationFile(configurationFilePath)
                                              .Initialize();
-            //_forsetiConfiguration.HarnessChangeManager.RegisterWatcher(typeof(ConsoleHarnessWatcher));
+            _forsetiConfiguration.HarnessChangeManager.RegisterWatcher(typeof(ConsoleHarnessWatcher));
         }
 
-        public static Executor WithForsetiConfigurationFile(string configurationFilePath) 
+        public static Executor WithForsetiConfigurationFile(string configurationFilePath, bool verbose = false) 
         {
             var configurationDirectory = System.IO.Path.GetDirectoryName(configurationFilePath);
             if (System.IO.Directory.Exists(configurationDirectory))
@@ -29,7 +31,7 @@ namespace Forseti.TRX
                 System.IO.Directory.SetCurrentDirectory(configurationDirectory);
             }
 
-            return new Executor(configurationFilePath);
+            return new Executor(configurationFilePath, verbose);
         }
 
         public IEnumerable<HarnessResult> ExecuteTests()

@@ -1,4 +1,4 @@
-﻿print("Dependency");
+﻿forseti.log("Dependency");
 function doStuff() {
-    print("Hello from doStuff");
+    forseti.log("Hello from doStuff");
 }

@@ -1,0 +1,43 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title>Forseti JS Specs</title>
+        <link rel="Stylesheet" type="text/css" href="lib/jasmine.css" />
+        <script type="text/javascript" src="lib/jasmine.js"></script>
+        <script type="text/javascript" src="lib/jasmine-html.js"></script>
+        <script type="text/javascript" src="lib/sinon-1.5.2.js"></script>
+        <script type="text/javascript" src="forseti_stubs.js"></script>
+
+        <script type="text/javascript" src="C:/PSS/Forseti/Source/Forseti/Scripting/Scripts/forseti.js"></script>
+        <script type="text/javascript" src="forseti_specs.js"></script>
+        <script type="text/javascript">
+            var jasmineEnv = jasmine.getEnv();
+            var htmlReporter = new jasmine.HtmlReporter();
+            jasmineEnv.addReporter(htmlReporter);
+
+
+            jasmineEnv.specFilter = function (spec) {
+                return htmlReporter.specFilter(spec);
+            };
+
+            var currentWindowOnload = window.onload;
+
+            window.onload = function () {
+                 if (currentWindowOnload) {
+                     currentWindowOnload();
+                 }
+
+                 //document.querySelector('.version').innerHTML = jasmineEnv.versionString();
+                 execJasmine();
+             };
+
+             function execJasmine() {
+                 jasmineEnv.execute();
+             }
+        </script>
+
+	</head>
+	<body>
+	
+	</body>
+</html>

@@ -2,6 +2,7 @@
 using Forseti.Harnesses;
 using Forseti.Scripting;
 using StructureMap;
+using Forseti.Reporting;
 
 namespace Forseti.Configuration
 {
@@ -11,8 +12,10 @@ namespace Forseti.Configuration
         IHarnessManager HarnessManager { get; }
         IHarnessChangeManager HarnessChangeManager { get; }
         IScriptEngine ScriptEngine { get; }
+        IReportingOptions ReportingOptions { get; }
 
         IConfigure Initialize();
+        IConfigure WithReportingOptions(IReportingOptions options);
 
         T GetInstanceOf<T>();
 		object GetInstanceOf(Type type);

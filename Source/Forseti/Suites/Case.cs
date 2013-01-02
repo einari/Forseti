@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace Forseti.Suites
 {
@@ -14,6 +15,8 @@ namespace Forseti.Suites
         public Description Description { get; set; }
         public Case Parent { get; set; }
         public string Name { get; set; }
+
+        public static Case DummyCase { get { return new Case { Name = "DUMMYCASE" }; } }
 		
 		public CaseResult Result { get; set; }
 
@@ -24,6 +27,11 @@ namespace Forseti.Suites
             @case.Parent = this;
             @case.Description = this.Description;
             _children.Add(@case);
+        }
+
+        public static bool IsDummyOrEmptyCase(Case @case)
+        {
+            return @case == null || String.IsNullOrEmpty(@case.Name) || @case.Name == Case.DummyCase.Name;
         }
     }
 }

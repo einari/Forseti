@@ -1,4 +1,4 @@
-﻿describe("when doing stuff", function () {
+describe("when doing stuff", function () {
 
     system();
 

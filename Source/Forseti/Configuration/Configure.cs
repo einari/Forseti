@@ -5,6 +5,7 @@ using StructureMap;
 using Microsoft.Practices.ServiceLocation;
 using StructureMap.ServiceLocatorAdapter;
 using System;
+using Forseti.Reporting;
 
 namespace Forseti.Configuration
 {
@@ -14,11 +15,13 @@ namespace Forseti.Configuration
         public IHarnessChangeManager HarnessChangeManager { get; private set; }
         public IContainer Container { get; private set; }
         public IScriptEngine ScriptEngine { get; private set; }
+        public IReportingOptions ReportingOptions { get; private set; }
 
 
         Configure(IContainer container)
         {
             Container = container;
+            ReportingOptions = new ReportingOptions();
         }
 
         public static IConfigure WithStandard()
@@ -42,13 +45,18 @@ namespace Forseti.Configuration
             return container;
         }
 
-
+        public IConfigure WithReportingOptions(IReportingOptions options)
+        {
+            ReportingOptions = options;
+            return this;
+        }
 
         public IConfigure Initialize()
         {
             HarnessManager = Container.GetInstance<IHarnessManager>();
             ScriptEngine = Container.GetInstance<IScriptEngine>();
             HarnessChangeManager = Container.GetInstance<IHarnessChangeManager>();
+            Container.Configure(c => c.For<IReportingOptions>().Singleton().Add(ReportingOptions));
 
             return this;
         }

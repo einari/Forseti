@@ -16,10 +16,16 @@ namespace Forseti.Pages.Spark
         const string TemplateName = "Harness";
         SparkViewDescriptor _descriptor;
         SparkViewEngine _engine;
+        string _forsetiJs;
+        string _requireJs;
+        string _mainJs;
 
         public PageGenerator(IResourceManager resourceManager)
         {
             var template = resourceManager.GetStringFromAssemblyOf<PageGenerator>("Forseti.Pages.Spark.Harness.spark");
+            _forsetiJs = resourceManager.GetStringFromAssemblyOf<Forseti.Scripting.ScriptEngine>("Forseti.Scripting.Scripts.forseti.js");
+            _requireJs = resourceManager.GetStringFromAssemblyOf<Forseti.Scripting.ScriptEngine>("Forseti.Scripting.Scripts.require.js");
+            _mainJs = resourceManager.GetStringFromAssemblyOf<Forseti.Scripting.ScriptEngine>("Forseti.Scripting.Scripts.main.js");
 
             var settings = new SparkSettings().SetPageBaseType(typeof(HarnessView));
             var templates = new InMemoryViewFolder();
@@ -38,6 +44,7 @@ namespace Forseti.Pages.Spark
 
             var harnessView = (HarnessView)_engine.CreateInstance(_descriptor);
             harnessView.Harness = harness;
+            harnessView.RunnerScripts = new[] { "forseti.js" , "r.js"} ;
             harnessView.FrameworkScript = harness.Framework.ScriptName;
             harnessView.FrameworkExecutionScript = harness.Framework.ExecuteScriptName;
             harnessView.FrameworkReportingScript = harness.Framework.ReportScriptName;
@@ -81,6 +88,9 @@ namespace Forseti.Pages.Spark
 
             var result = writer.ToString();
 
+            File.WriteAllText(page.RootPath + "forseti.js", _forsetiJs);
+            File.WriteAllText(page.RootPath + "r.js", _requireJs);
+            File.WriteAllText(page.RootPath + "main.js", _mainJs);
             File.WriteAllText(page.RootPath + harness.Framework.ScriptName, harness.Framework.Script);
             File.WriteAllText(page.RootPath + harness.Framework.ExecuteScriptName, harness.Framework.ExecuteScript);
             File.WriteAllText(page.RootPath + harness.Framework.ReportScriptName, harness.Framework.ReportScript);
@@ -118,7 +128,7 @@ namespace Forseti.Pages.Spark
                 {
                     var sourcePath = Path.Combine(currentDirectory, folder);
                     var targetPath = Path.Combine(page.RootPath, folder);
-                    
+
                     CopyFilesRecursively(page, descriptionRelativePath, descriptionFile, new DirectoryInfo(targetPath), new DirectoryInfo(sourcePath), additionalReferences);
                 }
             }

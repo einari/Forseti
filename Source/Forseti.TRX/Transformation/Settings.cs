@@ -13,6 +13,7 @@ namespace Forseti.TRX.Transformation
         public string ComputerName { get; private set; }
         public string UserName { get; private set; }
         public string TfsUsername { get; private set; }
+        public bool VerboseOutput { get; private set; }
         
 
 
@@ -43,6 +44,9 @@ namespace Forseti.TRX.Transformation
 
                 if (args.Length > 4 && !string.IsNullOrEmpty(args[4]))
                     settings.TfsUsername = args[4];
+
+                if (args.Length > 5 && !string.IsNullOrEmpty(args[5]))
+                    settings.VerboseOutput = Convert.ToBoolean(args[5]);
             }
             return settings;
         }

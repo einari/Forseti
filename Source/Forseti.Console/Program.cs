@@ -10,12 +10,13 @@ namespace Forseti.Console
         [STAThread]
         public static int Main(string[] args)
         {
-			//System.IO.Directory.SetCurrentDirectory("~/Projects/Fludo/Source");
+         
 
 			System.Console.WriteLine("Keys : \n  R : Rerun\n  B : Run in browser\n  Any other key : Exit\n\n");
 
             var configuration = Configure
                 .WithStandard()
+                .WithReportingOptions(new Forseti.Reporting.ReportingOptions(false))
                 .FromConfigurationFile("forseti.yaml")
                 .Initialize();
 

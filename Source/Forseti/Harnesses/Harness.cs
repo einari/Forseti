@@ -111,9 +111,7 @@ namespace Forseti.Harnesses
                     _suites.Where(s => IsDescriptionForSystem(description, s))
                            .ForEach(s =>
                            {
-                                    // Todo: Hack for now
-                                description.AddCase(new Case());
-                                s.AddDescription(description);
+                               s.AddDescription(description);
 
                                 if (!affectedSuites.Contains(s))
                                     affectedSuites.Add(s);

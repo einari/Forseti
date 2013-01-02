@@ -1,1 +1,1 @@
-﻿print("Hello world");
+﻿forseti.log("Hello world");

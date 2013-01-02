@@ -1,4 +1,4 @@
-﻿print("Jasmine Dependency");
+﻿forseti.log("Jasmine Dependency");
 function doStuff() {
-    print("Hello from doStuff");
+    forseti.log("Hello from doStuff");
 }
