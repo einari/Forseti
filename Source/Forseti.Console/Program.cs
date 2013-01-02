@@ -16,7 +16,7 @@ namespace Forseti.Console
 
             var configuration = Configure
                 .WithStandard()
-                .WithReportingOptions(new Forseti.Reporting.ReportingOptions(false))
+                .WithReportingOptions(new Forseti.Reporting.ReportingOptions(onlyOutputFailed: true))
                 .FromConfigurationFile("forseti.yaml")
                 .Initialize();
 
