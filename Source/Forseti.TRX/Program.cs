@@ -10,15 +10,16 @@ namespace Forseti.TRX
     {
         static int Main(string[] args)
         {
-            //args = new[] {  @"C:\PSS\Forseti-tfs\ForsetiTesting\FirstLevel\firstlevel.yaml",
+            //args = new[] {  @"C:\PSS\Forseti-tfs\ForsetiTesting\forseti.yaml",
             //                @"C:\PSS\Forseti-tfs\ForsetiTesting\forseti.trx",
             //                "COMPUTERNAME",
             //                "USERNAME",
-            //                "TFS\\USERNAME"};
+            //                "TFS\\USERNAME",
+            //                "true"};
 
             var settings = Settings.FromArguments(args);
             
-            var executor = Executor.WithForsetiConfigurationFile(settings.ForsetiConfigurationFile);
+            var executor = Executor.WithForsetiConfigurationFile(settings.ForsetiConfigurationFile, verbose: settings.VerboseOutput);
             var results = executor.ExecuteTests();
 
             var trxBuilder = new TrxBuilder(settings.ComputerName,settings.UserName,settings.TfsUsername).BuildFrom(results);

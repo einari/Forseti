@@ -18,18 +18,19 @@ namespace Forseti.TFSBuildActivities
 
        Action<string> _logger; 
 
-        public TestRunner(string forsetiConfiguration, string trxOutput, string computerName, string localUser, string tfsUser) 
+        public TestRunner(string forsetiConfiguration, string trxOutput, string computerName, string localUser, string tfsUser, bool verboseOutput = true) 
         {
             _logger = (s) => Console.WriteLine(s);
 
             var executingAssemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             _forsetiExecutablePath = Path.Combine(executingAssemblyFolder, ForsetiTrxExecutable);
-            _forsetiArguments = string.Format("\"{0}\" \"{1}\" \"{2}\" \"{3}\" \"{4}\"",
+            _forsetiArguments = string.Format("\"{0}\" \"{1}\" \"{2}\" \"{3}\" \"{4}\" \"{5}\"",
                                                 forsetiConfiguration,
                                                 trxOutput,
                                                 computerName,
                                                 localUser,
-                                                tfsUser);
+                                                tfsUser,
+                                                verboseOutput);
 
             var forsetiConfigfile = new FileInfo(forsetiConfiguration);
             if (forsetiConfigfile.Exists)
@@ -64,7 +65,7 @@ namespace Forseti.TFSBuildActivities
                 string outputStream = forsetiTrx.StandardOutput.ReadToEnd();
                 if (outputStream.Length > 0)
                 {
-                    _logger(outputStream);
+                    _logger(outputStream);                    
                 }
 
                 string errorStream = forsetiTrx.StandardError.ReadToEnd();
