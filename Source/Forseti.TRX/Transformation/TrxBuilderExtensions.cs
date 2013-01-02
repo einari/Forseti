@@ -53,6 +53,17 @@ namespace Forseti.TRX.Transformation
                                    }
                                });
                            }
+                           else 
+                           { 
+                                builder.AddTestResult(@description.FriendlyName(),
+                                                           Guid.NewGuid(),
+                                                           builder.ComputerName,
+                                                           UnitTestResult.ResultOutcome.Inconclusive,
+                                                           description.File.FullPath,
+                                                           description.Name,
+                                                           errorMessage: "no cases executed for description");
+                                   
+                           }
                        }));
             }
 

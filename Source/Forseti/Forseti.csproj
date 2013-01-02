@@ -99,6 +99,7 @@
     <Compile Include="Registries\MainRegistry.cs" />
     <Compile Include="Reporting\CaseExtensions.cs" />
     <Compile Include="Reporting\DescriptionExtensions.cs" />
+    <Compile Include="Reporting\HarnessResultExtensions.cs" />
     <Compile Include="Reporting\IReportingOptions.cs" />
     <Compile Include="Reporting\ReportingOptions.cs" />
     <Compile Include="Suites\Case.cs" />

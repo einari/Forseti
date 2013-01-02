@@ -7,10 +7,11 @@ namespace Forseti.TRX.Transformation
 {
     public class UnitTestResult
     {
-        public enum ResultOutcome 
+        public enum ResultOutcome
         {
             Passed = 0,
-            Failed = 1
+            Failed = 1,
+            Inconclusive = 2,
         }
 
         public Guid Id { get; set; }

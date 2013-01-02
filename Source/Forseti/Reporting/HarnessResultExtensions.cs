@@ -1,7 +1,7 @@
 ﻿using System;
 using Forseti.Suites;
 
-namespace Forseti.ConsoleReporter
+namespace Forseti.Reporting
 {
     public static class HarnessResultExtensions
     {
