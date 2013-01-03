@@ -59,6 +59,7 @@ namespace Forseti.ConsoleReporter
 
         private void PrintResultsOverview()
         {
+            Console.WriteLine("");
             for (int i = 0; i < _resultsOverview.Count; i++)
             {
                 if (i == 0)
@@ -70,25 +71,26 @@ namespace Forseti.ConsoleReporter
                 if (i == _resultsOverview.Count - 1)
                 {
                     Console.Write("]");
-                    Console.WriteLine("");
                 }
             }
         }
 
         private static void PrintCaseResultForArray(CaseResult result)
         {
-            var resultOutput = ".";
+            var resultOutput = "-";
             switch (result)
             {
                 case CaseResult.Passed:
                     Console.ForegroundColor = ConsoleColor.Green;
+                    resultOutput = ".";
                     break;
                 case CaseResult.Failed:
                     Console.ForegroundColor = ConsoleColor.Red;
-                    resultOutput = "*";
+                    resultOutput = "x";
                     break;
                 case CaseResult.Inconclusive:
                     Console.ForegroundColor = ConsoleColor.Yellow;
+                    resultOutput = "-";
                     break;
                 default:
                     break;
@@ -125,17 +127,17 @@ namespace Forseti.ConsoleReporter
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write(" "+ result.SuccessfulCaseCount);
             Console.ResetColor();
-            Console.Write(" Passed, ");
+            Console.Write(" Passed(.), ");
 
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write(result.FailedCaseCount);
             Console.ResetColor();
-            Console.Write("  Failed, ");
+            Console.Write("  Failed(x), ");
             
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write(result.InconclusiveCaseCount);
             Console.ResetColor();
-            Console.Write("  Inconclusive. Total {0} tests run.\n", result.TotalCaseCount);
+            Console.Write("  Inconclusive(-). Total {0} tests run.\r\n", result.TotalCaseCount);
 
             //Console.WriteLine("{0} Passed, {1} Failed. Ran in {2}s on the {3} framework/n",
             //    result.SuccessfulCaseCount,
