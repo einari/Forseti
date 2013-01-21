@@ -96,6 +96,7 @@
     <Compile Include="Harnesses\HarnessResult.cs" />
     <Compile Include="Harnesses\IHarnessChangeManager.cs" />
     <Compile Include="Harnesses\IHarnessWatcher.cs" />
+    <Compile Include="Pages\CaseScriptDescriptor.cs" />
     <Compile Include="Registries\MainRegistry.cs" />
     <Compile Include="Reporting\CaseExtensions.cs" />
     <Compile Include="Reporting\DescriptionExtensions.cs" />

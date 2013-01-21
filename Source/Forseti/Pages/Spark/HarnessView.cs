@@ -2,6 +2,7 @@
 using Spark;
 using System.Collections.Generic;
 using Forseti.Harnesses;
+using System.Linq;
 
 namespace Forseti.Pages.Spark
 {
@@ -34,7 +35,7 @@ namespace Forseti.Pages.Spark
         public string FrameworkReportingScript { get; set; }
 		
         public string[] SystemScripts { get; set; }
-        public string[] CaseScripts { get; set; }
+        public CaseScriptDescriptor[] CaseScripts { get; set; }
 
         public string[] Dependencies { get; set; }
 
@@ -60,7 +61,7 @@ namespace Forseti.Pages.Spark
                     systemScripts.Add(systemScript);
             }
 
-            CaseScripts = caseScripts.ToArray();
+            CaseScripts = caseScripts.Select(c => { return (CaseScriptDescriptor)c; }).ToArray();
             SystemScripts = systemScripts.ToArray();
         }
 

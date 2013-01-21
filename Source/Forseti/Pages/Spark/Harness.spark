@@ -18,7 +18,10 @@
 			forseti.systems.push("${system}");
 		</for>
 		<for each="var @case in CaseScripts">
-			forseti.descriptions.push("${@case}");
+			<for each="var dependency in @case.CaseDependencies">
+				forseti.systems.push("${@dependency}");
+			</for>
+			forseti.descriptions.push("${@case.Case}");
 		</for>
 
 		</script>

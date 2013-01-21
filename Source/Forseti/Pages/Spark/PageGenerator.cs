@@ -74,12 +74,11 @@ namespace Forseti.Pages.Spark
             foreach (var scriptFile in harnessView.SystemScripts)
                 CopyScriptAndPossibleAdditionalReferences(harness, page, scriptFile);
 
-            var actualCaseScripts = new List<string>();
-            foreach (var scriptFile in harnessView.CaseScripts)
+            var actualCaseScripts = new List<CaseScriptDescriptor>();
+            foreach (var caseDescriptor in harnessView.CaseScripts)
             {
-                var additionalRefereces = CopyScriptAndPossibleAdditionalReferences(harness, page, scriptFile);
-                actualCaseScripts.AddRange(additionalRefereces);
-                actualCaseScripts.Add(scriptFile);
+                var additionalRefereces = CopyScriptAndPossibleAdditionalReferences(harness, page, caseDescriptor.Case);
+                actualCaseScripts.Add(new CaseScriptDescriptor { CaseDependencies = additionalRefereces, Case = caseDescriptor.Case });
             }
             harnessView.CaseScripts = actualCaseScripts.ToArray();
 

@@ -1,1 +1,1 @@
-﻿print("Hello from a given statement");
+﻿forseti.log("Hello from a given statement");
