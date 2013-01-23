@@ -97,11 +97,10 @@ namespace Forseti.Configuration
                                     .ToList();
 
                                 globalDependencies.AddRange(harnessDependencies);
-
-                                globalDependencies.ForEach(harness.AddDependency);
                             }
+                            globalDependencies.ForEach(harness.AddDependency);
 
-						    _harnessManager.Add (harness);
+                            _harnessManager.Add (harness);
 						}
 					}
 				}

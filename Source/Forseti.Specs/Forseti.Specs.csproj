@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\for_ConfigurationFileReader\when_applying_a_file_with_global_dependencies_and_no_hanress_dependencies.cs" />
     <Compile Include="Configuration\for_ConfigurationFileReader\given\a_configuration_file_reader_and_a_configure_instance.cs" />
     <Compile Include="Configuration\for_ConfigurationFileReader\when_applying_a_file_with_dependencies.cs" />
     <Compile Include="Configuration\for_ConfigurationFileReader\when_applying_a_file_with_global_dependencies.cs" />
