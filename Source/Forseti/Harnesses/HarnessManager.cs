@@ -172,7 +172,7 @@ namespace Forseti.Harnesses
             
             _harnessChangeManager.NotifyChange(result, HarnessChangeType.RunComplete);
 
-            Console.WriteLine("<--- Took {0} seconds --->\n", delta.TotalSeconds);
+            Console.WriteLine("<--- Took {0} seconds --->\r\n", delta.TotalSeconds);
 
             return result;
         }

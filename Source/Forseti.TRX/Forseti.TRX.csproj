@@ -75,7 +75,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HarnessResultExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transformation\ITransformToTrx.cs" />
@@ -93,7 +92,6 @@
     <Compile Include="Transformation\TrxBuilderExtensions.cs" />
     <Compile Include="Transformation\UnitTestDefinition.cs" />
     <Compile Include="Transformation\UnitTestResult.cs" />
-    <Compile Include="Executor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forseti.Buster\Forseti.Buster.csproj">

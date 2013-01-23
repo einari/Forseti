@@ -1,12 +1,18 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
-using Forseti.Configuration;
+using Forseti.ConsoleReporter;
+using Forseti.Execution;
+using Forseti.Reporting;
 
 namespace Forseti.Console
 {
     public class Program
     {
+
+        static Executor _executor;
+        static IReporter _reporter;
+
         [STAThread]
         public static int Main(string[] args)
         {
@@ -14,23 +20,18 @@ namespace Forseti.Console
 
 			System.Console.WriteLine("Keys : \n  R : Rerun\n  B : Run in browser\n  Any other key : Exit\n\n");
 
-            var configuration = Configure
-                .WithStandard()
-                .WithReportingOptions(new Forseti.Reporting.ReportingOptions(onlyOutputFailed: true))
-                .FromConfigurationFile("forseti.yaml")
-                .Initialize();
+            var currentConfigurationFile = Path.Combine(Directory.GetCurrentDirectory(), "forseti.yaml");
+            currentConfigurationFile = Path.Combine(@"C:\Dev\ProCoSysNextGen\Statoil.ProCoSysNextGen\Source\","forseti.yaml");
+            
+            _executor = Executor.WithForsetiConfigurationFile(currentConfigurationFile);
+            _executor.ReportWith<Reporter>();
+            _executor.RegisterWatcher<Windows.Growl.GrowlHarnessWatcher>();
+            _executor.RegisterWatcher<ConsoleHarnessWatcher>();
 
-            configuration
-                    .HarnessChangeManager.RegisterWatcher(typeof(Windows.Growl.GrowlHarnessWatcher));
+            _reporter = new Reporter(_executor.GetReportingOptions());
+            
+            _reporter.ReportSummary(_executor.ExecuteTests());
 
-            configuration.HarnessChangeManager.RegisterWatcher(typeof(ConsoleReporter.ConsoleHarnessWatcher));
-
-            configuration
-                    .HarnessManager.Run();
-
-                    
-
-			
 			for( ;; ) 
 			{
 				var key = System.Console.ReadKey();
@@ -39,7 +40,8 @@ namespace Forseti.Console
                     switch (key.Key)
                     {
                         case ConsoleKey.R:
-						    configuration.HarnessManager.Run ();
+						    
+                            _reporter.ReportOn(_executor.ExecuteTests());
                             break;
                         case ConsoleKey.B:
                             var target = Path.GetTempPath() + @"Forseti/runner.html";

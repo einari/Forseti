@@ -20,7 +20,7 @@ namespace Forseti.TFSBuildActivities
 
         public TestRunner(string forsetiConfiguration, string trxOutput, string computerName, string localUser, string tfsUser, bool verboseOutput = true) 
         {
-            _logger = (s) => Console.WriteLine(s);
+            _logger = Console.WriteLine;
 
             var executingAssemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             _forsetiExecutablePath = Path.Combine(executingAssemblyFolder, ForsetiTrxExecutable);

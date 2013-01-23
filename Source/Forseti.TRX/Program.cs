@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Forseti.ConsoleReporter;
+using Forseti.Execution;
+using Forseti.Reporting;
 using Forseti.TRX.Transformation;
 
 namespace Forseti.TRX
@@ -20,6 +19,7 @@ namespace Forseti.TRX
             var settings = Settings.FromArguments(args);
             
             var executor = Executor.WithForsetiConfigurationFile(settings.ForsetiConfigurationFile, verbose: settings.VerboseOutput);
+            executor.RegisterWatcher<ConsoleHarnessWatcher>();
             var results = executor.ExecuteTests();
 
             var trxBuilder = new TrxBuilder(settings.ComputerName,settings.UserName,settings.TfsUsername).BuildFrom(results);

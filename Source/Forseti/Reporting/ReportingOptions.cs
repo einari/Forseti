@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Forseti.Reporting
+﻿namespace Forseti.Reporting
 {
     public class ReportingOptions : IReportingOptions
     {

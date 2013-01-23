@@ -82,6 +82,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Execution\Executor.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Files\File.cs" />
     <Compile Include="Files\FileManager.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Reporting\CaseExtensions.cs" />
     <Compile Include="Reporting\DescriptionExtensions.cs" />
     <Compile Include="Reporting\HarnessResultExtensions.cs" />
+    <Compile Include="Reporting\IReporter.cs" />
     <Compile Include="Reporting\IReportingOptions.cs" />
     <Compile Include="Reporting\ReportingOptions.cs" />
     <Compile Include="Suites\Case.cs" />
