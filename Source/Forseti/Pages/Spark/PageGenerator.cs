@@ -16,13 +16,16 @@ namespace Forseti.Pages.Spark
         const string TemplateName = "Harness";
         SparkViewDescriptor _descriptor;
         SparkViewEngine _engine;
+        string _jqueryJs;
         string _forsetiJs;
         string _requireJs;
         string _forsetiBootstrapperJs;
 
+
         public PageGenerator(IResourceManager resourceManager)
         {
             var template = resourceManager.GetStringFromAssemblyOf<PageGenerator>("Forseti.Pages.Spark.Harness.spark");
+            _jqueryJs = resourceManager.GetStringFromAssemblyOf<Forseti.Scripting.ScriptEngine>("Forseti.Scripting.Scripts.jquery.min.js");
             _forsetiJs = resourceManager.GetStringFromAssemblyOf<Forseti.Scripting.ScriptEngine>("Forseti.Scripting.Scripts.forseti.js");
             _requireJs = resourceManager.GetStringFromAssemblyOf<Forseti.Scripting.ScriptEngine>("Forseti.Scripting.Scripts.require.js");
             _forsetiBootstrapperJs = resourceManager.GetStringFromAssemblyOf<Forseti.Scripting.ScriptEngine>("Forseti.Scripting.Scripts.forseti.bootstrapper.js");
@@ -44,7 +47,7 @@ namespace Forseti.Pages.Spark
 
             var harnessView = (HarnessView)_engine.CreateInstance(_descriptor);
             harnessView.Harness = harness;
-            harnessView.RunnerScripts = new[] {"forseti.bootstrapper.js", "r.js", "forseti.js"} ;
+            harnessView.RunnerScripts = new[] {"jquery.min.js","forseti.bootstrapper.js", "r.js", "forseti.js"} ;
             harnessView.FrameworkScript = harness.Framework.ScriptName;
             harnessView.FrameworkExecutionScript = harness.Framework.ExecuteScriptName;
             harnessView.FrameworkReportingScript = harness.Framework.ReportScriptName;
@@ -87,6 +90,7 @@ namespace Forseti.Pages.Spark
 
             var result = writer.ToString();
 
+            File.WriteAllText(page.RootPath + "jquery.min.js", _jqueryJs);
             File.WriteAllText(page.RootPath + "forseti.bootstrapper.js", _forsetiBootstrapperJs);
             File.WriteAllText(page.RootPath + "r.js", _requireJs);
             File.WriteAllText(page.RootPath + "forseti.js", _forsetiJs);

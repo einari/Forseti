@@ -193,4 +193,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Scripting\Scripts\forseti.bootstrapper.js" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scripting\Scripts\jquery.min.js" />
+  </ItemGroup>
 </Project>

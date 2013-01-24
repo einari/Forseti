@@ -1,5 +1,4 @@
 ﻿var forseti = (function (w) {
-
     function createLocalRequire() {
 
         var r = w.require;
@@ -96,11 +95,15 @@
             var self = this;
             if (self.hasUnexecutedDescriptions()) {
                 self.prepareNextDescription();
-                self.require([self.currentDescription], function () {
+                __jquery.getScript(self.currentDescription, function () {
                     self.execute();
+                })
+                .fail(function (jqXhr, errorText, errorObject) {
+                    self.reportFailedCase(self.currentDescription, "", errorText + " : " +  errorObject + " in : " + self.currentDescription);
+                    self.executeNextDescription();
                 });
             }
         }
-    }
+    };
 
 })(window);
