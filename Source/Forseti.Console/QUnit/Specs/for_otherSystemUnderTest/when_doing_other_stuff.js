@@ -1,4 +1,5 @@
-﻿test("when doing other stuff", function () {
-    expect(true == true);
-    expect(true == true);
+﻿
+
+test("testing without a module", function () {
+    ok(true == true);
 });

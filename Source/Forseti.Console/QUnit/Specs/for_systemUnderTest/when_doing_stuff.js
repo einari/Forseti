@@ -1,5 +1,9 @@
-﻿test("when doing stuff", function () {
-    expect(true == false);
-    expect(true == true);
-    expect(true == false);
+﻿module("when_doing_stuff");
+
+test("it should fail!", function () {
+    ok(true == false);
+});
+
+test("it should not fail", function () {
+    ok(true == true);
 });
