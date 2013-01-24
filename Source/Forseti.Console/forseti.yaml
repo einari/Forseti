@@ -10,13 +10,13 @@ Dependencies:
   - Scripts/globalDependency.js
 
 Harnesses:
-#   - Harness:
-#       Framework				: Jasmine
-#       Name						: Jasmine Specs
-#       SystemsSearchPath 		: Jasmine/Scripts/{system}.js
-#       DescriptionsSearchPath	: Jasmine/Specs/for_{system}/{description}.js
-#       Dependencies:
-#        - Jasmine/Scripts/dependency.js
+   - Harness:
+       Framework				: Jasmine
+       Name						: Jasmine Specs
+       SystemsSearchPath 		: Jasmine/Scripts/{system}.js
+       DescriptionsSearchPath	: Jasmine/Specs/for_{system}/{description}.js
+       Dependencies:
+        - Jasmine/Scripts/dependency.js
 
    - Harness:
        Framework				: Jasmine

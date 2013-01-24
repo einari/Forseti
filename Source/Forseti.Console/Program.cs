@@ -21,7 +21,7 @@ namespace Forseti.Console
 			System.Console.WriteLine("Keys : \n  R : Rerun\n  B : Run in browser\n  Any other key : Exit\n\n");
 
             var currentConfigurationFile = Path.Combine(Directory.GetCurrentDirectory(), "forseti.yaml");
-            
+
             _executor = Executor.WithForsetiConfigurationFile(currentConfigurationFile);
             _executor.ReportWith<Reporter>();
             _executor.RegisterWatcher<Windows.Growl.GrowlHarnessWatcher>();
