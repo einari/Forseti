@@ -19,6 +19,7 @@ namespace Forseti.TRX
             var settings = Settings.FromArguments(args);
             
             var executor = Executor.WithForsetiConfigurationFile(settings.ForsetiConfigurationFile, verbose: settings.VerboseOutput);
+            executor.ReportWith<Reporter>();
             executor.RegisterWatcher<ConsoleHarnessWatcher>();
             var results = executor.ExecuteTests();
 
