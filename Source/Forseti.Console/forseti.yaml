@@ -32,7 +32,6 @@ Harnesses:
        Name						: QUnit Specs
        SystemsSearchPath 		: QUnit/Scripts/{system}.js
        DescriptionsSearchPath	: QUnit/Specs/for_{system}/{description}.js
-       
 
 # Buster support needs revisiting and more love!
 #   - Harness:

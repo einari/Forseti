@@ -8,9 +8,9 @@
     framework.initialize = function () {
         if (!framework.instance) {
             QUnit.init();
-            QUnit.config.autostart = true;
+            QUnit.config.autostart = false;
             QUnit.config.blocking = false;
-            QUnit.config.autorun = false;
+            QUnit.config.autorun = true;
             QUnit.config.updateRate = 0;
             framework.instance = QUnit;
         }
