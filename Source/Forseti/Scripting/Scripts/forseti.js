@@ -9,6 +9,16 @@
         w.__require = r;
     };
 
+    function logToBrowser(message) {
+        typeof message === "string"
+                ? console.log("Log : " + message)
+                : console.log(message);
+    }
+
+    function logToRunner(message) {
+        w.print(message);
+    }
+
     function loadNextDescription(description) {
         var options = {
             script: description,
@@ -63,13 +73,7 @@
             execute: function () { }
         },
         runningInBrowser: inBrowser(),
-        log: function (message) {
-            if (this.runningInBrowser)
-                typeof message === "string" ? console.log("Log : " + message)
-                                            : console.log(message);
-            else
-                w.print(message);
-        },
+        log: function () { },
         reportPassedCase: function (description, caseName) {
             var descriptionFile = this.currentDescription;
             if (this.runningInBrowser)
@@ -99,6 +103,7 @@
             return description;
         },
         initialize: function () {
+            this.log = this.runningInBrowser ? logToBrowser : logToRunner;
             if (this.framework) {
                 this.framework.initialize();
                 this.loadSystems();
