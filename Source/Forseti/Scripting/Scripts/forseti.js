@@ -9,6 +9,15 @@
         w.__require = r;
     };
 
+    function loadNextDescription(description) {
+        var options = {
+            script: description,
+            success: function () { forseti.execute(); }
+        };
+
+        forseti.getScript(options);
+    }
+
     createLocalRequire();
     var nextDescriptionForExecutingIndex = 0;
 
@@ -26,6 +35,27 @@
         },
         require: function () {
             __require.apply(this, arguments);
+        },
+        getScript: function (settings) {
+            var options = {
+                script: "",
+                success: function () { },
+                fail: function () { }
+            };
+            __jquery.extend(options, settings);
+
+
+            if (this.runningInBrowser)
+                this.require([options.script], options.success);
+            else
+                __jquery.getScript(options.script, function () {
+                    options.success();
+                })
+                .fail(function (jqXhr, errorText, errorObject) {
+                    forseti.reportFailedCase(description, "", errorText + " : " + errorObject + " in : " + description);
+                    forseti.executeNextDescription();
+                });
+
         },
         framework: {
             instance: null,
@@ -79,6 +109,7 @@
 
             this.currentDescription = nextDescription;
             nextDescriptionForExecutingIndex++;
+            return nextDescription;
         },
         currentDescription: "",
         loadSystems: function (func) {
@@ -94,14 +125,8 @@
         executeNextDescription: function () {
             var self = this;
             if (self.hasUnexecutedDescriptions()) {
-                self.prepareNextDescription();
-                __jquery.getScript(self.currentDescription, function () {
-                    self.execute();
-                })
-                .fail(function (jqXhr, errorText, errorObject) {
-                    self.reportFailedCase(self.currentDescription, "", errorText + " : " +  errorObject + " in : " + self.currentDescription);
-                    self.executeNextDescription();
-                });
+                var nextDescription = self.prepareNextDescription();
+                loadNextDescription(nextDescription);
             }
         }
     };
