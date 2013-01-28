@@ -4,7 +4,7 @@
     <Property MultiValue="0" name="EncryptedEditPassword" type="string"></Property>
     <Property MultiValue="0" name="Name" type="string"></Property>
     <Property MultiValue="0" name="ProjectAuthor" type="string"></Property>
-    <Property MultiValue="0" name="ProjectID" type="string">{2D156752-BB44-4F62-9F34-FF8D75D5D257}</Property>
+    <Property MultiValue="0" name="ProjectID" type="string">{E92F84B7-6DB0-4D95-8C07-B646950045C2}</Property>
     <Property MultiValue="0" name="ProjectNotes" type="string"></Property>
     <Object Class="TFBActionListCollection" XMLID="{4871BDFF-5DCB-42ED-A404-9A1070981A03}">
       <Object Class="TFBActionList" XMLID="{0850F5DE-DB29-4012-BCC3-ABEBB87FC14C}">
