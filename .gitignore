@@ -11,6 +11,7 @@ source/**/obj
 *.pidb
 _ReSharper.*
 source/solutions/packages
+packages/*
 
 # OS generated files #
 ######################
