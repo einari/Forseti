@@ -8,7 +8,7 @@ Most test / spec runners out there have focus on bringing in real browsers and t
 
 # Getting started #
 
-You can either build it yourself, or download a pre-compiled binary package from [here](https://github.com/downloads/dolittlestudios/Forseti/Forseti.zip). You will however have to have .net 4 installed on a Windows machine or Mono 2.8 installed on Mac OSX or Linux. The Forseti.exe file in the distribution is the one you want to run with Mono.  
+You can either build it yourself, or download a pre-compiled binary package from [here](https://github.com/dolittle/Forseti/wiki). You will however have to have .net 4 installed on a Windows machine or Mono 2.8 installed on Mac OSX or Linux. The Forseti.exe file in the distribution is the one you want to run with Mono.  
   
 A tip for Mono users is to set up Mono to by default run runtime version 4 in your .bash_profile file :
 
@@ -17,7 +17,7 @@ A tip for Mono users is to set up Mono to by default run runtime version 4 in yo
  
 # How to build #
 
-Forseti compiles fine in MonoDevelop 2 and Visual Studio 2010. Once you have the source, you navigate to the Source/Solutions path and you'll find two solution files, one that is tested under Windows and Visual Studio 2010 called *'Forseti.sln'* and another that has been tested with MonoDevelop 2 and Mac OSX; *'Forseti OSX.sln'*. If you're on OSX, you can't just go ahead and compile it, you need all the packages it depends on downloaded first. A rakefile has been created to do the downloads of these packages from [Nuget](http://www.nuget.org). 
+Forseti compiles fine in MonoDevelop 2 and Visual Studio 2010/2012. Once you have the source, you navigate to the Source/Solutions path and you'll find two solution files, one that is tested under Windows and Visual Studio 2010 called *'Forseti.sln'* and another that has been tested with MonoDevelop 2 and Mac OSX; *'Forseti OSX.sln'*. If you're on OSX, you can't just go ahead and compile it, you need all the packages it depends on downloaded first. A rakefile has been created to do the downloads of these packages from [Nuget](http://www.nuget.org). 
 From your terminal window :
 
 	Your-Computer:Source someone$ sudo rake
@@ -27,77 +27,7 @@ On Windows you only need to open the solution and build it with Visual Studio, i
 
 # How to use #
 
-For now, the only thing up and running is the console runner. It relies on a configuration file that you need to create called *forseti.yaml* - its layout is like this : 
-	
-	Harnesses:
-		- Harness:
-			Framework				: [name of testing/specification framework]
-			Name					: [name of harness]
-			SystemsSearchPath		: [relative path from current directory]/{placeholders}.js
-			DescriptionsSearchPath	: [relative path from current directory]/{placeholders}.js
-			Dependencies            :
-			  - [relative path from current directory/harnessdependency.js]
-
-A concrete configuration could be something like this : 
-
-	Harnesses:
-	  - Harness:
-          Framework					: Jasmine
-          Name						: Something
-          SystemsSearchPath			: Scripts/{system}.js
-          DescriptionsSearchPath	: Specs/for_{system}/{description}.js
-          Dependencies              :
-            - Scripts/plugins/jquery.someplugin.js
-			
-Basically by configuring Forseti as above, you are setting up search paths that will represent your convention to where it finds systems you are testing / specifying and corresponding descriptions as we're calling it, but basically your tests / specs. You can create your own placeholders, there are for the time being no built in placeholders. You can also add another level if you're for instance using namespacing, you could easily have *'Scripts/{namespace}/{system}.js'*. For the time being, recursiveness in this mechanism is not supported. 
-
-Once configured and Forseti is executed from the location of the Forseti.yaml file, it will start finding all systems and its corresponding tests / specs and then run everything that it has found. It will then sit there and wait till a new file is added, removed or modified and then run the impacted system and its corresponding tests / specs again.
-
-
-### Dependencies ###
-
-Forseti also supports multiple Harness', which can be useful when speccing different aspects of a system / multiple systems. In these cases there may be a mixed need for dependencies that can be resolved like so:
-
-	Dependencies:
-	  - Scripts/libs/jquery-1.7.2.min.js
-
-	Harnesses:
-	  - Harness:
-          Framework					: Jasmine
-          Name						: Something
-          SystemsSearchPath			: Scripts/{system}.js
-          DescriptionsSearchPath	: Specs/for_{system}/{description}.js
-          Dependencies              :
-            - Scripts/plugins/jquery.someplugin.js
-
-	  - Harness:
-          Framework					: Buster
-          Name						: Something
-          SystemsSearchPath			: Scripts/{system}.js
-          DescriptionsSearchPath	: Specs/for_{system}/{description}.js
-          Dependencies              :
-            - Scripts/legacy/legacy.js
-            - Scripts/legacy/ancient.js
-
-
-
-# Frameworks #
-Forseti supports multiple testing/specification frameworks, which can be specified in the YAML file. We currently support the following assemblies:
- - [Jasmine](http://pivotal.github.com/jasmine/) 
- - [BusterJS](http://www.busterjs.org)
- - [QUnit](http://docs.jquery.com/QUnit)
- - JsUnit isn't supported yet, but [feel free to contribute!] (https://github.com/dolittle/Forseti/issues/30)
-
-A sample of a Buster configuration : 
-
-	Harnesses:
-	  - Harness:
-	      Framework					: Buster
-          Name						: Something
-          SystemsSearchPath			: Scripts/{system}.js
-          DescriptionsSearchPath	: Specs/for_{system}/{description}.js
-
-
+Head over to the [wiki](https://github.com/dolittle/Forseti/wiki) for help on getting started with Forseti
 
 # Why... Ohhh... Why... #
 
