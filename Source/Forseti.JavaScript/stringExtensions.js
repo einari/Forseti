@@ -21,3 +21,15 @@ String.prototype.shouldBeEmpty = function() {
 String.prototype.shouldNotBeEmpty = function() {
 
 };
+
+String.prototype.shouldBeEqual = function(expected) {
+
+};
+
+String.prototype.shouldBeEqual = function(notExpected) {
+
+};
+
+String.prototype.shouldBeSurroundedWith = function(expectedDelimiter) {
+
+};
