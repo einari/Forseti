@@ -24,12 +24,13 @@ namespace Forseti.Console
             
             _executor = Executor.WithForsetiConfigurationFile(currentConfigurationFile);
             _executor.ReportWith<Reporter>();
-            _executor.RegisterWatcher<Windows.Growl.GrowlHarnessWatcher>();
+            //_executor.RegisterWatcher<Windows.Growl.GrowlHarnessWatcher>();
             _executor.RegisterWatcher<ConsoleHarnessWatcher>();
 
             _reporter = new Reporter(_executor.GetReportingOptions());
             
-            _reporter.ReportSummary(_executor.ExecuteTests());
+			var harnessResults = _executor.ExecuteTests ();
+            _reporter.ReportSummary(harnessResults);
 
 			for( ;; ) 
 			{

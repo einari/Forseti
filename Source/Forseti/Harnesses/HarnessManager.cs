@@ -135,7 +135,7 @@ namespace Forseti.Harnesses
 			{
 				Console.WriteLine ("No suites");
                 _harnessChangeManager.NotifyChange(result, HarnessChangeType.RunComplete);
-				return null;
+				return result;
 			}
             suites.ForEach(s => 
                             {
@@ -186,8 +186,11 @@ namespace Forseti.Harnesses
         public IEnumerable<HarnessResult> Run()
         {
             var results = new List<HarnessResult>();
-            foreach (var harness in _harnesses)
-                results.Add(Execute(harness, harness.Suites));
+            foreach (var harness in _harnesses) 
+			{
+				var result = Execute (harness, harness.Suites);
+                results.Add(result);
+			}
 
             return results;
         }

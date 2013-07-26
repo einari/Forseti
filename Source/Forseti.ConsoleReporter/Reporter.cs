@@ -36,7 +36,7 @@ namespace Forseti.ConsoleReporter
 
         public void ReportSummary(IEnumerable<HarnessResult> harnessResults)
         {
-            var enumeratedResults = harnessResults as IList<HarnessResult> ?? harnessResults.ToList();
+			var enumeratedResults = harnessResults ?? new HarnessResult[0];
             var totalPassed = enumeratedResults.SuccessfulCaseCount();
             var totalFailed = enumeratedResults.FailedCaseCount();
             var totalInconclusive = enumeratedResults.InconclusiveCaseCount();
