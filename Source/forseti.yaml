@@ -13,7 +13,7 @@ Harnesses:
    - Harness:
        Framework				: Jasmine
        Name						: Jasmine Specs
-       SystemsSearchPath 		: ../Forseti.JavaScript/{system}.js
-       DescriptionsSearchPath	: for_{system}/{description}.js
+       SystemsSearchPath 		: Forseti.JavaScript/{system}.js
+       DescriptionsSearchPath	: Forseti.JavaScript.Specs/for_{system}/{description}.js
 #       Dependencies:
 #        - Jasmine/Scripts/dependency.js
