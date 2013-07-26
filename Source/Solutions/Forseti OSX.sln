@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forseti.OSX", "..\Forseti.O
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forseti.OSX.Client", "..\Forseti.OSX.Client\Forseti.OSX.Client.csproj", "{7ACD1C91-C9CF-4FB0-AB65-68C2AF84D6A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forseti.ConsoleReporter", "..\Forseti.ConsoleReporter\Forseti.ConsoleReporter.csproj", "{1F835984-A7D9-469F-B39C-50A23D51A161}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,20 @@ Global
 		{0BCEAD10-6A48-444E-A8B3-841275529002}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{0BCEAD10-6A48-444E-A8B3-841275529002}.Release|x86.ActiveCfg = Release|Any CPU
 		{0BCEAD10-6A48-444E-A8B3-841275529002}.Release|x86.Build.0 = Release|Any CPU
+		{1F835984-A7D9-469F-B39C-50A23D51A161}.AppStore|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F835984-A7D9-469F-B39C-50A23D51A161}.AppStore|Any CPU.Build.0 = Debug|Any CPU
+		{1F835984-A7D9-469F-B39C-50A23D51A161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F835984-A7D9-469F-B39C-50A23D51A161}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F835984-A7D9-469F-B39C-50A23D51A161}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1F835984-A7D9-469F-B39C-50A23D51A161}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1F835984-A7D9-469F-B39C-50A23D51A161}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1F835984-A7D9-469F-B39C-50A23D51A161}.Debug|x86.Build.0 = Debug|Any CPU
+		{1F835984-A7D9-469F-B39C-50A23D51A161}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F835984-A7D9-469F-B39C-50A23D51A161}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F835984-A7D9-469F-B39C-50A23D51A161}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1F835984-A7D9-469F-B39C-50A23D51A161}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1F835984-A7D9-469F-B39C-50A23D51A161}.Release|x86.ActiveCfg = Release|Any CPU
+		{1F835984-A7D9-469F-B39C-50A23D51A161}.Release|x86.Build.0 = Release|Any CPU
 		{77E4DF53-BEB2-4A63-AF73-A0CDF9CB8BD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{77E4DF53-BEB2-4A63-AF73-A0CDF9CB8BD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77E4DF53-BEB2-4A63-AF73-A0CDF9CB8BD7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
