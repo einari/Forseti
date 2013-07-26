@@ -6,14 +6,16 @@
 #MockFrameworks:
 #  - Sinon
 
-#Dependencies:
-#  - Scripts/globalDependency.js
+Dependencies:
+  - Forseti.JavaScript/libraries/jquery-1.7.1.min.js
+  - Forseti.JavaScript/libraries/require.js
+  - Forseti.JavaScript/libraries/Bifrost.debug.js
 
 Harnesses:
    - Harness:
        Framework				: Jasmine
        Name						: Jasmine Specs
-       SystemsSearchPath 		: Forseti.JavaScript/{system}.js
-       DescriptionsSearchPath	: Forseti.JavaScript.Specs/for_{system}/{description}.js
+       SystemsSearchPath 		: Forseti.JavaScript/{folder}/{system}.js
+       DescriptionsSearchPath	: Forseti.JavaScript.Specs/{folder}/for_{system}/{description}.js
 #       Dependencies:
 #        - Jasmine/Scripts/dependency.js
