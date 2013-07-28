@@ -4,10 +4,8 @@ Bifrost.namespace("Forseti.harnesses", {
 
 		this.suites = [];
 
-
 		this.addSuite = function(suite) {
 			self.suites.push(suite);
 		};
-
 	})
 });
