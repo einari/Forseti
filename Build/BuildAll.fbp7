@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-16"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <VSXML>
   <Object Class="TFBProject" XMLID="{A1EE5DD7-1B1A-4003-A419-2CE84BF7A269}">
     <Property MultiValue="0" name="EncryptedEditPassword" type="string"></Property>
