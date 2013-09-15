@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>forseti</id>
+    <title>Forseti Console</title>
+    <version>1.0.0.0</version>
+    <authors>Einar Ingebrigtsen, Pavneet Singh Saund</authors>
+    <owners>Pavneet Singh Saund</owners>
+    <summary>forseti</summary>
+    <description>Forseti </description>
+    <projectUrl>http://github.com/dolittle/forseti</projectUrl>
+    <tags>forseti javascript runner jasmine qunit .net</tags>
+    <copyright></copyright>
+    <licenseUrl>https://github.com/dolittle/Forseti/blob/master/MIT-LICENSE.txt</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <iconUrl>https://raw.github.com/dolittle/Forseti/master/Forseti-logo.png</iconUrl>
+    <dependencies>
+      <dependency id="forseti.portable" version="1.0.0.0" />
+    </dependencies>
+    <releaseNotes></releaseNotes>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+    <!--<file src="content\**" target="content" />-->
+  </files>
+</package>    
