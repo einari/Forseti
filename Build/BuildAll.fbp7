@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-16"?>
 <VSXML>
   <Object Class="TFBProject" XMLID="{A1EE5DD7-1B1A-4003-A419-2CE84BF7A269}">
     <Property MultiValue="0" name="EncryptedEditPassword" type="string"></Property>
     <Property MultiValue="0" name="Name" type="string"></Property>
     <Property MultiValue="0" name="ProjectAuthor" type="string"></Property>
-    <Property MultiValue="0" name="ProjectID" type="string">{2D156752-BB44-4F62-9F34-FF8D75D5D257}</Property>
+    <Property MultiValue="0" name="ProjectID" type="string">{83D0BC22-9015-446E-8053-66530F424F12}</Property>
     <Property MultiValue="0" name="ProjectNotes" type="string"></Property>
     <Object Class="TFBActionListCollection" XMLID="{4871BDFF-5DCB-42ED-A404-9A1070981A03}">
       <Object Class="TFBActionList" XMLID="{0850F5DE-DB29-4012-BCC3-ABEBB87FC14C}">
@@ -600,11 +600,14 @@ Platform=Any CPU
             <Object Class="TRunProgramAction" XMLID="{BBC1788E-6B21-4CDE-9778-DFC2B681DE15}">
               <Property MultiValue="0" name="ActionComment" type="string"></Property>
               <Property MultiValue="1" name="ActionDescription" type="string">
-                <![CDATA[Execute Program [ %7ZipArchiverTool% ]]]>
+                <![CDATA[Create Forseti.Console.zip]]>
               </Property>
               <Property name="ActionTextColor" type="Cardinal">0</Property>
               <Property MultiValue="0" name="ActionTypeID" type="string"></Property>
               <Property name="CaptureOutput" type="Boolean">True</Property>
+              <Property MultiValue="1" name="Description" type="string">
+                <![CDATA[Create Forseti.Console.zip]]>
+              </Property>
               <Property name="Enabled" type="Boolean">True</Property>
               <Property name="EnableLiveCapture" type="Boolean">True</Property>
               <Property name="EnableReturnCodeCheck" type="Boolean">True</Property>
@@ -656,6 +659,85 @@ Platform=Any CPU
                 <Property name="FailIfExists" type="Boolean">False</Property>
                 <Property name="FailIfZeroFiles" type="Boolean">True</Property>
                 <Property MultiValue="0" name="FileSpec" type="string">%CurrentDirectory%\Forseti.Console.zip</Property>
+                <Property name="Force" type="Boolean">True</Property>
+                <Property name="HideActionFromLog" type="Boolean">False</Property>
+                <Property name="IgnoreFailure" type="Boolean">False</Property>
+                <Property name="Locked" type="Boolean">False</Property>
+                <Property name="LogActionProperties" type="Boolean">False</Property>
+                <Property name="LogFilesAffected" type="Boolean">True</Property>
+                <Property MultiValue="0" name="LogToVariable" type="TVariableName"></Property>
+                <Property name="MaxRetryAttempts" type="Cardinal">0</Property>
+                <Property name="Overwrite" type="Boolean">True</Property>
+                <Property name="OverwriteReadOnly" type="Boolean">False</Property>
+                <Property name="PauseInterval" type="Cardinal">0</Property>
+                <Property name="RetryPauseInterval" type="Cardinal">1000</Property>
+                <Property name="SuppressStatusMessages" type="Boolean">False</Property>
+                <Property MultiValue="0" name="Target" type="string">%ForsetiConsolePackageFolder%</Property>
+                <Property name="TargetIsDir" type="Boolean">True</Property>
+              </Object>
+            </Object>
+            <Object Class="TRunProgramAction" XMLID="{E500331A-EDCB-45E6-8A78-C6509FBB9619}">
+              <Property MultiValue="0" name="ActionComment" type="string"></Property>
+              <Property MultiValue="1" name="ActionDescription" type="string">
+                <![CDATA[Create Forseti.Console.exe]]>
+              </Property>
+              <Property name="ActionTextColor" type="Cardinal">0</Property>
+              <Property MultiValue="0" name="ActionTypeID" type="string"></Property>
+              <Property name="CaptureOutput" type="Boolean">True</Property>
+              <Property MultiValue="1" name="Description" type="string">
+                <![CDATA[Create Forseti.Console.exe]]>
+              </Property>
+              <Property name="Enabled" type="Boolean">True</Property>
+              <Property name="EnableLiveCapture" type="Boolean">True</Property>
+              <Property name="EnableReturnCodeCheck" type="Boolean">True</Property>
+              <Property name="EnableTimeout" type="Boolean">False</Property>
+              <Property name="ExpandActionLogTitle" type="Boolean">True</Property>
+              <Property name="ExpandImpersonationToken" type="Boolean">False</Property>
+              <Property MultiValue="0" name="ExtraCmdLineParamsAtEnd" type="string"></Property>
+              <Property MultiValue="0" name="ExtraCmdLineParamsAtStart" type="string"></Property>
+              <Property name="HideActionFromLog" type="Boolean">False</Property>
+              <Property name="HideWindow" type="Boolean">True</Property>
+              <Property name="IgnoreFailure" type="Boolean">False</Property>
+              <Property MultiValue="0" name="ImpersonateToken" type="string"></Property>
+              <Property name="ImpersonateUser" type="Boolean">False</Property>
+              <Property MultiValue="0" name="ImpersonateUserName" type="string"></Property>
+              <Property MultiValue="0" name="InputFile" type="string"></Property>
+              <Property name="Locked" type="Boolean">False</Property>
+              <Property name="LogActionProperties" type="Boolean">False</Property>
+              <Property name="LogOutput" type="Boolean">True</Property>
+              <Property name="LogProcessParameters" type="Boolean">True</Property>
+              <Property MultiValue="0" name="LogToVariable" type="TVariableName"></Property>
+              <Property name="MaxRetryAttempts" type="Cardinal">0</Property>
+              <Property MultiValue="1" name="Params" type="string">
+                <![CDATA[a Forseti.Console.exe -sfx]]>
+              </Property>
+              <Property name="PauseInterval" type="Cardinal">0</Property>
+              <Property name="ProcessorAffinity" type="Cardinal">0</Property>
+              <Property name="ProcessPriority" type="TFBExecuteThreadPriority">tpNormal</Property>
+              <Property MultiValue="0" name="ProgramName" type="string">%7ZipArchiverTool%</Property>
+              <Property name="RedirectStdErr" type="Boolean">True</Property>
+              <Property name="RetryPauseInterval" type="Cardinal">1000</Property>
+              <Property name="ReturnCodeComparator" type="TFBRunReturnCodeComparator">rcEqualTo</Property>
+              <Property name="ReturnCodeToCheck" type="Integer">0</Property>
+              <Property MultiValue="0" name="StartInDir" type="string">%CurrentDirectory%</Property>
+              <Property name="SuppressStatusMessages" type="Boolean">False</Property>
+              <Property name="TerminateOnTimeout" type="Boolean">False</Property>
+              <Property name="TimeoutLength" type="Cardinal">1</Property>
+              <Property name="UseErrorDialogMonitor" type="Boolean">False</Property>
+              <Property name="WaitForCompletion" type="Boolean">True</Property>
+              <Object Class="TMoveFilesAction" XMLID="{05911162-D041-4ED5-9A8F-A598030E017B}">
+                <Property MultiValue="0" name="ActionComment" type="string"></Property>
+                <Property MultiValue="1" name="ActionDescription" type="string">
+                  <![CDATA[Move File(s) [ %CurrentDirectory%\Forseti.Console.exe -&gt; %ForsetiConsolePackageFolder% ]]]>
+                </Property>
+                <Property name="ActionTextColor" type="Cardinal">0</Property>
+                <Property MultiValue="0" name="ActionTypeID" type="string"></Property>
+                <Property name="ClearAttributes" type="Boolean">False</Property>
+                <Property name="Enabled" type="Boolean">True</Property>
+                <Property name="ExpandActionLogTitle" type="Boolean">True</Property>
+                <Property name="FailIfExists" type="Boolean">False</Property>
+                <Property name="FailIfZeroFiles" type="Boolean">True</Property>
+                <Property MultiValue="0" name="FileSpec" type="string">%CurrentDirectory%\Forseti.Console.exe</Property>
                 <Property name="Force" type="Boolean">True</Property>
                 <Property name="HideActionFromLog" type="Boolean">False</Property>
                 <Property name="IgnoreFailure" type="Boolean">False</Property>
