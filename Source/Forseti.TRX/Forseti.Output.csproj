@@ -8,8 +8,8 @@
     <ProjectGuid>{1CC07CC7-F6C5-494B-900B-2CDE971E570D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Forseti.TRX</RootNamespace>
-    <AssemblyName>Forseti.TRX</AssemblyName>
+    <RootNamespace>Forseti.Output</RootNamespace>
+    <AssemblyName>Forseti.Output</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -75,25 +75,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppVeyor\OutputExecutor.cs" />
+    <Compile Include="IOutputExecutor.cs" />
+    <Compile Include="MSTest\OutputExecutor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Transformation\ITransformToTrx.cs" />
-    <Compile Include="Transformation\Results.cs" />
-    <Compile Include="Transformation\ResultSummary.cs" />
-    <Compile Include="Transformation\Settings.cs" />
-    <Compile Include="Transformation\TestDefinitions.cs" />
-    <Compile Include="Transformation\TestEntries.cs" />
-    <Compile Include="Transformation\TestEntry.cs" />
-    <Compile Include="Transformation\TestLists.cs" />
-    <Compile Include="Transformation\TestRun.cs" />
-    <Compile Include="Transformation\TestSettings.cs" />
-    <Compile Include="Transformation\Times.cs" />
-    <Compile Include="Transformation\TrxBuilder.cs" />
-    <Compile Include="Transformation\TrxBuilderExtensions.cs" />
-    <Compile Include="Transformation\UnitTestDefinition.cs" />
-    <Compile Include="Transformation\UnitTestResult.cs" />
+    <Compile Include="MSTest\Transformation\ITransformToTrx.cs" />
+    <Compile Include="MSTest\Transformation\Results.cs" />
+    <Compile Include="MSTest\Transformation\ResultSummary.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="MSTest\Transformation\TestDefinitions.cs" />
+    <Compile Include="MSTest\Transformation\TestEntries.cs" />
+    <Compile Include="MSTest\Transformation\TestEntry.cs" />
+    <Compile Include="MSTest\Transformation\TestLists.cs" />
+    <Compile Include="MSTest\Transformation\TestRun.cs" />
+    <Compile Include="MSTest\Transformation\TestSettings.cs" />
+    <Compile Include="MSTest\Transformation\Times.cs" />
+    <Compile Include="MSTest\TrxBuilder.cs" />
+    <Compile Include="MSTest\TrxBuilderExtensions.cs" />
+    <Compile Include="MSTest\Transformation\UnitTestDefinition.cs" />
+    <Compile Include="MSTest\Transformation\UnitTestResult.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Forseti.AppVeyor\Forseti.AppVeyor.csproj">
+      <Project>{616d450d-c79e-48e0-b08e-403053ffe2da}</Project>
+      <Name>Forseti.AppVeyor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Forseti.Buster\Forseti.Buster.csproj">
       <Project>{0BCEAD10-6A48-444E-A8B3-841275529002}</Project>
       <Name>Forseti.Buster</Name>
@@ -118,6 +125,7 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

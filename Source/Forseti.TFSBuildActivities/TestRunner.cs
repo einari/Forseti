@@ -10,7 +10,7 @@ namespace Forseti.TFSBuildActivities
 {
     public class TestRunner
     {
-        const string ForsetiTrxExecutable = "Forseti.TRX.exe";
+        const string ForsetiTrxExecutable = "Forseti.Output.exe";
 
         string _forsetiExecutablePath;
         string _forsetiArguments;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Forseti.TRX.Transformation
+namespace Forseti.Output    
 {
     public class Settings
     {

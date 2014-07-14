@@ -5,7 +5,7 @@ using Forseti.Harnesses;
 using Forseti.Extensions;
 using Forseti.Reporting;
 
-namespace Forseti.TRX.Transformation
+namespace Forseti.Output.MSTest.Transformation
 {
     public static  class TrxBuilderExtensions
     {

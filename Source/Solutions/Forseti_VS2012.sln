@@ -27,9 +27,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forseti.VisualStudio.TestAd
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forseti.VisualStudio.TestAdapter.Extension", "..\Forseti.VisualStudio.TestAdapter.Extension\Forseti.VisualStudio.TestAdapter.Extension.csproj", "{C1DA7553-5611-4FDB-80D3-7333A67A34BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forseti.TRX", "..\Forseti.TRX\Forseti.TRX.csproj", "{1CC07CC7-F6C5-494B-900B-2CDE971E570D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forseti.Output", "..\Forseti.TRX\Forseti.Output.csproj", "{1CC07CC7-F6C5-494B-900B-2CDE971E570D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forseti.TRX.Specs", "..\Forseti.TRX.Specs\Forseti.TRX.Specs.csproj", "{66023350-4C8C-4944-9B2B-A41ACEE8F12A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forseti.AppVeyor", "..\Forseti.AppVeyor\Forseti.AppVeyor.csproj", "{616D450D-C79E-48E0-B08E-403053FFE2DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -194,6 +196,16 @@ Global
 		{66023350-4C8C-4944-9B2B-A41ACEE8F12A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{66023350-4C8C-4944-9B2B-A41ACEE8F12A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{66023350-4C8C-4944-9B2B-A41ACEE8F12A}.Release|x86.ActiveCfg = Release|Any CPU
+		{616D450D-C79E-48E0-B08E-403053FFE2DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{616D450D-C79E-48E0-B08E-403053FFE2DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{616D450D-C79E-48E0-B08E-403053FFE2DA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{616D450D-C79E-48E0-B08E-403053FFE2DA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{616D450D-C79E-48E0-B08E-403053FFE2DA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{616D450D-C79E-48E0-B08E-403053FFE2DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{616D450D-C79E-48E0-B08E-403053FFE2DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{616D450D-C79E-48E0-B08E-403053FFE2DA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{616D450D-C79E-48E0-B08E-403053FFE2DA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{616D450D-C79E-48E0-B08E-403053FFE2DA}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

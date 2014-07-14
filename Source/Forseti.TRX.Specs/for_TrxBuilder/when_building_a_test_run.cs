@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
-using Forseti.TRX.Transformation;
+using Forseti.Output.MSTest.Transformation;
 using Machine.Specifications;
 using System.Xml.Linq;
 
-namespace Forseti.TRX.Specs.for_TrxBuilder
+namespace Forseti.Output.Specs.for_TrxBuilder
 {
     public class when_building_a_test_run
     {

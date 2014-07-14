@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Forseti.TRX.Transformation
+namespace Forseti.Output.MSTest.Transformation
 {
     public class TestSettings : ITransformToTrx
     {

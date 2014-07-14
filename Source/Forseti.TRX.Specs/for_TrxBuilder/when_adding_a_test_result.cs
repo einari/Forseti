@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using Machine.Specifications;
 using System.Xml.Linq;
-using Forseti.TRX.Transformation;
+using Forseti.Output.MSTest.Transformation;
 
-namespace Forseti.TRX.Specs.for_TrxBuilder
+namespace Forseti.Output.Specs.for_TrxBuilder
 {
     public class when_adding_a_test_result : given.a_builder
     {
