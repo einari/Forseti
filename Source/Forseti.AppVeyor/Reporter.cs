@@ -21,10 +21,10 @@ namespace Forseti.AppVeyor
         IReportingOptions _options;
         IBuildWorkerApi _workerApi;
 
-        public Reporter(IReportingOptions options, IBuildWorkerApi workerApi)
+        public Reporter(IReportingOptions options)//, IBuildWorkerApi workerApi) //have to set this up.
         {
             _options = options;
-            _workerApi = workerApi;
+            _workerApi = new BuildWorkerApi();
         }
 
 
