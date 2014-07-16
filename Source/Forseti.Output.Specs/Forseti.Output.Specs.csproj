@@ -64,8 +64,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Forseti.TRX\Forseti.Output.csproj">
-      <Project>{1CC07CC7-F6C5-494B-900B-2CDE971E570D}</Project>
+    <ProjectReference Include="..\Forseti.Output\Forseti.Output.csproj">
+      <Project>{1cc07cc7-f6c5-494b-900b-2cde971e570d}</Project>
       <Name>Forseti.Output</Name>
     </ProjectReference>
   </ItemGroup>

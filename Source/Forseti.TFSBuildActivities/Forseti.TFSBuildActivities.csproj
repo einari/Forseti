@@ -108,10 +108,6 @@
       <Project>{77E4DF53-BEB2-4A63-AF73-A0CDF9CB8BD7}</Project>
       <Name>Forseti.QUnit</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Forseti.TRX\Forseti.Output.csproj">
-      <Project>{1CC07CC7-F6C5-494B-900B-2CDE971E570D}</Project>
-      <Name>Forseti.Output</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Forseti\Forseti.csproj">
       <Project>{F4DC4B9D-BE5F-4DA6-9E18-CA1A242739A5}</Project>
       <Name>Forseti</Name>
