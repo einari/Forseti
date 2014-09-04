@@ -28,8 +28,11 @@ namespace Forseti.Suites
 
         public void AddDescription(Description description)
         {
-            _descriptions.Add(description);
-            description.Suite = this;
+            if (!_descriptions.Contains(description))
+            {
+                _descriptions.Add(description);
+                description.Suite = this;
+            }
         }
 
         public void RemoveDescriptions(IEnumerable<Description> descriptions)

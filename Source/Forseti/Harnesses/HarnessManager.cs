@@ -141,16 +141,9 @@ namespace Forseti.Harnesses
                                 result.AddAffectedSuite(s); 
                             });
 			
-            var cases = new List<Case>();
-            var timeBefore = DateTime.Now;
             
-            foreach (var suite in suites)
-            {
-                foreach (var description in suite.Descriptions)
-                    cases.AddRange(description.Cases);
-
-                harness.Cases = cases;
-            }
+            var timeBefore = DateTime.Now;
+            var cases = PrepareCasesForSuite(harness, suites);
 			
 			if( harness.Cases.Count () == 0 )
 			{
@@ -173,6 +166,30 @@ namespace Forseti.Harnesses
             Console.WriteLine("<--- Took {0} seconds --->\r\n", delta.TotalSeconds);
 
             return result;
+        }
+
+        IEnumerable<Case> PrepareCasesForSuite(Harness harness, IEnumerable<Suite> suites)
+        {
+            var cases = new List<Case>();
+            foreach (var suite in suites)
+            {
+                var descriptionsToRemove = new List<Description>();
+                foreach (var description in suite.Descriptions)
+                {
+                    if (System.IO.File.Exists(description.File.FullPath))
+                    {
+                        cases.AddRange(description.Cases);
+                    }
+                    else
+                    {
+                        descriptionsToRemove.Add(description);
+                    }
+                }
+
+                suite.RemoveDescriptions(descriptionsToRemove);
+                harness.Cases = cases;
+            }
+            return cases;
         }
 
         private Suite PrepareSuiteForReporting(Suite s)
