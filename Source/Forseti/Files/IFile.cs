@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Forseti.Files
 {
-    public interface IFile
+    public interface IFile : IComparable<IFile>
     {
         string Filename { get; set; }
         string Folder { get; set; }

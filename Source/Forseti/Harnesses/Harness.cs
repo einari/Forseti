@@ -100,8 +100,12 @@ namespace Forseti.Harnesses
                 var isSystem = IsSystem(file);
                 if (isSystem)
                 {
-                    var suite = new Suite(file);
-                    _suites.Add(suite);
+                    var suite = _suites.Where(s => s.SystemFile.FullPath == file.FullPath).SingleOrDefault();
+                    if (suite == null)
+                    {
+                        suite = new Suite(file);
+                        _suites.Add(suite);
+                    }
                 }
 
                 var isDescription = IsDescription(file);

@@ -103,5 +103,10 @@ namespace Forseti.Files
 				.Replace ("\\\\","/")
 				.Replace("\\","/");
 		}
+
+        public int CompareTo(IFile other)
+        {
+            return FullPath.CompareTo(other.FullPath);
+        }
     }
 }

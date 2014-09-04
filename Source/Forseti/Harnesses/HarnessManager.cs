@@ -91,12 +91,8 @@ namespace Forseti.Harnesses
 					foreach( var suite in affectedSuites )
 					{
 	                    var now = DateTime.Now;
-	                    var delta = now.Subtract(suite.LastRun);
-	                    if (delta.TotalSeconds > 2)
-	                    {
-	                        Execute(harness, new[] { suite });
-	                        suite.LastRun = now;
-	                    }
+	                    Execute(harness, new[] { suite });
+	                    suite.LastRun = now;
 					}
 				}
             }

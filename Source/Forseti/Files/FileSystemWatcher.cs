@@ -30,23 +30,29 @@ namespace Forseti.Files
 	
         void _actualWatcher_Renamed(object sender, System.IO.RenamedEventArgs e)
         {
+            _actualWatcher.EnableRaisingEvents = false;
             var oldFile = (File)e.OldFullPath;
             NotifySubscribers(FileChange.Deleted, oldFile);
             var file = (File)e.FullPath;
             NotifySubscribers(FileChange.Added, file);
+            _actualWatcher.EnableRaisingEvents = true;
         }
 
 		void _actualWatcher_Created(object sender, System.IO.FileSystemEventArgs e)
 		{
+            _actualWatcher.EnableRaisingEvents = false;
 			var file = (File)e.FullPath;
 			NotifySubscribers(FileChange.Added, file);
+            _actualWatcher.EnableRaisingEvents = true;
 		}
 
         void _actualWatcher_Changed(object sender, System.IO.FileSystemEventArgs e)
         {
+            _actualWatcher.EnableRaisingEvents = false;
 			var file = (File)e.FullPath;
 			var fileChange = GetFileChangeStatus(e);
 			NotifySubscribers(fileChange, file);
+            _actualWatcher.EnableRaisingEvents = true;
         }
 		
 		void NotifySubscribers(FileChange fileChange, IFile file)
@@ -71,7 +77,5 @@ namespace Forseti.Files
             }
             return FileChange.Unknown;
         }
-
-
     }
 }
