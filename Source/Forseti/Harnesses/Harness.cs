@@ -106,6 +106,9 @@ namespace Forseti.Harnesses
                         suite = new Suite(file);
                         _suites.Add(suite);
                     }
+
+                    if (!affectedSuites.Contains(suite))
+                        affectedSuites.Add(suite);
                 }
 
                 var isDescription = IsDescription(file);

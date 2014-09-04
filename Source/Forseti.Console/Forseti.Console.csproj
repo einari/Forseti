@@ -213,8 +213,8 @@
     </Content>
   </ItemGroup>
   <PropertyGroup>
-    <PostBuildEvent>cd $(OutDir)
-del Forseti.exe
-ren Forseti.Console.exe Forseti.exe</PostBuildEvent>
+    <PostBuildEvent>rem cd $(OutDir)
+rem del Forseti.exe
+copy Forseti.Console.exe Forseti.exe /y</PostBuildEvent>
   </PropertyGroup>
 </Project>

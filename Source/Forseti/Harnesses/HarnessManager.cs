@@ -72,7 +72,9 @@ namespace Forseti.Harnesses
                         {
                             var runSuite = false;
                             if (suite.SystemFile.FullPath == file.FullPath)
+                            {
                                 runSuite = true;
+                            }
 
                             foreach (var description in suite.Descriptions)
                             {
@@ -85,16 +87,16 @@ namespace Forseti.Harnesses
                         }
                     }
                 }
-				
-				if( affectedSuites != null )
-				{
-					foreach( var suite in affectedSuites )
-					{
-	                    var now = DateTime.Now;
-	                    Execute(harness, new[] { suite });
-	                    suite.LastRun = now;
-					}
-				}
+
+                if (affectedSuites != null)
+                {
+                    foreach (var suite in affectedSuites)
+                    {
+                        var now = DateTime.Now;
+                        Execute(harness, new[] { suite });
+                        suite.LastRun = now;
+                    }
+                }
             }
 		}
 
