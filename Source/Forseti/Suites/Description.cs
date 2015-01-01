@@ -1,12 +1,16 @@
 ﻿using System.Collections.Generic;
 using Forseti.Files;
 using System.IO;
+using System;
 
 namespace Forseti.Suites
 {
-    public class Description
+    public class Description : IComparable
     {
 		List<IFile> _dependencies = new List<IFile>();
+
+        List<IFile> _contexts = new List<IFile>();
+
         List<Case> _cases = new List<Case>();
 
         public Suite Suite { get; set; }
@@ -21,6 +25,9 @@ namespace Forseti.Suites
         }
 		
 		public IEnumerable<IFile> Dependencies { get { return _dependencies; } }
+
+        public IEnumerable<IFile> Contexts { get { return _contexts; } }
+
         public IEnumerable<Case> Cases 
         { 
             get { return _cases; }
@@ -37,6 +44,17 @@ namespace Forseti.Suites
             _cases.Add(@case);
         }
 
+        public void AddContext(IFile context)
+        {
+            _contexts.Add(context);
+        }
+
+        public void RemoveContext(IFile context)
+        {
+            _contexts.Remove(context);
+        }
+
+
         public  void ResetCasesForReporting()
         {
             var dummyCaseForReportingPurposes = Case.DummyCase;
@@ -45,5 +63,17 @@ namespace Forseti.Suites
             AddCase(dummyCaseForReportingPurposes);
         }
 
+
+        public int CompareTo(object obj)
+        {
+            var other = obj as Description;
+            return other.File.FullPath.CompareTo(File.FullPath);
+        }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as Description;
+            return File.FullPath.Equals(other.File.FullPath);
+        }
     }
 }
