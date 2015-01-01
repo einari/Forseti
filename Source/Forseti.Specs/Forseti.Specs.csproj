@@ -98,6 +98,8 @@
     <Compile Include="Scripting\for_DependencyParser\when_finding_from_content_with_multiple_dependencies.cs" />
     <Compile Include="Suites\for_Case\when_adding_child_case.cs" />
     <Compile Include="Suites\for_Description\when_adding_case.cs" />
+    <Compile Include="Suites\for_Description\when_removing_added_context.cs" />
+    <Compile Include="Suites\for_Description\when_adding_context_as_file.cs" />
     <Compile Include="Suites\for_Description\when_creating_a_description_with_a_file.cs" />
     <Compile Include="Suites\for_Suite\when_adding_suite_description.cs" />
     <Compile Include="Harnesses\for_HarnessManager\given\a_harness_manager.cs" />

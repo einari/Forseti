@@ -15,10 +15,15 @@ namespace Forseti.Harnesses
 
 		string _systemsSearchPath;
 		string _descriptionsSearchPath;
+        string _contextsSearchPath;
+
         Regex _systemsSearchPathRegex;
         Regex _descriptionsSearchPathRegex;
+        Regex _contextsSearchPathRegex;
+
         Dictionary<string,int> _systemComponents;
         Dictionary<string,int> _descriptionComponents;
+        Dictionary<string, int> _contextsComponents;
 
         List<Suite> _suites = new List<Suite>();
 		List<IFile> _dependencies = new List<IFile>();
@@ -53,6 +58,17 @@ namespace Forseti.Harnesses
                 _descriptionsSearchPathRegex = BuildSearchRegex(value, out _descriptionComponents);
 			}
 		}
+
+        public string ContextsSearchPath
+        {
+            get { return _contextsSearchPath; }
+            set
+            {
+                _contextsSearchPath = value;
+                _contextsSearchPathRegex = BuildSearchRegex(value, out _contextsComponents);
+            }
+        }
+
 		
 		public IEnumerable<IFile> Dependencies {get { return _dependencies; }}
         public IEnumerable<Suite> Suites { get { return _suites; } }
@@ -129,7 +145,7 @@ namespace Forseti.Harnesses
 			return affectedSuites;
         }
 
-        private bool IsDescriptionForSystem(Description description, Suite suite)
+        bool IsDescriptionForSystem(Description description, Suite suite)
         {
             var systemComponents = _systemsSearchPathRegex.Match(suite.SystemFile.FullPath);
             var descriptionComponents = _descriptionsSearchPathRegex.Match(description.File.FullPath);
