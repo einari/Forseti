@@ -150,11 +150,12 @@ namespace Forseti.Harnesses
 				Console.WriteLine("no cases");
 			} else 
 			{
-	            var page = _pageGenerator.GenerateFrom(harness);
-
-                // Todo: this is no good - just a temporary testing thing....
-                HarnessCaseReporter.HarnessResult = result;
-	            _scriptEngine.Execute(page);
+                using (var page = _pageGenerator.GenerateFrom(harness))
+                {
+                    // Todo: this is no good - just a temporary testing thing....
+                    HarnessCaseReporter.HarnessResult = result;
+                    _scriptEngine.Execute(page);
+                }
 			}
 
             result.EndTime = DateTime.Now;

@@ -36,7 +36,7 @@ namespace Forseti.Pages.Spark
             {
                 ViewFolder = templates
             };
-            templates.Add(TemplateName, template); 
+            templates.Add(TemplateName, template);
             _descriptor = new SparkViewDescriptor().AddTemplate(TemplateName);
         }
 
@@ -47,78 +47,57 @@ namespace Forseti.Pages.Spark
 
             var harnessView = (HarnessView)_engine.CreateInstance(_descriptor);
             harnessView.Harness = harness;
-            harnessView.RunnerScripts = new[] {"jquery.min.js","forseti.bootstrapper.js", "r.js", "forseti.js"} ;
+            harnessView.RunnerScripts = new[] { "jquery.min.js", "forseti.bootstrapper.js", "r.js", "forseti.js" };
             harnessView.FrameworkScript = harness.Framework.ScriptName;
             harnessView.FrameworkExecutionScript = harness.Framework.ExecuteScriptName;
             harnessView.FrameworkReportingScript = harness.Framework.ReportScriptName;
 
-            page.RootPath = Path.GetTempPath() + @"Forseti/";
+            page.RootPath = ""; 
             page.Filename = string.Format("{0}runner.html", page.RootPath);
-
-            if (!Directory.Exists(page.RootPath))
-                Directory.CreateDirectory(page.RootPath);
 
             if (harness.HasDependencies())
             {
                 var actualDependencies = new List<string>();
                 foreach (var dependency in harness.Dependencies)
                 {
-                    CopyScript(page, dependency.RelativePath);
                     actualDependencies.Add(dependency.RelativePath);
                 }
                 harnessView.Dependencies = actualDependencies.ToArray();
-            } else {
-				harnessView.Dependencies = new string[0];
-			}
-							
+            }
+            else
+            {
+                harnessView.Dependencies = new string[0];
+            }
+
 
             var writer = new StringWriter();
-
-            foreach (var scriptFile in harnessView.SystemScripts)
-                CopyScriptAndPossibleAdditionalReferences(harness, page, scriptFile);
 
             var actualCaseScripts = new List<CaseScriptDescriptor>();
             foreach (var caseDescriptor in harnessView.CaseScripts)
             {
-                var additionalRefereces = CopyScriptAndPossibleAdditionalReferences(harness, page, caseDescriptor.Case);
+                var additionalRefereces = GetPossibleAdditionalReferences(harness, page, caseDescriptor.Case);
                 actualCaseScripts.Add(new CaseScriptDescriptor { CaseDependencies = additionalRefereces, Case = caseDescriptor.Case });
             }
             harnessView.CaseScripts = actualCaseScripts.ToArray();
-
 
             harnessView.RenderView(writer);
 
             var result = writer.ToString();
 
-            File.WriteAllText(page.RootPath + "jquery.min.js", _jqueryJs);
-            File.WriteAllText(page.RootPath + "forseti.bootstrapper.js", _forsetiBootstrapperJs);
-            File.WriteAllText(page.RootPath + "r.js", _requireJs);
-            File.WriteAllText(page.RootPath + "forseti.js", _forsetiJs);
-            File.WriteAllText(page.RootPath + harness.Framework.ScriptName, harness.Framework.Script);
-            File.WriteAllText(page.RootPath + harness.Framework.ExecuteScriptName, harness.Framework.ExecuteScript);
-            File.WriteAllText(page.RootPath + harness.Framework.ReportScriptName, harness.Framework.ReportScript);
+            page.AddRunnerDependency("jquery.min.js", _jqueryJs);
+            page.AddRunnerDependency("forseti.bootstrapper.js", _forsetiBootstrapperJs);
+            page.AddRunnerDependency("r.js", _requireJs);
+            page.AddRunnerDependency("forseti.js", _forsetiJs);
+            page.AddRunnerDependency(harness.Framework.ScriptName, harness.Framework.Script);
+            page.AddRunnerDependency(harness.Framework.ExecuteScriptName, harness.Framework.ExecuteScript);
+            page.AddRunnerDependency(harness.Framework.ReportScriptName, harness.Framework.ReportScript);
 
-			
-            
             File.WriteAllText(page.Filename, result);
 
             return page;
         }
 
-        void CopyFilesRecursively(Page page, string descriptionRelativePath, Files.File descriptionFile, DirectoryInfo target, DirectoryInfo source, List<string> additionalReferences)
-        {
-            foreach (var dir in source.GetDirectories())
-                CopyFilesRecursively(page, descriptionRelativePath, descriptionFile, target.CreateSubdirectory(dir.Name), dir, additionalReferences);
-            foreach (var file in source.GetFiles())
-            {
-                var relativeFileName = string.Format("{0}/{1}/{2}", descriptionRelativePath, file.Directory.Name, file.Name);
-                additionalReferences.Add(((Files.File)relativeFileName).RelativePath);
-                CopyScript(page, file.FullName);
-            }
-        }
-
-
-        IEnumerable<string> CopyScriptAndPossibleAdditionalReferences(Harness harness, Page page, Files.File descriptionFile)
+        IEnumerable<string> GetPossibleAdditionalReferences(Harness harness, Page page, Files.File descriptionFile)
         {
             var currentDirectory = Directory.GetCurrentDirectory();
             var additionalReferences = new List<string>();
@@ -132,23 +111,23 @@ namespace Forseti.Pages.Spark
                     var sourcePath = Path.Combine(currentDirectory, folder);
                     var targetPath = Path.Combine(page.RootPath, folder);
 
-                    CopyFilesRecursively(page, descriptionRelativePath, descriptionFile, new DirectoryInfo(targetPath), new DirectoryInfo(sourcePath), additionalReferences);
+                    GetFilesRecursively(page, descriptionRelativePath, descriptionFile, new DirectoryInfo(targetPath), new DirectoryInfo(sourcePath), additionalReferences);
                 }
             }
-            CopyScript(page, descriptionFile);
 
             return additionalReferences;
         }
 
-        private static void CopyScript(Page page, Files.File scriptFile)
+        void GetFilesRecursively(Page page, string descriptionRelativePath, Files.File descriptionFile, DirectoryInfo target, DirectoryInfo source, List<string> additionalReferences)
         {
-            var target = Path.Combine(page.RootPath, scriptFile.RelativePath);
-            var script = scriptFile.ReadAllText();
-            var dir = Path.GetDirectoryName(target);
-            if (!Directory.Exists(dir))
-                Directory.CreateDirectory(dir);
-
-            File.WriteAllText(target, script, Encoding.ASCII);
+            foreach (var dir in source.GetDirectories())
+                GetFilesRecursively(page, descriptionRelativePath, descriptionFile, target.CreateSubdirectory(dir.Name), dir, additionalReferences);
+            foreach (var file in source.GetFiles())
+            {
+                var relativeFileName = string.Format("{0}/{1}/{2}", descriptionRelativePath, file.Directory.Name, file.Name);
+                additionalReferences.Add(((Files.File)relativeFileName).RelativePath);
+            }
         }
+
     }
 }

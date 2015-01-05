@@ -118,13 +118,16 @@
         },
         currentDescription: "",
         loadSystems: function (func) {
+            logToRunner("loadSystems");
             var sytems = this.require(this.systems);
         },
         run: function () {
+            logToRunner("run");
             this.initialize();
             this.executeNextDescription();
         },
         reportingComplete: function () {
+            logToRunner("reportingComplete");
             this.executeNextDescription();
         },
         executeNextDescription: function () {
@@ -135,5 +138,4 @@
             }
         }
     };
-
 })(window);
